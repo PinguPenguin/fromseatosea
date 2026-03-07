@@ -4,7 +4,7 @@
 "version" : "0.0.1",
 "game_id" : "victoria3",
 "picture" : "thumbnail.png",
-"supported_game_version" : "1.8.*",
+"supported_game_version" : "1.12.*",
 "short_description" : "Description of your Mod",
 "tags" : [],
 "relationships" : [],
