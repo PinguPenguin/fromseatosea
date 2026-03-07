@@ -1,4 +1,6 @@
 # From Sea to Sea
+![thumbnail.png](/mod/.metadata/thumbnail.png)
+
 If you are not a developer and are testing the development branch, check this page regularly.
 
 A modification for the Paradox Interactive game, "Victoria 3".
