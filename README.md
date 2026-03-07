@@ -35,8 +35,8 @@ Edit the [mod/.metadata/metadata.json](mod/.metadata/metadata.json) file directl
 - short_description
 
 > ⚠️ **Important:** If you choose the manual approach, you must also delete or manually adjust the following files:
-> - `mod/events/ABBREVIATION_PLACEHOLDER_events.txt`
-> - `mod/common/on_action/ABBREVIATION_PLACEHOLDER_on_actions.txt`
+> - `mod/events/s2s_events.txt`
+> - `mod/common/on_action/s2s_on_actions.txt`
 
 **Automated via GitHub Action:**
 
@@ -60,7 +60,7 @@ This automation streamlines setup and helps avoid common issues.
   - Select the **`Initialize Mod Template`** workflow.
   - Start the workflow and enter your desired abbreviation or prefix. Fill in any optional fields as needed.
   - When the workflow finishes, check [mod/events/abbreviation_event.txt](mod/events/abbreviation_event.txt):
-    - The first line should now use your abbreviation instead of `ABBREVIATION_PLACEHOLDER_error_suppression`.
+    - The first line should now use your abbreviation instead of `s2s_error_suppression`.
 
 For a visual guide to the workflow options, see the screenshot in `documentation/workflow.png`.
 

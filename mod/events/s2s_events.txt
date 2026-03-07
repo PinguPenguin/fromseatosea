@@ -1,0 +1,9 @@
+﻿namespace = s2s_error_suppression
+
+s2s_error_suppression.0001 = {
+  hidden = yes
+  orphan = yes
+  trigger = {
+    exists = global_var:s2s_is_loaded
+  }
+}
