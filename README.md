@@ -5,6 +5,17 @@ This mod is still in *very* early development. It aims to give the player an imp
 
 If you are not a developer and are testing the development branch, check this page regularly!
 
+### What this is
+- A mod that expands on the vanilla experience for Canada
+- A state facelift with resource tweaks
+- Small resource tweaks/journal entries
+
+### What this is not
+- A total overhaul
+- Changing core gameplay mechanics
+- Changing UI/UX
+- Adding any new IGs, goods, buildings, or units
+
 ## Getting Started
 **I recommend using [GitHub Desktop](https://desktop.github.com) to download**;
 it provides an easy way to synchronize with the latest changes. If it is
