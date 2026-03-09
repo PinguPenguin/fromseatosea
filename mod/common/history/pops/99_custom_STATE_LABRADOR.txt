@@ -1,68 +1,19 @@
 ﻿POPS = {
 
 	s:STATE_LABRADOR = {
-	
 		region_state:GBR = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 30906
+				size = 9000
 			}
 			create_pop = {
 				culture = irish
-				size = 30909
+				size = 9000
 			}
 			create_pop = {
 				culture = inuit
-				size = 6166
+				size = 30000
 			}
-		}
-	}
-	s:labrador = {
-		{
-
-		
-		
-		
-		}
-	
-		{
-
-		
-		
-		
-		}
-	
-		{
-
-		
-		
-		
-		}
-	
-		{
-
-		
-		
-		
-		}
-	
-		region_state:GBR = {
-
-		create_pop = {
-			culture = irish
-			religion = 
-			size = 8837
-		}
-		create_pop = {
-			culture = anglo_canadian
-			religion = 
-			size = 8157
-		}
-		create_pop = {
-			culture = inuit
-			religion = 
-			size = 50985
-		}
 		}
 	}
 }
