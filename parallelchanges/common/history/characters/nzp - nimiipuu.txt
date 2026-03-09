@@ -1,0 +1,9 @@
+﻿CHARACTERS = {
+	c:NZP ?= {
+		create_character = {
+			template = NZP_tuekakas_wallowa
+		}
+
+		# Joseph the Younger wasn't born until 1840
+	}
+}

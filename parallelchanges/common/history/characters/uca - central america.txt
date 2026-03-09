@@ -1,0 +1,7 @@
+﻿CHARACTERS = {
+	c:UCA ?= {
+		create_character = {
+			template = UCA_francisco_morazan
+		}
+	}
+}
