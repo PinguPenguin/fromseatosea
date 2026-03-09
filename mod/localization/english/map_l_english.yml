@@ -1,2 +1,6 @@
 ﻿l_english:
  STATE_LABRADOR:0 "Labrador"
+ HUB_NAME_STATE_LABRADOR_city: "Goose Bay"
+ HUB_NAME_STATE_LABRADOR_farm: "North West River"
+ HUB_NAME_STATE_LABRADOR_wood: "Port Hope Simpson"
+ HUB_NAME_STATE_LABRADOR_mine: "Labrador City"
