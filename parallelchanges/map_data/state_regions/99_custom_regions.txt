@@ -1,0 +1,17 @@
+﻿
+STATE_LABRADOR = {
+    id = 1234
+    provinces = { "x781f7b" "x56e072" "x773701" "x1253c5" "x7a4a5e" "x7ee516" "xad6639" "xa1628c" "xef77d5" "x032662" "x48c5e0" "x8d49cd" "x8cd97a" "x8bc7da" "x4bcbc3" "x1dc31a" "xbcb8d9" "xb83486" "x0bc8c1" "xcb2f2f" "xff4c93" "x5be06b" "xc0dd8b" "xdd4ceb" "x581057" "x484dec" "xd9c831" "x515ba4" "x0a4a4c" "x3e0978" "xc1a729" "x365c92" "x07f4fb" "xdb0704" "xa4445f" "xfe4f9f" "xbfc7d9" "xfc3a5f" "x8d480c" "xa9ce06" "xcb5a8f" "xa2094f" "xdbac6b" "x9d9919" "x0c6598" "x43cf86" "x2ccaba" "xb8fe88" "xe0cbab" "xe6aab9" "x5f3317" "x543388" "x8ab607" "x188a1d" "x908155" "x5fe782" "x77ef94" "x0cc129" "x5ca682" "xaa1e16" "x9056ec" "xb9b943" "x3b17a5" "x0060c0" "x943ca5" "x28520d" "x5b7dba" "x0064c5" "x03d1c9" "x177ae0" "xb378bb" "x6c9cae" "xe29640" "x4b3d6e" "x65b146" "x84a349" "x29924f" "x793cfe" "xb19217" "xc53cd1" "x4192ee" "x5ef6eb" "x7046ba" "x021e3a" "x3bfc08" "x7c4aac" "x3e5986" "xe6783b" "x5c5de8" "x1baaf2" "x171acd" "x29399e" "x8e933e" "x40777e" "x6a488f" "x59020c" "xa8774f" "xe888d6" "x2c9384" "xb54ed1" "xf3c2bb" "x06f38c" "xdda6fc" "xbebefa" "x1e71f4" "xece49f" "x433b03" "x38b630" "x1a3e3d" "xb35fc1" "x7e85fa" "xdcdd4e" "x73bf8d" "x04819f" "xd1a6a0" "xbc9d94" "x2345d0" "x8b0ab0" "xcbbe16" "xd81bb8" }
+    subsistence_building = "building_subsistence_farm"
+	city = "x9d9919"
+	farm = "x9d9919"
+	mine = "x9d9919"
+	wood = "x9d9919"
+	impassable = { "x29924f" "x4bcbc3" "xf3c2bb" "xcb2f2f" }
+    arable_land = 3
+    arable_resources = {  }
+    capped_resources = {
+		building_fishing_wharf = 20
+		building_iron_mine = "x9d9919"
+	}
+}
