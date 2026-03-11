@@ -5,6 +5,8 @@ This mod is still in *very* early development. It aims to give the player an imp
 
 If you are not a developer and are testing the development branch, check this page regularly!
 
+This repository was generated with the Victoria 3 Modding Co-op's [Mod Template repo](https://github.com/Victoria-3-Modding-Co-op/Mod-Template).
+
 ### What this is
 - A mod that expands on the vanilla experience for Canada
 - A state facelift with resource tweaks
