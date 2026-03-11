@@ -2,18 +2,18 @@
 
 	s:STATE_LABRADOR = {
 		region_state:GBR = {
-			create_pop = {
-				culture = anglo_canadian
-				size = 9000
-			}
-			create_pop = {
-				culture = irish
-				size = 9000
-			}
-			create_pop = {
-				culture = inuit
-				size = 30000
-			}
+		create_pop = {
+			culture = inuit
+			size = 8700
+		}
+		create_pop = {
+			culture = irish
+			size = 18600
+		}
+		create_pop = {
+			culture = anglo_canadian
+			size = 2700
+		}
 		}
 	}
 }
