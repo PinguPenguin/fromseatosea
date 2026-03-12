@@ -9,10 +9,11 @@ STATE_LABRADOR = {
     wood = "x0a4a4c"
     port = "x4b3d6e"
     impassable = { "x29924f" "x4bcbc3" "xf3c2bb" "xcb2f2f" }
-    arable_land = 3
-    arable_resources = {}
+    arable_land = 100
+    arable_resources = {  }
     capped_resources = {
-        building_fishing_wharf = 30
-        building_iron_mine = 10
-    }
+		building_fishing_wharf = 30
+		building_iron_mine = 10
+		building_logging_camp = 10
+	}
 }
