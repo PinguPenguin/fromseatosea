@@ -1,0 +1,25 @@
+﻿BUILDINGS = {
+
+	s:STATE_SAINT_LAURENT={
+		region_state:QUE={
+
+			create_building = {
+				building = "building_port"
+				reserves = 1
+				activate_production_methods = { }
+				add_ownership = { country = { country = "c:QUE" levels = 1 } }
+			}
+		}
+	}
+
+	s:STATE_QUEBEC_SAGUENAY={
+		region_state:QUE={
+
+			create_building = {
+				building = "building_port"
+				reserves = 1
+				activate_production_methods = { }
+			}
+		}
+	}
+}

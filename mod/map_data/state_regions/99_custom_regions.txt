@@ -34,7 +34,7 @@ STATE_QUEBEC_SAGUENAY = {
     capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
 }
 
-STATE_BAS_DE_SAINT_LAURENT = {
+STATE_SAINT_LAURENT = {
     id = 702
     provinces = { "x9c7d80" "xb5326c" "x958fe3" "x8b8f3a" "x485cca" "xe18042" "x56175a" "x0dc085" "x5a7228" "xbee924" "x20c1f0" "x2ad507" "x3f7d99" "x987579" "xbf2c9c" "x480c58" "x8e075c" "x0b1976" "xfce590" "x5fa5af" "xf040c0" "xac0620" "xbabc7f" "x74b0c7" "xfd27c5" "x76f0e9" "xcb411e" "x7b5364" "x50b299" }
     subsistence_building = "building_subsistence_farm"

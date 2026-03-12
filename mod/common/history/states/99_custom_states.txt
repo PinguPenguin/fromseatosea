@@ -16,7 +16,7 @@
 		owned_provinces = { "x012169" "x0313ac" "x0696ed" "x08f4ce" "x09896c" "x0bb7ba" "x0c21b6" "x118d77" "x12a5d2" "x1fbb10" "x228775" "x2548ae" "x32a6f4" "x35e144" "x373813" "x388916" "x39e87e" "x3ffff0" "x4097dc" "x44483d" "x466e9b" "x46df18" "x4aa93d" "x4aca5f" "x4ace4a" "x4b1e93" "x4c54ae" "x4ef8e9" "x525b58" "x5763ff" "x57afb7" "x57c5de" "x5a3388" "x5a7a37" "x5aa7dc" "x5ca0a8" "x5e2fc8" "x5e6df6" "x5f5eca" "x5fa9ed" "x5ffab6" "x604a53" "x605307" "x6490d9" "x6d0523" "x6d42f4" "x6de406" "x72dcba" "x74eb3d" "x7562c6" "x7a9b4a" "x7c9f7a" "x7f1f42" "x80e0c0" "x81b203" "x83b071" "x89b43f" "x89fa93" "x8b2a99" "x8c5aa9" "x8decc8" "x8f8a9b" "x94fa65" "x960abf" "x9d6f87" "xa20189" "xa49d73" "xa8a05f" "xab6e38" "xac9ad6" "xacc1e7" "xad2b5f" "xb0c0c0" "xb3bfe3" "xb4fe75" "xb6f3e3" "xb9a32d" "xcaf05d" "xcb447a" "xccb94b" "xcecced" "xd3aa4e" "xd48872" "xd669f9" "xd7386d" "xd84b92" "xd8a57b" "xdc6999" "xe572eb" "xe5d1bc" "xe82270" "xe9a095" "xea225d" "xeb2761" "xec7382" "xf0544f" "xf16e7a" "xf1721c" "xf2b920" "xf7dbb7" "xf903c7" "xf9aa56" "xfce71c" }
 	}}
 
-	s:STATE_BAS_DE_SAINT_LAURENT = {
+	s:STATE_SAINT_LAURENT = {
 	
 	create_state = {
 		country = c:QUE

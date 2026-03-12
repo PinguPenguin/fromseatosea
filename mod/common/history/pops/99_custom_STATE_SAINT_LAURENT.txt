@@ -1,6 +1,6 @@
 ﻿POPS = {
 
-	s:STATE_BAS_DE_SAINT_LAURENT = {
+	s:STATE_SAINT_LAURENT = {
 	
 		region_state:QUE = {
 			create_pop = {
