@@ -7,5 +7,10 @@
 				culture = franco_canadian
 				size = 316
 			}
+		
+			create_pop = {
+				culture = franco_canadian
+				size = 2484
+			}
 		}
 	}}

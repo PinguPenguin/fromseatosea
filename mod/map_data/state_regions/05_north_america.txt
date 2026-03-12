@@ -984,23 +984,18 @@ STATE_NEW_BRUNSWICK = {
 STATE_QUEBEC = {
     id = 312
     subsistence_building = "building_subsistence_farm"
-    provinces = { "x0b40b9" "xec29f7" "xdf6f96" "xd11049" "xfc2bfd" "x6480ae" "x3b30da" "x521409" "x3ea9c4" "x1b5812" "xe47745" "xd45d25" "x271c30" "x1a9915" "xde17d2" "x4ecb15" "xe6153b" "x2557a8" "xf723ee" "xcfcb67" "x0707c7" "x3000c0" "x61804d" "xf0c080" "xa1b5a5" "x9c19e2" "xa5be2d" "x804729" "x9f961d" "x10547b" "x25aba0" "x617b18" "xe9c5aa" "x6fcb2d" "xf6d76f" "xddea3f" "xa69ab7" "xda0669" "xb838ec" "x328a2e" "x721a36" "xfda361" "xb5e4ec" "x8df3c2" "xd0550d" "x80e040" "xd31a5c" }
-    impassable = { "xBB863E" "x972704" "xD93335" "x084179" "xABA573" "x141935" "x51949A" "x36876C" "xD99AA0" "x9315BC" "x5E9628" "xD20107" "x9B7A14" "x16CFCB" "xBD1776" "x1B97E4" "xC0A7EF" "x7020B3" "x12FF08" "xFE2408" "x25DC66" "xEB2882" "x1E71B4" "x1590F6" "x5B8149" "xE94E94" "xEB9966" "x9C5236" "x4D27E6" "xBB2C30" "x21D72E" "xA54A42" "x0AA539" "x4B32DC" "x247A18" "x7C3F68" "xC04BB6" "xE40566" "x7F0C4F" "xA9F068" "x5D1B1A" "xF0DE11" "xD822EC" "x290B54" "xC940C5" "xCD957E" "xD1352B" "x4A9F05" "xE2FFD8" "xFE2104" "x795074" "xB3AED8" "x0B737C" "x4D370F" "xAA9CDB" "xD4E8B5" "x32DFD2" "x54D79E" "x038C02" "xF7E5FD" "x6040C4" "xBA04A4" "x8E1DAC" "xC13D2C" "x9050B8" "x8CF0B9" "xF3DF90" "x307A15" "x6D2618" "x1F7BA8" "xA8BE58" "x907833" "x23F6CC" "xF306C9" "x62CE97" "x9B5749" "x06F336" "xC75269" "x11192E" "x7BDAD0" "xEABC88" "x5040AF" "x95E0DC" "x7B728D" "x561CF3" "xAB6FE2" "xCE0625" "x0000C0" "xBB606D" "x96B85F" "xEFCD73" "xD414F5" "x0B4DFD" "x0C6AE4" "x8B2119" "xB6023C" "x7D7012" "xE29144" "x2793A0" "x499FB6" "x864A3A" "x326543" "xD03CD5" "x53E74E" "x67C76E" "x0B9764" "xDDBFBD" "x085D59" "x788810" "xD5666E" "x8A6937" "x76A99E" "x92F132" "x69E64D" "xD4A5DD" "x062E92" "xE58487" "x4F1A54" "x773791" "xAE1EF2" "x79E1C6" "x7BB2F1" "xB671B8" "xEA49D9" "xABCF6B" "x5EF02F" "x13C360" "x63918E" "x939A08" "xCA5E91" "xD74D19" "x3ED2DB" "xC62D1B" "xFF1907" "x51CF24" "xDEEEDD" "x46467A" }
+    provinces = { "xab9c44" "x3ea9c4" "xe6153b" "x0b40b9" "xb5e4ec" "x9f961d" "xb9dd91" "xfc2bfd" "x8df3c2" "x6fcb2d" "xf6d76f" "xd0550d" "x9c19e2" "x1a9915" "x61804d" "xec29f7" "x2557a8" "xdf6f96" "xd040c0" "x25aba0" "xb838ec" "xf723ee" "xd31a5c" "xe47745" "x3000c0" "xddea3f" "xa69ab7" "xa5be2d" "x328a2e" "xde17d2" "xcfcb67" "x80e040" "xd45d25" "x271c30" "x0707c7" "x6480ae" "xd11049" "x3b30da" "x617b18" "x721a36" "xfda361" "x804729" "xe9c5aa" "xda0669" "x10547b" "xf0c080" "x1b5812" "xa1b5a5" "x4ecb15" "x521409" }
     traits = { "state_trait_st_lawrence_river" }
     city = "xd11049"
-    port = "x0b40b9"
     farm = "xec29f7"
     mine = "xdf6f96"
     wood = "x61804d"
     arable_land = 24
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_tobacco_plantation" }
     capped_resources = {
-        building_iron_mine = "xdf6f96"
+        building_iron_mine = "10"
         building_logging_camp = 100
-        building_whaling_station = 4
-        building_fishing_wharf = 8
     }
-    naval_exit_id = 3045
 }
 
 STATE_NEWFOUNDLAND = {

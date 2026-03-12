@@ -1157,8 +1157,8 @@
 				culture = cree
 				size = 278
 			}
-		}
-		region_state:HBC = {
+		
+
 			create_pop = {
 				culture = inuit
 				size = 370
@@ -1175,7 +1175,9 @@
 				culture = anglo_canadian
 				size = 619
 			}
-		}
+		
+}
+		
 	}
 	s:STATE_NEWFOUNDLAND = {
 		region_state:GBR = {

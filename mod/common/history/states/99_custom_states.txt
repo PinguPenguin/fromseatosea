@@ -20,7 +20,7 @@
 	
 	create_state = {
 		country = c:QUE
-		owned_provinces = { "x0b1976" "x0dc085" "x20c1f0" "x2ad507" "x3f7d99" "x480c58" "x485cca" "x50b299" "x56175a" "x5a7228" "x5fa5af" "x74b0c7" "x76f0e9" "x7b5364" "x8b8f3a" "x8e075c" "x958fe3" "x987579" "x9c7d80" "xab9c44" "xac0620" "xb5326c" "xb9dd91" "xbabc7f" "xbee924" "xbf2c9c" "xcb411e" "xd040c0" "xe18042" "xf040c0" "xfce590" "xfd27c5" }
+		owned_provinces = { "x0b1976" "x0dc085" "x20c1f0" "x2ad507" "x3f7d99" "x480c58" "x485cca" "x50b299" "x56175a" "x5a7228" "x5fa5af" "x74b0c7" "x76f0e9" "x7b5364" "x8b8f3a" "x8e075c" "x958fe3" "x987579" "x9c7d80" "xac0620" "xb5326c" "xbabc7f" "xbee924" "xbf2c9c" "xcb411e" "xe18042" "xf040c0" "xfce590" "xfd27c5" }
 	}}
 
 	s:STATE_NOUVEAU_QUEBEC = {

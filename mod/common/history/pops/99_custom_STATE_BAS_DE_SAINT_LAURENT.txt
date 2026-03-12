@@ -5,7 +5,7 @@
 		region_state:QUE = {
 			create_pop = {
 				culture = franco_canadian
-				size = 26505
+				size = 24021
 			}
 		}
 	}}

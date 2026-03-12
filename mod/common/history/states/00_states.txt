@@ -973,12 +973,9 @@ STATES = {
 	s:STATE_QUEBEC = {
 		create_state = {
 			country = c:QUE
-			owned_provinces = { "x0707c7" "x0b40b9" "x10547b" "x1a9915" "x1b5812" "x2557a8" "x25aba0" "x271c30" "x3000c0" "x328a2e" "x3b30da" "x3ea9c4" "x4ecb15" "x521409" "x617b18" "x61804d" "x6480ae" "x6fcb2d" "x721a36" "x804729" "x8df3c2" "x9c19e2" "x9f961d" "xa1b5a5" "xa5be2d" "xa69ab7" "xb5e4ec" "xb838ec" "xcfcb67" "xd0550d" "xd11049" "xd31a5c" "xd45d25" "xda0669" "xddea3f" "xde17d2" "xdf6f96" "xe47745" "xe6153b" "xe9c5aa" "xec29f7" "xf0c080" "xf6d76f" "xf723ee" "xfc2bfd" "xfda361" }
+			owned_provinces = { "x0707c7" "x0b40b9" "x10547b" "x1a9915" "x1b5812" "x2557a8" "x25aba0" "x271c30" "x3000c0" "x328a2e" "x3b30da" "x3ea9c4" "x4ecb15" "x521409" "x617b18" "x61804d" "x6480ae" "x6fcb2d" "x721a36" "x804729" "x80e040" "x8df3c2" "x9c19e2" "x9f961d" "xa1b5a5" "xa5be2d" "xa69ab7" "xab9c44" "xb5e4ec" "xb838ec" "xb9dd91" "xcfcb67" "xd040c0" "xd0550d" "xd11049" "xd31a5c" "xd45d25" "xda0669" "xddea3f" "xde17d2" "xdf6f96" "xe47745" "xe6153b" "xe9c5aa" "xec29f7" "xf0c080" "xf6d76f" "xf723ee" "xfc2bfd" "xfda361" }
 		}
-		create_state = {
-			country = c:HBC
-			owned_provinces = { "x80e040" }
-		}
+		
 
 		add_homeland = cu:franco_canadian
 	}
