@@ -2844,7 +2844,7 @@
 					building={
 						type="building_manor_house"
 						country="c:QUE"
-						levels=2
+						levels = 1
 						region="STATE_QUEBEC"
 					}
 				}
@@ -2856,7 +2856,7 @@
 				add_ownership={
 					country={
 						country="c:QUE"
-						levels=5
+						levels = 1
 					}
 				}
 				reserves=1

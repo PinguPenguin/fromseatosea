@@ -1,0 +1,39 @@
+﻿POPS = {
+
+	s:STATE_NOUVEAU_QUEBEC = {
+	
+		region_state:HBC = {
+			create_pop = {
+				culture = anglo_canadian
+				size = 6081
+			}
+			create_pop = {
+				culture = franco_canadian
+				size = 14595
+			}
+			create_pop = {
+				culture = cree
+				size = 13838
+			}
+			create_pop = {
+				culture = inuit
+				size = 3630
+			}
+			create_pop = {
+				culture = cree
+				size = 2722
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 4538
+			}
+			create_pop = {
+				culture = franco_canadian
+				size = 389361
+			}
+			create_pop = {
+				culture = franco_canadian
+				size = 3104
+			}
+		}
+	}}

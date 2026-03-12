@@ -1,0 +1,24 @@
+﻿
+BUILDINGS = {
+	s:STATE_NOUVEAU_QUEBEC = {
+		region_state:HBC = {
+			create_building = {
+				building = "building_barrack"
+
+				add_ownership = { country = { country = "c:HBC" levels = 4 } }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:HBC"
+						levels = 1
+						region = "STATE_NOUVEAU_QUEBEC"
+					}
+				}
+			}
+		}
+	}
+}

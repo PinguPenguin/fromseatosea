@@ -1,0 +1,11 @@
+﻿POPS = {
+
+	s:STATE_QUEBEC = {
+	
+		region_state:QUE = {
+			create_pop = {
+				culture = franco_canadian
+				size = 316
+			}
+		}
+	}}

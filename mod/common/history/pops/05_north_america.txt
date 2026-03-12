@@ -1147,33 +1147,33 @@
 		region_state:QUE = {
 			create_pop = {
 				culture = franco_canadian
-				size = 547200
+				size = 39870
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 5000
+				size = 462
 			}
 			create_pop = {
 				culture = cree
-				size = 3000
+				size = 278
 			}
 		}
 		region_state:HBC = {
 			create_pop = {
 				culture = inuit
-				size = 4000
+				size = 370
 			}
 			create_pop = {
 				culture = cree
-				size = 18204
+				size = 1408
 			}
 			create_pop = {
 				culture = franco_canadian
-				size = 19200
+				size = 1485
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 8000
+				size = 619
 			}
 		}
 	}

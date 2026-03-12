@@ -1,0 +1,28 @@
+﻿POPS = {
+
+	s:STATE_QUEBEC_SAGUENAY = {
+	
+		region_state:QUE = {
+			create_pop = {
+				culture = anglo_canadian
+				size = 1300
+			}
+			create_pop = {
+				culture = franco_canadian
+				size = 3120
+			}
+			create_pop = {
+				culture = cree
+				size = 2958
+			}
+			create_pop = {
+				culture = franco_canadian
+				size = 85500
+			}
+		
+			create_pop = {
+				culture = franco_canadian
+				size = 2544
+			}
+		}
+	}}
