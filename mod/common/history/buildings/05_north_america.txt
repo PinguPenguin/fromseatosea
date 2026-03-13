@@ -2743,7 +2743,7 @@
 				add_ownership={
 					country={
 						country="c:NVS"
-						levels=3
+						levels = 2
 					}
 				}
 				reserves=1

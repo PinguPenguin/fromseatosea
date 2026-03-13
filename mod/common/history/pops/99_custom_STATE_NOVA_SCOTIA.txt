@@ -1,0 +1,23 @@
+﻿POPS = {
+
+	s:STATE_NOVA_SCOTIA = {
+	
+		region_state:NVS = {
+			create_pop = {
+				culture = afro_american
+				size = 1499
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 88457
+			}
+			create_pop = {
+				culture = franco_canadian
+				size = 23760
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 29695
+			}
+		}
+	}}

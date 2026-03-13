@@ -33,4 +33,11 @@
 		country = c:QUE
 		owned_provinces = { "x06e7aa" "x0f9997" "x161e99" "x19a366" "x1f1e03" "x23a620" "x259187" "x26ef74" "x294669" "x2ae27a" "x369b85" "x3c581d" "x61e6e2" "x67cf61" "x681a84" "x69a300" "x71a953" "x7673f1" "x7be7d8" "x83e4ff" "x8a7725" "x93518a" "x9f5988" "xa0c3e5" "xb0d24a" "xc3b4f8" "xc8cbdc" "xd1c961" "xde6c73" "xe36dac" "xe4eb3c" "xe55165" "xea68f6" "xec6322" "xec77eb" "xeda6be" "xf096a5" "xfa2fd7" "xff53c3" }
 	}}
+
+	s:STATE_NOVA_SCOTIA = {
+	
+	create_state = {
+		country = c:NVS
+		owned_provinces = { "x085c83" "x380f20" "x406fba" "x63e1c4" "x6b5822" "x8060c0" "x80aa26" "x8cfa32" "x905458" "x99ca75" "xb95db3" "xc060c0" "xca0399" "xe4892f" "xeafa99" "xec5b4b" "xf04040" "xf95d47" }
+	}}
 }

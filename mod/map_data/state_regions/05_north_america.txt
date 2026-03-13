@@ -963,22 +963,22 @@ STATE_ONTARIO = {
 STATE_NEW_BRUNSWICK = {
     id = 311
     subsistence_building = "building_subsistence_fishing_village"
-    provinces = { "x082153" "x085C83" "x20CF66" "x326F36" "x380F20" "x406FBA" "x484A09" "x493CD4" "x4D9EEE" "x5A0CA8" "x62FC6A" "x63E1C4" "x66DFE7" "x6B5822" "x7040C0" "x70A0CE" "x70C040" "x71A015" "x740012" "x8060C0" "x80AA26" "x8CFA32" "x8E553E" "x8ED253" "x905458" "x99CA75" "xB95DB3" "xBB0F05" "xC060C0" "xC91FD7" "xCA0399" "xD090A6" "xDE0FD5" "xE4892F" "xEAFA99" "xEC5B4B" "xEE2FFF" "xF01C37" "xF04040" "xF95D47" }
+    provinces = { "xf01c37" "x8ed253" "xc91fd7" "x70a0ce" "x71a015" "x8e553e" "x484a09" "xde0fd5" "x20cf66" "xee2fff" "x493cd4" "x70c040" "x082153" "xd090a6" "x740012" "x62fc6a" "x4d9eee" "x5a0ca8" "x326f36" "x66dfe7" "xbb0f05" "x7040c0" }
     traits = { "state_trait_halifax_harbor" }
-    city = "x6B5822"
-    port = "xCA0399"
-    farm = "x484A09"
-    mine = "x082153"
-    wood = "xF01C37"
-    arable_land = 40
+    city = "xee2fff"
+    port = "xf01c37"
+    farm = "x70c040"
+    mine = "xde0fd5"
+    wood = "x70a0ce"
+    arable_land = 22
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 44
-        building_lead_mine = 54
+        building_coal_mine = "x082153"
+        building_lead_mine = "x082153"
         building_logging_camp = 30
         building_fishing_wharf = 8
     }
-    naval_exit_id = 3017
+    naval_exit_id = 3067
 }
 
 STATE_QUEBEC = {

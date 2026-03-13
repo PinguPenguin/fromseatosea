@@ -62,3 +62,18 @@ STATE_NOUVEAU_QUEBEC = {
     arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
     capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
 }
+
+STATE_NOVA_SCOTIA = {
+    id = 704
+    provinces = { "xb95db3" "x8cfa32" "xe4892f" "xeafa99" "xf95d47" "xf04040" "x80aa26" "x63e1c4" "x6b5822" "x8060c0" "x905458" "xc060c0" "x99ca75" "x085c83" "x406fba" "xca0399" "xec5b4b" "x380f20" }
+    subsistence_building = "building_subsistence_farm"
+    city = "x80aa26"
+    port = "x085c83"
+    farm = "xca0399"
+    mine = "x484a09"
+    wood = "xf95d47"
+    naval_exit_id = 3045
+    arable_land = 19
+    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
+    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+}
