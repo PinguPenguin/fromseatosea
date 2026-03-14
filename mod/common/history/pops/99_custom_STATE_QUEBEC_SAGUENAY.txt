@@ -24,5 +24,30 @@
 				culture = franco_canadian
 				size = 2544
 			}
+		
+			create_pop = {
+				culture = franco_canadian
+				size = 11051
+			}
+		
+			create_pop = {
+				culture = franco_canadian
+				size = 2550
+			}
+		
+			create_pop = {
+				culture = franco_canadian
+				size = 1700
+			}
+		
+			create_pop = {
+				culture = franco_canadian
+				size = 1711
+			}
+		
+			create_pop = {
+				culture = franco_canadian
+				size = 2567
+			}
 		}
 	}}
