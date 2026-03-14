@@ -1,7 +1,4 @@
 ----Immediate (bugfixes)----
--Fix Saint John spline (overlap)
--Fix NB loc ("Maritimes")
--Tweak Nouveau-Quebec/Saguenay border (avoid split state?)
 
 ----Short-term----
 -Complete state modding framework
@@ -13,9 +10,10 @@
 -Investigate adding Hudson's Bay Sea Node/ports
 -Add state populations/resources/buildings
 -Fix existing JEs/events to work with new states
--Add state modifiers
+
 
 ----Long-term----
+-Add state modifiers
 -Implement new companies
     -Canadian Pacific (Railways, ports, shipyards, trade centres)
         - Canada Steamship lines(?) 
