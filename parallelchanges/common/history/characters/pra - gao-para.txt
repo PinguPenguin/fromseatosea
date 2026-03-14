@@ -1,7 +1,0 @@
-﻿CHARACTERS = {
-	c:PRA ?= {
-		create_character = {
-			template = PRA_eduardo_angelim
-		}
-	}
-}

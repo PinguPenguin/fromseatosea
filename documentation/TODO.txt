@@ -1,0 +1,54 @@
+----Immediate (bugfixes)----
+-Fix Saint John spline (overlap)
+-Fix NB loc ("Maritimes")
+-Tweak Nouveau-Quebec/Saguenay border (avoid split state?)
+
+----Short-term----
+-Complete state modding framework
+    - Make new states
+    - Make splines/hubs/ports
+    - Loc for new cities
+
+----Mid-term (MUST BE COMPLETED FOR FIRST RELEASE)----
+-Investigate adding Hudson's Bay Sea Node/ports
+-Add state populations/resources/buildings
+-Fix existing JEs/events to work with new states
+-Add state modifiers
+
+----Long-term----
+-Implement new companies
+    -Canadian Pacific (Railways, ports, shipyards, trade centres)
+        - Canada Steamship lines(?) 
+    -DOSCO or STELCO (iron, coal, steel)
+    -Bombardier(?) (Engines, cars?)
+        -Canadian Car & Foundry (Tooling, Motors, Cars)
+    -Inco or Noranda (Lead, Sulfur, Gold)
+    -Canadian Industries Limited or Shawinigan Chemicals Ltd. (Fertilizer, Explosives)
+    -Abitibi Power and Paper (Wood, Paper, Electricity)
+    -Canada Packers (Food, Meat)
+    -Dominion Textile (Clothing, synthetics?, cotton?)
+    -Imperial Oil (Oil)
+-Tweak Canada-Britain subject relationship (remove financial tax)
+
+-Create new indgenous decentralized tags, improve nation-building (tied to conf)
+
+-Add flavour JEs
+    -Confederation
+    -Colonizing the Prairie/Building the Railway
+    -Unlocking the North/Canadian shield?
+    -Chinese Immigration Act/path to multiculturalism
+
+----Far long-term----
+-Map beautification (asset painting, etc.)
+-Balance of power/independence mechanic
+    -Leverage econ. power in the empire?
+    -Peaceful/violent secession
+    -Newfoundland Referendum
+ 
+-Alaska Seizure event chain
+
+-Historical characters/events
+    -Red River Rebellion
+    -Komagata Maru
+
+-Improve US border states?

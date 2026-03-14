@@ -1,8 +1,0 @@
-﻿CHARACTERS = {
-	c:GJM ?= {
-		create_character = {
-			# Ras Goshu Zewde
-			template = gjm_goshu_zewde
-		}
-	}
-}
