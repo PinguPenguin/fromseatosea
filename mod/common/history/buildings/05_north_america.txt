@@ -2601,7 +2601,7 @@
 					building={
 						type="building_financial_district"
 						country="c:ONT"
-						levels=6
+						levels = 1
 						region="STATE_ONTARIO"
 					}
 				}
@@ -2652,7 +2652,7 @@
 				add_ownership={
 					country={
 						country="c:ONT"
-						levels=5
+						levels = 1
 					}
 				}
 				reserves=1

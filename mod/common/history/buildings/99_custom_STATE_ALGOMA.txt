@@ -1,0 +1,24 @@
+﻿
+BUILDINGS = {
+	s:STATE_ALGOMA = {
+		region_state:HBC = {
+			create_building = {
+				building = "building_barrack"
+
+				add_ownership = { country = { country = "c:HBC" levels = 1 } }
+			}
+			create_building = {
+				building = "building_sulfur_mine"
+
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:HBC"
+						levels = 1
+						region = "STATE_ALGOMA"
+					}
+				}
+			}
+		}
+	}
+}

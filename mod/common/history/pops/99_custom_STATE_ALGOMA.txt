@@ -1,0 +1,27 @@
+﻿POPS = {
+
+	s:STATE_ALGOMA = {
+	
+		region_state:HBC = {
+			create_pop = {
+				culture = cree
+				size = 6631
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 2965
+			}
+			create_pop = {
+				culture = franco_canadian
+				size = 5502
+			}
+			create_pop = {
+				culture = cree
+				size = 3015
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 86245
+			}
+		}
+	}}

@@ -1,0 +1,43 @@
+﻿POPS = {
+
+	s:STATE_NORTHWEST_ONTARIO = {
+	
+		region_state:HBC = {
+			create_pop = {
+				culture = cree
+				size = 17987
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 8046
+			}
+			create_pop = {
+				culture = siouan
+				size = 3562
+			}
+			create_pop = {
+				culture = metis
+				size = 3558
+			}
+			create_pop = {
+				culture = algonquian
+				size = 3474
+			}
+			create_pop = {
+				culture = iroquoian
+				size = 3474
+			}
+			create_pop = {
+				culture = franco_canadian
+				size = 14925
+			}
+			create_pop = {
+				culture = cree
+				size = 8179
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 233955
+			}
+		}
+	}}

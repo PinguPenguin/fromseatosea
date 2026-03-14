@@ -37,4 +37,33 @@
 		country = c:NVS
 		owned_provinces = { "x085c83" "x380f20" "x406fba" "x63e1c4" "x6b5822" "x8060c0" "x80aa26" "x8cfa32" "x905458" "x99ca75" "xb95db3" "xc060c0" "xca0399" "xe4892f" "xeafa99" "xec5b4b" "xf04040" "xf95d47" }
 	}}
+
+	s:STATE_ONTARIO_PENINSULA = {
+	
+	create_state = {
+		country = c:ONT
+		owned_provinces = { "x0137a1" "x0d2971" "x123762" "x1c432a" "x206622" "x24691a" "x2bcbc7" "x308040" "x3344f6" "x337ecf" "x515254" "x729349" "x9a44c7" "xb00040" "xb08040" "xc0110a" "xc1233a" "xd5b4a4" }
+	}}
+
+	s:STATE_ALGOMA = {
+	
+	create_state = {
+		country = c:HBC
+		owned_provinces = { "x00afdf" "x020df9" "x06b1fe" "x0b7201" "x0ca605" "x17aeb7" "x256309" "x257105" "x271dab" "x29be41" "x2a08d3" "x2e016e" "x3193ea" "x361609" "x42f312" "x466a98" "x503d32" "x507bf4" "x527017" "x56d964" "x5b310a" "x5d9b41" "x627826" "x6b2093" "x738279" "x74590e" "x7505f0" "x88147f" "x8e20d9" "x8ee117" "x92d783" "x941b9d" "x9552a3" "x9c6e87" "x9e289b" "x9e46fd" "x9f77e9" "xa11839" "xa1d195" "xa1e55b" "xa92847" "xaba06f" "xafbe4e" "xbcf90d" "xbef64a" "xc75f8c" "xc893ec" "xc97ced" "xd1f43f" "xd567eb" "xdc58ab" "xe519fe" "xeca516" "xed34e6" "xf49f6d" "xf7e3f8" "xfc9a0a" }
+	}
+	create_state = {
+		country = c:ONT
+		owned_provinces = { "x1f0d15" "x263f77" "x26ef2a" "x2ad0e3" "x2b36a1" "x313bb2" "x4020c0" "x51a9ea" "x520bf5" "x56a6fd" "x5e776d" "x676e1e" "x724f63" "x7b1ae4" "x82492b" "x8f87b9" "x90a5c2" "x993abf" "xa07380" "xa794c1" "xa7b9ee" "xb2d5dc" "xba1406" "xbab329" "xc0a0c0" "xd2b39a" "xde7b99" "xea4fc0" "xeaebd8" "xf03811" }
+	}}
+
+	s:STATE_NORTHWEST_ONTARIO = {
+	
+	create_state = {
+		country = c:HBC
+		owned_provinces = { "x00cb48" "x00f376" "x011713" "x037f88" "x04633f" "x06958b" "x0708ad" "x08335d" "x08f7a9" "x0d2f27" "x0d7566" "x0db925" "x0e2f58" "x0fe1b2" "x101204" "x1176c6" "x11deb9" "x13f9fa" "x15c12c" "x1695df" "x16db09" "x171782" "x192c84" "x196c5f" "x1b4c6d" "x1c5746" "x1c6f98" "x1ddb81" "x1e2884" "x1fd5f8" "x20327a" "x208af2" "x20f7a5" "x22e40f" "x23c839" "x243b2a" "x271949" "x280a1d" "x297066" "x2a8963" "x2b78b9" "x2bc058" "x2dd641" "x2e6c75" "x2f2c82" "x2f570d" "x317fb3" "x31a991" "x33bd4e" "x343659" "x355aca" "x36b818" "x37d9e8" "x383ea0" "x388c4e" "x3927f5" "x398e4c" "x399ca7" "x3c2a27" "x3e7368" "x403994" "x406000" "x411a9b" "x4164f7" "x41a233" "x42ddae" "x48dfb9" "x490d2a" "x49ad61" "x4a04b2" "x4b096d" "x4b09c5" "x4c823a" "x4cf9f7" "x4d3033" "x4dffcd" "x4f35d0" "x4f738b" "x560e55" "x5699d1" "x569e74" "x578996" "x58158a" "x5a3d13" "x5b8a5f" "x5d7a14" "x5d9879" "x5eacb8" "x5fd282" "x61c521" "x61cd70" "x62baf4" "x6334f9" "x64ad7d" "x677647" "x6893b6" "x6a902f" "x6b64f8" "x6bcc92" "x6ca726" "x6cbb4f" "x6e31a1" "x6e6170" "x6e78ac" "x6e90ea" "x6ffe7e" "x7383df" "x76a0e6" "x77bc8d" "x78a3ba" "x790e5b" "x795ad3" "x79dc59" "x7ab82c" "x7bd091" "x7cf31c" "x7fb431" "x824210" "x827b75" "x83adcb" "x853b98" "x866c8a" "x8d15cb" "x8d992e" "x903279" "x90faea" "x932b65" "x93bd4c" "x940c24" "x969229" "x96c2fb" "x99ab17" "x9aa464" "x9c3f51" "x9cc19e" "x9df567" "x9e7cad" "x9ebd23" "xa00289" "xa18606" "xa22f7e" "xa24eb6" "xa2f8dd" "xa6f3ba" "xa70030" "xa7d370" "xa83989" "xa8c5e8" "xab2c76" "xab9db4" "xacd62e" "xad5354" "xad7d1f" "xae0541" "xae2d58" "xaebfff" "xb026c2" "xb090ad" "xb0cb2a" "xb27fd6" "xb4468d" "xb4f7b9" "xb54962" "xb6b30d" "xbdbecb" "xbdd238" "xbe6ade" "xc33c7e" "xc42b28" "xc8d6e6" "xce6d4a" "xcf1990" "xcfbce8" "xd03bf3" "xd17651" "xd1db51" "xd29273" "xd2ce4c" "xd2ee35" "xd37405" "xd3807d" "xd5540c" "xd5cd71" "xd5f515" "xd6162e" "xd64816" "xd7414c" "xd841d9" "xd849e6" "xda3337" "xdb8797" "xdce271" "xdd7290" "xdeda97" "xe0da0b" "xe1f252" "xe2fa8e" "xe50d46" "xe58c05" "xe61337" "xe756c1" "xe961e9" "xe99d1d" "xe9f39b" "xeb4bdb" "xed6465" "xef374f" "xf2120d" "xf3d744" "xf45c86" "xf6a5a4" "xf6ce39" "xf738d5" "xfa9af5" "xfbb002" "xfc4326" "xfc4f0d" "xfe02ce" "xff8a91" }
+	}
+	create_state = {
+		country = c:ONT
+		owned_provinces = { "x24171d" "x3cb77d" "x3ebfed" "x54f237" "x5d7155" "x5f5f99" "x64970e" "x780aaa" "x9577b0" "x99f3c4" "x9cc0d0" "x9dbfa5" "xc134a4" "xc5041f" "xd319eb" "xd389de" "xff5559" }
+	}}
 }

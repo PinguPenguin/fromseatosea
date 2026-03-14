@@ -1062,23 +1062,23 @@
 		region_state:ONT = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 366792
+				size = 28749
 			}
 			create_pop = {
 				culture = cree
-				size = 12200
+				size = 1006
 			}
 			create_pop = {
 				culture = franco_canadian
-				size = 23400
+				size = 1835
 			}
 			create_pop = {
 				culture = iroquoian
-				size = 3902
+				size = 428
 			}
 			create_pop = {
 				culture = algonquian
-				size = 3902
+				size = 428
 			}
 			create_pop = {
 				culture = franco_canadian
@@ -1089,19 +1089,19 @@
 		region_state:HBC = {
 			create_pop = {
 				culture = metis
-				size = 3996
+				size = 438
 			}
 			create_pop = {
 				culture = siouan
-				size = 4000
+				size = 438
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 12000
+				size = 989
 			}
 			create_pop = {
 				culture = cree
-				size = 28200
+				size = 2211
 			}
 		}
 	}
