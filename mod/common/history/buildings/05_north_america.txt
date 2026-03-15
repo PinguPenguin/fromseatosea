@@ -2922,7 +2922,7 @@
 				add_ownership={
 					country={
 						country="c:ORG"
-						levels=2
+						levels = 1
 					}
 				}
 				reserves=1

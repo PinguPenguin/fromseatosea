@@ -86,7 +86,7 @@
 	}
 	create_state = {
 		country = c:HBC
-		owned_provinces = { "x01b33d" "x06ab9d" "x08b4f9" "x0a2ccf" "x0ae42e" "x12e022" "x13a156" "x166b44" "x1757cc" "x17c895" "x19a2ee" "x1bc323" "x1d94aa" "x1dd882" "x1e17c5" "x1e566c" "x1eb5fe" "x1ef389" "x1fde39" "x21a007" "x2322de" "x23e500" "x280549" "x281860" "x2837f0" "x2f09cb" "x2f5ff8" "x30f15c" "x3168f1" "x34b4d3" "x364cb6" "x3b6c38" "x3fe00a" "x3ffb80" "x43634b" "x43ad4a" "x44502c" "x4623ff" "x469ff1" "x4ad41c" "x4b1fa6" "x4c29e7" "x4d14a8" "x4e53e1" "x50ddcb" "x53cd63" "x5410de" "x58a79e" "x5b2e01" "x5b8650" "x5bb079" "x5c25d6" "x5c699d" "x5d8481" "x5ddbf4" "x5fee31" "x6ae53a" "x6dad90" "x6eafec" "x6efbd9" "x79210d" "x7a4b9b" "x7b8e59" "x7f64bc" "x80723e" "x8080a7" "x85cf1d" "x871aa5" "x8b891e" "x8bcfe8" "x8da75a" "x8e4372" "x8e8988" "x90cf2d" "x922237" "x928ee3" "x94b087" "x94c9bb" "x95534b" "x97993b" "x9add51" "x9ff6e4" "xa2bcae" "xaeb7c5" "xaf521a" "xb38742" "xb6c4a3" "xb6e642" "xb81cb1" "xbbb0e5" "xbcff3b" "xbe898b" "xc06000" "xc09f00" "xc0d10f" "xc0f03c" "xc10e8d" "xc18671" "xc2043b" "xc6c382" "xc826e9" "xcbc288" "xcde235" "xce1d48" "xce6b2c" "xceb3e5" "xcedae2" "xd0df51" "xd30931" "xd3cb06" "xd9665f" "xd97c0e" "xd9c98f" "xda9446" "xdd93b6" "xdf3ac1" "xe1280e" "xe1dcd7" "xe3a0fd" "xe4775e" "xe51c72" "xe7c7cd" "xea25bc" "xebafe0" "xeef418" "xef8b24" "xefca8a" "xf01c28" "xf083ed" "xf42c50" "xf7519a" "xfb2b8c" "xff08d7" }
+		owned_provinces = { "x01b33d" "x06ab9d" "x08b4f9" "x0a2ccf" "x0ae42e" "x12e022" "x13a156" "x166b44" "x1757cc" "x17c895" "x19a2ee" "x1bc323" "x1d94aa" "x1dd882" "x1e17c5" "x1e566c" "x1eb5fe" "x1ef389" "x1fde39" "x21a007" "x2322de" "x23e500" "x280549" "x281860" "x2837f0" "x2f09cb" "x2f5ff8" "x30f15c" "x3168f1" "x34b4d3" "x364cb6" "x3b6c38" "x3fe00a" "x3ffb80" "x43634b" "x43ad4a" "x44502c" "x4623ff" "x469ff1" "x4ad41c" "x4b1fa6" "x4c29e7" "x4d14a8" "x4e53e1" "x50ddcb" "x53cd63" "x5410de" "x58a79e" "x5b2e01" "x5b8650" "x5bb079" "x5c25d6" "x5c699d" "x5d8481" "x5ddbf4" "x5fee31" "x6ae53a" "x6dad90" "x6eafec" "x6efbd9" "x73f1e8" "x79210d" "x7a4b9b" "x7b8e59" "x7f64bc" "x80723e" "x8080a7" "x85cf1d" "x871aa5" "x8b891e" "x8bcfe8" "x8da75a" "x8e4372" "x8e8988" "x90cf2d" "x922237" "x928ee3" "x94b087" "x94c9bb" "x95534b" "x97993b" "x9add51" "x9ff6e4" "xa2bcae" "xaeb7c5" "xaf521a" "xb38742" "xb6c4a3" "xb6e642" "xb81cb1" "xbbb0e5" "xbcff3b" "xbe898b" "xc06000" "xc09f00" "xc0d10f" "xc0f03c" "xc10e8d" "xc18671" "xc2043b" "xc6c382" "xc826e9" "xcbc288" "xcde235" "xce1d48" "xce6b2c" "xceb3e5" "xcedae2" "xd0df51" "xd30931" "xd3cb06" "xd9665f" "xd97c0e" "xd9c98f" "xda9446" "xdd93b6" "xdf3ac1" "xe1280e" "xe1dcd7" "xe3a0fd" "xe4775e" "xe51c72" "xe7c7cd" "xea25bc" "xebafe0" "xeef418" "xef8b24" "xefca8a" "xf01c28" "xf083ed" "xf42c50" "xf7519a" "xfb2b8c" "xff08d7" }
 	}}
 
 	s:STATE_EDMONTON = {
@@ -109,5 +109,34 @@
 	create_state = {
 		country = c:HBC
 		owned_provinces = { "x02a092" "x02e8da" "x043fc9" "x0877da" "x0a5171" "x0a84c8" "x0ad3c1" "x0e80fb" "x0ec207" "x120eea" "x1392fd" "x1426b4" "x150075" "x186af1" "x188022" "x1a8a74" "x1eebb5" "x1f8897" "x208ea9" "x21e777" "x22820c" "x2b2e3c" "x2d5c98" "x2f5b26" "x317ba1" "x330ff6" "x3628b1" "x3673d9" "x368fa7" "x373e0d" "x381007" "x394c8f" "x39d17f" "x3d060d" "x3f4262" "x40a0ea" "x47b094" "x487992" "x4b5372" "x4c24ef" "x4d6778" "x4e9b73" "x4fb5bd" "x62957e" "x633a67" "x650c02" "x74e2cf" "x7502d8" "x771c6f" "x78dd97" "x7b461e" "x80a0a3" "x81ed91" "x8626e9" "x86ee41" "x87acec" "x886e4a" "x89c402" "x8a3275" "x8a563d" "x8c6fb2" "x8d811f" "x8e154a" "x91d858" "x91d882" "x926957" "x95deb0" "x97d4a4" "x980251" "x9a52f2" "x9a96ba" "x9d7865" "x9eaabc" "x9ec04e" "xa09daf" "xa3151a" "xa45402" "xa489ba" "xa4c569" "xa818f4" "xa91fd6" "xaa6118" "xad218d" "xaeb7c9" "xaf9ce8" "xb1775f" "xb27e30" "xb66b81" "xb84007" "xbbfb01" "xc04000" "xc17db9" "xc286c9" "xc6334c" "xc65514" "xc821dc" "xc94f32" "xc9be8f" "xca6ea4" "xcadd23" "xcd4c74" "xcd72ad" "xcdac4c" "xd17431" "xd1d7e7" "xd27629" "xd8277c" "xdc6a00" "xdc7245" "xe154e6" "xe1c1a4" "xe225be" "xe2baeb" "xe32d1b" "xe4209a" "xe4404b" "xe54214" "xe6e5c3" "xe85e02" "xe99cd6" "xeaef3d" "xec5a3a" "xef3717" "xef3ed9" "xef9af6" "xf057a9" "xf16167" "xf5d3a9" "xf7a1c4" "xfe3901" }
+	}}
+
+	s:STATE_BC_INTERIOR = {
+	
+	create_state = {
+		country = c:ORE
+		owned_provinces = { "x06eeac" "x082a0f" "x0d5e87" "x0eae6c" "x1a8981" "x2bbea4" "x335573" "x34c789" "x362e8f" "x453f2b" "x490d37" "x497376" "x4d08e1" "x4df1b5" "x501e7b" "x521640" "x52c081" "x539c2f" "x5502ec" "x5a6f3e" "x5c6656" "x605f60" "x611ae5" "x61cacb" "x687c61" "x69c90f" "x6cf452" "x70aaaf" "x738afd" "x77ad45" "x7b567f" "x7bdc98" "x804a90" "x83b2a7" "x841727" "x852913" "x8b9b2e" "x8d62e7" "x94b02f" "x9a43d9" "x9b5b04" "x9c275b" "x9e2648" "xa0d447" "xa23efd" "xaa8177" "xafe769" "xb3a699" "xbb97d1" "xc0a000" "xc6eb78" "xcdaf46" "xcfc60a" "xd080f5" "xd4afea" "xd5a5b1" "xd9a050" "xdb515a" "xdcf8ed" "xdd172e" "xe01e2e" "xe764c0" "xe811d1" "xede38b" "xee83f2" "xfa6f59" "xfa7d25" "xfbe9a2" "xfd4c5e" "xff3644" }
+	}}
+
+	s:STATE_UPPER_BC = {
+	
+	create_state = {
+		country = c:ATB
+		owned_provinces = { "x0019c8" "x004080" "x0361f9" "x03ea0d" "x05085f" "x07c186" "x094ee3" "x098440" "x0c324c" "x0c50ab" "x0f979f" "x0fc30c" "x105e9e" "x124b70" "x13bf55" "x149257" "x17186d" "x172779" "x173d99" "x17ac99" "x1a457c" "x1c0d58" "x202671" "x20a6bc" "x20d07c" "x23e4de" "x2600c9" "x2613cc" "x26fe6e" "x27b8cb" "x2da2d0" "x2e14f8" "x2f367f" "x2f6de4" "x353f41" "x35417d" "x361836" "x367cc4" "x398ab7" "x3a5746" "x3f6e46" "x411ce0" "x42cc6b" "x4383d7" "x45712d" "x457edc" "x45ccd8" "x4a2d16" "x4ad217" "x4afa0e" "x4cb32b" "x4d34b5" "x4d47eb" "x502bc0" "x53fa26" "x54c8a5" "x56dfdd" "x58555f" "x58a2f5" "x5dc4e3" "x5e0cd6" "x5fbaa3" "x63fc5c" "x664323" "x674c91" "x6a10e2" "x6d09cf" "x6d883b" "x6e651a" "x6ef14a" "x7088d1" "x711438" "x75ce92" "x768b68" "x77fcf9" "x784fac" "x7e9185" "x7ec219" "x7fe760" "x827c30" "x83263b" "x83a2f7" "x846bbd" "x84daef" "x85c5de" "x862333" "x86384c" "x88982e" "x89cec2" "x8a0525" "x8a2d02" "x8b7e77" "x8d9e74" "x8da2a3" "x90ec1e" "x945793" "x97f1db" "x9b707d" "x9bcbb0" "x9c09f4" "x9c4ebd" "x9d30a0" "xa24464" "xa595a4" "xa5c52c" "xa6b63f" "xa9c721" "xaac55e" "xab945f" "xad0c56" "xb20af0" "xb2b319" "xb34974" "xb44559" "xb55800" "xb795cf" "xb84cb1" "xbb5d4e" "xbb7ed9" "xbbc5f1" "xc0c173" "xc0f62f" "xc39ee7" "xc84186" "xca984f" "xcbefc9" "xcec8bc" "xd02fba" "xd46521" "xdb5bfc" "xdb73a1" "xde98a3" "xdff28b" "xe02548" "xe49b22" "xe77af1" "xe85e08" "xe8d2d0" "xe973d5" "xe97a12" "xef46b1" "xf7e225" "xface14" }
+	}
+	create_state = {
+		country = c:HBC
+		owned_provinces = { "x003c0a" "x03a13c" "x084c04" "x196bbc" "x1c6431" "x1fd5d0" "x20156d" "x252116" "x25dd86" "x267f51" "x27d1c9" "x3108cf" "x34c75e" "x364f5d" "x36edbc" "x383856" "x396fb1" "x40028f" "x475882" "x4f2908" "x59f3fc" "x5c8e10" "x5f06d2" "x6031e8" "x653b62" "x65e312" "x666995" "x670613" "x780f19" "x7fd1c6" "x81606b" "x87d0f6" "x8c21f3" "x9860f4" "x99e6cc" "x9c4123" "xa504be" "xa697bd" "xa968d6" "xaba1a8" "xb175d9" "xb98d8c" "xbad980" "xc087bc" "xc0a02f" "xc132c8" "xc50a34" "xc7414d" "xc826fd" "xc8f21a" "xda096e" "xda1e50" "xdc970d" "xde374d" "xe057f6" "xe240d1" "xe7d0d3" "xe9b547" "xee19e4" "xf23e90" "xfc10d7" "xff5a75" }
+	}
+	create_state = {
+		country = c:ORG
+		owned_provinces = { "x003e09" "x046319" "x0d541b" "x0ef29e" "x123bdd" "x211659" "x2142b1" "x22717e" "x32e810" "x377b09" "x3d7cf6" "x3ef318" "x3f0544" "x462445" "x5249e0" "x5a9ba4" "x5d8407" "x607082" "x60dd5f" "x63dabd" "x63fbf3" "x671508" "x6c8005" "x6c8c52" "x6e8b4c" "x6f3aaf" "x74b3f3" "x795d42" "x7d839e" "x853c2d" "x872652" "x8bc3a9" "x8dcfda" "x9540cc" "x9d1421" "xa01450" "xa12143" "xa3dd6f" "xa4c072" "xa78118" "xa941a4" "xb6226d" "xb8325d" "xb9e50c" "xbbf2bb" "xbc873d" "xbd3e1f" "xc4f8be" "xc79097" "xc7ab8a" "xcb92d8" "xd1aa6a" "xd369b9" "xd3e426" "xe040c0" "xe9756f" "xeef6b1" "xf0ad76" "xf0e9a1" "xf18b54" "xf216d7" "xfefb89" }
+	}}
+
+	s:STATE_VANCOUVER_ISLAND = {
+	
+	create_state = {
+		country = c:ORE
+		owned_provinces = { "x24fab0" "x2b750f" "x34639f" "x64e0b4" "x6dfdd1" "x76cd59" "x7a8f60" "x999e9b" "xc0b693" "xc9a9ab" "xe9ac75" "xfdf070" }
 	}}
 }
