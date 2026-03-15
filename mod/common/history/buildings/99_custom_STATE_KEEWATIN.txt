@@ -1,0 +1,24 @@
+﻿
+BUILDINGS = {
+	s:STATE_KEEWATIN = {
+		region_state:HBC = {
+			create_building = {
+				building = "building_logging_camp"
+
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:HBC"
+						levels = 1
+						region = "STATE_KEEWATIN"
+					}
+				}
+			}
+			create_building = {
+				building = "building_barrack"
+
+				add_ownership = { country = { country = "c:HBC" levels = 1 } }
+			}
+		}
+	}
+}

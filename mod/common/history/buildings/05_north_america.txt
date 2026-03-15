@@ -2947,7 +2947,7 @@
 				add_ownership={
 					country={
 						country="c:HBC"
-						levels=2
+						levels = 1
 					}
 				}
 				reserves=1
@@ -2959,7 +2959,7 @@
 					company={
 						type=company_hbc
 						country="c:GBR"
-						levels=2
+						levels = 1
 					}
 				}
 				reserves=1

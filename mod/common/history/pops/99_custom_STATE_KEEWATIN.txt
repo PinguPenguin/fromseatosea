@@ -1,0 +1,32 @@
+﻿POPS = {
+
+	s:STATE_KEEWATIN = {
+	
+		region_state:HBC = {
+			create_pop = {
+				culture = cree
+				size = 8719
+			}
+			create_pop = {
+				culture = metis
+				size = 14534
+			}
+			create_pop = {
+				culture = athabaskan
+				size = 11625
+			}
+			create_pop = {
+				culture = metis
+			religion = protestant
+				size = 2903
+			}
+			create_pop = {
+				culture = siouan
+				size = 8719
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 10788
+			}
+		}
+	}}

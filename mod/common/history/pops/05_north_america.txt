@@ -1199,35 +1199,35 @@
 		region_state:HBC = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 3999
+				size = 798
 			}
 			create_pop = {
 				culture = siouan
-				size = 8200
+				size = 1635
 			}
 			create_pop = {
 				culture = metis
-				size = 11000
+				size = 2193
 			}
 		}
 		region_state:IRC = {
 			create_pop = {
 				culture = cree
-				size = 12000
+				size = 2393
 			}
 			create_pop = {
 				culture = siouan
-				size = 12004
+				size = 2393
 			}
 		}
 		region_state:BLF = {
 			create_pop = {
 				culture = siouan
-				size = 15400
+				size = 3070
 			}
 			create_pop = {
 				culture = metis
-				size = 5000
+				size = 997
 			}
 		}
 	}
@@ -1267,25 +1267,25 @@
 		region_state:HBC = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 3000
+				size = 1467
 			}
 			create_pop = {
 				culture = siouan
-				size = 4200
+				size = 2053
 			}
 			create_pop = {
 				culture = metis
-				size = 16000
+				size = 7820
 			}
 		}
 		region_state:IRC = {
 			create_pop = {
 				culture = siouan
-				size = 8000
+				size = 3910
 			}
 			create_pop = {
 				culture = cree
-				size = 24000
+				size = 11730
 			}
 		}
 	}
@@ -1293,30 +1293,30 @@
 		region_state:HBC = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 14848
+				size = 4060
 			}
 			create_pop = {
 				culture = siouan
-				size = 12000
+				size = 3281
 			}
 			create_pop = {
 				culture = metis
 				religion = protestant
-				size = 3996
+				size = 1093
 			}
 			create_pop = {
 				culture = athabaskan
-				size = 16000
+				size = 4375
 			}
 			create_pop = {
 				culture = metis
-				size = 20004
+				size = 5470
 			}
 		}
 		region_state:IRC = {
 			create_pop = {
 				culture = cree
-				size = 12000
+				size = 3281
 			}
 		}
 	}

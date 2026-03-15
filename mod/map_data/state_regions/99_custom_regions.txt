@@ -116,3 +116,55 @@ STATE_NORTHWEST_ONTARIO = {
     arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
     capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
 }
+
+STATE_KEEWATIN = {
+    id = 708
+    provinces = { "xa0231c" "xaa5d63" "x0db4ca" "x7ce9e2" "xb1c965" "x8be8b5" "x0c2c81" "x131829" "xb448a4" "xca95ea" "xd48023" "x21166d" "x7a790a" "x76718f" "xe15693" "x13fc0f" "x56a6c4" "x0c6fd7" "xcca2c5" "x6f9dbe" "x0cdfef" "x0b8443" "xfd8b0c" "x43ecf0" "xa182ab" "x43b793" "xfa5fa2" "xe9fe5b" "xae76e5" "xf91e7e" "xa03446" "x594f3c" "x6911e2" "x4d0581" "xe5081d" "xf770e6" "x44ef6b" "xc9870b" "x86229f" "x65f69e" "xd7ce04" "xd4d86f" "xc587cd" "x5b4e49" "xdab83f" "xd0913b" "xb84746" "xeb9647" "xf2b4ce" "xc99667" "xfb1b79" "x5e806d" "xc9790e" "x3e8475" "x7ee88a" "x8020c0" "x9455f5" "xb4abac" "x857dd7" "x57afc4" "x7b9c23" "xc036ec" "x0e7e40" "x85f1ea" "x2b9e9f" "x832eb1" "x956f56" "x044b0b" "xf779d9" "xff1988" "xc8467f" "x86d18a" "x544568" "x9cb866" "xd1f715" "xe0a3a3" "x464f48" "x44cca9" "x6c06d8" "xca15a3" "x8a7316" "xb5c055" "xe0f215" "x3e3e84" "xb8ab1d" "xbe34c5" "xf66d8e" "x6e8c90" "xc61e9b" "xd4b179" "x1510b9" "xb0f3c2" "xf4a9f1" "x0791f2" "xeed579" "xf7af04" "x8b9e21" "xe7cb96" "x40e52d" "x253e84" "xf5931b" "xf73ff8" "x1c140f" "x42f582" "x38d2b3" "x187c58" "x24df1c" "x555bad" "x78225b" "xf73080" "xdc2b47" "x0f245d" "x5cc4c6" "x7f8573" "x0e6ed3" "xdd60f3" "x528228" "x70f127" "x7122b4" "x46b922" "xdbbc41" "x8521ab" "x09ccbb" "x5e3093" "x2275df" "x002497" "x40e000" "xbb5ea2" "x6219bb" "x32ce68" "xb8e561" "x1ee51c" "xa57384" "x85f6fb" "xea8d91" "x08045e" "x5be5bf" "xc923b4" "xe857dc" "xc02fed" "x3eb341" "x00f433" "x0782f1" "x5d7496" "x68c879" "x4503e6" "xe58d80" "x5f1f9d" "xf8510f" "x165b36" "x45d044" "x5fc402" "x7a8dc0" "x71e534" "x09454b" "xba7439" "x18f5ee" "x521e7c" "x12c464" "x9e3dc0" "x180d7a" "x2256ce" "x9a54dd" "xd81024" "x75f292" "x3f7017" "x6137ea" "x7a3e48" "x6a73e3" "x4ff4d0" "x1a0e35" "xe25d1f" "xf9bb2e" "x30c051" "xf2ad8f" "x563d7f" "x0c1436" "xf2debd" "xb7b9d2" "x92e099" "xa9c5c0" "x4992a9" "xe19213" "xd0d2b7" "x4676bd" "xad40b0" "xf88dc6" "x813c7a" "x1328f8" "x6b748e" "x55e100" "x395554" "x9d05eb" "x3612f5" }
+    subsistence_building = "building_subsistence_farm"
+	city = "x7a3e48"
+	farm = "x09454b"
+	mine = "xb0f3c2"
+	wood = "x18f5ee"
+    arable_land = 23
+    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
+    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+}
+
+STATE_NORTH_SASKATCHEWAN = {
+    id = 709
+    provinces = { "x3ffb80" "x280549" "xc2043b" "xcedae2" "xe3a0fd" "x1eb5fe" "x1ef389" "x281860" "xe51c72" "xbbb0e5" "xfb2b8c" "x58a79e" "x2837f0" "x5b2e01" "x08b4f9" "x34b4d3" "xaf521a" "x922237" "x0ae42e" "x97993b" "x80723e" "xf7519a" "xb6e642" "x1e17c5" "x8080a7" "xc0f03c" "xc06000" "xd9665f" "x50ddcb" "x1bc323" "x94b087" "x6eafec" "xce1d48" "xc6c382" "x12e022" "xc10e8d" "xd3cb06" "x5410de" "x23e500" "xbcff3b" "x8da75a" "x53cd63" "x5c25d6" "x0a2ccf" "x2322de" "xb38742" "x4d14a8" "x6ae53a" "xff08d7" "x7f64bc" "xbe898b" "x95534b" "x9add51" "xef8b24" "xceb3e5" "x7b8e59" "x13a156" "xdf3ac1" "x3168f1" "xd30931" "xebafe0" "x9705b3" "xa2bcae" "x871aa5" "x5d8481" "x79210d" "xaeb7c5" "xe7c7cd" "x5c699d" "x8b891e" "xefca8a" "x19a2ee" "x3b6c38" "x44502c" "x1d94aa" "xc18671" "x01b33d" "x5b8650" "x4ad41c" "x90cf2d" "xd97c0e" "xe1dcd7" "xd0df51" "xcbc288" "xf01c28" "xc826e9" "x43634b" "x4c29e7" "xc0d10f" "x364cb6" "x1fde39" "x6efbd9" "x8e4372" "xe4775e" "x4b1fa6" "x5ddbf4" "x85cf1d" "xce6b2c" "x928ee3" "xf083ed" "x94c9bb" "x30f15c" "x8e8988" "x4e53e1" "xc09f00" "xc203b7" "x7a4b9b" "x21a007" "xf42c50" "xe1280e" "x3fe00a" "x6dad90" "x17c895" "x5fee31" "xeef418" "x43ad4a" "xd9c98f" "x06ab9d" "xb44927" "x2f5ff8" "x1e566c" "xb81cb1" "xdd93b6" "x2f09cb" "x5bb079" "x1757cc" "x9ff6e4" "xda9446" "xb6c4a3" "xea25bc" "x469ff1" "x8bcfe8" "x4623ff" "x166b44" "x1dd882" "xcde235" }
+    subsistence_building = "building_subsistence_farm"
+	city = "x53cd63"
+	farm = "xcde235"
+	mine = "x3b6c38"
+	wood = "x1dd882"
+    arable_land = 0
+    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
+    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+}
+
+STATE_EDMONTON = {
+    id = 710
+    provinces = { "x670a46" "xa75296" "x907360" "x70370b" "x673ca0" "x518f22" "xfca61c" "x433bc6" "x89c61f" "xdcc985" "x7a03dc" "x3991ab" "x0ed37a" "xc33300" "xdaac5c" "x7f49e7" "x51cec5" "xf11edd" "x001b22" "x5a43d4" "xfb8137" "xc45e08" "x676674" "x583eaa" "x23ba24" "x759e96" "x10bf0f" "x872d1d" "x75be3e" "x0e6b0a" "xf2dfa3" "xc3d71f" "x6a64cd" "x973257" "x2a6d2a" "x12af70" "x92aabe" "x072ddc" "x6dc09d" "xeddf68" "x55dbf6" "x00f631" "x8a6d99" "xa2b002" "xb12674" "xc5a257" "x67cabb" "xb24198" "xc4e828" "x285a4e" "x253a98" "x5779a2" "xf3ad96" "x6b0266" "xefa433" "x7050f0" "x98f80a" "x26db64" "xcb77d5" "xfadebc" "x3b027f" "x060c67" "x61c9b8" "xfcb25c" "x107893" "xd71124" "x74c214" "xa86910" "xa74a2f" "xcac792" "x594542" "xd1a1d9" "x69bed1" "x2fa24b" "x39e46c" "x311442" "xa8913b" "x933c14" "x44a1d9" "x92ad8f" "x840a15" "xeb7e0e" "xd44fbb" "xf43cc8" "x4e03e3" "x799cfa" "xa9976f" "xb2b31f" "x8f67dc" "xa150dd" "x1c413a" "x4f80b8" "x6241e5" "xc07fc1" "xdfa1bb" "x617dfb" "x402b2e" "x55f9ab" "x1197cd" "x56971b" "xbe8dc0" "x7340b5" "xb94fd8" "xf4ec2d" "x397f40" "x52fcb4" "xb88cbc" }
+    subsistence_building = "building_subsistence_farm"
+	city = "x51cec5"
+	farm = "xa86910"
+	mine = "x55dbf6"
+	wood = "xa9976f"
+    arable_land = 0
+    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
+    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+}
+
+STATE_ATHABASCA = {
+    id = 711
+    provinces = { "xad218d" "x39d17f" "xef3ed9" "xaf9ce8" "xc9be8f" "xa09daf" "xdc7245" "xb1775f" "xe85e02" "x1a8a74" "x0a84c8" "xc94f32" "x1f8897" "x02e8da" "xc6334c" "x02a092" "x89c402" "x8626e9" "xaa6118" "x120eea" "xe54214" "x3d060d" "xe225be" "x043fc9" "xc286c9" "xeaef3d" "xe154e6" "x368fa7" "xa4c569" "xe99cd6" "x394c8f" "x771c6f" "xca6ea4" "x317ba1" "xa3151a" "x0e80fb" "x2b2e3c" "xc04000" "x633a67" "x80a0a3" "x8e154a" "xcadd23" "xf16167" "x21e777" "x87acec" "x40a0ea" "x4b5372" "x95deb0" "xd27629" "x9ec04e" "x3673d9" "xb27e30" "x186af1" "x4fb5bd" "x9a96ba" "xa818f4" "x86ee41" "x62957e" "xe4209a" "x8a3275" "xd1d7e7" "xf7a1c4" "x1392fd" "x97d4a4" "xb84007" "x22820c" "x487992" "x0ec207" "x980251" "xe2baeb" "x47b094" "x8c6fb2" "x78dd97" "x1426b4" "x188022" "x373e0d" "x3628b1" "xc821dc" "x650c02" "x2f5b26" "x0877da" "xe1c1a4" "xe4404b" "xdc6a00" "x381007" "x4c24ef" "x886e4a" "x91d858" "x9d7865" "xb66b81" "x4d6778" "xbbfb01" "xd8277c" "x2d5c98" "x1eebb5" "xa489ba" "x81ed91" "x9a52f2" "x7502d8" "xd17431" "xc65514" "xe6e5c3" "xfe3901" "xa91fd6" "xef3717" "x0a5171" "x150075" "x91d882" "x4e9b73" "xf057a9" "xaeb7c9" "x9eaabc" "x74e2cf" "xcd4c74" "x926957" "xec5a3a" "xcdac4c" "x0ad3c1" "x8a563d" "x8d811f" "xc17db9" "xf5d3a9" "x330ff6" "x208ea9" "x7b461e" "xcd72ad" "x3f4262" "xef9af6" "xe32d1b" "xa45402" }
+    subsistence_building = "building_subsistence_farm"
+	city = "x188022"
+	farm = "xe85e02"
+	mine = "xc65514"
+	wood = "x40a0ea"
+    arable_land = 50
+    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
+    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+}

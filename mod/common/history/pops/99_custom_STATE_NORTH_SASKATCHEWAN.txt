@@ -1,0 +1,27 @@
+﻿POPS = {
+
+	s:STATE_NORTH_SASKATCHEWAN = {
+	
+		region_state:HBC = {
+			create_pop = {
+				culture = cree
+				size = 12270
+			}
+			create_pop = {
+				culture = siouan
+				size = 4090
+			}
+			create_pop = {
+				culture = metis
+				size = 8180
+			}
+			create_pop = {
+				culture = siouan
+				size = 2147
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 1533
+			}
+		}
+	}}

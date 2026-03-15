@@ -1,0 +1,35 @@
+﻿POPS = {
+
+	s:STATE_ATHABASCA = {
+	
+		region_state:HBC = {
+			create_pop = {
+				culture = metis
+				size = 2196
+			}
+			create_pop = {
+				culture = siouan
+				size = 6764
+			}
+			create_pop = {
+				culture = siouan
+				size = 5272
+			}
+			create_pop = {
+				culture = cree
+				size = 5270
+			}
+			create_pop = {
+				culture = metis
+				size = 4831
+			}
+			create_pop = {
+				culture = siouan
+				size = 3601
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 1756
+			}
+		}
+	}}

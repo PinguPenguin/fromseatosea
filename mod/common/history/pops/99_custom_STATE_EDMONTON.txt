@@ -1,0 +1,35 @@
+﻿POPS = {
+
+	s:STATE_EDMONTON = {
+	
+		region_state:HBC = {
+			create_pop = {
+				culture = metis
+				size = 1807
+			}
+			create_pop = {
+				culture = siouan
+				size = 5566
+			}
+			create_pop = {
+				culture = siouan
+				size = 4339
+			}
+			create_pop = {
+				culture = cree
+				size = 4337
+			}
+			create_pop = {
+				culture = metis
+				size = 3976
+			}
+			create_pop = {
+				culture = siouan
+				size = 2964
+			}
+			create_pop = {
+				culture = anglo_canadian
+				size = 1445
+			}
+		}
+	}}
