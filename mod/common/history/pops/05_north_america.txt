@@ -1235,31 +1235,31 @@
 		region_state:ORG = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 6500
+				size = 1319
 			}
 			create_pop = {
 				culture = salish
-				size = 27396
+				size = 5559
 			}
 			create_pop = {
 				culture = athabaskan
-				size = 7000
+				size = 1421
 			}
 		}
 		region_state:ATB = {
 			create_pop = {
 				culture = athabaskan
-				size = 35200
+				size = 6030
 			}
 		}
 		region_state:HBC = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 1500
+				size = 367
 			}
 			create_pop = {
 				culture = athabaskan
-				size = 13000
+				size = 2638
 			}
 		}
 	}
@@ -1338,7 +1338,7 @@
 		region_state:HBC = {
 			create_pop = {
 				culture = athabaskan
-				size = 16000
+				size = 12759
 			}
 		}
 	}

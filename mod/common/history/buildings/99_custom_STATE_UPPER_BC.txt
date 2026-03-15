@@ -1,0 +1,12 @@
+﻿
+BUILDINGS = {
+	s:STATE_UPPER_BC = {
+		region_state:ATB = {
+			create_building = {
+				building = "building_barrack"
+
+				add_ownership = { country = { country = "c:ATB" levels = 1 } }
+			}
+		}
+	}
+}
