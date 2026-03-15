@@ -1,0 +1,11 @@
+﻿POPS = {
+
+	s:STATE_NORTHWEST_TERRITORIES = {
+	
+		region_state:ATB = {
+			create_pop = {
+				culture = athabaskan
+				size = 1167
+			}
+		}
+	}}
