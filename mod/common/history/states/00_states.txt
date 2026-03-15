@@ -899,7 +899,7 @@ STATES = {
 	s:STATE_SASKATCHEWAN = {
 		create_state = {
 			country = c:HBC
-			owned_provinces = { "x01a126" "x023abc" "x0366e9" "x097aeb" "x0e7e33" "x13d8b0" "x167cb1" "x1ba7c7" "x1bd909" "x1e1be6" "x1e2c08" "x1e3adc" "x1f57f4" "x29bdc1" "x2a2319" "x2b3f4c" "x2cbf22" "x2ed2e9" "x3be1af" "x46b1f4" "x5291eb" "x55855f" "x58fbf4" "x5ece96" "x64df0c" "x68efda" "x6c59ac" "x6d1b75" "x7270ac" "x73f1e8" "x76118a" "x7a8706" "x802040" "x80e080" "x84de33" "x8d5801" "x912b29" "x926eca" "x9665e4" "x97a74b" "x9d5a1e" "xa0472d" "xaa4a52" "xaac78f" "xabcaf9" "xb0ab9c" "xb25003" "xb7cbc8" "xba20f5" "xbb4dad" "xbc5647" "xbdd65b" "xbf6b39" "xbfa383" "xc2bdc8" "xd1f86f" "xd2d3be" "xd55dce" "xd72087" "xdccc35" "xe1c4d9" "xe2ea0f" "xe33a60" "xe417cf" "xe48fd5" "xe555e3" "xf06a31" "xf0a479" "xf1c0c8" "xf33d4e" "xf45d51" "xfab5a6" "xfc8479" }
+			owned_provinces = { "x01a126" "x023abc" "x0366e9" "x097aeb" "x0e7e33" "x13d8b0" "x167cb1" "x1ba7c7" "x1bd909" "x1e1be6" "x1e2c08" "x1e3adc" "x1f57f4" "x29bdc1" "x2a2319" "x2b3f4c" "x2cbf22" "x2ed2e9" "x3be1af" "x46b1f4" "x5291eb" "x55855f" "x58fbf4" "x5ece96" "x64df0c" "x68efda" "x6c59ac" "x6d1b75" "x7270ac" "x76118a" "x7a8706" "x802040" "x80e080" "x84de33" "x8d5801" "x912b29" "x926eca" "x9665e4" "x97a74b" "x9d5a1e" "xa0472d" "xaa4a52" "xaac78f" "xabcaf9" "xb0ab9c" "xb25003" "xb7cbc8" "xba20f5" "xbb4dad" "xbc5647" "xbdd65b" "xbf6b39" "xbfa383" "xc2bdc8" "xd1f86f" "xd2d3be" "xd55dce" "xd72087" "xdccc35" "xe1c4d9" "xe2ea0f" "xe33a60" "xe417cf" "xe48fd5" "xe555e3" "xf06a31" "xf0a479" "xf1c0c8" "xf33d4e" "xf45d51" "xfab5a6" "xfc8479" }
 		}
 		create_state = {
 			country = c:IRC

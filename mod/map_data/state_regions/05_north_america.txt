@@ -1073,7 +1073,7 @@ STATE_BRITISH_COLUMBIA = {
 STATE_SASKATCHEWAN = {
     id = 316
     subsistence_building = "building_subsistence_farm"
-    provinces = { "xba20f5" "xf1c0c8" "xbfa383" "x46b1f4" "xca657a" "x233603" "x68efda" "x806080" "x50237f" "xef4828" "x6dada3" "x06c47f" "xc2bdc8" "x0366e9" "x8015b3" "xa31e5d" "xf06a31" "xd1f86f" "xfab5a6" "xe74adb" "x64df0c" "xbc5647" "xb0ab9c" "xe555e3" "x4356b6" "x7270ac" "xe6f6bc" "x097aeb" "xf0a479" "x80e080" "xc0e080" "x3e129b" "xdccc35" "xe30338" "x6c59ac" "xfc8479" "x2b3f4c" "x6c7258" "x09250f" "x008174" "x9eee00" "xe417cf" "x58fbf4" "x13d8b0" "x739297" "x4a2d69" "x97a74b" "x926eca" "x01a126" "xbdd65b" "x851792" "x73f1e8" "x2a2319" "x626c7d" "x802040" "xfd269c" "x1f57f4" "x0756bb" "xd2d3be" "x023abc" "xe2ea0f" "x3be1af" "x84de33" "x6a28ce" "xe35ede" "xaac78f" "x6d1b75" "xb25003" "x345017" "x912b29" "xf078c6" "xcc9544" "x2ed2e9" "xee8586" "xa0472d" "xa6f8cb" "x111542" "xe1c4d9" "xbf6b39" "x1b24d4" "x8bc79e" "x1e2c08" "x5ece96" "x673118" "x1bd909" "x8d5801" "xd72087" "x85cef2" "x3a74fa" "xbb4dad" "xabcaf9" "x7a8706" "xf45d51" "x9e9910" "xaa4a52" "x1ba7c7" "xd55dce" "x76118a" "xf33d4e" "x5291eb" "xe7e32c" "x6a0632" "x2570fc" "x2cbf22" "x9e315b" "xe33a60" "xa2dabf" "xd4f003" "xcb3485" "x25d8e1" "x0e7e33" "x9d5a1e" "xe48fd5" "x129294" "x40b953" "x29bdc1" "x157aad" "x84bc34" "x8a8277" "x167cb1" "x55855f" "x1e3adc" "xc06080" "x1e1be6" "x3fc72e" "xb7cbc8" "xe5e502" "x5abbf5" "x117695" "x9665e4" }
+    provinces = { "x0756bb" "x345017" "x46b1f4" "xd55dce" "x29bdc1" "xfd269c" "x5291eb" "x023abc" "x1e2c08" "xca657a" "xe33a60" "x2570fc" "x1b24d4" "x806080" "x1f57f4" "x85cef2" "xbfa383" "x0366e9" "x1bd909" "x3a74fa" "x01a126" "xe2ea0f" "x2ed2e9" "x1e1be6" "xd72087" "x6dada3" "x8bc79e" "x64df0c" "xef4828" "xb0ab9c" "x117695" "x7a8706" "x2a2319" "x40b953" "x2b3f4c" "x5abbf5" "x9665e4" "x97a74b" "x233603" "xba20f5" "xd1f86f" "x4a2d69" "x167cb1" "x802040" "x008174" "x129294" "x3fc72e" "xe417cf" "xbb4dad" "x50237f" "x58fbf4" "x6c59ac" "xe6f6bc" "x0e7e33" "xf1c0c8" "xc06080" "xa2dabf" "x76118a" "xc0e080" "xcb3485" "xcc9544" "xd2d3be" "xe5e502" "xa6f8cb" "xe48fd5" "x626c7d" "xf45d51" "x3e129b" "x9e315b" "xee8586" "xa31e5d" "x6a0632" "x55855f" "x9e9910" "x1ba7c7" "x09250f" "x25d8e1" "x84de33" "x6d1b75" "x06c47f" "xfc8479" "x8015b3" "x68efda" "x739297" "xf33d4e" "x157aad" "x84bc34" "x7270ac" "x926eca" "xaa4a52" "x8a8277" "x13d8b0" "x80e080" "x912b29" "x111542" "x1e3adc" "xe1c4d9" "x673118" "x2cbf22" "xbf6b39" "xf06a31" "x6c7258" "x9eee00" "x097aeb" "xfab5a6" "xabcaf9" "xaac78f" "xe74adb" "xb25003" "xa0472d" "x9d5a1e" "xe7e32c" "xe555e3" "xe35ede" "xbdd65b" "x8d5801" "xc2bdc8" "xf0a479" "x3be1af" "x6a28ce" "xf078c6" "xbc5647" "xb7cbc8" "x4356b6" "x5ece96" "x851792" "xe30338" "xd4f003" "xdccc35" }
     traits = { "state_trait_canadian_prairies" }
     city = "x0e7e33"
     farm = "xfd269c"
@@ -1082,7 +1082,7 @@ STATE_SASKATCHEWAN = {
     arable_land = 60
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = "xf45d51"
+        building_coal_mine = "x80e080"
         building_logging_camp = 40
     }
     resource = {
