@@ -2,7 +2,7 @@
 
 	s:STATE_VANCOUVER_ISLAND = {
 	
-		region_state:ORE = {
+		region_state:ORG = {
 			create_pop = {
 				culture = athabaskan
 				size = 1113

@@ -2,7 +2,7 @@
 
 	s:STATE_BC_INTERIOR = {
 	
-		region_state:ORE = {
+		region_state:ORG = {
 			create_pop = {
 				culture = athabaskan
 				size = 2198
