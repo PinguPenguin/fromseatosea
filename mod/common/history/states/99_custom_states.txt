@@ -114,7 +114,7 @@
 	s:STATE_BC_INTERIOR = {
 	
 	create_state = {
-		country = c:ORE
+		country = c:ORG
 		owned_provinces = { "x06eeac" "x082a0f" "x0d5e87" "x0eae6c" "x1a8981" "x2bbea4" "x335573" "x34c789" "x362e8f" "x453f2b" "x490d37" "x497376" "x4d08e1" "x4df1b5" "x501e7b" "x521640" "x52c081" "x539c2f" "x5502ec" "x5a6f3e" "x5c6656" "x605f60" "x611ae5" "x61cacb" "x687c61" "x69c90f" "x6cf452" "x70aaaf" "x738afd" "x77ad45" "x7b567f" "x7bdc98" "x804a90" "x83b2a7" "x841727" "x852913" "x8b9b2e" "x8d62e7" "x94b02f" "x9a43d9" "x9b5b04" "x9c275b" "x9e2648" "xa0d447" "xa23efd" "xaa8177" "xafe769" "xb3a699" "xbb97d1" "xc0a000" "xc6eb78" "xcdaf46" "xcfc60a" "xd080f5" "xd4afea" "xd5a5b1" "xd9a050" "xdb515a" "xdcf8ed" "xdd172e" "xe01e2e" "xe764c0" "xe811d1" "xede38b" "xee83f2" "xfa6f59" "xfa7d25" "xfbe9a2" "xfd4c5e" "xff3644" }
 	}}
 
@@ -136,7 +136,7 @@
 	s:STATE_VANCOUVER_ISLAND = {
 	
 	create_state = {
-		country = c:ORE
+		country = c:ORG
 		owned_provinces = { "x24fab0" "x2b750f" "x34639f" "x64e0b4" "x6dfdd1" "x76cd59" "x7a8f60" "x999e9b" "xc0b693" "xc9a9ab" "xe9ac75" "xfdf070" }
 	}}
 }
