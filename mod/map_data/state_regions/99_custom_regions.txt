@@ -57,7 +57,7 @@ STATE_NOUVEAU_QUEBEC = {
     farm = "xff9824"
     mine = "x8d50a1"
     wood = "xd4f421"
-    impassable = { x038c02 x0452f3 x06255c x062e92 x06f336 x085d59 x0aa539 x0b4dfd x0b9764 x0c6ae4 x11192e x13c360 x141935 x1f7ba8 x21d72e x2793a0 x28174f x2a40f1 x326543 x32dfd2 x33c3e1 x3ce2c4 x3ed2db x499fb6 x4b32dc x4d370f x4f1a54 x4f335a x5040af x51cf24 x537b4b x53e74e x54d79e x561cf3 x5d1b1a x5ef02f x5f4665 x6040c4 x62ce97 x63918e x66cbe1 x66ecb4 x67c76e x69e64d x6d2618 x6ec829 x76a99e x773791 x782d9a x788810 x795074 x79694a x79e1c6 x7b6229 x7b728d x7bb2f1 x7bdad0 x7d7012 x85b0c2 x864a3a x8a6937 x8b2119 x8cf0b9 x8e1dac x9050b8 x907833 x92f132 x939a08 x95e0dc x96b85f x9b5749 x9d0d78 xa2d6c3 xa54a42 xa8be58 xab6fe2 xabcf6b xae1ef2 xaf4675 xb6023c xb671b8 xb70866 xba04a4 xbb606d xbb863e xbd1776 xc0049d xc13d2c xc62d1b xc75269 xc940c5 xca5e91 xcd957e xce0625 xd03cd5 xd1352b xd414f5 xd4a5dd xd4e8b5 xd5666e xd74d19 xd93335 xddbfbd xdeeedd xe29144 xe58487 xe94e94 xeabc88 xefcd73 xf04d97 xf306c9 xf3df90 xf7e5fd xfe2104 xfe2408 xff1907 xf0de11 x972704 x4d27e6 x247a18 x12ff08 x084179 xeb2882 x9b7a14 x25dc66 xa9f068 xeb9966 xaba573 x5b8149 x9315bc x51949a x9c5236 xea49d9 xd99aa0 xc04bb6 x1b97e4 x7f0c4f xe2ffd8 x46467a xe40566 x307a15 x7020b3 x23f6cc x1590f6 xc0a7ef x5e9628 x16cfcb x1e71b4 x0000c0 xd20107 xb3aed8 xbb2c30 xd822ec x4a9f05 x7c3f68 x290b54 xaa9cdb x0b737c x36876c }
+	impassable = { x038c02 x0452f3 x06255c x062e92 x06f336 x085d59 x0aa539 x0b4dfd x0b9764 x0c6ae4 x11192e x13c360 x141935 x1f7ba8 x21d72e x2793a0 x28174f x2a40f1 x326543 x32dfd2 x33c3e1 x3ce2c4 x3ed2db x499fb6 x4b32dc x4d370f x4f1a54 x4f335a x5040af x51cf24 x537b4b x53e74e x54d79e x561cf3 x5d1b1a x5ef02f x5f4665 x6040c4 x62ce97 x63918e x66cbe1 x66ecb4 x67c76e x69e64d x6d2618 x6ec829 x76a99e x773791 x782d9a x788810 x795074 x79694a x79e1c6 x7b6229 x7b728d x7bb2f1 x7bdad0 x7d7012 x85b0c2 x864a3a x8a6937 x8b2119 x8cf0b9 x8e1dac x9050b8 x907833 x92f132 x939a08 x95e0dc x96b85f x9b5749 x9d0d78 xa2d6c3 xa54a42 xa8be58 xab6fe2 xabcf6b xae1ef2 xaf4675 xb6023c xb671b8 xb70866 xba04a4 xbb606d xbb863e xbd1776 xc0049d xc13d2c xc62d1b xc75269 xc940c5 xca5e91 xcd957e xce0625 xd03cd5 xd1352b xd414f5 xd4a5dd xd4e8b5 xd5666e xd74d19 xd93335 xddbfbd xdeeedd xe29144 xe58487 xe94e94 xeabc88 xefcd73 xf04d97 xf306c9 xf3df90 xf7e5fd xfe2104 xfe2408 xff1907 xf0de11 x972704 x4d27e6 x247a18 x12ff08 x084179 xeb2882 x9b7a14 x25dc66 xa9f068 xeb9966 xaba573 x5b8149 x9315bc x51949a x9c5236 xea49d9 xd99aa0 xc04bb6 x1b97e4 x7f0c4f xe2ffd8 x46467a xe40566 x307a15 x7020b3 x23f6cc x1590f6 xc0a7ef x5e9628 x16cfcb x1e71b4 x0000c0 xd20107 xb3aed8 xbb2c30 xd822ec x4a9f05 x7c3f68 x290b54 xaa9cdb x0b737c x36876c }
     arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
     capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
 }
@@ -113,7 +113,7 @@ STATE_NORTHWEST_ONTARIO = {
     farm = "x22e40f"
     mine = "x403994"
     wood = "xa24eb6"
-    impassable = { x0708ad x08f7a9 x1c6f98 x280a1d x383ea0 x388c4e x5eacb8 x61c521 x78a3ba x8d15cb x940c24 x9ebd23 xa7d370 xa8c5e8 xab2c76 xad5354 xbdbecb xd03bf3 xd2ee35 xd5f515 xf6ce39 }
+	impassable = { x0708ad x08f7a9 x1c6f98 x280a1d x383ea0 x388c4e x5eacb8 x61c521 x78a3ba x8d15cb x940c24 x9ebd23 xa7d370 xa8c5e8 xab2c76 xad5354 xbdbecb xd03bf3 xd2ee35 xd5f515 xf6ce39 }
     arable_land = 120
     arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
     capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
