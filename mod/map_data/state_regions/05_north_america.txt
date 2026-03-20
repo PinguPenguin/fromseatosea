@@ -947,16 +947,12 @@ STATE_ONTARIO = {
     farm = "x80f104"
     mine = "x48e362"
     wood = "xb1a86d"
-    arable_land = 15
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_tobacco_plantation" "building_vineyard" }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_sulfur_mine = "x65f177"
-        building_logging_camp = 90
-    }
-    resource = {
-        type = "building_oil_rig"
-        undiscovered_amount = 60
-    }
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_NEW_BRUNSWICK = {
@@ -969,14 +965,13 @@ STATE_NEW_BRUNSWICK = {
     farm = "x70c040"
     mine = "xde0fd5"
     wood = "x70a0ce"
-    arable_land = 22
-    arable_resources = { "building_livestock_ranch" }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_coal_mine = "x082153"
-        building_lead_mine = "x082153"
-        building_logging_camp = 30
-        building_fishing_wharf = 8
-    }
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
     naval_exit_id = 3067
 }
 
@@ -989,12 +984,12 @@ STATE_QUEBEC = {
     farm = "xec29f7"
     mine = "xdf6f96"
     wood = "x61804d"
-    arable_land = 24
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_tobacco_plantation" }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_iron_mine = "10"
-        building_logging_camp = 100
-    }
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_NEWFOUNDLAND = {
@@ -1008,15 +1003,13 @@ STATE_NEWFOUNDLAND = {
     farm = "x0c0ccc"
     mine = "xde7be8"
     wood = "x8d790b"
-    arable_land = 17
-    arable_resources = { "building_livestock_ranch" }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_iron_mine = "x10a000"
-        building_lead_mine = "x10a000"
-        building_logging_camp = 24
-        building_whaling_station = 6
-        building_fishing_wharf = 10
-    }
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
     naval_exit_id = 3045
 }
 
@@ -1029,13 +1022,12 @@ STATE_ALBERTA = {
     farm = "xc0a080"
     mine = "x0c61fe"
     wood = "x699c1e"
-    arable_land = 30
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_coal_mine = "x0c61fe"
-        building_sulfur_mine = "x0c61fe"
-        building_logging_camp = 70
-    }
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
     resource = {
         type = "building_oil_rig"
         undiscovered_amount = 80
@@ -1052,15 +1044,13 @@ STATE_BRITISH_COLUMBIA = {
     farm = "xe06c22"
     mine = "xc8510a"
     wood = "x2541a9"
-    arable_land = 33
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_coal_mine = "xc8510a"
-        building_sulfur_mine = "xc8510a"
-        building_logging_camp = 90
-        building_whaling_station = 6
-        building_fishing_wharf = 9
-    }
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
@@ -1078,12 +1068,12 @@ STATE_SASKATCHEWAN = {
     farm = "xfd269c"
     mine = "x80e080"
     wood = "x673118"
-    arable_land = 60
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_coal_mine = "x80e080"
-        building_logging_camp = 40
-    }
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
     resource = {
         type = "building_oil_rig"
         undiscovered_amount = 30
@@ -1099,12 +1089,12 @@ STATE_MANITOBA = {
     farm = "xfa6f32"
     mine = "x42f2e2"
     wood = "x54c371"
-    arable_land = 37
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_logging_camp = 32
-        building_fishing_wharf = 5
-    }
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
     resource = {
         type = "building_oil_rig"
         undiscovered_amount = 30
@@ -1122,11 +1112,11 @@ STATE_YUKON_TERRITORY = {
     mine = "x0044d7"
     wood = "x3a98aa"
     arable_land = 20
-    arable_resources = { "building_livestock_ranch" }
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_iron_mine = "x0044d7"
-        building_logging_camp = 25
-    }
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
@@ -1145,11 +1135,11 @@ STATE_NORTHWEST_TERRITORIES = {
     mine = "xe9656f"
     wood = "xda9366"
     arable_land = 20
-    arable_resources = { "building_livestock_ranch" }
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_iron_mine = "xe9656f"
-        building_logging_camp = 40
-    }
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_NUNAVUT = {
@@ -1164,10 +1154,12 @@ STATE_NUNAVUT = {
     mine = "x47ff7e"
     wood = "x02b1b4"
     arable_land = 20
-    arable_resources = { "building_livestock_ranch" }
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_logging_camp = 8
-    }
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
     naval_exit_id = 3044
 }
 

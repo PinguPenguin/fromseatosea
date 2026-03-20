@@ -10,13 +10,13 @@ STATE_LABRADOR = {
     port = "x4b3d6e"
     naval_exit_id = 3021
     impassable = { xcb2f2f xf3c2bb }
-    arable_land = 100
-    arable_resources = {}
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
     capped_resources = {
-        building_fishing_wharf = 30
-        building_iron_mine = "x38b630"
-        building_logging_camp = 10
-    }
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_QUEBEC_SAGUENAY = {
@@ -29,9 +29,13 @@ STATE_QUEBEC_SAGUENAY = {
     mine = "xea225d"
     wood = "x2548ae"
     naval_exit_id = 3045
-    arable_land = 0
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_SAINT_LAURENT = {
@@ -44,9 +48,13 @@ STATE_SAINT_LAURENT = {
     wood = "x480c58"
     port = "x0b1976"
     naval_exit_id = 3045
-    arable_land = 0
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_NOUVEAU_QUEBEC = {
@@ -58,9 +66,12 @@ STATE_NOUVEAU_QUEBEC = {
     mine = "x8d50a1"
     wood = "xd4f421"
     impassable = { x0000c0 x038c02 x0452f3 x062e92 x06f336 x084179 x085d59 x0aa539 x0b4dfd x0b737c x0b9764 x0c6ae4 x11192e x12ff08 x13c360 x141935 x1590f6 x16cfcb x1b97e4 x1e71b4 x1f7ba8 x21d72e x23f6cc x247a18 x25dc66 x2793a0 x290b54 x2a40f1 x307a15 x326543 x32dfd2 x36876c x3ed2db x46467a x499fb6 x4a9f05 x4b32dc x4d27e6 x4d370f x4f1a54 x4f335a x5040af x51949a x51cf24 x53e74e x54d79e x561cf3 x5b8149 x5d1b1a x5e9628 x5ef02f x6040c4 x62ce97 x63918e x67c76e x69e64d x6b3eb5 x6d2618 x7020b3 x76a99e x773791 x788810 x795074 x79e1c6 x7b728d x7bb2f1 x7bdad0 x7c3f68 x7d7012 x864a3a x8a6937 x8b2119 x8cf0b9 x8e1dac x9050b8 x907833 x92f132 x9315bc x939a08 x95e0dc x96b85f x972704 x9b5749 x9b7a14 x9c5236 x9d0d78 xa54a42 xa8be58 xa9f068 xaa9cdb xab6fe2 xaba573 xabcf6b xae1ef2 xb3aed8 xb6023c xb671b8 xb70866 xba04a4 xbb2c30 xbb606d xbb863e xbd1776 xc04bb6 xc0a7ef xc13d2c xc62d1b xc75269 xc940c5 xca5e91 xcd957e xce0625 xd03cd5 xd1352b xd17183 xd20107 xd414f5 xd4a5dd xd4e8b5 xd5666e xd74d19 xd822ec xd93335 xd99aa0 xddbfbd xdeeedd xe29144 xe2ffd8 xe40566 xe58487 xe94e94 xea49d9 xeabc88 xeb2882 xeb9966 xefcd73 xf0de11 xf306c9 xf3df90 xf7e5fd xfe2104 xfe2408 xff1907 }
-    arable_land = 180
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_NOVA_SCOTIA = {
@@ -73,9 +84,13 @@ STATE_NOVA_SCOTIA = {
     mine = "x905458"
     wood = "xf95d47"
     naval_exit_id = 3045
-    arable_land = 19
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_ONTARIO_PENINSULA = {
@@ -86,9 +101,12 @@ STATE_ONTARIO_PENINSULA = {
     farm = "x337ecf"
     mine = "x308040"
     wood = "x123762"
-    arable_land = 18
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_ALGOMA = {
@@ -101,9 +119,13 @@ STATE_ALGOMA = {
     wood = "x466a98"
     port = "x627826"
     naval_exit_id = 3044
-    arable_land = 50
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_NORTHWEST_ONTARIO = {
@@ -114,9 +136,12 @@ STATE_NORTHWEST_ONTARIO = {
     farm = "x22e40f"
     mine = "x403994"
     wood = "xa24eb6"
-    arable_land = 120
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_KEEWATIN = {
@@ -129,9 +154,13 @@ STATE_KEEWATIN = {
     wood = "x18f5ee"
     port = "xeb9647"
     naval_exit_id = 3044
-    arable_land = 23
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_NORTH_SASKATCHEWAN = {
@@ -142,9 +171,12 @@ STATE_NORTH_SASKATCHEWAN = {
     farm = "xcde235"
     mine = "x3b6c38"
     wood = "x1dd882"
-    arable_land = 0
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_EDMONTON = {
@@ -155,9 +187,12 @@ STATE_EDMONTON = {
     farm = "xa86910"
     mine = "x55dbf6"
     wood = "xa9976f"
-    arable_land = 0
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_ATHABASCA = {
@@ -168,9 +203,12 @@ STATE_ATHABASCA = {
     farm = "xe85e02"
     mine = "xc65514"
     wood = "x40a0ea"
-    arable_land = 50
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_BC_INTERIOR = {
@@ -181,9 +219,12 @@ STATE_BC_INTERIOR = {
     farm = "x501e7b"
     mine = "xdcf8ed"
     wood = "x9b5b04"
-    arable_land = 0
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_UPPER_BC = {
@@ -196,9 +237,13 @@ STATE_UPPER_BC = {
     mine = "xbb5d4e"
     wood = "xbc873d"
     naval_exit_id = 3154
-    arable_land = 1
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
 }
 
 STATE_VANCOUVER_ISLAND = {
@@ -211,7 +256,11 @@ STATE_VANCOUVER_ISLAND = {
     mine = "x64e0b4"
     wood = "x76cd59"
     naval_exit_id = 3154
-    arable_land = 6
-    arable_resources = { "bg_wheat_farms" "bg_livestock_ranches" }
-    capped_resources = { "bg_lead_mining" 5 "bg_iron_mining" 5 "bg_logging" 10 }
+    arable_land = 20
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+		building_coal_mine = 10
+		building_fishing_wharf = 10
+		building_logging_camp = 10
+	}
 }
