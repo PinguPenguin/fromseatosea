@@ -2,12 +2,12 @@
 
 ----Short-term----
 -Complete state modding framework
-    - Make new states
-    - Make splines/hubs/ports
-    - Loc for new cities
+    - Make new states (COMPLETE)
+    - Make splines/hubs/ports (COMPLETE)
+    - Loc for new cities (COMPLETE)
 
 ----Mid-term (MUST BE COMPLETED FOR FIRST RELEASE)----
--Investigate adding Hudson's Bay Sea Node/ports
+-Investigate adding Hudson's Bay Sea Node/ports (COMPLETE)
 -Add state populations/resources/buildings
 -Fix existing JEs/events to work with new states
 
