@@ -5,64 +5,54 @@ POPS = {
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 2641
-			}
-			create_pop = {
-				culture = cree
-				religion = catholic
-				size = 541
+				size = 1867
 			}
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 1258
+				size = 3214
 			}
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 1295
+				size = 908
 			}
 			create_pop = {
 				culture = algonquian
 				religion = animist
-				size = 1008
+				size = 5304
 			}
 		}
 		region_state:ONT = {
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 6796
-			}
-			create_pop = {
-				culture = cree
-				religion = catholic
-				size = 1389
+				size = 4790
 			}
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 3238
+				size = 1122
 			}
 			create_pop = {
 				culture = franco_canadian
 				religion = protestant
-				size = 554
+				size = 391
 			}
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 3330
+				size = 2343
 			}
 			create_pop = {
 				culture = algonquian
 				religion = catholic
-				size = 357
+				size = 1822
 			}
 			create_pop = {
 				culture = algonquian
 				religion = animist
-				size = 2593
+				size = 3239
 			}
 		}
 	}

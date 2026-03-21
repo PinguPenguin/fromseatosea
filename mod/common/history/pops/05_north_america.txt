@@ -1219,56 +1219,56 @@ POPS = {
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 2000
+				size = 2605
 			}
 			create_pop = {
 				culture = metis
 				religion = catholic
-				size = 3000
+				size = 3906
 			}
 		}
 		region_state:IRC = {
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 6000
+				size = 3483
 			}
 		}
 		region_state:BLF = {
 			create_pop = {
 				culture = metis
 				religion = catholic
-				size = 5152
+				size = 6710
 			}
 			create_pop = {
 				culture = metis
 				religion = animist
-				size = 429
+				size = 558
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 6780
+				size = 8826
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = catholic
-				size = 1360
+				size = 1768
 			}
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 6509
+				size = 3805
 			}
 			create_pop = {
 				culture = dakota
 				religion = animist
-				size = 4885
+				size = 4224
 			}
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 4885
+				size = 6358
 			}
 		}
 	}
