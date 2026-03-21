@@ -4,142 +4,77 @@ POPS = {
 		region_state:BLF = {
 			create_pop = {
 				culture = metis
-				religion = protestant
-				size = 145
-			}
-			create_pop = {
-				culture = metis
 				religion = catholic
-				size = 455
+				size = 559
 			}
 			create_pop = {
 				culture = metis
 				religion = animist
-				size = 300
+				size = 369
 			}
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 750
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 581
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = catholic
-				size = 19
+				size = 914
 			}
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 450
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = protestant
-				size = 24
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = catholic
-				size = 276
+				size = 551
 			}
 		}
 		region_state:HBC = {
 			create_pop = {
 				culture = metis
-				religion = protestant
-				size = 339
-			}
-			create_pop = {
-				culture = metis
 				religion = catholic
-				size = 1061
+				size = 1300
 			}
 			create_pop = {
 				culture = metis
 				religion = animist
-				size = 700
+				size = 854
 			}
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 1750
+				size = 2143
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 1355
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = catholic
-				size = 45
+				size = 1657
 			}
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 1050
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = protestant
-				size = 56
+				size = 1280
 			}
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 644
+				size = 783
 			}
 		}
 		region_state:IRC = {
 			create_pop = {
 				culture = metis
-				religion = protestant
-				size = 97
-			}
-			create_pop = {
-				culture = metis
 				religion = catholic
-				size = 303
+				size = 370
 			}
 			create_pop = {
 				culture = metis
 				religion = animist
-				size = 200
+				size = 242
 			}
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 500
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 387
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = catholic
-				size = 13
+				size = 610
 			}
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 300
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = protestant
-				size = 16
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = catholic
-				size = 184
+				size = 368
 			}
 		}
 	}

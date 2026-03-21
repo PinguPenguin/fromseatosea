@@ -5,42 +5,37 @@ POPS = {
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 129970
+				size = 128729
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = catholic
-				size = 1625
+				size = 1606
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 11055
+				size = 10952
 			}
 			create_pop = {
 				culture = irish
 				religion = catholic
-				size = 7275
+				size = 7203
 			}
 			create_pop = {
 				culture = irish
 				religion = protestant
-				size = 650
+				size = 4604
 			}
 			create_pop = {
 				culture = cree
 				religion = catholic
-				size = 610
-			}
-			create_pop = {
-				culture = cree
-				religion = protestant
-				size = 4145
+				size = 2264
 			}
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 3170
+				size = 3142
 			}
 		}
 	}

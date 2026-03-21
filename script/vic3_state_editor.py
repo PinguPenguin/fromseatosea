@@ -2,7 +2,10 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
+import shutil
+import subprocess
 import sys
 import tkinter as tk
 from collections import Counter, defaultdict
@@ -57,7 +60,54 @@ DEFAULT_CANADIAN_STATES = {
 DEFAULT_NEWLINE = "\r\n"
 STATE_REGION_PATTERN = re.compile(r"(?m)^([ \t]*)(STATE_[A-Z0-9_]+)\s*=\s*\{")
 STATE_HISTORY_PATTERN = re.compile(r"(?m)^([ \t]*)(s:STATE_[A-Z0-9_]+)\s*=\s*\{")
+POP_STATE_SECTION_PATTERN = re.compile(r"(?m)^([ \t]*)(s:STATE_[A-Z0-9_]+)\s*=\s*\{")
 LOCALIZATION_PATTERN = re.compile(r'(?m)^\s*(STATE_[A-Z0-9_]+):\d?\s+"(.*)"\s*$')
+
+DARK_BG = "#14181e"
+DARK_PANEL = "#1b222c"
+DARK_ELEVATED = "#222b36"
+DARK_BORDER = "#344150"
+DARK_FG = "#e8edf4"
+DARK_MUTED = "#aab6c6"
+ACCENT = "#3f8cff"
+ACCENT_ACTIVE = "#66a6ff"
+WARNING_FG = "#ffbe76"
+
+ARABLE_RESOURCE_DEFAULTS = {
+    "building_banana_plantation",
+    "building_coffee_plantation",
+    "building_cotton_plantation",
+    "building_dye_plantation",
+    "building_livestock_ranch",
+    "building_maize_farm",
+    "building_opium_plantation",
+    "building_rice_farm",
+    "building_sugar_plantation",
+    "building_tea_plantation",
+    "building_tobacco_plantation",
+    "building_vineyard",
+    "building_wheat_farm",
+}
+
+CAPPED_RESOURCE_DEFAULTS = {
+    "building_coal_mine",
+    "building_fishing_wharf",
+    "building_iron_mine",
+    "building_lead_mine",
+    "building_logging_camp",
+    "building_sulfur_mine",
+    "building_whaling_station",
+}
+
+DISCOVERABLE_RESOURCE_DEFAULTS = {
+    "building_gold_field",
+    "building_oil_rig",
+    "building_rubber_plantation",
+}
+
+DISCOVERABLE_DEPLETED_TYPE_DEFAULTS = {
+    "building_gold_mine",
+}
 
 
 @dataclass
@@ -105,6 +155,10 @@ class StateRecord:
 
     def owner_tags(self) -> list[str]:
         return [owner.tag for owner in self.owners]
+
+    def editable_owner_tags(self) -> list[str]:
+        tags = self.owner_tags()
+        return tags if tags else self.all_owner_tags()
 
     def all_owner_tags(self) -> list[str]:
         tags = self.owner_tags()
@@ -228,13 +282,35 @@ def parse_top_level_entries(block_text: str) -> list[TopLevelEntry]:
 def detect_child_indent(block_text: str, default: str = "    ") -> str:
     for line in block_text.splitlines():
         stripped = line.lstrip()
-        if stripped and stripped != "}":
-            return line[: len(line) - len(stripped)]
+        indent = line[: len(line) - len(stripped)]
+        if stripped and stripped != "}" and indent:
+            return indent
     return default
 
 
 def indent_unit(indent: str) -> str:
     return "\t" if "\t" in indent else "    "
+
+
+def normalize_entry_indentation(raw: str, child_indent: str) -> str:
+    lines = raw.splitlines()
+    non_empty_indents = []
+    for line in lines:
+        if not line.strip():
+            continue
+        stripped = line.lstrip()
+        indent = line[: len(line) - len(stripped)]
+        non_empty_indents.append(len(indent))
+    base_indent = min(non_empty_indents) if non_empty_indents else 0
+
+    normalized_lines = []
+    for line in lines:
+        if not line.strip():
+            normalized_lines.append("")
+            continue
+        stripped_line = line[base_indent:] if len(line) >= base_indent else line.lstrip()
+        normalized_lines.append(f"{child_indent}{stripped_line}")
+    return "\n".join(normalized_lines)
 
 
 def parse_quoted_list(raw: str) -> list[str]:
@@ -325,6 +401,92 @@ def build_effective_blocks(paths: list[Path], pattern: re.Pattern[str]) -> dict[
     return occurrences
 
 
+def find_last_wrapper_close(text: str) -> int:
+    matches = list(re.finditer(r"(?m)^[ \t]*}\s*$", text))
+    if matches:
+        return matches[-1].start()
+    return len(text)
+
+
+def iter_pop_state_sections(text: str) -> list[tuple[str, int, int, str]]:
+    matches = list(POP_STATE_SECTION_PATTERN.finditer(text))
+    if not matches:
+        return []
+    wrapper_close = find_last_wrapper_close(text)
+    sections: list[tuple[str, int, int, str]] = []
+    for index, match in enumerate(matches):
+        key = match.group(2)
+        start = match.start()
+        end = matches[index + 1].start() if index + 1 < len(matches) else wrapper_close
+        section_text = text[start:end].rstrip("\r\n")
+        sections.append((key, start, end, section_text))
+    return sections
+
+
+def find_pop_state_section(text: str, key: str) -> tuple[int, int, str] | None:
+    for section_key, start, end, section_text in iter_pop_state_sections(text):
+        if section_key == key:
+            return start, end, section_text
+    return None
+
+
+def replace_pop_state_section(text: str, key: str, new_section: str) -> str:
+    found = find_pop_state_section(text, key)
+    if found is None:
+        wrapper_close = find_last_wrapper_close(text)
+        prefix = text[:wrapper_close].rstrip("\r\n")
+        suffix = text[wrapper_close:]
+        joiner = "\n\n" if prefix else ""
+        return f"{prefix}{joiner}{new_section}\n{suffix.lstrip(chr(10)).lstrip(chr(13))}"
+    start, end, _old = found
+    suffix = text[end:]
+    if suffix and not suffix.startswith(("\n", "\r")):
+        suffix = "\n" + suffix
+    return text[:start] + new_section + suffix
+
+
+def parse_pops_by_owner_tolerant(section_text: str) -> dict[str, list[PopRow]]:
+    owner_matches = [(match.start(), match.group(1)) for match in re.finditer(r"(?m)^\s*region_state:([A-Z0-9_]+)\s*=\s*\{", section_text)]
+    if not owner_matches:
+        return {}
+
+    pops_by_owner: dict[str, list[PopRow]] = defaultdict(list)
+    seen_keys: dict[str, set[tuple[str, str, str]]] = defaultdict(set)
+    owner_index = 0
+    current_owner = owner_matches[0][1]
+
+    for match in re.finditer(r"(?m)^\s*create_pop\s*=\s*\{", section_text):
+        while owner_index + 1 < len(owner_matches) and owner_matches[owner_index + 1][0] <= match.start():
+            owner_index += 1
+            current_owner = owner_matches[owner_index][1]
+
+        brace_index = section_text.find("{", match.end() - 1)
+        if brace_index == -1:
+            continue
+        try:
+            close_index = find_matching_brace(section_text, brace_index)
+        except ValueError:
+            continue
+        block = section_text[match.start(): close_index + 1]
+        culture_match = re.search(r"(?m)^\s*culture\s*=\s*([A-Za-z0-9_]+)\s*$", block)
+        religion_match = re.search(r"(?m)^\s*religion\s*=\s*([A-Za-z0-9_]+)\s*$", block)
+        size_match = re.search(r"(?m)^\s*size\s*=\s*(-?\d+)\s*$", block)
+        if not culture_match or not size_match:
+            continue
+        row = PopRow(
+            culture=culture_match.group(1),
+            religion=religion_match.group(1) if religion_match else "",
+            size=size_match.group(1),
+        )
+        dedupe_key = (row.culture, row.religion, row.size)
+        if dedupe_key in seen_keys[current_owner]:
+            continue
+        seen_keys[current_owner].add(dedupe_key)
+        pops_by_owner[current_owner].append(row)
+
+    return dict(pops_by_owner)
+
+
 def render_inline_list(values: list[str], quote: bool = True) -> str:
     if not values:
         return "{ }"
@@ -352,7 +514,7 @@ def render_discoverable_resource(row: DiscoverableResourceRow, child_indent: str
     return "\n".join(lines)
 
 
-def render_state_region_block(state_id: str, original_block: str, record: StateRecord, newline: str) -> str:
+def render_state_region_block(state_id: str, original_block: str, record: StateRecord) -> str:
     entries = parse_top_level_entries(original_block)
     child_indent = detect_child_indent(original_block)
     nested_indent = child_indent + indent_unit(child_indent)
@@ -377,15 +539,15 @@ def render_state_region_block(state_id: str, original_block: str, record: StateR
                 result_entries.extend(rendered_targets)
                 inserted = True
             continue
-        result_entries.append(entry.raw.rstrip())
+        result_entries.append(normalize_entry_indentation(entry.raw.rstrip(), child_indent))
     if not inserted:
         result_entries.extend(rendered_targets)
 
     rebuilt = header
     if result_entries:
-        rebuilt += newline + newline.join(result_entries) + newline
+        rebuilt += "\n" + "\n".join(result_entries) + "\n"
     else:
-        rebuilt += newline
+        rebuilt += "\n"
     rebuilt += "}"
     return rebuilt
 
@@ -412,9 +574,9 @@ def normalize_pop_rows(rows: list[PopRow]) -> list[PopRow]:
     return [PopRow(culture, religion, str(merged[(culture, religion)])) for culture, religion in order]
 
 
-def render_pop_state_block(record: StateRecord, newline: str) -> str:
+def render_pop_state_block(record: StateRecord) -> str:
     lines = [f"\ts:{record.state_id} = {{"]
-    for owner_tag in record.all_owner_tags():
+    for owner_tag in record.editable_owner_tags():
         lines.append(f"\t\tregion_state:{owner_tag} = {{")
         rows = normalize_pop_rows(record.pops_by_owner.get(owner_tag, []))
         for row in rows:
@@ -426,7 +588,7 @@ def render_pop_state_block(record: StateRecord, newline: str) -> str:
             lines.append("\t\t\t}")
         lines.append("\t\t}")
     lines.append("\t}")
-    return newline.join(lines)
+    return "\n".join(lines)
 
 
 def parse_int_string(value: str) -> int | None:
@@ -439,9 +601,88 @@ def parse_int_string(value: str) -> int | None:
         return None
 
 
+def is_arable_resource_id(resource_id: str) -> bool:
+    if resource_id in {"building_rubber_plantation", "building_subsistence_farm"}:
+        return False
+    return (
+        resource_id.endswith("_farm")
+        or resource_id.endswith("_ranch")
+        or resource_id.endswith("_plantation")
+        or resource_id == "building_vineyard"
+    )
+
+
+def is_capped_resource_id(resource_id: str) -> bool:
+    if resource_id in {"building_gold_mine", "building_oil_rig"}:
+        return False
+    return resource_id.endswith("_mine") or resource_id in {
+        "building_fishing_wharf",
+        "building_logging_camp",
+        "building_whaling_station",
+    }
+
+
+def is_discoverable_resource_id(resource_id: str) -> bool:
+    return resource_id in DISCOVERABLE_RESOURCE_DEFAULTS
+
+
+def is_discoverable_depleted_type_id(resource_id: str) -> bool:
+    return resource_id in DISCOVERABLE_DEPLETED_TYPE_DEFAULTS
+
+
+def build_resource_choice_lists(resource_ids: set[str]) -> tuple[list[str], list[str], list[str], list[str]]:
+    all_ids = set(resource_ids)
+    arable_choices = sorted(
+        resource_id for resource_id in all_ids | ARABLE_RESOURCE_DEFAULTS if is_arable_resource_id(resource_id)
+    )
+    capped_choices = sorted(
+        resource_id for resource_id in all_ids | CAPPED_RESOURCE_DEFAULTS if is_capped_resource_id(resource_id)
+    )
+    discoverable_choices = sorted(
+        resource_id
+        for resource_id in all_ids | DISCOVERABLE_RESOURCE_DEFAULTS
+        if is_discoverable_resource_id(resource_id)
+    )
+    depleted_choices = [""] + sorted(
+        resource_id
+        for resource_id in all_ids | DISCOVERABLE_DEPLETED_TYPE_DEFAULTS
+        if is_discoverable_depleted_type_id(resource_id)
+    )
+    return arable_choices, capped_choices, discoverable_choices, depleted_choices
+
+
+def is_blank_pop_row(row: PopRow) -> bool:
+    return not row.culture.strip() and not row.religion.strip() and not row.size.strip()
+
+
+def allocate_proportional(total: int, weights: list[int]) -> list[int]:
+    if total <= 0 or not weights:
+        return [0 for _ in weights]
+    if sum(weights) <= 0:
+        weights = [1 for _ in weights]
+    total_weight = sum(weights)
+    base_values: list[int] = []
+    remainders: list[tuple[float, int]] = []
+    used = 0
+    for index, weight in enumerate(weights):
+        exact = total * weight / total_weight
+        base = int(exact)
+        base_values.append(base)
+        remainders.append((exact - base, index))
+        used += base
+    remainders.sort(key=lambda item: (-item[0], item[1]))
+    for offset in range(total - used):
+        base_values[remainders[offset][1]] += 1
+    return base_values
+
+
 def owner_population_total(rows: list[PopRow]) -> int | None:
     total = 0
     for row in rows:
+        if is_blank_pop_row(row):
+            continue
+        if not row.culture.strip():
+            return None
         value = parse_int_string(row.size)
         if value is None:
             return None
@@ -458,8 +699,13 @@ def validate_record(record: StateRecord) -> None:
     cleaned_arable_resources: list[str] = []
     for resource in record.arable_resources:
         resource_id = resource.strip()
-        if resource_id:
-            cleaned_arable_resources.append(resource_id)
+        if not resource_id:
+            continue
+        if not is_arable_resource_id(resource_id):
+            raise ValueError(
+                f"Arable resource '{resource_id}' must be a farm, ranch, or non-rubber plantation"
+            )
+        cleaned_arable_resources.append(resource_id)
     record.arable_resources = cleaned_arable_resources
 
     cleaned_capped: list[ResourceCountRow] = []
@@ -470,6 +716,10 @@ def validate_record(record: StateRecord) -> None:
             continue
         if not resource_id:
             raise ValueError("Each capped resource row needs a building id")
+        if not is_capped_resource_id(resource_id):
+            raise ValueError(
+                f"Capped resource '{resource_id}' must be a mine, logging camp, fishing wharf, or whaling station"
+            )
         if amount is None or amount < 0:
             raise ValueError(f"Capped resource '{resource_id}' needs a non-negative integer amount")
         if amount == 0:
@@ -486,6 +736,14 @@ def validate_record(record: StateRecord) -> None:
             continue
         if not resource_id:
             raise ValueError("Each discoverable resource row needs a type")
+        if not is_discoverable_resource_id(resource_id):
+            raise ValueError(
+                f"Discoverable resource '{resource_id}' must be an oil rig, gold field, or rubber plantation"
+            )
+        if depleted_type and not is_discoverable_depleted_type_id(depleted_type):
+            raise ValueError(f"Discoverable resource depleted type '{depleted_type}' is not supported")
+        if depleted_type and resource_id != "building_gold_field":
+            raise ValueError("Only gold fields can use a depleted type")
         if amount is None or amount < 0:
             raise ValueError(f"Discoverable resource '{resource_id}' needs a non-negative integer amount")
         if amount == 0:
@@ -494,7 +752,7 @@ def validate_record(record: StateRecord) -> None:
     record.discoverable_resources = cleaned_discoverables
 
     normalized_pops: dict[str, list[PopRow]] = {}
-    for owner_tag in record.all_owner_tags():
+    for owner_tag in record.editable_owner_tags():
         normalized_pops[owner_tag] = normalize_pop_rows(record.pops_by_owner.get(owner_tag, []))
     record.pops_by_owner = normalized_pops
 
@@ -509,6 +767,10 @@ class ModRepository:
         self.culture_choices: list[str] = []
         self.religion_choices: list[str] = []
         self.resource_choices: list[str] = []
+        self.arable_resource_choices: list[str] = []
+        self.capped_resource_choices: list[str] = []
+        self.discoverable_resource_choices: list[str] = []
+        self.discoverable_depleted_type_choices: list[str] = []
         self.state_records: dict[str, StateRecord] = {}
         self.global_warnings: list[str] = []
 
@@ -520,7 +782,11 @@ class ModRepository:
 
         region_occurrences = build_effective_blocks(region_paths, STATE_REGION_PATTERN)
         ownership_occurrences = build_effective_blocks(ownership_paths, STATE_HISTORY_PATTERN)
-        pop_occurrences = build_effective_blocks(pop_paths, STATE_HISTORY_PATTERN)
+        pop_occurrences: dict[str, list[tuple[Path, str]]] = defaultdict(list)
+        for path in sorted(pop_paths, key=lambda item: item.name.lower()):
+            text = read_text(path)
+            for key, _start, _end, section_text in iter_pop_state_sections(text):
+                pop_occurrences[key].append((path, section_text))
 
         culture_ids: set[str] = set()
         religion_ids: set[str] = set()
@@ -560,11 +826,8 @@ class ModRepository:
             extra_pop_tags: list[str] = []
             if pop_block:
                 owner_tags = {owner.tag for owner in owners}
-                for entry in parse_top_level_entries(pop_block):
-                    if not entry.key.startswith("region_state:"):
-                        continue
-                    owner_tag = entry.key.split(":", 1)[1]
-                    pops = parse_pop_rows(entry.raw)
+                parsed_pops = parse_pops_by_owner_tolerant(pop_block)
+                for owner_tag, pops in parsed_pops.items():
                     pops_by_owner[owner_tag] = pops
                     if owner_tag not in owner_tags:
                         extra_pop_tags.append(owner_tag)
@@ -582,7 +845,11 @@ class ModRepository:
             if len(pop_blocks) > 1:
                 warnings.append("Multiple pop blocks found; editing the last-loaded one.")
             if extra_pop_tags:
-                warnings.append("Pop data contains owner tags not present in state history.")
+                warnings.append(
+                    "Pop data contains owner tags not present in state history: "
+                    + ", ".join(sorted(extra_pop_tags))
+                    + "."
+                )
             if pop_source is None:
                 warnings.append("No pop block exists yet; save will create a new per-state pop file.")
 
@@ -608,6 +875,12 @@ class ModRepository:
         self.culture_choices = sorted(culture_ids)
         self.religion_choices = sorted(religion_ids)
         self.resource_choices = sorted(resource_ids)
+        (
+            self.arable_resource_choices,
+            self.capped_resource_choices,
+            self.discoverable_resource_choices,
+            self.discoverable_depleted_type_choices,
+        ) = build_resource_choice_lists(resource_ids)
 
     def save_state(self, record: StateRecord) -> None:
         validate_record(record)
@@ -624,23 +897,23 @@ class ModRepository:
             raise KeyError(f"Could not find state-region block for {record.state_id}")
         _start, _end, original_block = found
         newline = detect_newline(path)
-        new_block = render_state_region_block(record.state_id, original_block, record, newline).replace("\n", newline)
+        new_block = render_state_region_block(record.state_id, original_block, record)
         updated = replace_named_block(text, record.state_id, STATE_REGION_PATTERN, new_block)
-        path.write_text(updated, encoding="utf-8", newline="")
+        path.write_text(updated, encoding="utf-8", newline=newline)
 
     def _save_pop_block(self, record: StateRecord) -> None:
         source = record.pop_source or (self.pops_dir / f"99_manual_{record.state_id}.txt")
         newline = detect_newline(source)
-        state_block = render_pop_state_block(record, newline)
+        state_block = render_pop_state_block(record)
         if source.exists():
             text = read_text(source)
-            if find_named_block(text, f"s:{record.state_id}", STATE_HISTORY_PATTERN):
-                updated = replace_named_block(text, f"s:{record.state_id}", STATE_HISTORY_PATTERN, state_block)
+            if find_pop_state_section(text, f"s:{record.state_id}"):
+                updated = replace_pop_state_section(text, f"s:{record.state_id}", state_block)
             else:
-                updated = f"POPS = {{{newline}{newline}{state_block}{newline}}}{newline}"
+                updated = f"POPS = {{\n\n{state_block}\n}}\n"
         else:
-            updated = f"POPS = {{{newline}{newline}{state_block}{newline}}}{newline}"
-        source.write_text(updated, encoding="utf-8", newline="")
+            updated = f"POPS = {{\n\n{state_block}\n}}\n"
+        source.write_text(updated, encoding="utf-8", newline=newline)
 
 
 @dataclass
@@ -658,6 +931,7 @@ class EditableTable(ttk.Frame):
         columns: list[ColumnSpec],
         on_change: Callable[[], None],
         add_label: str,
+        canvas_height: int = 320,
     ) -> None:
         super().__init__(master)
         self.columns = columns
@@ -671,9 +945,36 @@ class EditableTable(ttk.Frame):
             ttk.Label(header, text=column.title).grid(row=0, column=column_index, sticky="w", padx=(0, 8))
         ttk.Label(header, text="").grid(row=0, column=len(columns), sticky="w")
 
-        self.rows_frame = ttk.Frame(self)
-        self.rows_frame.grid(row=1, column=0, sticky="ew")
+        scroll_frame = ttk.Frame(self)
+        scroll_frame.grid(row=1, column=0, sticky="nsew")
+        scroll_frame.columnconfigure(0, weight=1)
+        scroll_frame.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
+
+        self.rows_canvas = tk.Canvas(
+            scroll_frame,
+            bg=DARK_ELEVATED,
+            highlightthickness=1,
+            highlightbackground=DARK_BORDER,
+            highlightcolor=ACCENT,
+            relief="flat",
+            borderwidth=0,
+            height=canvas_height,
+        )
+        self.rows_canvas.grid(row=0, column=0, sticky="nsew")
+        self.rows_scrollbar = ttk.Scrollbar(scroll_frame, orient="vertical", command=self.rows_canvas.yview)
+        self.rows_scrollbar.grid(row=0, column=1, sticky="ns", padx=(8, 0))
+        self.rows_canvas.configure(yscrollcommand=self.rows_scrollbar.set)
+
+        self.rows_frame = ttk.Frame(self.rows_canvas)
+        self._rows_window = self.rows_canvas.create_window((0, 0), window=self.rows_frame, anchor="nw")
+        self.rows_frame.bind("<Configure>", self._sync_scroll_region)
+        self.rows_canvas.bind("<Configure>", self._resize_canvas_window)
+        self.rows_canvas.bind("<Enter>", self._bind_mousewheel)
+        self.rows_canvas.bind("<Leave>", self._unbind_mousewheel)
+        self.rows_frame.bind("<Enter>", self._bind_mousewheel)
+        self.rows_frame.bind("<Leave>", self._unbind_mousewheel)
 
         buttons = ttk.Frame(self)
         buttons.grid(row=2, column=0, sticky="w", pady=(6, 0))
@@ -687,9 +988,11 @@ class EditableTable(ttk.Frame):
             self.row_widgets.clear()
             if not rows:
                 self.add_blank_row(trigger_change=False)
+                self._refresh_scroll_region()
                 return
             for row in rows:
                 self._add_row_widgets(row, trigger_change=False)
+            self._refresh_scroll_region()
         finally:
             self._suspend_callbacks = False
 
@@ -719,6 +1022,7 @@ class EditableTable(ttk.Frame):
             row=0, column=len(self.columns), sticky="w"
         )
         self.row_widgets.append((frame, variables))
+        self._refresh_scroll_region()
         if trigger_change:
             self._handle_change()
 
@@ -732,11 +1036,254 @@ class EditableTable(ttk.Frame):
             row_frame.grid_configure(row=row_index)
         if not self.row_widgets:
             self.add_blank_row(trigger_change=False)
+        self._refresh_scroll_region()
         self._handle_change()
 
     def _handle_change(self, *_args: object) -> None:
         if not self._suspend_callbacks:
             self.on_change()
+
+    def _sync_scroll_region(self, _event: object | None = None) -> None:
+        self.rows_canvas.configure(scrollregion=self.rows_canvas.bbox("all"))
+
+    def _resize_canvas_window(self, event: tk.Event[tk.Misc]) -> None:
+        self.rows_canvas.itemconfigure(self._rows_window, width=event.width)
+        self._sync_scroll_region()
+
+    def _refresh_scroll_region(self) -> None:
+        self.after_idle(self._sync_scroll_region)
+
+    def _bind_mousewheel(self, _event: object | None = None) -> None:
+        self.rows_canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+
+    def _unbind_mousewheel(self, _event: object | None = None) -> None:
+        self.rows_canvas.unbind_all("<MouseWheel>")
+
+    def _on_mousewheel(self, event: tk.Event[tk.Misc]) -> None:
+        if event.delta == 0:
+            return
+        self.rows_canvas.yview_scroll(int(-event.delta / 120), "units")
+
+
+class PopTable(ttk.Frame):
+    def __init__(
+        self,
+        master: tk.Misc,
+        owner_tag: str,
+        culture_choices: list[str],
+        religion_choices: list[str],
+        on_change: Callable[[], None],
+        on_slider: Callable[[str, int, float], None],
+    ) -> None:
+        super().__init__(master)
+        self.owner_tag = owner_tag
+        self.culture_choices = culture_choices
+        self.religion_choices = religion_choices
+        self.on_change = on_change
+        self.on_slider = on_slider
+        self._suspend_callbacks = False
+        self.row_widgets: list[dict[str, object]] = []
+
+        header = ttk.Frame(self)
+        header.grid(row=0, column=0, sticky="ew")
+        headings = ["Culture", "Religion", "Size", "Share", "Adjust", ""]
+        for column_index, title in enumerate(headings):
+            ttk.Label(header, text=title).grid(row=0, column=column_index, sticky="w", padx=(0, 8))
+
+        scroll_frame = ttk.Frame(self)
+        scroll_frame.grid(row=1, column=0, sticky="nsew")
+        scroll_frame.columnconfigure(0, weight=1)
+        scroll_frame.rowconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
+        self.columnconfigure(0, weight=1)
+
+        self.rows_canvas = tk.Canvas(
+            scroll_frame,
+            bg=DARK_ELEVATED,
+            highlightthickness=1,
+            highlightbackground=DARK_BORDER,
+            highlightcolor=ACCENT,
+            relief="flat",
+            borderwidth=0,
+            height=360,
+        )
+        self.rows_canvas.grid(row=0, column=0, sticky="nsew")
+        self.rows_scrollbar = ttk.Scrollbar(scroll_frame, orient="vertical", command=self.rows_canvas.yview)
+        self.rows_scrollbar.grid(row=0, column=1, sticky="ns", padx=(8, 0))
+        self.rows_canvas.configure(yscrollcommand=self.rows_scrollbar.set)
+
+        self.rows_frame = ttk.Frame(self.rows_canvas)
+        self._rows_window = self.rows_canvas.create_window((0, 0), window=self.rows_frame, anchor="nw")
+        self.rows_frame.bind("<Configure>", self._sync_scroll_region)
+        self.rows_canvas.bind("<Configure>", self._resize_canvas_window)
+        self.rows_canvas.bind("<Enter>", self._bind_mousewheel)
+        self.rows_canvas.bind("<Leave>", self._unbind_mousewheel)
+        self.rows_frame.bind("<Enter>", self._bind_mousewheel)
+        self.rows_frame.bind("<Leave>", self._unbind_mousewheel)
+
+        buttons = ttk.Frame(self)
+        buttons.grid(row=2, column=0, sticky="w", pady=(6, 0))
+        ttk.Button(buttons, text="Add pop row", command=self.add_blank_row).grid(row=0, column=0, sticky="w")
+
+    def set_rows(self, rows: list[dict[str, str]]) -> None:
+        self._suspend_callbacks = True
+        try:
+            for row_info in self.row_widgets:
+                row_info["frame"].destroy()
+            self.row_widgets.clear()
+            if not rows:
+                self.add_blank_row(trigger_change=False)
+                self._refresh_scroll_region()
+                return
+            for row in rows:
+                self._add_row_widgets(row, trigger_change=False)
+            self._refresh_scroll_region()
+        finally:
+            self._suspend_callbacks = False
+
+    def get_rows(self) -> list[dict[str, str]]:
+        result: list[dict[str, str]] = []
+        for row_info in self.row_widgets:
+            variables = row_info["variables"]
+            result.append({key: variables[key].get() for key in ("culture", "religion", "size")})
+        return result
+
+    def add_blank_row(self, trigger_change: bool = True) -> None:
+        self._add_row_widgets({"culture": "", "religion": "", "size": ""}, trigger_change=trigger_change)
+
+    def set_row_sizes(self, sizes_by_index: dict[int, int]) -> None:
+        self._suspend_callbacks = True
+        try:
+            for index, row_info in enumerate(self.row_widgets):
+                if index in sizes_by_index:
+                    row_info["variables"]["size"].set(str(sizes_by_index[index]))
+        finally:
+            self._suspend_callbacks = False
+
+    def update_share_display(self, total_population: int) -> None:
+        self._suspend_callbacks = True
+        try:
+            for row_info in self.row_widgets:
+                variables = row_info["variables"]
+                share_var: tk.StringVar = row_info["share_var"]
+                slider_var: tk.DoubleVar = row_info["slider_var"]
+                slider: ttk.Scale = row_info["slider"]
+                row = PopRow(
+                    culture=variables["culture"].get(),
+                    religion=variables["religion"].get(),
+                    size=variables["size"].get(),
+                )
+                if is_blank_pop_row(row):
+                    share_var.set("")
+                    slider_var.set(0.0)
+                    slider.state(["disabled"])
+                    continue
+                size = parse_int_string(row.size)
+                if not row.culture.strip() or size is None or size < 0 or total_population <= 0:
+                    share_var.set("invalid")
+                    slider_var.set(0.0)
+                    slider.state(["disabled"])
+                    continue
+                share = (size / total_population) * 100
+                share_var.set(f"{share:.2f}%")
+                slider_var.set(share)
+                slider.state(["!disabled"])
+        finally:
+            self._suspend_callbacks = False
+
+    def _add_row_widgets(self, row: dict[str, str], trigger_change: bool = True) -> None:
+        frame = ttk.Frame(self.rows_frame)
+        frame.grid(row=len(self.row_widgets), column=0, sticky="ew", pady=2)
+        variables = {
+            "culture": tk.StringVar(value=row.get("culture", "")),
+            "religion": tk.StringVar(value=row.get("religion", "")),
+            "size": tk.StringVar(value=row.get("size", "")),
+        }
+        for variable in variables.values():
+            variable.trace_add("write", self._handle_change)
+
+        culture_box = ttk.Combobox(frame, textvariable=variables["culture"], values=self.culture_choices, width=24)
+        culture_box.grid(row=0, column=0, sticky="ew", padx=(0, 8))
+        religion_box = ttk.Combobox(frame, textvariable=variables["religion"], values=self.religion_choices, width=20)
+        religion_box.grid(row=0, column=1, sticky="ew", padx=(0, 8))
+        size_entry = ttk.Entry(frame, textvariable=variables["size"], width=12)
+        size_entry.grid(row=0, column=2, sticky="ew", padx=(0, 8))
+
+        share_var = tk.StringVar(value="")
+        ttk.Label(frame, textvariable=share_var, width=10).grid(row=0, column=3, sticky="w", padx=(0, 8))
+
+        slider_var = tk.DoubleVar(value=0.0)
+        slider = ttk.Scale(
+            frame,
+            from_=0.0,
+            to=100.0,
+            orient=tk.HORIZONTAL,
+            variable=slider_var,
+            command=lambda _value, row_frame=frame: self._handle_slider(row_frame),
+        )
+        slider.grid(row=0, column=4, sticky="ew", padx=(0, 8))
+        frame.columnconfigure(4, weight=1)
+
+        ttk.Button(frame, text="Remove", command=lambda: self._remove_row(frame)).grid(row=0, column=5, sticky="w")
+        self.row_widgets.append(
+            {
+                "frame": frame,
+                "variables": variables,
+                "share_var": share_var,
+                "slider_var": slider_var,
+                "slider": slider,
+            }
+        )
+        self._refresh_scroll_region()
+        if trigger_change:
+            self._handle_change()
+
+    def _remove_row(self, frame: ttk.Frame) -> None:
+        for index, row_info in enumerate(self.row_widgets):
+            if row_info["frame"] is frame:
+                row_info["frame"].destroy()
+                self.row_widgets.pop(index)
+                break
+        for row_index, row_info in enumerate(self.row_widgets):
+            row_info["frame"].grid_configure(row=row_index)
+        if not self.row_widgets:
+            self.add_blank_row(trigger_change=False)
+        self._refresh_scroll_region()
+        self._handle_change()
+
+    def _handle_change(self, *_args: object) -> None:
+        if not self._suspend_callbacks:
+            self.on_change()
+
+    def _handle_slider(self, frame: ttk.Frame) -> None:
+        if self._suspend_callbacks:
+            return
+        for index, row_info in enumerate(self.row_widgets):
+            if row_info["frame"] is frame:
+                slider_var: tk.DoubleVar = row_info["slider_var"]
+                self.on_slider(self.owner_tag, index, slider_var.get())
+                return
+
+    def _sync_scroll_region(self, _event: object | None = None) -> None:
+        self.rows_canvas.configure(scrollregion=self.rows_canvas.bbox("all"))
+
+    def _resize_canvas_window(self, event: tk.Event[tk.Misc]) -> None:
+        self.rows_canvas.itemconfigure(self._rows_window, width=event.width)
+        self._sync_scroll_region()
+
+    def _refresh_scroll_region(self) -> None:
+        self.after_idle(self._sync_scroll_region)
+
+    def _bind_mousewheel(self, _event: object | None = None) -> None:
+        self.rows_canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+
+    def _unbind_mousewheel(self, _event: object | None = None) -> None:
+        self.rows_canvas.unbind_all("<MouseWheel>")
+
+    def _on_mousewheel(self, event: tk.Event[tk.Misc]) -> None:
+        if event.delta == 0:
+            return
+        self.rows_canvas.yview_scroll(int(-event.delta / 120), "units")
 
 
 class Vic3StateEditorApp:
@@ -752,11 +1299,13 @@ class Vic3StateEditorApp:
         root.protocol("WM_DELETE_WINDOW", self.on_close)
         root.bind("<Control-s>", lambda _event: self.save_current())
         root.bind("<Control-S>", lambda _event: self.save_all())
+        self._apply_dark_theme()
 
         self.show_all_var = tk.BooleanVar(value=False)
         self.search_var = tk.StringVar()
         self.search_var.trace_add("write", lambda *_args: self.refresh_state_list())
         self.status_var = tk.StringVar(value="Ready")
+        self.slider_adjusting = False
 
         self.state_title_var = tk.StringVar(value="Select a state")
         self.source_var = tk.StringVar(value="")
@@ -765,19 +1314,100 @@ class Vic3StateEditorApp:
         self.arable_land_var = tk.StringVar()
         self.arable_land_var.trace_add("write", lambda *_args: self._mark_dirty())
 
-        self.owner_tables: dict[str, EditableTable] = {}
+        self.owner_tables: dict[str, PopTable] = {}
         self.owner_total_vars: dict[str, tk.StringVar] = {}
         self.owner_notebook: ttk.Notebook | None = None
         self.aggregate_text: tk.Text | None = None
         self.arable_table: EditableTable | None = None
         self.capped_table: EditableTable | None = None
         self.discoverable_table: EditableTable | None = None
+        self.resources_canvas: tk.Canvas | None = None
+        self.resources_content: ttk.Frame | None = None
+        self._resources_window: int | None = None
         self.state_listbox: tk.Listbox | None = None
 
         self._build_ui()
         self.refresh_state_list()
         if self.filtered_state_ids:
             self.select_state(self.filtered_state_ids[0])
+
+    def _apply_dark_theme(self) -> None:
+        style = ttk.Style(self.root)
+        try:
+            style.theme_use("clam")
+        except tk.TclError:
+            pass
+
+        self.root.configure(bg=DARK_BG)
+        self.root.option_add("*TCombobox*Listbox*Background", DARK_ELEVATED)
+        self.root.option_add("*TCombobox*Listbox*Foreground", DARK_FG)
+        self.root.option_add("*TCombobox*Listbox*selectBackground", ACCENT)
+        self.root.option_add("*TCombobox*Listbox*selectForeground", DARK_FG)
+
+        style.configure(".", background=DARK_PANEL, foreground=DARK_FG)
+        style.configure("TFrame", background=DARK_BG)
+        style.configure("TLabel", background=DARK_BG, foreground=DARK_FG)
+        style.configure("TCheckbutton", background=DARK_BG, foreground=DARK_FG)
+        style.map("TCheckbutton", background=[("active", DARK_BG)], foreground=[("disabled", DARK_MUTED)])
+        style.configure(
+            "TButton",
+            background=DARK_PANEL,
+            foreground=DARK_FG,
+            bordercolor=DARK_BORDER,
+            lightcolor=DARK_BORDER,
+            darkcolor=DARK_BORDER,
+            focusthickness=1,
+            focuscolor=ACCENT,
+            padding=(10, 6),
+        )
+        style.map(
+            "TButton",
+            background=[("active", DARK_ELEVATED), ("pressed", ACCENT)],
+            foreground=[("disabled", DARK_MUTED)],
+        )
+        style.configure(
+            "TEntry",
+            fieldbackground=DARK_ELEVATED,
+            foreground=DARK_FG,
+            bordercolor=DARK_BORDER,
+            lightcolor=DARK_BORDER,
+            darkcolor=DARK_BORDER,
+            insertcolor=DARK_FG,
+        )
+        style.configure(
+            "TCombobox",
+            fieldbackground=DARK_ELEVATED,
+            background=DARK_PANEL,
+            foreground=DARK_FG,
+            arrowcolor=DARK_FG,
+            bordercolor=DARK_BORDER,
+            lightcolor=DARK_BORDER,
+            darkcolor=DARK_BORDER,
+            insertcolor=DARK_FG,
+        )
+        style.map(
+            "TCombobox",
+            fieldbackground=[("readonly", DARK_ELEVATED)],
+            background=[("active", DARK_PANEL)],
+            foreground=[("readonly", DARK_FG)],
+            arrowcolor=[("active", ACCENT_ACTIVE)],
+        )
+        style.configure("TPanedwindow", background=DARK_BG)
+        style.configure("TNotebook", background=DARK_BG, borderwidth=0)
+        style.configure(
+            "TNotebook.Tab",
+            background=DARK_PANEL,
+            foreground=DARK_FG,
+            bordercolor=DARK_BORDER,
+            lightcolor=DARK_BORDER,
+            darkcolor=DARK_BORDER,
+            padding=(12, 6),
+        )
+        style.map(
+            "TNotebook.Tab",
+            background=[("selected", ACCENT), ("active", DARK_ELEVATED)],
+            foreground=[("selected", DARK_FG)],
+        )
 
     def _build_ui(self) -> None:
         outer = ttk.Panedwindow(self.root, orient=tk.HORIZONTAL)
@@ -791,7 +1421,19 @@ class Vic3StateEditorApp:
         ttk.Checkbutton(left, text="Show all loaded states", variable=self.show_all_var, command=self.refresh_state_list).grid(
             row=2, column=0, sticky="w", pady=(0, 8)
         )
-        self.state_listbox = tk.Listbox(left, exportselection=False)
+        self.state_listbox = tk.Listbox(
+            left,
+            exportselection=False,
+            bg=DARK_ELEVATED,
+            fg=DARK_FG,
+            selectbackground=ACCENT,
+            selectforeground=DARK_FG,
+            highlightthickness=1,
+            highlightbackground=DARK_BORDER,
+            highlightcolor=ACCENT,
+            relief="flat",
+            activestyle="none",
+        )
         self.state_listbox.grid(row=3, column=0, sticky="nsew")
         self.state_listbox.bind("<<ListboxSelect>>", self._on_state_list_select)
         left.columnconfigure(0, weight=1)
@@ -807,11 +1449,12 @@ class Vic3StateEditorApp:
         button_bar.grid(row=0, column=1, sticky="e")
         ttk.Button(button_bar, text="Save Current", command=self.save_current).grid(row=0, column=0, padx=(0, 8))
         ttk.Button(button_bar, text="Save All Dirty", command=self.save_all).grid(row=0, column=1, padx=(0, 8))
-        ttk.Button(button_bar, text="Reload From Disk", command=self.reload_repository).grid(row=0, column=2)
+        ttk.Button(button_bar, text="Open Pop File", command=self._open_pop_file).grid(row=0, column=2, padx=(0, 8))
+        ttk.Button(button_bar, text="Reload From Disk", command=self.reload_repository).grid(row=0, column=3)
         header.columnconfigure(0, weight=1)
 
         ttk.Label(right, textvariable=self.source_var).grid(row=1, column=0, sticky="w", pady=(6, 0))
-        ttk.Label(right, textvariable=self.warning_var, foreground="#9c5c00", wraplength=1000).grid(
+        ttk.Label(right, textvariable=self.warning_var, foreground=WARNING_FG, wraplength=1000).grid(
             row=2, column=0, sticky="w", pady=(4, 8)
         )
 
@@ -827,45 +1470,97 @@ class Vic3StateEditorApp:
         population_tab.columnconfigure(0, weight=1)
         population_tab.rowconfigure(0, weight=1)
         ttk.Label(population_tab, text="Aggregate summary").grid(row=1, column=0, sticky="w", pady=(12, 4))
-        self.aggregate_text = tk.Text(population_tab, height=12, wrap="word")
+        self.aggregate_text = tk.Text(
+            population_tab,
+            height=12,
+            wrap="word",
+            bg=DARK_ELEVATED,
+            fg=DARK_FG,
+            insertbackground=DARK_FG,
+            selectbackground=ACCENT,
+            selectforeground=DARK_FG,
+            highlightthickness=1,
+            highlightbackground=DARK_BORDER,
+            highlightcolor=ACCENT,
+            relief="flat",
+        )
         self.aggregate_text.grid(row=2, column=0, sticky="nsew")
 
         resources_tab = ttk.Frame(notebook, padding=8)
         notebook.add(resources_tab, text="Resources")
-        ttk.Label(resources_tab, text="Arable land").grid(row=0, column=0, sticky="w")
-        ttk.Entry(resources_tab, textvariable=self.arable_land_var, width=12).grid(row=0, column=1, sticky="w", padx=(8, 0))
+        resources_tab.columnconfigure(0, weight=1)
+        resources_tab.rowconfigure(0, weight=1)
+
+        resources_scroll = ttk.Frame(resources_tab)
+        resources_scroll.grid(row=0, column=0, sticky="nsew")
+        resources_scroll.columnconfigure(0, weight=1)
+        resources_scroll.rowconfigure(0, weight=1)
+
+        self.resources_canvas = tk.Canvas(
+            resources_scroll,
+            bg=DARK_BG,
+            highlightthickness=0,
+            borderwidth=0,
+            relief="flat",
+        )
+        self.resources_canvas.grid(row=0, column=0, sticky="nsew")
+        resources_scrollbar = ttk.Scrollbar(resources_scroll, orient="vertical", command=self.resources_canvas.yview)
+        resources_scrollbar.grid(row=0, column=1, sticky="ns", padx=(8, 0))
+        self.resources_canvas.configure(yscrollcommand=resources_scrollbar.set)
+
+        self.resources_content = ttk.Frame(self.resources_canvas)
+        self._resources_window = self.resources_canvas.create_window((0, 0), window=self.resources_content, anchor="nw")
+        self.resources_content.bind("<Configure>", self._sync_resources_scroll_region)
+        self.resources_canvas.bind("<Configure>", self._resize_resources_canvas_window)
+
+        arable_section = ttk.LabelFrame(self.resources_content, text="Arable Resources", padding=10)
+        arable_section.grid(row=0, column=0, sticky="ew", pady=(0, 10))
+        arable_section.columnconfigure(0, weight=1)
+        land_row = ttk.Frame(arable_section)
+        land_row.grid(row=0, column=0, sticky="w", pady=(0, 10))
+        ttk.Label(land_row, text="Arable land").grid(row=0, column=0, sticky="w")
+        ttk.Entry(land_row, textvariable=self.arable_land_var, width=12).grid(row=0, column=1, sticky="w", padx=(8, 0))
 
         self.arable_table = EditableTable(
-            resources_tab,
-            columns=[ColumnSpec("resource", "Arable Resource", 28, self.repo.resource_choices)],
+            arable_section,
+            columns=[ColumnSpec("resource", "Arable Resource", 28, self.repo.arable_resource_choices)],
             on_change=self._mark_dirty,
             add_label="Add arable resource",
+            canvas_height=120,
         )
-        self.arable_table.grid(row=1, column=0, columnspan=2, sticky="ew", pady=(12, 8))
+        self.arable_table.grid(row=1, column=0, sticky="ew")
 
+        capped_section = ttk.LabelFrame(self.resources_content, text="Capped Resources", padding=10)
+        capped_section.grid(row=1, column=0, sticky="ew", pady=(0, 10))
+        capped_section.columnconfigure(0, weight=1)
         self.capped_table = EditableTable(
-            resources_tab,
+            capped_section,
             columns=[
-                ColumnSpec("resource", "Capped Resource", 28, self.repo.resource_choices),
+                ColumnSpec("resource", "Capped Resource", 28, self.repo.capped_resource_choices),
                 ColumnSpec("amount", "Max Level", 10),
             ],
             on_change=self._mark_dirty,
             add_label="Add capped resource",
+            canvas_height=150,
         )
-        self.capped_table.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(0, 8))
+        self.capped_table.grid(row=0, column=0, sticky="ew")
 
+        discoverable_section = ttk.LabelFrame(self.resources_content, text="Discoverable Resources", padding=10)
+        discoverable_section.grid(row=2, column=0, sticky="ew")
+        discoverable_section.columnconfigure(0, weight=1)
         self.discoverable_table = EditableTable(
-            resources_tab,
+            discoverable_section,
             columns=[
-                ColumnSpec("resource", "Discoverable Resource", 28, self.repo.resource_choices),
+                ColumnSpec("resource", "Discoverable Resource", 28, self.repo.discoverable_resource_choices),
                 ColumnSpec("amount", "Amount", 10),
-                ColumnSpec("depleted_type", "Depleted Type", 28, self.repo.resource_choices),
+                ColumnSpec("depleted_type", "Depleted Type", 28, self.repo.discoverable_depleted_type_choices),
             ],
             on_change=self._mark_dirty,
             add_label="Add discoverable resource",
+            canvas_height=170,
         )
-        self.discoverable_table.grid(row=3, column=0, columnspan=2, sticky="ew")
-        resources_tab.columnconfigure(0, weight=1)
+        self.discoverable_table.grid(row=0, column=0, sticky="ew")
+        self.resources_content.columnconfigure(0, weight=1)
 
         ttk.Label(right, textvariable=self.summary_var, wraplength=1000).grid(row=4, column=0, sticky="w", pady=(10, 0))
         ttk.Label(right, textvariable=self.status_var).grid(row=5, column=0, sticky="w", pady=(8, 0))
@@ -971,6 +1666,17 @@ class Vic3StateEditorApp:
                 parts.append(f"{owner_tag}: pop-only owner, {total_text} pops")
         return "Owners: " + " | ".join(parts) if parts else "No ownership slices found."
 
+    def _sync_resources_scroll_region(self, _event: object | None = None) -> None:
+        if self.resources_canvas is None:
+            return
+        self.resources_canvas.configure(scrollregion=self.resources_canvas.bbox("all"))
+
+    def _resize_resources_canvas_window(self, event: tk.Event[tk.Misc]) -> None:
+        if self.resources_canvas is None or self._resources_window is None:
+            return
+        self.resources_canvas.itemconfigure(self._resources_window, width=event.width)
+        self._sync_resources_scroll_region()
+
     def _rebuild_owner_tabs(self, record: StateRecord) -> None:
         assert self.owner_notebook is not None
         for child in self.owner_notebook.winfo_children():
@@ -979,22 +1685,20 @@ class Vic3StateEditorApp:
         self.owner_total_vars.clear()
 
         ownership_tags = {owner.tag for owner in record.owners}
-        for owner_tag in record.all_owner_tags():
+        for owner_tag in record.editable_owner_tags():
             frame = ttk.Frame(self.owner_notebook, padding=8)
             total_var = tk.StringVar()
             owner_label = owner_tag
             if owner_tag not in ownership_tags:
                 owner_label += " (pop only)"
             ttk.Label(frame, textvariable=total_var).grid(row=0, column=0, sticky="w", pady=(0, 6))
-            table = EditableTable(
+            table = PopTable(
                 frame,
-                columns=[
-                    ColumnSpec("culture", "Culture", 24, self.repo.culture_choices),
-                    ColumnSpec("religion", "Religion", 20, self.repo.religion_choices),
-                    ColumnSpec("size", "Size", 12),
-                ],
+                owner_tag=owner_tag,
+                culture_choices=self.repo.culture_choices,
+                religion_choices=self.repo.religion_choices,
                 on_change=self._mark_dirty,
-                add_label="Add pop row",
+                on_slider=self._on_pop_slider,
             )
             table.grid(row=1, column=0, sticky="nsew")
             frame.columnconfigure(0, weight=1)
@@ -1025,7 +1729,7 @@ class Vic3StateEditorApp:
         religion_totals: Counter[str] = Counter()
         total_population = 0
         invalid_rows = False
-        for owner_tag in record.all_owner_tags():
+        for owner_tag in record.editable_owner_tags():
             rows = record.pops_by_owner.get(owner_tag, [])
             for row in rows:
                 culture = row.culture.strip()
@@ -1090,6 +1794,7 @@ class Vic3StateEditorApp:
         if self.current_state_id is None:
             return
         record = self.repo.state_records[self.current_state_id]
+        state_total = 0
         for owner_tag, table in self.owner_tables.items():
             rows = [PopRow(row["culture"], row["religion"], row["size"]) for row in table.get_rows()]
             total = owner_population_total(rows)
@@ -1097,8 +1802,107 @@ class Vic3StateEditorApp:
                 text = f"{owner_tag} total: invalid size"
             else:
                 text = f"{owner_tag} total: {total}"
+                state_total += total
             self.owner_total_vars[owner_tag].set(text)
+        for table in self.owner_tables.values():
+            table.update_share_display(state_total)
         self.summary_var.set(self._build_owner_summary(record))
+
+    def _current_record(self) -> StateRecord | None:
+        if self.current_state_id is None:
+            return None
+        return self.repo.state_records[self.current_state_id]
+
+    def _on_pop_slider(self, owner_tag: str, row_index: int, target_percent: float) -> None:
+        if self.loading_ui or self.slider_adjusting:
+            return
+        record = self._current_record()
+        if record is None:
+            return
+
+        row_refs: list[tuple[str, int, PopRow, int]] = []
+        target_ref: tuple[str, int, PopRow, int] | None = None
+        for current_owner, table in self.owner_tables.items():
+            for current_index, row_data in enumerate(table.get_rows()):
+                row = PopRow(row_data["culture"], row_data["religion"], row_data["size"])
+                if is_blank_pop_row(row):
+                    continue
+                size = parse_int_string(row.size)
+                if not row.culture.strip() or size is None or size < 0:
+                    self.status_var.set("Fill in valid culture/size values before using pop share sliders")
+                    return
+                ref = (current_owner, current_index, row, size)
+                row_refs.append(ref)
+                if current_owner == owner_tag and current_index == row_index:
+                    target_ref = ref
+
+        if target_ref is None:
+            return
+
+        total_population = sum(ref[3] for ref in row_refs)
+        if total_population <= 0:
+            return
+
+        target_size = max(0, min(total_population, int(round(total_population * target_percent / 100.0))))
+        other_refs = [ref for ref in row_refs if ref is not target_ref]
+        new_sizes: dict[str, dict[int, int]] = defaultdict(dict)
+        new_sizes[owner_tag][row_index] = target_size
+
+        if other_refs:
+            remainder = total_population - target_size
+            weights = [ref[3] for ref in other_refs]
+            allocations = allocate_proportional(remainder, weights)
+            for allocation, ref in zip(allocations, other_refs):
+                new_sizes[ref[0]][ref[1]] = allocation
+        else:
+            new_sizes[owner_tag][row_index] = total_population
+
+        self.slider_adjusting = True
+        try:
+            for current_owner, table in self.owner_tables.items():
+                table.set_row_sizes(new_sizes.get(current_owner, {}))
+        finally:
+            self.slider_adjusting = False
+
+        self._mark_dirty()
+        row_label = target_ref[2].culture
+        if target_ref[2].religion.strip():
+            row_label += f" / {target_ref[2].religion}"
+        self.status_var.set(f"Adjusted {row_label} to {target_percent:.2f}% of {record.display_name}")
+
+    def _open_pop_file(self) -> None:
+        record = self._current_record()
+        if record is None:
+            return
+        if record.pop_source is None or not record.pop_source.exists():
+            messagebox.showinfo("No pop file yet", "This state does not have an existing population file yet.")
+            return
+
+        notepad_plus_plus = self._find_notepad_plus_plus()
+        try:
+            if notepad_plus_plus is not None:
+                subprocess.Popen([str(notepad_plus_plus), str(record.pop_source)])
+            elif hasattr(os, "startfile"):
+                os.startfile(str(record.pop_source))
+            else:
+                subprocess.Popen(["xdg-open", str(record.pop_source)])
+        except Exception as exc:  # noqa: BLE001
+            messagebox.showerror("Open failed", str(exc))
+
+    def _find_notepad_plus_plus(self) -> Path | None:
+        candidates = [
+            shutil.which("notepad++"),
+            r"C:\Program Files\Notepad++\notepad++.exe",
+            r"C:\Program Files (x86)\Notepad++\notepad++.exe",
+            str(Path.home() / "AppData" / "Local" / "Programs" / "Notepad++" / "notepad++.exe"),
+        ]
+        for candidate in candidates:
+            if not candidate:
+                continue
+            path = Path(candidate)
+            if path.exists():
+                return path
+        return None
 
     def save_current(self) -> None:
         if self.current_state_id is None:
