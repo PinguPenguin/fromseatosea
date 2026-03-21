@@ -1,4 +1,4 @@
-﻿
+
 STATE_LABRADOR = {
     id = 700
     provinces = { "xc0dd8b" "xe0cbab" "x773701" "x8d49cd" "xff4c93" "x7c4aac" "x6c9cae" "x3b17a5" "x3e5986" "x07f4fb" "x188a1d" "x5b7dba" "x365c92" "x3bfc08" "xf3c2bb" "x5c5de8" "xa4445f" "xdd4ceb" "x4192ee" "x5ef6eb" "x7ee516" "x581057" "xdbac6b" "xe6783b" "xbebefa" "xa9ce06" "x908155" "x021e3a" "x2ccaba" "x1a3e3d" "x43cf86" "xd1a6a0" "x943ca5" "xcb2f2f" "xbfc7d9" "xd81bb8" "x04819f" "xdcdd4e" "x3e0978" "x9d9919" "x515ba4" "xbc9d94" "x2c9384" "x543388" "x0c6598" "xfc3a5f" "x6a488f" "xece49f" "xe29640" "x0bc8c1" "xc1a729" "xb378bb" "xb35fc1" "x56e072" "x2345d0" "x84a349" "xb8fe88" "x8ab607" "xb9b943" "x7e85fa" "xaa1e16" "x5f3317" "xdb0704" "x73bf8d" "x1e71f4" "x5fe782" "xb54ed1" "xe888d6" "xa8774f" "x28520d" "x781f7b" "x793cfe" "xb83486" "xd9c831" "x59020c" "x4bcbc3" "xc53cd1" "xa2094f" "xcb5a8f" "x8d480c" "x06f38c" "xad6639" "x29924f" "x48c5e0" "x65b146" "x9056ec" "x4b3d6e" "x77ef94" "xcbbe16" "x5be06b" "x03d1c9" "x7046ba" "x7a4a5e" "xe6aab9" "x8bc7da" "xfe4f9f" "x5ca682" "x40777e" "x484dec" "x8e933e" "xef77d5" "x177ae0" "xb19217" "x1baaf2" "x29399e" "x032662" "x38b630" "x0060c0" "x8cd97a" "x0064c5" "xdda6fc" "x171acd" "xa1628c" "x8b0ab0" "x1253c5" "xbcb8d9" "x0a4a4c" "x1dc31a" "x0cc129" "x433b03" }
@@ -136,33 +136,33 @@ STATE_ONTARIO_PENINSULA = {
     }
 }
 
-STATE_ALGOMA = {
-    id = 706
-    provinces = { "xbab329" "xc0a0c0" "x4020c0" "x256309" "x00afdf" "x520bf5" "x993abf" "x527017" "xeca516" "x361609" "x51a9ea" "x56a6fd" "x676e1e" "x738279" "xf03811" "x9f77e9" "x8e20d9" "x0ca605" "x26ef2a" "x8ee117" "x88147f" "x627826" "x2b36a1" "x7b1ae4" "x82492b" "xa7b9ee" "x9e289b" "xf49f6d" "xa11839" "xd1f43f" "x507bf4" "x1f0d15" "xd567eb" "x941b9d" "x257105" "x9552a3" "x42f312" "xfc9a0a" "xb2d5dc" "xa92847" "x9e46fd" "x3193ea" "x503d32" "x5e776d" "xed34e6" "x17aeb7" "xafbe4e" "xaba06f" "x263f77" "xa794c1" "x2a08d3" "x29be41" "x2ad0e3" "x9c6e87" "xc75f8c" "xd2b39a" "x5d9b41" "x724f63" "x313bb2" "x271dab" "xba1406" "xdc58ab" "xeaebd8" "x6b2093" "xc893ec" "xa1d195" "xbef64a" "x2e016e" "xea4fc0" "x5b310a" "xf7e3f8" "x466a98" "x74590e" "x8f87b9" "x7505f0" "x020df9" "x06b1fe" "x90a5c2" "x0b7201" "xbcf90d" "x92d783" "xc97ced" "xa1e55b" "x56d964" "xe519fe" "xde7b99" "xa07380" }
-    subsistence_building = "building_subsistence_farm"
-    city = "xbab329"
-    farm = "x82492b"
-    mine = "x29be41"
-    wood = "x466a98"
-    port = "x627826"
-    naval_exit_id = 3044
-    arable_land = 15
-    arable_resources = { "building_wheat_farm" }
-    capped_resources = {
-        building_coal_mine = 3
-        building_iron_mine = 12
-        building_logging_camp = 18
-        building_fishing_wharf = 2
-    }
-    resource = {
-        type = "building_oil_rig"
-        undiscovered_amount = 5
-    }
-    resource = {
-        type = "building_gold_field"
-        depleted_type = "building_gold_mine"
-        undiscovered_amount = 6
-    }
+STATE_ALGOMA = {
+id = 706
+provinces = { "xbab329" "xc0a0c0" "x4020c0" "x256309" "x00afdf" "x520bf5" "x993abf" "x527017" "xeca516" "x361609" "x51a9ea" "x56a6fd" "x676e1e" "x738279" "xf03811" "x9f77e9" "x8e20d9" "x0ca605" "x26ef2a" "x8ee117" "x88147f" "x627826" "x2b36a1" "x7b1ae4" "x82492b" "xa7b9ee" "x9e289b" "xf49f6d" "xa11839" "xd1f43f" "x507bf4" "x1f0d15" "xd567eb" "x941b9d" "x257105" "x9552a3" "x42f312" "xfc9a0a" "xb2d5dc" "xa92847" "x9e46fd" "x3193ea" "x503d32" "x5e776d" "xed34e6" "x17aeb7" "xafbe4e" "xaba06f" "x263f77" "xa794c1" "x2a08d3" "x29be41" "x2ad0e3" "x9c6e87" "xc75f8c" "xd2b39a" "x5d9b41" "x724f63" "x313bb2" "x271dab" "xba1406" "xdc58ab" "xeaebd8" "x6b2093" "xc893ec" "xa1d195" "xbef64a" "x2e016e" "xea4fc0" "x5b310a" "xf7e3f8" "x466a98" "x74590e" "x8f87b9" "x7505f0" "x020df9" "x06b1fe" "x90a5c2" "x0b7201" "xbcf90d" "x92d783" "xc97ced" "xa1e55b" "x56d964" "xe519fe" "xde7b99" "xa07380" }
+subsistence_building = "building_subsistence_farm"
+city = "xbab329"
+farm = "x82492b"
+mine = "x29be41"
+wood = "x466a98"
+port = "x627826"
+naval_exit_id = 3044
+arable_land = 15
+arable_resources = { "building_wheat_farm" }
+capped_resources = {
+    building_coal_mine = 3
+    building_iron_mine = 12
+    building_logging_camp = 18
+    building_fishing_wharf = 2
+}
+resource = {
+    type = "building_oil_rig"
+    undiscovered_amount = 5
+}
+resource = {
+    type = "building_gold_field"
+    depleted_type = "building_gold_mine"
+    undiscovered_amount = 6
+}
 }
 
 STATE_NORTHWEST_ONTARIO = {
