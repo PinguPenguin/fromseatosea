@@ -75,6 +75,18 @@ ACCENT_ACTIVE = "#66a6ff"
 WARNING_FG = "#ffbe76"
 
 BUILDING_OWNERSHIP_MODE_CHOICES = ["", "country", "building", "preserve"]
+BUILDING_OWNER_KIND_NATIONAL = "National"
+BUILDING_OWNER_KIND_LOCAL_WORKFORCE = "Local Workforce"
+BUILDING_OWNER_KIND_FINANCIAL_DISTRICT = "Financial District"
+BUILDING_OWNER_KIND_MANOR_HOUSE = "Manor House"
+BUILDING_OWNER_KIND_PRESERVE = "Preserve"
+BUILDING_OWNER_KIND_CHOICES = [
+    BUILDING_OWNER_KIND_NATIONAL,
+    BUILDING_OWNER_KIND_LOCAL_WORKFORCE,
+    BUILDING_OWNER_KIND_FINANCIAL_DISTRICT,
+    BUILDING_OWNER_KIND_MANOR_HOUSE,
+    BUILDING_OWNER_KIND_PRESERVE,
+]
 
 ARABLE_RESOURCE_DEFAULTS = {
     "building_banana_plantation",
@@ -899,6 +911,37 @@ def render_building_state_block(record: StateRecord, wrapper_block: str | None =
     return "\n".join(lines)
 
 
+def building_total_levels(row: BuildingRow) -> str:
+    if row.level.strip():
+        return row.level.strip()
+    return row.ownership_levels.strip()
+
+
+def infer_building_owner_kind(state_id: str, row: BuildingRow) -> str:
+    mode = row.ownership_mode.strip()
+    if mode == "preserve":
+        return BUILDING_OWNER_KIND_PRESERVE
+    if mode == "country":
+        return BUILDING_OWNER_KIND_NATIONAL if row.ownership_country.strip() == row.owner_tag.strip() else BUILDING_OWNER_KIND_PRESERVE
+    if mode == "building":
+        if row.ownership_country.strip() != row.owner_tag.strip():
+            return BUILDING_OWNER_KIND_PRESERVE
+        building_type = row.ownership_building_type.strip()
+        ownership_region = row.ownership_region.strip()
+        if building_type == row.building.strip() and ownership_region == state_id:
+            return BUILDING_OWNER_KIND_LOCAL_WORKFORCE
+        if building_type == "building_financial_district" and ownership_region:
+            return BUILDING_OWNER_KIND_FINANCIAL_DISTRICT
+        if building_type == "building_manor_house" and ownership_region:
+            return BUILDING_OWNER_KIND_MANOR_HOUSE
+        return BUILDING_OWNER_KIND_PRESERVE
+    if mode == "":
+        if row.level.strip() and row.reserves.strip():
+            return BUILDING_OWNER_KIND_NATIONAL
+        return BUILDING_OWNER_KIND_PRESERVE
+    return BUILDING_OWNER_KIND_PRESERVE
+
+
 def parse_int_string(value: str) -> int | None:
     stripped = value.strip()
     if not stripped:
@@ -1137,6 +1180,12 @@ def validate_record(record: StateRecord) -> None:
                 raise ValueError(f"Building '{building_id}' building ownership requires a region state id")
         else:
             raise ValueError(f"Building '{building_id}' has unsupported ownership mode '{ownership_mode}'")
+
+        if ownership_mode and level is not None:
+            raise ValueError(
+                f"Building '{building_id}' cannot define both Level and ownership. "
+                "Victoria 3 create_building requires using either Level or Owned Levels/Owner fields, not both."
+            )
 
         cleaned_buildings.append(
             BuildingRow(
@@ -2105,28 +2154,21 @@ class Vic3StateEditorApp:
         ttk.Label(
             buildings_tab,
             text=(
-                "One row per create_building block. Owner tags come from state history. "
-                "Use ownership mode 'preserve' to keep unsupported raw ownership blocks such as company or mixed ownership."
+                "One row per create_building block. State Owner chooses the region_state slice. "
+                "Levels is the total building level count. Owner Type chooses how those levels are owned. "
+                "Owner Location is only used for Financial District and Manor House ownership. "
+                "Unsupported rows stay available as Preserve."
             ),
             wraplength=1080,
         ).grid(row=0, column=0, sticky="w", pady=(0, 8))
         self.buildings_table = EditableTable(
             buildings_tab,
             columns=[
-                ColumnSpec("owner_tag", "Owner", 10, []),
+                ColumnSpec("owner_tag", "State Owner", 10, []),
                 ColumnSpec("building", "Building", 26, self.repo.building_choices),
-                ColumnSpec("level", "Level", 8),
-                ColumnSpec("reserves", "Reserves", 8),
-                ColumnSpec("ownership_mode", "Owner Mode", 12, BUILDING_OWNERSHIP_MODE_CHOICES),
-                ColumnSpec("ownership_country", "Owner Country", 12),
-                ColumnSpec("ownership_levels", "Owned Levels", 10),
-                ColumnSpec(
-                    "ownership_building_type",
-                    "Owner Building",
-                    24,
-                    self.repo.ownership_building_type_choices,
-                ),
-                ColumnSpec("ownership_region", "Owner Region", 22, sorted(self.repo.state_records)),
+                ColumnSpec("levels", "Levels", 8),
+                ColumnSpec("owner_kind", "Owner Type", 20, BUILDING_OWNER_KIND_CHOICES),
+                ColumnSpec("owner_location", "Owner Location", 22, sorted(self.repo.state_records)),
             ],
             on_change=self._mark_dirty,
             add_label="Add building",
@@ -2222,7 +2264,7 @@ class Vic3StateEditorApp:
             if self.buildings_table is not None:
                 self.buildings_table.set_column_choices("owner_tag", record.editable_owner_tags())
                 self.buildings_table.set_rows(
-                    [self._building_row_to_table_dict(row) for row in record.buildings]
+                    [self._building_row_to_table_dict(record, row) for row in record.buildings]
                     or [self._blank_building_row_data(record)],
                     row_metadata=list(record.buildings) or [None],
                 )
@@ -2238,48 +2280,101 @@ class Vic3StateEditorApp:
         return {
             "owner_tag": default_owner,
             "building": "",
-            "level": "",
-            "reserves": "",
-            "ownership_mode": "",
-            "ownership_country": "",
-            "ownership_levels": "",
-            "ownership_building_type": "",
-            "ownership_region": "",
+            "levels": "",
+            "owner_kind": BUILDING_OWNER_KIND_NATIONAL,
+            "owner_location": "",
         }
 
-    def _building_row_to_table_dict(self, row: BuildingRow) -> dict[str, str]:
+    def _building_row_to_table_dict(self, record: StateRecord, row: BuildingRow) -> dict[str, str]:
+        owner_kind = infer_building_owner_kind(record.state_id, row)
+        owner_location = row.ownership_region if owner_kind in {
+            BUILDING_OWNER_KIND_FINANCIAL_DISTRICT,
+            BUILDING_OWNER_KIND_MANOR_HOUSE,
+        } else ""
         return {
             "owner_tag": row.owner_tag,
             "building": row.building,
-            "level": row.level,
-            "reserves": row.reserves,
-            "ownership_mode": row.ownership_mode,
-            "ownership_country": row.ownership_country,
-            "ownership_levels": row.ownership_levels,
-            "ownership_building_type": row.ownership_building_type,
-            "ownership_region": row.ownership_region,
+            "levels": building_total_levels(row),
+            "owner_kind": owner_kind,
+            "owner_location": owner_location,
         }
 
     def _building_row_from_table(
         self,
+        record: StateRecord,
         row: dict[str, str],
         metadata: object | None,
     ) -> BuildingRow:
         template = metadata if isinstance(metadata, BuildingRow) else BuildingRow()
-        return BuildingRow(
-            owner_tag=row.get("owner_tag", ""),
-            building=row.get("building", ""),
-            level=row.get("level", ""),
-            reserves=row.get("reserves", ""),
-            ownership_mode=row.get("ownership_mode", ""),
-            ownership_country=row.get("ownership_country", ""),
-            ownership_levels=row.get("ownership_levels", ""),
-            ownership_building_type=row.get("ownership_building_type", ""),
-            ownership_region=row.get("ownership_region", ""),
+        owner_tag = row.get("owner_tag", "").strip()
+        building_id = row.get("building", "").strip()
+        total_levels = row.get("levels", "").strip()
+        owner_kind = row.get("owner_kind", "").strip()
+        owner_location = row.get("owner_location", "").strip().strip('"')
+
+        if not building_id and not total_levels and not owner_location:
+            return BuildingRow()
+
+        if owner_kind == BUILDING_OWNER_KIND_PRESERVE and isinstance(metadata, BuildingRow):
+            return BuildingRow(
+                owner_tag=template.owner_tag,
+                building=template.building,
+                level=template.level,
+                reserves=template.reserves,
+                ownership_mode=template.ownership_mode,
+                ownership_country=template.ownership_country,
+                ownership_levels=template.ownership_levels,
+                ownership_building_type=template.ownership_building_type,
+                ownership_region=template.ownership_region,
+                template_entries=list(template.template_entries),
+                ownership_template_entries=list(template.ownership_template_entries),
+                preserved_add_ownership_raw=template.preserved_add_ownership_raw,
+            )
+
+        converted = BuildingRow(
+            owner_tag=owner_tag,
+            building=building_id,
+            level="",
+            reserves=template.reserves.strip() or "1",
+            ownership_mode="",
+            ownership_country="",
+            ownership_levels="",
+            ownership_building_type="",
+            ownership_region="",
             template_entries=list(template.template_entries),
             ownership_template_entries=list(template.ownership_template_entries),
             preserved_add_ownership_raw=template.preserved_add_ownership_raw,
         )
+
+        if owner_kind == BUILDING_OWNER_KIND_NATIONAL:
+            if template.ownership_mode == "" and template.level.strip() and template.reserves.strip():
+                converted.level = total_levels
+            else:
+                converted.ownership_mode = "country"
+                converted.ownership_country = owner_tag
+                converted.ownership_levels = total_levels
+        elif owner_kind == BUILDING_OWNER_KIND_LOCAL_WORKFORCE:
+            converted.ownership_mode = "building"
+            converted.ownership_country = owner_tag
+            converted.ownership_levels = total_levels
+            converted.ownership_building_type = building_id
+            converted.ownership_region = record.state_id
+        elif owner_kind == BUILDING_OWNER_KIND_FINANCIAL_DISTRICT:
+            converted.ownership_mode = "building"
+            converted.ownership_country = owner_tag
+            converted.ownership_levels = total_levels
+            converted.ownership_building_type = "building_financial_district"
+            converted.ownership_region = owner_location
+        elif owner_kind == BUILDING_OWNER_KIND_MANOR_HOUSE:
+            converted.ownership_mode = "building"
+            converted.ownership_country = owner_tag
+            converted.ownership_levels = total_levels
+            converted.ownership_building_type = "building_manor_house"
+            converted.ownership_region = owner_location
+        else:
+            converted.ownership_mode = "preserve"
+
+        return converted
 
     def _build_owner_summary(self, record: StateRecord) -> str:
         parts = []
@@ -2408,7 +2503,7 @@ class Vic3StateEditorApp:
             ]
         if self.buildings_table is not None:
             record.buildings = [
-                self._building_row_from_table(row, metadata)
+                self._building_row_from_table(record, row, metadata)
                 for row, metadata in self.buildings_table.get_rows_with_metadata()
             ]
         self.summary_var.set(self._build_owner_summary(record))
