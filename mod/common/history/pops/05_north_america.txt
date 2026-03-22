@@ -1287,7 +1287,7 @@ POPS = {
 			create_pop = {
 				culture = salish
 				religion = animist
-				size = 10829
+				size = 13829
 			}
 			create_pop = {
 				culture = metis
@@ -1303,11 +1303,6 @@ POPS = {
 				culture = franco_canadian
 				religion = catholic
 				size = 3336
-			}
-			create_pop = {
-				culture = haida
-				religion = animist
-				size = 3610
 			}
 		}
 	}
