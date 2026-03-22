@@ -61,6 +61,7 @@ DEFAULT_NEWLINE = "\r\n"
 STATE_REGION_PATTERN = re.compile(r"(?m)^([ \t]*)(STATE_[A-Z0-9_]+)\s*=\s*\{")
 STATE_HISTORY_PATTERN = re.compile(r"(?m)^([ \t]*)(s:STATE_[A-Z0-9_]+)\s*=\s*\{")
 POP_STATE_SECTION_PATTERN = re.compile(r"(?m)^([ \t]*)(s:STATE_[A-Z0-9_]+)\s*=\s*\{")
+BUILDINGS_WRAPPER_PATTERN = re.compile(r"(?m)^([ \t]*)(BUILDINGS)\s*=\s*\{")
 LOCALIZATION_PATTERN = re.compile(r'(?m)^\s*(STATE_[A-Z0-9_]+):\d?\s+"(.*)"\s*$')
 
 DARK_BG = "#14181e"
@@ -72,6 +73,8 @@ DARK_MUTED = "#aab6c6"
 ACCENT = "#3f8cff"
 ACCENT_ACTIVE = "#66a6ff"
 WARNING_FG = "#ffbe76"
+
+BUILDING_OWNERSHIP_MODE_CHOICES = ["", "country", "building", "preserve"]
 
 ARABLE_RESOURCE_DEFAULTS = {
     "building_banana_plantation",
@@ -137,18 +140,38 @@ class DiscoverableResourceRow:
 
 
 @dataclass
+class BuildingRow:
+    owner_tag: str = ""
+    building: str = ""
+    level: str = ""
+    reserves: str = ""
+    ownership_mode: str = ""
+    ownership_country: str = ""
+    ownership_levels: str = ""
+    ownership_building_type: str = ""
+    ownership_region: str = ""
+    template_entries: list[TopLevelEntry] = field(default_factory=list)
+    ownership_template_entries: list[TopLevelEntry] = field(default_factory=list)
+    preserved_add_ownership_raw: str = ""
+
+
+@dataclass
 class StateRecord:
     state_id: str
     display_name: str
     owners: list[OwnershipSlice]
     region_source: Path | None
     pop_source: Path | None
+    building_source: Path | None
     ownership_source: Path | None
     arable_land: str = ""
     arable_resources: list[str] = field(default_factory=list)
     capped_resources: list[ResourceCountRow] = field(default_factory=list)
     discoverable_resources: list[DiscoverableResourceRow] = field(default_factory=list)
     pops_by_owner: dict[str, list[PopRow]] = field(default_factory=dict)
+    buildings: list[BuildingRow] = field(default_factory=list)
+    building_owner_extras: dict[str, list[str]] = field(default_factory=dict)
+    building_state_extras: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     canada_focus: bool = False
     dirty: bool = False
@@ -167,6 +190,14 @@ class StateRecord:
             if tag not in seen:
                 tags.append(tag)
                 seen.add(tag)
+        for tag in self.building_owner_extras:
+            if tag not in seen:
+                tags.append(tag)
+                seen.add(tag)
+        for row in self.buildings:
+            if row.owner_tag and row.owner_tag not in seen:
+                tags.append(row.owner_tag)
+                seen.add(row.owner_tag)
         return tags
 
 
@@ -174,6 +205,14 @@ class StateRecord:
 class TopLevelEntry:
     key: str
     raw: str
+
+
+@dataclass
+class TopLevelEntrySpan:
+    key: str
+    raw: str
+    start: int
+    end: int
 
 
 def read_text(path: Path) -> str:
@@ -236,12 +275,12 @@ def replace_named_block(text: str, key: str, pattern: re.Pattern[str], new_block
     return text[:start] + new_block + text[end:]
 
 
-def parse_top_level_entries(block_text: str) -> list[TopLevelEntry]:
+def parse_top_level_entry_spans(block_text: str) -> list[TopLevelEntrySpan]:
     open_index = block_text.find("{")
     close_index = block_text.rfind("}")
     if open_index == -1 or close_index == -1 or close_index <= open_index:
         return []
-    entries: list[TopLevelEntry] = []
+    entries: list[TopLevelEntrySpan] = []
     index = open_index + 1
     while index < close_index:
         while index < close_index and block_text[index].isspace():
@@ -274,9 +313,37 @@ def parse_top_level_entries(block_text: str) -> list[TopLevelEntry]:
                 entry_end += 1
         while entry_end < close_index and block_text[entry_end] in "\r\n":
             entry_end += 1
-        entries.append(TopLevelEntry(key=key, raw=block_text[entry_start:entry_end].rstrip()))
+        entries.append(TopLevelEntrySpan(key=key, raw=block_text[entry_start:entry_end].rstrip(), start=entry_start, end=entry_end))
         index = entry_end
     return entries
+
+
+def parse_top_level_entries(block_text: str) -> list[TopLevelEntry]:
+    return [TopLevelEntry(entry.key, entry.raw) for entry in parse_top_level_entry_spans(block_text)]
+
+
+def find_top_level_entry_span(block_text: str, key: str) -> TopLevelEntrySpan | None:
+    for entry in parse_top_level_entry_spans(block_text):
+        if entry.key == key:
+            return entry
+    return None
+
+
+def replace_top_level_entry(block_text: str, key: str, new_entry: str) -> str:
+    found = find_top_level_entry_span(block_text, key)
+    if found is None:
+        raise KeyError(f"Could not find top-level entry {key}")
+    return block_text[: found.start] + new_entry + block_text[found.end :]
+
+
+def insert_top_level_entry(block_text: str, new_entry: str) -> str:
+    close_index = block_text.rfind("}")
+    if close_index == -1:
+        raise ValueError("Block has no closing brace")
+    prefix = block_text[:close_index].rstrip("\r\n")
+    suffix = block_text[close_index:]
+    joiner = "\n" if prefix.rstrip().endswith("{") else "\n\n"
+    return f"{prefix}{joiner}{new_entry}\n{suffix}"
 
 
 def detect_child_indent(block_text: str, default: str = "    ") -> str:
@@ -487,6 +554,92 @@ def parse_pops_by_owner_tolerant(section_text: str) -> dict[str, list[PopRow]]:
     return dict(pops_by_owner)
 
 
+def parse_assignment_value(raw: str, key: str) -> str | None:
+    match = re.search(rf'(?<![A-Za-z0-9_]){re.escape(key)}\s*=\s*(?:"([^"]+)"|([^\s{{}}]+))', raw)
+    if not match:
+        return None
+    return match.group(1) or match.group(2)
+
+
+def parse_assignment_int(raw: str, key: str) -> str | None:
+    match = re.search(rf"(?<![A-Za-z0-9_]){re.escape(key)}\s*=\s*(-?\d+)", raw)
+    return match.group(1) if match else None
+
+
+def normalize_country_tag(value: str) -> str:
+    return value.strip().strip('"').removeprefix("c:")
+
+
+def parse_country_tag(raw: str, key: str = "country") -> str:
+    value = parse_assignment_value(raw, key)
+    return normalize_country_tag(value) if value is not None else ""
+
+
+def parse_building_ownership(raw: str, row: BuildingRow) -> bool:
+    ownership_entries = parse_top_level_entries(raw)
+    if len(ownership_entries) != 1 or ownership_entries[0].key not in {"country", "building"}:
+        row.ownership_mode = "preserve" if raw.strip() else ""
+        row.preserved_add_ownership_raw = raw
+        return bool(raw.strip())
+
+    ownership_entry = ownership_entries[0]
+    row.ownership_mode = ownership_entry.key
+    row.ownership_template_entries = parse_top_level_entries(ownership_entry.raw)
+    if ownership_entry.key == "country":
+        row.ownership_country = parse_country_tag(ownership_entry.raw)
+        row.ownership_levels = parse_assignment_int(ownership_entry.raw, "levels") or ""
+    else:
+        row.ownership_building_type = parse_assignment_value(ownership_entry.raw, "type") or ""
+        row.ownership_country = parse_country_tag(ownership_entry.raw)
+        row.ownership_levels = parse_assignment_int(ownership_entry.raw, "levels") or ""
+        row.ownership_region = parse_assignment_value(ownership_entry.raw, "region") or ""
+    return False
+
+
+def parse_building_row(owner_tag: str, raw: str) -> tuple[BuildingRow, bool]:
+    row = BuildingRow(owner_tag=owner_tag, template_entries=parse_top_level_entries(raw))
+    unsupported_ownership = False
+    for entry in row.template_entries:
+        if entry.key == "building":
+            row.building = parse_assignment_value(entry.raw, "building") or ""
+        elif entry.key == "level":
+            row.level = parse_assignment_int(entry.raw, "level") or ""
+        elif entry.key == "reserves":
+            row.reserves = parse_assignment_int(entry.raw, "reserves") or ""
+        elif entry.key == "add_ownership":
+            unsupported_ownership = parse_building_ownership(entry.raw, row)
+    return row, unsupported_ownership
+
+
+def parse_building_state_block(
+    block_text: str,
+) -> tuple[list[BuildingRow], dict[str, list[str]], list[str], list[str], int]:
+    rows: list[BuildingRow] = []
+    owner_extras: dict[str, list[str]] = {}
+    state_extras: list[str] = []
+    owner_tags: list[str] = []
+    unsupported_ownership_rows = 0
+
+    for entry in parse_top_level_entries(block_text):
+        if not entry.key.startswith("region_state:"):
+            state_extras.append(entry.raw)
+            continue
+        owner_tag = entry.key.partition(":")[2]
+        owner_tags.append(owner_tag)
+        owner_extra_entries: list[str] = []
+        for owner_entry in parse_top_level_entries(entry.raw):
+            if owner_entry.key != "create_building":
+                owner_extra_entries.append(owner_entry.raw)
+                continue
+            row, unsupported = parse_building_row(owner_tag, owner_entry.raw)
+            rows.append(row)
+            if unsupported:
+                unsupported_ownership_rows += 1
+        owner_extras[owner_tag] = owner_extra_entries
+
+    return rows, owner_extras, state_extras, owner_tags, unsupported_ownership_rows
+
+
 def render_inline_list(values: list[str], quote: bool = True) -> str:
     if not values:
         return "{ }"
@@ -591,6 +744,152 @@ def render_pop_state_block(record: StateRecord) -> str:
     return "\n".join(lines)
 
 
+def render_ordered_entries(
+    template_entries: list[TopLevelEntry],
+    renderers: dict[str, Callable[[], str | None]],
+    child_indent: str,
+    preferred_order: list[str],
+    ignored_keys: set[str] | None = None,
+) -> list[str]:
+    lines: list[str] = []
+    rendered_keys: set[str] = set()
+    ignored = ignored_keys or set()
+    for entry in template_entries:
+        if entry.key in ignored:
+            continue
+        if entry.key in renderers:
+            if entry.key in rendered_keys:
+                continue
+            rendered = renderers[entry.key]()
+            if rendered:
+                lines.append(rendered)
+            rendered_keys.add(entry.key)
+            continue
+        lines.append(normalize_entry_indentation(entry.raw.rstrip(), child_indent))
+
+    for key in preferred_order:
+        if key in rendered_keys:
+            continue
+        rendered = renderers[key]()
+        if rendered:
+            lines.append(rendered)
+    return lines
+
+
+def render_building_add_ownership(
+    row: BuildingRow,
+    child_indent: str,
+    nested_indent: str,
+    deep_indent: str,
+) -> str | None:
+    mode = row.ownership_mode.strip()
+    if mode == "":
+        return None
+    if mode == "preserve":
+        if not row.preserved_add_ownership_raw.strip():
+            return None
+        return normalize_entry_indentation(row.preserved_add_ownership_raw.rstrip(), child_indent)
+    if mode not in {"country", "building"}:
+        raise ValueError(f"Unsupported ownership mode '{mode}'")
+
+    if mode == "country":
+        inner_renderers = {
+            "country": lambda: f'{deep_indent}country = "c:{row.ownership_country.strip()}"'
+            if row.ownership_country.strip()
+            else None,
+            "levels": lambda: f"{deep_indent}levels = {row.ownership_levels.strip()}"
+            if row.ownership_levels.strip()
+            else None,
+        }
+        inner_entries = render_ordered_entries(
+            row.ownership_template_entries,
+            inner_renderers,
+            deep_indent,
+            ["country", "levels"],
+            ignored_keys={"type", "region"},
+        )
+    else:
+        inner_renderers = {
+            "type": lambda: f'{deep_indent}type = "{row.ownership_building_type.strip()}"'
+            if row.ownership_building_type.strip()
+            else None,
+            "country": lambda: f'{deep_indent}country = "c:{row.ownership_country.strip()}"'
+            if row.ownership_country.strip()
+            else None,
+            "levels": lambda: f"{deep_indent}levels = {row.ownership_levels.strip()}"
+            if row.ownership_levels.strip()
+            else None,
+            "region": lambda: f'{deep_indent}region = "{row.ownership_region.strip()}"'
+            if row.ownership_region.strip()
+            else None,
+        }
+        inner_entries = render_ordered_entries(
+            row.ownership_template_entries,
+            inner_renderers,
+            deep_indent,
+            ["type", "country", "levels", "region"],
+        )
+
+    lines = [f"{child_indent}add_ownership = {{", f"{nested_indent}{mode} = {{"]
+    lines.extend(inner_entries)
+    lines.append(f"{nested_indent}}}")
+    lines.append(f"{child_indent}}}")
+    return "\n".join(lines)
+
+
+def render_building_row(
+    row: BuildingRow,
+    create_indent: str,
+    child_indent: str,
+    nested_indent: str,
+    deep_indent: str,
+) -> str:
+    renderers = {
+        "building": lambda: f'{child_indent}building = "{row.building.strip()}"'
+        if row.building.strip()
+        else None,
+        "level": lambda: f"{child_indent}level = {row.level.strip()}" if row.level.strip() else None,
+        "reserves": lambda: f"{child_indent}reserves = {row.reserves.strip()}" if row.reserves.strip() else None,
+        "add_ownership": lambda: render_building_add_ownership(row, child_indent, nested_indent, deep_indent),
+    }
+    entries = render_ordered_entries(
+        row.template_entries,
+        renderers,
+        child_indent,
+        ["building", "level", "reserves", "add_ownership"],
+    )
+    lines = [f"{create_indent}create_building = {{"]
+    lines.extend(entries)
+    lines.append(f"{create_indent}}}")
+    return "\n".join(lines)
+
+
+def render_building_state_block(record: StateRecord, wrapper_block: str | None = None) -> str:
+    state_indent = detect_child_indent(wrapper_block, default="\t") if wrapper_block else "\t"
+    owner_indent = state_indent + indent_unit(state_indent)
+    create_indent = owner_indent + indent_unit(owner_indent)
+    child_indent = create_indent + indent_unit(create_indent)
+    nested_indent = child_indent + indent_unit(child_indent)
+    deep_indent = nested_indent + indent_unit(nested_indent)
+
+    rows_by_owner: dict[str, list[BuildingRow]] = defaultdict(list)
+    for row in record.buildings:
+        rows_by_owner[row.owner_tag].append(row)
+
+    lines = [f"{state_indent}s:{record.state_id} = {{"]
+    for owner_tag in record.editable_owner_tags():
+        lines.append(f"{owner_indent}region_state:{owner_tag} = {{")
+        for row in rows_by_owner.get(owner_tag, []):
+            lines.append(render_building_row(row, create_indent, child_indent, nested_indent, deep_indent))
+        for raw_extra in record.building_owner_extras.get(owner_tag, []):
+            lines.append(normalize_entry_indentation(raw_extra.rstrip(), create_indent))
+        lines.append(f"{owner_indent}}}")
+    for raw_extra in record.building_state_extras:
+        lines.append(normalize_entry_indentation(raw_extra.rstrip(), owner_indent))
+    lines.append(f"{state_indent}}}")
+    return "\n".join(lines)
+
+
 def parse_int_string(value: str) -> int | None:
     stripped = value.strip()
     if not stripped:
@@ -653,6 +952,20 @@ def build_resource_choice_lists(resource_ids: set[str]) -> tuple[list[str], list
 
 def is_blank_pop_row(row: PopRow) -> bool:
     return not row.culture.strip() and not row.religion.strip() and not row.size.strip()
+
+
+def is_blank_building_row(row: BuildingRow) -> bool:
+    return (
+        not row.owner_tag.strip()
+        and not row.building.strip()
+        and not row.level.strip()
+        and not row.reserves.strip()
+        and not row.ownership_mode.strip()
+        and not row.ownership_country.strip()
+        and not row.ownership_levels.strip()
+        and not row.ownership_building_type.strip()
+        and not row.ownership_region.strip()
+    )
 
 
 def allocate_proportional(total: int, weights: list[int]) -> list[int]:
@@ -756,6 +1069,84 @@ def validate_record(record: StateRecord) -> None:
         normalized_pops[owner_tag] = normalize_pop_rows(record.pops_by_owner.get(owner_tag, []))
     record.pops_by_owner = normalized_pops
 
+    editable_owner_tags = set(record.editable_owner_tags())
+    cleaned_buildings: list[BuildingRow] = []
+    for row in record.buildings:
+        if is_blank_building_row(row):
+            continue
+
+        owner_tag = row.owner_tag.strip()
+        building_id = row.building.strip()
+        level = parse_int_string(row.level)
+        reserves = parse_int_string(row.reserves)
+        ownership_mode = row.ownership_mode.strip()
+        ownership_country = normalize_country_tag(row.ownership_country)
+        ownership_levels = parse_int_string(row.ownership_levels)
+        ownership_building_type = row.ownership_building_type.strip()
+        ownership_region = row.ownership_region.strip().strip('"')
+
+        if not owner_tag:
+            raise ValueError("Every building row must include an owner tag")
+        if editable_owner_tags and owner_tag not in editable_owner_tags:
+            raise ValueError(f"Building owner tag '{owner_tag}' is not present in state history")
+        if not building_id:
+            raise ValueError("Every building row must include a building id")
+        if level is not None and level < 0:
+            raise ValueError(f"Building '{building_id}' level must be a non-negative integer")
+        if reserves is not None and reserves < 0:
+            raise ValueError(f"Building '{building_id}' reserves must be a non-negative integer")
+
+        if ownership_mode == "":
+            ownership_country = ""
+            ownership_levels = None
+            ownership_building_type = ""
+            ownership_region = ""
+        elif ownership_mode == "preserve":
+            if not row.preserved_add_ownership_raw.strip():
+                raise ValueError(
+                    f"Building '{building_id}' is set to preserve ownership, but no raw ownership block exists"
+                )
+            ownership_country = ""
+            ownership_levels = None
+            ownership_building_type = ""
+            ownership_region = ""
+        elif ownership_mode == "country":
+            if not ownership_country:
+                raise ValueError(f"Building '{building_id}' country ownership requires a country tag")
+            if ownership_levels is None or ownership_levels < 0:
+                raise ValueError(f"Building '{building_id}' country ownership requires non-negative levels")
+            ownership_building_type = ""
+            ownership_region = ""
+        elif ownership_mode == "building":
+            if not ownership_building_type:
+                raise ValueError(f"Building '{building_id}' building ownership requires a building type")
+            if not ownership_country:
+                raise ValueError(f"Building '{building_id}' building ownership requires a country tag")
+            if ownership_levels is None or ownership_levels < 0:
+                raise ValueError(f"Building '{building_id}' building ownership requires non-negative levels")
+            if not ownership_region:
+                raise ValueError(f"Building '{building_id}' building ownership requires a region state id")
+        else:
+            raise ValueError(f"Building '{building_id}' has unsupported ownership mode '{ownership_mode}'")
+
+        cleaned_buildings.append(
+            BuildingRow(
+                owner_tag=owner_tag,
+                building=building_id,
+                level="" if level is None else str(level),
+                reserves="" if reserves is None else str(reserves),
+                ownership_mode=ownership_mode,
+                ownership_country=ownership_country,
+                ownership_levels="" if ownership_levels is None else str(ownership_levels),
+                ownership_building_type=ownership_building_type,
+                ownership_region=ownership_region,
+                template_entries=list(row.template_entries),
+                ownership_template_entries=list(row.ownership_template_entries),
+                preserved_add_ownership_raw=row.preserved_add_ownership_raw,
+            )
+        )
+    record.buildings = cleaned_buildings
+
 
 class ModRepository:
     def __init__(self, root: Path) -> None:
@@ -763,6 +1154,7 @@ class ModRepository:
         self.state_regions_dir = root / "mod" / "map_data" / "state_regions"
         self.state_history_dir = root / "mod" / "common" / "history" / "states"
         self.pops_dir = root / "mod" / "common" / "history" / "pops"
+        self.buildings_dir = root / "mod" / "common" / "history" / "buildings"
         self.localization_file = root / "mod" / "localization" / "english" / "map_l_english.yml"
         self.culture_choices: list[str] = []
         self.religion_choices: list[str] = []
@@ -771,6 +1163,8 @@ class ModRepository:
         self.capped_resource_choices: list[str] = []
         self.discoverable_resource_choices: list[str] = []
         self.discoverable_depleted_type_choices: list[str] = []
+        self.building_choices: list[str] = []
+        self.ownership_building_type_choices: list[str] = []
         self.state_records: dict[str, StateRecord] = {}
         self.global_warnings: list[str] = []
 
@@ -779,6 +1173,7 @@ class ModRepository:
         region_paths = sorted(self.state_regions_dir.glob("*.txt"), key=lambda path: path.name.lower())
         ownership_paths = sorted(self.state_history_dir.glob("*.txt"), key=lambda path: path.name.lower())
         pop_paths = sorted(self.pops_dir.glob("*.txt"), key=lambda path: path.name.lower())
+        building_paths = sorted(self.buildings_dir.glob("*.txt"), key=lambda path: path.name.lower())
 
         region_occurrences = build_effective_blocks(region_paths, STATE_REGION_PATTERN)
         ownership_occurrences = build_effective_blocks(ownership_paths, STATE_HISTORY_PATTERN)
@@ -787,25 +1182,40 @@ class ModRepository:
             text = read_text(path)
             for key, _start, _end, section_text in iter_pop_state_sections(text):
                 pop_occurrences[key].append((path, section_text))
+        building_occurrences: dict[str, list[tuple[Path, str]]] = defaultdict(list)
+        for path in sorted(building_paths, key=lambda item: item.name.lower()):
+            text = read_text(path)
+            wrapper = find_named_block(text, "BUILDINGS", BUILDINGS_WRAPPER_PATTERN)
+            if wrapper is None:
+                continue
+            _start, _end, wrapper_block = wrapper
+            for entry in parse_top_level_entries(wrapper_block):
+                if entry.key.startswith("s:STATE_"):
+                    building_occurrences[entry.key].append((path, entry.raw))
 
         culture_ids: set[str] = set()
         religion_ids: set[str] = set()
         resource_ids: set[str] = set()
+        building_ids: set[str] = set()
+        ownership_building_type_ids: set[str] = set()
         records: dict[str, StateRecord] = {}
 
         state_ids = sorted(
             set(region_occurrences)
             | {key.removeprefix("s:") for key in ownership_occurrences}
             | {key.removeprefix("s:") for key in pop_occurrences}
+            | {key.removeprefix("s:") for key in building_occurrences}
         )
         for state_id in state_ids:
             region_blocks = region_occurrences.get(state_id, [])
             ownership_blocks = ownership_occurrences.get(f"s:{state_id}", [])
             pop_blocks = pop_occurrences.get(f"s:{state_id}", [])
+            building_blocks = building_occurrences.get(f"s:{state_id}", [])
 
             region_source, region_block = region_blocks[-1] if region_blocks else (None, None)
             ownership_source, ownership_block = ownership_blocks[-1] if ownership_blocks else (None, None)
             pop_source, pop_block = pop_blocks[-1] if pop_blocks else (None, None)
+            building_source, building_block = building_blocks[-1] if building_blocks else (None, None)
 
             owners = parse_ownership_block(ownership_block) if ownership_block else []
             arable_land = ""
@@ -834,8 +1244,27 @@ class ModRepository:
                     for row in pops:
                         if row.culture:
                             culture_ids.add(row.culture)
-                        if row.religion:
-                            religion_ids.add(row.religion)
+                    if row.religion:
+                        religion_ids.add(row.religion)
+
+            buildings: list[BuildingRow] = []
+            building_owner_extras: dict[str, list[str]] = {}
+            building_state_extras: list[str] = []
+            building_owner_tags: list[str] = []
+            unsupported_building_rows = 0
+            if building_block:
+                (
+                    buildings,
+                    building_owner_extras,
+                    building_state_extras,
+                    building_owner_tags,
+                    unsupported_building_rows,
+                ) = parse_building_state_block(building_block)
+                for row in buildings:
+                    if row.building:
+                        building_ids.add(row.building)
+                    if row.ownership_building_type:
+                        ownership_building_type_ids.add(row.ownership_building_type)
 
             warnings: list[str] = []
             if len(region_blocks) > 1:
@@ -844,14 +1273,31 @@ class ModRepository:
                 warnings.append("Multiple ownership blocks found; reading the last-loaded one.")
             if len(pop_blocks) > 1:
                 warnings.append("Multiple pop blocks found; editing the last-loaded one.")
+            if len(building_blocks) > 1:
+                warnings.append("Multiple building blocks found; editing the last-loaded one.")
             if extra_pop_tags:
                 warnings.append(
                     "Pop data contains owner tags not present in state history: "
                     + ", ".join(sorted(extra_pop_tags))
                     + "."
                 )
+            extra_building_tags = [tag for tag in building_owner_tags if tag not in {owner.tag for owner in owners}]
+            if extra_building_tags:
+                warnings.append(
+                    "Building data contains owner tags not present in state history: "
+                    + ", ".join(sorted(extra_building_tags))
+                    + "."
+                )
+            if unsupported_building_rows:
+                warnings.append(
+                    f"{unsupported_building_rows} building row(s) use unsupported ownership patterns; leave mode as preserve to round-trip them."
+                )
+            if any(building_owner_extras.values()) or building_state_extras:
+                warnings.append("Building data contains unsupported non-create_building entries that will be preserved.")
             if pop_source is None:
                 warnings.append("No pop block exists yet; save will create a new per-state pop file.")
+            if building_source is None:
+                warnings.append("No building block exists yet; save will create a new per-state building file.")
 
             canada_focus = state_id in DEFAULT_CANADIAN_STATES
 
@@ -861,12 +1307,16 @@ class ModRepository:
                 owners=owners,
                 region_source=region_source,
                 pop_source=pop_source,
+                building_source=building_source,
                 ownership_source=ownership_source,
                 arable_land=arable_land,
                 arable_resources=arable_resources,
                 capped_resources=capped_resources,
                 discoverable_resources=discoverables,
                 pops_by_owner=pops_by_owner,
+                buildings=buildings,
+                building_owner_extras=building_owner_extras,
+                building_state_extras=building_state_extras,
                 warnings=warnings,
                 canada_focus=canada_focus,
             )
@@ -875,6 +1325,8 @@ class ModRepository:
         self.culture_choices = sorted(culture_ids)
         self.religion_choices = sorted(religion_ids)
         self.resource_choices = sorted(resource_ids)
+        self.building_choices = sorted(building_ids)
+        self.ownership_building_type_choices = sorted(ownership_building_type_ids)
         (
             self.arable_resource_choices,
             self.capped_resource_choices,
@@ -886,6 +1338,7 @@ class ModRepository:
         validate_record(record)
         self._save_state_region(record)
         self._save_pop_block(record)
+        self._save_building_block(record)
 
     def _save_state_region(self, record: StateRecord) -> None:
         if record.region_source is None:
@@ -914,6 +1367,34 @@ class ModRepository:
         else:
             updated = f"POPS = {{\n\n{state_block}\n}}\n"
         source.write_text(updated, encoding="utf-8", newline=newline)
+        record.pop_source = source
+
+    def _save_building_block(self, record: StateRecord) -> None:
+        source = record.building_source or (self.buildings_dir / f"99_manual_{record.state_id}.txt")
+        newline = detect_newline(source)
+        state_key = f"s:{record.state_id}"
+
+        wrapper_block: str | None = None
+        if source.exists():
+            text = read_text(source)
+            wrapper = find_named_block(text, "BUILDINGS", BUILDINGS_WRAPPER_PATTERN)
+            if wrapper is not None:
+                wrapper_start, wrapper_end, wrapper_block = wrapper
+                state_block = render_building_state_block(record, wrapper_block)
+                if find_top_level_entry_span(wrapper_block, state_key) is not None:
+                    updated_wrapper = replace_top_level_entry(wrapper_block, state_key, state_block)
+                else:
+                    updated_wrapper = insert_top_level_entry(wrapper_block, state_block)
+                updated = text[:wrapper_start] + updated_wrapper + text[wrapper_end:]
+            else:
+                state_block = render_building_state_block(record)
+                updated = f"BUILDINGS = {{\n\n{state_block}\n}}\n"
+        else:
+            state_block = render_building_state_block(record)
+            updated = f"BUILDINGS = {{\n\n{state_block}\n}}\n"
+
+        source.write_text(updated, encoding="utf-8", newline=newline)
+        record.building_source = source
 
 
 @dataclass
@@ -936,7 +1417,7 @@ class EditableTable(ttk.Frame):
         super().__init__(master)
         self.columns = columns
         self.on_change = on_change
-        self.row_widgets: list[tuple[ttk.Frame, dict[str, tk.StringVar]]] = []
+        self.row_widgets: list[dict[str, object]] = []
         self._suspend_callbacks = False
 
         header = ttk.Frame(self)
@@ -980,35 +1461,60 @@ class EditableTable(ttk.Frame):
         buttons.grid(row=2, column=0, sticky="w", pady=(6, 0))
         ttk.Button(buttons, text=add_label, command=self.add_blank_row).grid(row=0, column=0, sticky="w")
 
-    def set_rows(self, rows: list[dict[str, str]]) -> None:
+    def set_rows(self, rows: list[dict[str, str]], row_metadata: list[object | None] | None = None) -> None:
         self._suspend_callbacks = True
         try:
-            for frame, _vars in self.row_widgets:
+            for row_info in self.row_widgets:
+                frame: ttk.Frame = row_info["frame"]
                 frame.destroy()
             self.row_widgets.clear()
             if not rows:
-                self.add_blank_row(trigger_change=False)
+                self.add_blank_row(trigger_change=False, metadata=None)
                 self._refresh_scroll_region()
                 return
-            for row in rows:
-                self._add_row_widgets(row, trigger_change=False)
+            metadata_items = row_metadata or [None for _ in rows]
+            if len(metadata_items) != len(rows):
+                raise ValueError("Row metadata length must match row data length")
+            for row, metadata in zip(rows, metadata_items):
+                self._add_row_widgets(row, trigger_change=False, metadata=metadata)
             self._refresh_scroll_region()
         finally:
             self._suspend_callbacks = False
 
     def get_rows(self) -> list[dict[str, str]]:
         output: list[dict[str, str]] = []
-        for _frame, variables in self.row_widgets:
+        for row_info in self.row_widgets:
+            variables: dict[str, tk.StringVar] = row_info["variables"]
             output.append({key: variables[key].get() for key in variables})
         return output
 
-    def add_blank_row(self, trigger_change: bool = True) -> None:
-        self._add_row_widgets({column.key: "" for column in self.columns}, trigger_change=trigger_change)
+    def get_rows_with_metadata(self) -> list[tuple[dict[str, str], object | None]]:
+        output: list[tuple[dict[str, str], object | None]] = []
+        for row_info in self.row_widgets:
+            variables: dict[str, tk.StringVar] = row_info["variables"]
+            metadata = row_info.get("metadata")
+            output.append(({key: variables[key].get() for key in variables}, metadata))
+        return output
 
-    def _add_row_widgets(self, row: dict[str, str], trigger_change: bool = True) -> None:
+    def set_column_choices(self, key: str, choices: list[str] | None) -> None:
+        for column in self.columns:
+            if column.key == key:
+                column.choices = choices
+                break
+        for row_info in self.row_widgets:
+            widgets: dict[str, ttk.Widget] = row_info["widgets"]
+            widget = widgets.get(key)
+            if isinstance(widget, ttk.Combobox):
+                widget.configure(values=choices or [])
+
+    def add_blank_row(self, trigger_change: bool = True, metadata: object | None = None) -> None:
+        self._add_row_widgets({column.key: "" for column in self.columns}, trigger_change=trigger_change, metadata=metadata)
+
+    def _add_row_widgets(self, row: dict[str, str], trigger_change: bool = True, metadata: object | None = None) -> None:
         frame = ttk.Frame(self.rows_frame)
         frame.grid(row=len(self.row_widgets), column=0, sticky="ew", pady=2)
         variables: dict[str, tk.StringVar] = {}
+        widgets: dict[str, ttk.Widget] = {}
         for column_index, column in enumerate(self.columns):
             variable = tk.StringVar(value=row.get(column.key, ""))
             variable.trace_add("write", self._handle_change)
@@ -1018,24 +1524,34 @@ class EditableTable(ttk.Frame):
             else:
                 widget = ttk.Entry(frame, textvariable=variable, width=column.width)
             widget.grid(row=0, column=column_index, sticky="ew", padx=(0, 8))
+            widgets[column.key] = widget
         ttk.Button(frame, text="Remove", command=lambda: self._remove_row(frame)).grid(
             row=0, column=len(self.columns), sticky="w"
         )
-        self.row_widgets.append((frame, variables))
+        self.row_widgets.append(
+            {
+                "frame": frame,
+                "variables": variables,
+                "widgets": widgets,
+                "metadata": metadata,
+            }
+        )
         self._refresh_scroll_region()
         if trigger_change:
             self._handle_change()
 
     def _remove_row(self, frame: ttk.Frame) -> None:
-        for index, (row_frame, _vars) in enumerate(self.row_widgets):
+        for index, row_info in enumerate(self.row_widgets):
+            row_frame: ttk.Frame = row_info["frame"]
             if row_frame is frame:
                 row_frame.destroy()
                 self.row_widgets.pop(index)
                 break
-        for row_index, (row_frame, _vars) in enumerate(self.row_widgets):
+        for row_index, row_info in enumerate(self.row_widgets):
+            row_frame = row_info["frame"]
             row_frame.grid_configure(row=row_index)
         if not self.row_widgets:
-            self.add_blank_row(trigger_change=False)
+            self.add_blank_row(trigger_change=False, metadata=None)
         self._refresh_scroll_region()
         self._handle_change()
 
@@ -1294,7 +1810,7 @@ class Vic3StateEditorApp:
         self.filtered_state_ids: list[str] = []
         self.loading_ui = False
 
-        root.title("Victoria 3 State Demographics Editor")
+        root.title("Victoria 3 State Editor")
         root.geometry("1400x900")
         root.protocol("WM_DELETE_WINDOW", self.on_close)
         root.bind("<Control-s>", lambda _event: self.save_current())
@@ -1321,6 +1837,7 @@ class Vic3StateEditorApp:
         self.arable_table: EditableTable | None = None
         self.capped_table: EditableTable | None = None
         self.discoverable_table: EditableTable | None = None
+        self.buildings_table: EditableTable | None = None
         self.resources_canvas: tk.Canvas | None = None
         self.resources_content: ttk.Frame | None = None
         self._resources_window: int | None = None
@@ -1562,6 +2079,42 @@ class Vic3StateEditorApp:
         self.discoverable_table.grid(row=0, column=0, sticky="ew")
         self.resources_content.columnconfigure(0, weight=1)
 
+        buildings_tab = ttk.Frame(notebook, padding=8)
+        notebook.add(buildings_tab, text="Buildings")
+        buildings_tab.columnconfigure(0, weight=1)
+        buildings_tab.rowconfigure(1, weight=1)
+        ttk.Label(
+            buildings_tab,
+            text=(
+                "One row per create_building block. Owner tags come from state history. "
+                "Use ownership mode 'preserve' to keep unsupported raw ownership blocks such as company or mixed ownership."
+            ),
+            wraplength=1080,
+        ).grid(row=0, column=0, sticky="w", pady=(0, 8))
+        self.buildings_table = EditableTable(
+            buildings_tab,
+            columns=[
+                ColumnSpec("owner_tag", "Owner", 10, []),
+                ColumnSpec("building", "Building", 26, self.repo.building_choices),
+                ColumnSpec("level", "Level", 8),
+                ColumnSpec("reserves", "Reserves", 8),
+                ColumnSpec("ownership_mode", "Ownership", 12, BUILDING_OWNERSHIP_MODE_CHOICES),
+                ColumnSpec("ownership_country", "Own Country", 12),
+                ColumnSpec("ownership_levels", "Own Levels", 10),
+                ColumnSpec(
+                    "ownership_building_type",
+                    "Own Building Type",
+                    24,
+                    self.repo.ownership_building_type_choices,
+                ),
+                ColumnSpec("ownership_region", "Own Region", 22, sorted(self.repo.state_records)),
+            ],
+            on_change=self._mark_dirty,
+            add_label="Add building",
+            canvas_height=420,
+        )
+        self.buildings_table.grid(row=1, column=0, sticky="nsew")
+
         ttk.Label(right, textvariable=self.summary_var, wraplength=1000).grid(row=4, column=0, sticky="w", pady=(10, 0))
         ttk.Label(right, textvariable=self.status_var).grid(row=5, column=0, sticky="w", pady=(8, 0))
 
@@ -1620,6 +2173,7 @@ class Vic3StateEditorApp:
                     [
                         f"State regions: {record.region_source.name if record.region_source else 'missing'}",
                         f"Pops: {record.pop_source.name if record.pop_source else 'new per-state file on save'}",
+                        f"Buildings: {record.building_source.name if record.building_source else 'new per-state file on save'}",
                         f"Ownership: {record.ownership_source.name if record.ownership_source else 'missing'}",
                     ]
                 )
@@ -1646,11 +2200,67 @@ class Vic3StateEditorApp:
                     ]
                     or [{"resource": "", "amount": "", "depleted_type": ""}]
                 )
+            if self.buildings_table is not None:
+                self.buildings_table.set_column_choices("owner_tag", record.editable_owner_tags())
+                self.buildings_table.set_rows(
+                    [self._building_row_to_table_dict(row) for row in record.buildings]
+                    or [self._blank_building_row_data(record)],
+                    row_metadata=list(record.buildings) or [None],
+                )
             self._rebuild_owner_tabs(record)
             self._refresh_aggregate_summary(record)
             self.status_var.set(f"Loaded {record.display_name}")
         finally:
             self.loading_ui = False
+
+    def _blank_building_row_data(self, record: StateRecord) -> dict[str, str]:
+        owner_tags = record.editable_owner_tags()
+        default_owner = owner_tags[0] if len(owner_tags) == 1 else ""
+        return {
+            "owner_tag": default_owner,
+            "building": "",
+            "level": "",
+            "reserves": "",
+            "ownership_mode": "",
+            "ownership_country": "",
+            "ownership_levels": "",
+            "ownership_building_type": "",
+            "ownership_region": "",
+        }
+
+    def _building_row_to_table_dict(self, row: BuildingRow) -> dict[str, str]:
+        return {
+            "owner_tag": row.owner_tag,
+            "building": row.building,
+            "level": row.level,
+            "reserves": row.reserves,
+            "ownership_mode": row.ownership_mode,
+            "ownership_country": row.ownership_country,
+            "ownership_levels": row.ownership_levels,
+            "ownership_building_type": row.ownership_building_type,
+            "ownership_region": row.ownership_region,
+        }
+
+    def _building_row_from_table(
+        self,
+        row: dict[str, str],
+        metadata: object | None,
+    ) -> BuildingRow:
+        template = metadata if isinstance(metadata, BuildingRow) else BuildingRow()
+        return BuildingRow(
+            owner_tag=row.get("owner_tag", ""),
+            building=row.get("building", ""),
+            level=row.get("level", ""),
+            reserves=row.get("reserves", ""),
+            ownership_mode=row.get("ownership_mode", ""),
+            ownership_country=row.get("ownership_country", ""),
+            ownership_levels=row.get("ownership_levels", ""),
+            ownership_building_type=row.get("ownership_building_type", ""),
+            ownership_region=row.get("ownership_region", ""),
+            template_entries=list(template.template_entries),
+            ownership_template_entries=list(template.ownership_template_entries),
+            preserved_add_ownership_raw=template.preserved_add_ownership_raw,
+        )
 
     def _build_owner_summary(self, record: StateRecord) -> str:
         parts = []
@@ -1776,6 +2386,11 @@ class Vic3StateEditorApp:
         for owner_tag, table in self.owner_tables.items():
             record.pops_by_owner[owner_tag] = [
                 PopRow(row["culture"], row["religion"], row["size"]) for row in table.get_rows()
+            ]
+        if self.buildings_table is not None:
+            record.buildings = [
+                self._building_row_from_table(row, metadata)
+                for row, metadata in self.buildings_table.get_rows_with_metadata()
             ]
         self.summary_var.set(self._build_owner_summary(record))
         self._refresh_aggregate_summary(record)
@@ -1978,7 +2593,7 @@ def default_repo_root() -> Path:
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Manual Victoria 3 state demographics/resource editor")
+    parser = argparse.ArgumentParser(description="Manual Victoria 3 state demographics/resource/building editor")
     parser.add_argument("--root", type=Path, default=default_repo_root(), help="Repository root")
     parser.add_argument(
         "--check",
@@ -1998,11 +2613,14 @@ def run_check(repository: ModRepository) -> int:
         print(f"Example state: {first.display_name} ({first.state_id})")
         print(f"  Region source: {first.region_source}")
         print(f"  Pop source: {first.pop_source}")
+        print(f"  Building source: {first.building_source}")
         print(f"  Ownership source: {first.ownership_source}")
         print(f"  Owners: {', '.join(owner.tag for owner in first.owners) or '(none)'}")
     print(f"Known cultures: {len(repository.culture_choices)}")
     print(f"Known religions: {len(repository.religion_choices)}")
     print(f"Known resource/building ids: {len(repository.resource_choices)}")
+    print(f"Known starting building ids: {len(repository.building_choices)}")
+    print(f"Known ownership building types: {len(repository.ownership_building_type_choices)}")
     warning_count = sum(len(record.warnings) for record in repository.state_records.values())
     print(f"Per-state warnings: {warning_count}")
     return 0
