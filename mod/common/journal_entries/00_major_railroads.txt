@@ -139,19 +139,28 @@ je_canada_pacific_railway = {
 				state_region = s:STATE_QUEBEC
 			}
 			any_scope_state = {
-				state_region = s:STATE_BRITISH_COLUMBIA
+				state_region = s:STATE_ONTARIO_PENINSULA
 			}
 			any_scope_state = {
-				state_region = s:STATE_ONTARIO
+				state_region = s:STATE_ALGOMA
 			}
 			any_scope_state = {
-				state_region = s:STATE_ALBERTA
+				state_region = s:STATE_NORTHWEST_ONTARIO
+			}
+			any_scope_state = {
+				state_region = s:STATE_MANITOBA
 			}
 			any_scope_state = {
 				state_region = s:STATE_SASKATCHEWAN
 			}
 			any_scope_state = {
-				state_region = s:STATE_MANITOBA
+				state_region = s:STATE_ALBERTA
+			}
+			any_scope_state = {
+				state_region = s:STATE_BC_INTERIOR
+			}
+			any_scope_state = {
+				state_region = s:STATE_BRITISH_COLUMBIA
 			}
 		}
 	}
@@ -162,19 +171,28 @@ je_canada_pacific_railway = {
 			state_region = s:STATE_QUEBEC
 		}
 		any_scope_state = {
-			state_region = s:STATE_BRITISH_COLUMBIA
+			state_region = s:STATE_ONTARIO_PENINSULA
 		}
 		any_scope_state = {
-			state_region = s:STATE_ONTARIO
+			state_region = s:STATE_ALGOMA
 		}
 		any_scope_state = {
-			state_region = s:STATE_ALBERTA
+			state_region = s:STATE_NORTHWEST_ONTARIO
+		}
+		any_scope_state = {
+			state_region = s:STATE_MANITOBA
 		}
 		any_scope_state = {
 			state_region = s:STATE_SASKATCHEWAN
 		}
 		any_scope_state = {
-			state_region = s:STATE_MANITOBA
+			state_region = s:STATE_ALBERTA
+		}
+		any_scope_state = {
+			state_region = s:STATE_BC_INTERIOR
+		}
+		any_scope_state = {
+			state_region = s:STATE_BRITISH_COLUMBIA
 		}
 	}
 
@@ -184,15 +202,19 @@ je_canada_pacific_railway = {
 			has_building = building_railway
 		}
 		any_scope_state = {
-			state_region = s:STATE_BRITISH_COLUMBIA
+			state_region = s:STATE_ONTARIO_PENINSULA
 			has_building = building_railway
 		}
 		any_scope_state = {
-			state_region = s:STATE_ONTARIO
+			state_region = s:STATE_ALGOMA
 			has_building = building_railway
 		}
 		any_scope_state = {
-			state_region = s:STATE_ALBERTA
+			state_region = s:STATE_NORTHWEST_ONTARIO
+			has_building = building_railway
+		}
+		any_scope_state = {
+			state_region = s:STATE_MANITOBA
 			has_building = building_railway
 		}
 		any_scope_state = {
@@ -200,7 +222,15 @@ je_canada_pacific_railway = {
 			has_building = building_railway
 		}
 		any_scope_state = {
-			state_region = s:STATE_MANITOBA
+			state_region = s:STATE_ALBERTA
+			has_building = building_railway
+		}
+		any_scope_state = {
+			state_region = s:STATE_BC_INTERIOR
+			has_building = building_railway
+		}
+		any_scope_state = {
+			state_region = s:STATE_BRITISH_COLUMBIA
 			has_building = building_railway
 		}
 	}
