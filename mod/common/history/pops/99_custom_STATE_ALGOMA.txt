@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_ALGOMA = {
 		region_state:HBC = {

@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_SAINT_LAURENT = {
 		region_state:QUE = {

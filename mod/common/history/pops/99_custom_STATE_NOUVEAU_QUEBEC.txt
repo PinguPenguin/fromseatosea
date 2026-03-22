@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_NOUVEAU_QUEBEC = {
 		region_state:HBC = {

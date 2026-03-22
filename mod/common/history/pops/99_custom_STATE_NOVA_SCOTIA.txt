@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_NOVA_SCOTIA = {
 		region_state:NVS = {

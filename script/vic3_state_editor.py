@@ -219,6 +219,10 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8-sig")
 
 
+def write_text(path: Path, text: str, newline: str) -> None:
+    path.write_text(text, encoding="utf-8-sig", newline=newline)
+
+
 def detect_newline(path: Path) -> str:
     if not path.exists():
         return DEFAULT_NEWLINE
@@ -1352,7 +1356,7 @@ class ModRepository:
         newline = detect_newline(path)
         new_block = render_state_region_block(record.state_id, original_block, record)
         updated = replace_named_block(text, record.state_id, STATE_REGION_PATTERN, new_block)
-        path.write_text(updated, encoding="utf-8", newline=newline)
+        write_text(path, updated, newline)
 
     def _save_pop_block(self, record: StateRecord) -> None:
         source = record.pop_source or (self.pops_dir / f"99_manual_{record.state_id}.txt")
@@ -1366,7 +1370,7 @@ class ModRepository:
                 updated = f"POPS = {{\n\n{state_block}\n}}\n"
         else:
             updated = f"POPS = {{\n\n{state_block}\n}}\n"
-        source.write_text(updated, encoding="utf-8", newline=newline)
+        write_text(source, updated, newline)
         record.pop_source = source
 
     def _save_building_block(self, record: StateRecord) -> None:
@@ -1393,7 +1397,7 @@ class ModRepository:
             state_block = render_building_state_block(record)
             updated = f"BUILDINGS = {{\n\n{state_block}\n}}\n"
 
-        source.write_text(updated, encoding="utf-8", newline=newline)
+        write_text(source, updated, newline)
         record.building_source = source
 
 

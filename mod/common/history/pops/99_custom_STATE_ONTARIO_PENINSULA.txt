@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_ONTARIO_PENINSULA = {
 		region_state:ONT = {

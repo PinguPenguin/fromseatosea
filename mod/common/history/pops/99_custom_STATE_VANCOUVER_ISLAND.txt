@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_VANCOUVER_ISLAND = {
 		region_state:ORG = {

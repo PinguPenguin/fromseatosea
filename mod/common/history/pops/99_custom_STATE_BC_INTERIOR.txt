@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_BC_INTERIOR = {
 		region_state:ORG = {

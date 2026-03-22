@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_QUEBEC_SAGUENAY = {
 		region_state:QUE = {

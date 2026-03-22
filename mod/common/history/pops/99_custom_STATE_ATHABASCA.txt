@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_ATHABASCA = {
 		region_state:HBC = {

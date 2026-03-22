@@ -1,4 +1,4 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_NORTH_SASKATCHEWAN = {
 		region_state:IRC = {
