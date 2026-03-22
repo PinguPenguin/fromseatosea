@@ -25,6 +25,7 @@ BUILDINGS = {
 			create_building = {
 				building = "building_port"
 				reserves = 1
+				activate_production_methods={ "pm_basic_port"}
 				add_ownership = {
 					building = {
 						type = "building_financial_district"
@@ -61,18 +62,6 @@ BUILDINGS = {
 					building = {
 						type = "building_financial_district"
 						country = "c:NVS"
-						levels = 2
-						region = "STATE_NOVA_SCOTIA"
-					}
-				}
-			}
-			create_building = {
-				building = "building_military_shipyard"
-				reserves = 1
-				add_ownership = {
-					building = {
-						type = "building_financial_district"
-						country = "c:NVS"
 						levels = 1
 						region = "STATE_NOVA_SCOTIA"
 					}
@@ -97,7 +86,7 @@ BUILDINGS = {
 					building = {
 						type = "building_logging_camp"
 						country = "c:NVS"
-						levels = 2
+						levels = 1
 						region = "STATE_NOVA_SCOTIA"
 					}
 				}
