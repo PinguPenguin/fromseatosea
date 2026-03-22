@@ -206,7 +206,14 @@ major_railways.3 = {
 	option = { # settle the west coast
 		name = major_railways.3.a
 		default_option = yes
-		scope:pacific_railroad_end = {
+
+		every_scope_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_BC_INTERIOR
+					state_region = s:STATE_BRITISH_COLUMBIA
+				}
+			}
 			add_modifier = {
 				name = canada_settlement_mod
 				days = normal_modifier_time
@@ -214,7 +221,7 @@ major_railways.3 = {
 			}
 		}
 	}
-	option = { # settle the praries
+	option = { # settle the prairies
 		name = major_railways.3.b
 		every_scope_state = {
 			limit = {
