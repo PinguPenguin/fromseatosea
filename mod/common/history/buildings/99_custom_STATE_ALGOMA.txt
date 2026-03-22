@@ -3,19 +3,26 @@ BUILDINGS = {
 	s:STATE_ALGOMA = {
 		region_state:HBC = {
 			create_building = {
-				building = "building_barrack"
-
-				add_ownership = { country = { country = "c:HBC" levels = 1 } }
+				building = "building_logging_camp"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:HBC"
+						levels = 1
+					}
+				}
 			}
+		}
+		region_state:ONT = {
 			create_building = {
-				building = "building_sulfur_mine"
-
+				building = "building_logging_camp"
+				reserves = 1
 				add_ownership = {
 					building = {
 						type = "building_financial_district"
-						country = "c:HBC"
+						country = "c:ONT"
 						levels = 1
-						region = "STATE_ALGOMA"
+						region = "STATE_ONTARIO_PENINSULA"
 					}
 				}
 			}

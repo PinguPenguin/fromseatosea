@@ -1,53 +1,42 @@
 ﻿POPS = {
 
 	s:STATE_QUEBEC_SAGUENAY = {
-	
 		region_state:QUE = {
 			create_pop = {
-				culture = anglo_canadian
-				size = 1300
+				culture = franco_canadian
+				religion = catholic
+				size = 174325
 			}
 			create_pop = {
-				culture = franco_canadian
-				size = 3120
+				culture = anglo_canadian
+				religion = catholic
+				size = 13254
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 9517
+			}
+			create_pop = {
+				culture = irish
+				religion = catholic
+				size = 10972
+			}
+			create_pop = {
+				culture = irish
+				religion = protestant
+				size = 649
 			}
 			create_pop = {
 				culture = cree
-				size = 2958
+				religion = catholic
+				size = 1982
 			}
 			create_pop = {
-				culture = franco_canadian
-				size = 85500
-			}
-		
-			create_pop = {
-				culture = franco_canadian
-				size = 2544
-			}
-		
-			create_pop = {
-				culture = franco_canadian
-				size = 11051
-			}
-		
-			create_pop = {
-				culture = franco_canadian
-				size = 2550
-			}
-		
-			create_pop = {
-				culture = franco_canadian
-				size = 1700
-			}
-		
-			create_pop = {
-				culture = franco_canadian
-				size = 1711
-			}
-		
-			create_pop = {
-				culture = franco_canadian
-				size = 2567
+				culture = cree
+				religion = animist
+				size = 9301
 			}
 		}
-	}}
+	}
+}

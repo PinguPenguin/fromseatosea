@@ -1,24 +1,152 @@
 ﻿BUILDINGS = {
 
-	s:STATE_SAINT_LAURENT={
-		region_state:QUE={
-
+	s:STATE_SAINT_LAURENT = {
+		region_state:QUE = {
 			create_building = {
 				building = "building_port"
 				reserves = 1
 				activate_production_methods = { }
-				add_ownership = { country = { country = "c:QUE" levels = 1 } }
+				add_ownership = {
+					country = {
+						country = "c:QUE"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_fishing_wharf"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_fishing_wharf"
+						country = "c:QUE"
+						levels = 1
+						region = "STATE_SAINT_LAURENT"
+					}
+				}
+			}
+			create_building = {
+				building = "building_logging_camp"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_logging_camp"
+						country = "c:QUE"
+						levels = 1
+						region = "STATE_SAINT_LAURENT"
+					}
+				}
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_wheat_farm"
+						country = "c:QUE"
+						levels = 2
+						region = "STATE_SAINT_LAURENT"
+					}
+				}
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_livestock_ranch"
+						country = "c:QUE"
+						levels = 1
+						region = "STATE_SAINT_LAURENT"
+					}
+				}
 			}
 		}
 	}
-
-	s:STATE_QUEBEC_SAGUENAY={
-		region_state:QUE={
-
+	s:STATE_QUEBEC_SAGUENAY = {
+		region_state:QUE = {
 			create_building = {
 				building = "building_port"
 				reserves = 1
 				activate_production_methods = { }
+				add_ownership = {
+					country = {
+						country = "c:QUE"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_shipyard"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:QUE"
+						levels = 1
+						region = "STATE_QUEBEC"
+					}
+				}
+			}
+			create_building = {
+				building = "building_military_shipyard"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:QUE"
+						levels = 1
+						region = "STATE_QUEBEC"
+					}
+				}
+			}
+			create_building = {
+				building = "building_fishing_wharf"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_fishing_wharf"
+						country = "c:QUE"
+						levels = 2
+						region = "STATE_QUEBEC_SAGUENAY"
+					}
+				}
+			}
+			create_building = {
+				building = "building_logging_camp"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_logging_camp"
+						country = "c:QUE"
+						levels = 2
+						region = "STATE_QUEBEC_SAGUENAY"
+					}
+				}
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_wheat_farm"
+						country = "c:QUE"
+						levels = 2
+						region = "STATE_QUEBEC_SAGUENAY"
+					}
+				}
+			}
+			create_building = {
+				building = "building_iron_mine"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:QUE"
+						levels = 1
+						region = "STATE_QUEBEC_SAGUENAY"
+					}
+				}
 			}
 		}
 	}

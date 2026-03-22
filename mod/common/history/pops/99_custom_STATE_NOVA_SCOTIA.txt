@@ -1,23 +1,42 @@
 ﻿POPS = {
 
 	s:STATE_NOVA_SCOTIA = {
-	
 		region_state:NVS = {
 			create_pop = {
-				culture = afro_american
-				size = 1499
+				culture = anglo_canadian
+				religion = protestant
+				size = 104708
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 88457
+				religion = catholic
+				size = 31317
+			}
+			create_pop = {
+				culture = irish
+				religion = protestant
+				size = 3499
+			}
+			create_pop = {
+				culture = irish
+				religion = catholic
+				size = 23779
 			}
 			create_pop = {
 				culture = franco_canadian
-				size = 23760
+				religion = protestant
+				size = 8443
 			}
 			create_pop = {
-				culture = anglo_canadian
-				size = 29695
+				culture = franco_canadian
+				religion = catholic
+				size = 18721
+			}
+			create_pop = {
+				culture = afro_american
+				religion = protestant
+				size = 6533
 			}
 		}
-	}}
+	}
+}

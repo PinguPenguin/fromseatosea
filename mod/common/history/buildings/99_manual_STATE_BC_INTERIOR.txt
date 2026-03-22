@@ -1,0 +1,31 @@
+﻿BUILDINGS = {
+
+	s:STATE_BC_INTERIOR = {
+		region_state:ORG = {
+			create_building = {
+				building = "building_logging_camp"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:ORG"
+						levels = 1
+						region = "STATE_BRITISH_COLUMBIA"
+					}
+				}
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_livestock_ranch"
+						country = "c:ORG"
+						levels = 1
+						region = "STATE_BC_INTERIOR"
+					}
+				}
+			}
+		}
+	}
+}

@@ -8,7 +8,7 @@
 
 ----Mid-term (MUST BE COMPLETED FOR FIRST RELEASE)----
 -Investigate adding Hudson's Bay Sea Node/ports (COMPLETE)
--Add state populations/resources/buildings
+-Add state populations/resources/buildings (COMPLETE)
 -Fix existing JEs/events to work with new states
 
 
