@@ -3066,8 +3066,10 @@
 		region_state:IRC = {
 		}
 	}
-	s:STATE_YUKON_TERRITORY={
-		region_state:HBC={
+	s:STATE_YUKON_TERRITORY = {
+		region_state:ATB = {
+		}
+		region_state:HBC = {
 		}
 	}
 	s:STATE_NORTHWEST_TERRITORIES = {

@@ -4,8 +4,13 @@ BUILDINGS = {
 		region_state:HBC = {
 			create_building = {
 				building = "building_barrack"
-
-				add_ownership = { country = { country = "c:HBC" levels = 4 } }
+				add_ownership = {
+					country = {
+						country = "c:HBC"
+						levels = 4
+					}
+				}
+				reserves = 1
 			}
 		}
 	}

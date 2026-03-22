@@ -176,6 +176,9 @@ class StateRecord:
     pop_source: Path | None
     building_source: Path | None
     ownership_source: Path | None
+    homelands: list[str] = field(default_factory=list)
+    loaded_homelands: list[str] = field(default_factory=list)
+    state_history_template_entries: list[TopLevelEntry] = field(default_factory=list)
     arable_land: str = ""
     arable_resources: list[str] = field(default_factory=list)
     capped_resources: list[ResourceCountRow] = field(default_factory=list)
@@ -441,16 +444,36 @@ def parse_pop_rows(owner_block_text: str) -> list[PopRow]:
     return rows
 
 
-def parse_ownership_block(block_text: str) -> list[OwnershipSlice]:
+def normalize_culture_id(value: str) -> str:
+    return value.strip().strip('"').removeprefix("cu:")
+
+
+def parse_homeland_culture(raw: str) -> str:
+    value = parse_assignment_value(raw, "add_homeland")
+    return normalize_culture_id(value) if value is not None else ""
+
+
+def parse_state_history_block(block_text: str) -> tuple[list[OwnershipSlice], list[str], list[TopLevelEntry]]:
     owners: list[OwnershipSlice] = []
-    for entry in parse_top_level_entries(block_text):
+    homelands: list[str] = []
+    entries = parse_top_level_entries(block_text)
+    for entry in entries:
         if entry.key != "create_state":
+            if entry.key == "add_homeland":
+                culture = parse_homeland_culture(entry.raw)
+                if culture:
+                    homelands.append(culture)
             continue
         tag_match = re.search(r"country\s*=\s*c:([A-Z0-9_]+)", entry.raw)
         provinces_match = re.search(r"owned_provinces\s*=\s*\{([^}]*)\}", entry.raw, re.S)
         provinces = re.findall(r'"([^"]+)"', provinces_match.group(1)) if provinces_match else []
         if tag_match:
             owners.append(OwnershipSlice(tag_match.group(1), len(provinces)))
+    return owners, homelands, entries
+
+
+def parse_ownership_block(block_text: str) -> list[OwnershipSlice]:
+    owners, _homelands, _entries = parse_state_history_block(block_text)
     return owners
 
 
@@ -765,6 +788,34 @@ def render_pop_state_block(record: StateRecord) -> str:
     return "\n".join(lines)
 
 
+def render_state_history_block(record: StateRecord, original_block: str) -> str:
+    entries = record.state_history_template_entries or parse_top_level_entries(original_block)
+    child_indent = detect_child_indent(original_block, default="\t")
+    open_index = original_block.find("{")
+    header = original_block[: open_index + 1].rstrip()
+    homeland_entries = [f"{child_indent}add_homeland = cu:{culture}" for culture in record.homelands if culture.strip()]
+
+    result_entries: list[str] = []
+    inserted = False
+    for entry in entries:
+        if entry.key == "add_homeland":
+            if not inserted:
+                result_entries.extend(homeland_entries)
+                inserted = True
+            continue
+        result_entries.append(normalize_entry_indentation(entry.raw.rstrip(), child_indent))
+    if not inserted:
+        result_entries.extend(homeland_entries)
+
+    rebuilt = header
+    if result_entries:
+        rebuilt += "\n" + "\n".join(result_entries) + "\n"
+    else:
+        rebuilt += "\n"
+    rebuilt += "}"
+    return rebuilt
+
+
 def render_ordered_entries(
     template_entries: list[TopLevelEntry],
     renderers: dict[str, Callable[[], str | None]],
@@ -1061,6 +1112,14 @@ def validate_record(record: StateRecord) -> None:
         raise ValueError("Arable land must be a non-negative integer")
     record.arable_land = str(arable_land)
 
+    cleaned_homelands: list[str] = []
+    for culture in record.homelands:
+        culture_id = normalize_culture_id(culture)
+        if not culture_id:
+            continue
+        cleaned_homelands.append(culture_id)
+    record.homelands = cleaned_homelands
+
     cleaned_arable_resources: list[str] = []
     for resource in record.arable_resources:
         resource_id = resource.strip()
@@ -1275,7 +1334,12 @@ class ModRepository:
             pop_source, pop_block = pop_blocks[-1] if pop_blocks else (None, None)
             building_source, building_block = building_blocks[-1] if building_blocks else (None, None)
 
-            owners = parse_ownership_block(ownership_block) if ownership_block else []
+            owners: list[OwnershipSlice] = []
+            homelands: list[str] = []
+            state_history_template_entries: list[TopLevelEntry] = []
+            if ownership_block:
+                owners, homelands, state_history_template_entries = parse_state_history_block(ownership_block)
+                culture_ids.update(culture for culture in homelands if culture)
             arable_land = ""
             arable_resources: list[str] = []
             capped_resources: list[ResourceCountRow] = []
@@ -1367,6 +1431,9 @@ class ModRepository:
                 pop_source=pop_source,
                 building_source=building_source,
                 ownership_source=ownership_source,
+                homelands=homelands,
+                loaded_homelands=list(homelands),
+                state_history_template_entries=state_history_template_entries,
                 arable_land=arable_land,
                 arable_resources=arable_resources,
                 capped_resources=capped_resources,
@@ -1394,9 +1461,31 @@ class ModRepository:
 
     def save_state(self, record: StateRecord) -> None:
         validate_record(record)
+        self._save_state_history_block(record)
         self._save_state_region(record)
         self._save_pop_block(record)
         self._save_building_block(record)
+
+    def _save_state_history_block(self, record: StateRecord) -> None:
+        if record.homelands == record.loaded_homelands:
+            return
+        if record.ownership_source is None:
+            if not record.homelands:
+                return
+            raise ValueError(f"{record.state_id} has no state-history source file")
+        path = record.ownership_source
+        text = read_text(path)
+        block_key = f"s:{record.state_id}"
+        found = find_named_block(text, block_key, STATE_HISTORY_PATTERN)
+        if found is None:
+            raise KeyError(f"Could not find state-history block for {record.state_id}")
+        _start, _end, original_block = found
+        new_block = render_state_history_block(record, original_block)
+        if new_block != original_block:
+            newline = detect_newline(path)
+            updated = replace_named_block(text, block_key, STATE_HISTORY_PATTERN, new_block)
+            write_text(path, updated, newline)
+        record.loaded_homelands = list(record.homelands)
 
     def _save_state_region(self, record: StateRecord) -> None:
         if record.region_source is None:
@@ -1911,6 +2000,7 @@ class Vic3StateEditorApp:
         self.owner_total_vars: dict[str, tk.StringVar] = {}
         self.owner_notebook: ttk.Notebook | None = None
         self.aggregate_text: tk.Text | None = None
+        self.homelands_table: EditableTable | None = None
         self.arable_table: EditableTable | None = None
         self.capped_table: EditableTable | None = None
         self.discoverable_table: EditableTable | None = None
@@ -2079,6 +2169,27 @@ class Vic3StateEditorApp:
             relief="flat",
         )
         self.aggregate_text.grid(row=2, column=0, sticky="nsew")
+
+        homelands_tab = ttk.Frame(notebook, padding=8)
+        notebook.add(homelands_tab, text="Homelands")
+        homelands_tab.columnconfigure(0, weight=1)
+        homelands_tab.rowconfigure(1, weight=1)
+        ttk.Label(
+            homelands_tab,
+            text=(
+                "One row per add_homeland line in the state-history block. "
+                "Choose the cultures that should treat this state as a homeland."
+            ),
+            wraplength=1080,
+        ).grid(row=0, column=0, sticky="w", pady=(0, 8))
+        self.homelands_table = EditableTable(
+            homelands_tab,
+            columns=[ColumnSpec("culture", "Culture", 28, self.repo.culture_choices)],
+            on_change=self._mark_dirty,
+            add_label="Add homeland",
+            canvas_height=220,
+        )
+        self.homelands_table.grid(row=1, column=0, sticky="nsew")
 
         resources_tab = ttk.Frame(notebook, padding=8)
         notebook.add(resources_tab, text="Resources")
@@ -2252,6 +2363,10 @@ class Vic3StateEditorApp:
             self.warning_var.set("Warnings: " + " ".join(record.warnings) if record.warnings else "")
             self.summary_var.set(self._build_owner_summary(record))
             self.arable_land_var.set(record.arable_land)
+            if self.homelands_table is not None:
+                self.homelands_table.set_rows(
+                    [{"culture": culture} for culture in record.homelands] or [{"culture": ""}]
+                )
             if self.arable_table is not None:
                 self.arable_table.set_rows([{"resource": value} for value in record.arable_resources] or [{"resource": ""}])
             if self.capped_table is not None:
@@ -2524,6 +2639,8 @@ class Vic3StateEditorApp:
             return
         record = self.repo.state_records[self.current_state_id]
         record.arable_land = self.arable_land_var.get()
+        if self.homelands_table is not None:
+            record.homelands = [row["culture"] for row in self.homelands_table.get_rows()]
         if self.arable_table is not None:
             record.arable_resources = [row["resource"] for row in self.arable_table.get_rows()]
         if self.capped_table is not None:
@@ -2768,6 +2885,7 @@ def run_check(repository: ModRepository) -> int:
         print(f"  Building source: {first.building_source}")
         print(f"  Ownership source: {first.ownership_source}")
         print(f"  Owners: {', '.join(owner.tag for owner in first.owners) or '(none)'}")
+        print(f"  Homelands: {', '.join(first.homelands) or '(none)'}")
     print(f"Known cultures: {len(repository.culture_choices)}")
     print(f"Known religions: {len(repository.religion_choices)}")
     print(f"Known resource/building ids: {len(repository.resource_choices)}")
