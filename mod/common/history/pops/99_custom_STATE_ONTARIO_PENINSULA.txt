@@ -42,6 +42,11 @@
 				religion = catholic
 				size = 3000
 			}
+			create_pop = {
+				culture = iroquoian
+				religion = animist
+				size = 4000
+			}
 		}
 	}
 }

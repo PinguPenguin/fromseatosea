@@ -1095,6 +1095,11 @@
 				religion = animist
 				size = 8976
 			}
+			create_pop = {
+				culture = iroquoian
+				religion = animist
+				size = 4000
+			}
 		}
 	}
 	s:STATE_NEW_BRUNSWICK = {
@@ -1172,6 +1177,11 @@
 				culture = cree
 				religion = animist
 				size = 3286
+			}
+			create_pop = {
+				culture = iroquoian
+				religion = animist
+				size = 2000
 			}
 		}
 	}

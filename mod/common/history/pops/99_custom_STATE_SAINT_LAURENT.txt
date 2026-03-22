@@ -28,14 +28,9 @@
 				size = 4604
 			}
 			create_pop = {
-				culture = cree
-				religion = catholic
-				size = 2264
-			}
-			create_pop = {
-				culture = cree
+				culture = iroquoian
 				religion = animist
-				size = 3142
+				size = 3000
 			}
 		}
 	}
