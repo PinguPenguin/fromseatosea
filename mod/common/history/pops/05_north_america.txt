@@ -1062,84 +1062,77 @@
 		region_state:ONT = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 348949
+				religion = protestant
+				size = 44076
 			}
 			create_pop = {
-				culture = cree
-				size = 12200
-			}
-			create_pop = {
-				culture = franco_canadian
-				size = 22262
-			}
-			create_pop = {
-				culture = iroquoian
-				size = 3902
-			}
-			create_pop = {
-				culture = algonquian
-				size = 3902
+				culture = anglo_canadian
+				religion = catholic
+				size = 5298
 			}
 			create_pop = {
 				culture = franco_canadian
 				religion = protestant
-				size = 600
-			}
-		}
-		region_state:HBC = {
-			create_pop = {
-				culture = metis
-				size = 3996
+				size = 1670
 			}
 			create_pop = {
-				culture = siouan
-				size = 4000
+				culture = franco_canadian
+				religion = catholic
+				size = 20773
 			}
 			create_pop = {
-				culture = anglo_canadian
-				size = 12000
+				culture = irish
+				religion = protestant
+				size = 3857
 			}
 			create_pop = {
-				culture = cree
-				size = 26829
+				culture = irish
+				religion = catholic
+				size = 5350
+			}
+			create_pop = {
+				culture = algonquian
+				religion = animist
+				size = 8976
 			}
 		}
 	}
 	s:STATE_NEW_BRUNSWICK = {
-		# New Brunswick: 119457 in 1834, not counting First Nations
 		region_state:NBS = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 36295
+				religion = protestant
+				size = 40012
 			}
 			create_pop = {
-				culture = afro_american
-				size = 667
+				culture = anglo_canadian
+				religion = catholic
+				size = 8125
 			}
 			create_pop = {
 				culture = franco_canadian
-				size = 29040
+				religion = protestant
+				size = 2005
 			}
-			# 1871 census figure; not easy to get numbers or estimates before the 1871 census, and changes afterwards make it hard to say if 1836-1871 should following a growing trend or shrinking trend for First Nations in Canada
 			create_pop = {
-				culture = algonquian
-				size = 1403
+				culture = franco_canadian
+				religion = catholic
+				size = 26882
 			}
-		}
-		# Nova Scotia: 199906 in 1837, not counting First Nations
-		region_state:NVS = {
 			create_pop = {
-				culture = anglo_canadian
-				size = 108116
+				culture = irish
+				religion = catholic
+				size = 32057
 			}
 			create_pop = {
 				culture = afro_american
-				size = 1834
+				religion = protestant
+				size = 5454
 			}
-			# 1871 census figure; not easy to get numbers or estimates before the 1871 census, and changes afterwards make it hard to say if 1836-1871 should following a growing trend or shrinking trend for First Nations in Canada
 			create_pop = {
-				culture = algonquian
-				size = 1666
+				culture = irish
+				religion = protestant
+				size = 17465
 			}
 		}
 	}
@@ -1147,51 +1140,77 @@
 		region_state:QUE = {
 			create_pop = {
 				culture = franco_canadian
-				size = 39870
+				religion = catholic
+				size = 172010
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 462
-			}
-			create_pop = {
-				culture = cree
-				size = 278
-			}
-		
-
-			create_pop = {
-				culture = inuit
-				size = 370
-			}
-			create_pop = {
-				culture = cree
-				size = 1408
-			}
-			create_pop = {
-				culture = franco_canadian
-				size = 1485
+				religion = catholic
+				size = 20703
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 619
+				religion = protestant
+				size = 13463
 			}
-		
-}
-		
+			create_pop = {
+				culture = irish
+				religion = catholic
+				size = 14756
+			}
+			create_pop = {
+				culture = irish
+				religion = protestant
+				size = 2449
+			}
+			create_pop = {
+				culture = cree
+				religion = catholic
+				size = 3333
+			}
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 3286
+			}
+		}
 	}
 	s:STATE_NEWFOUNDLAND = {
 		region_state:GBR = {
 			create_pop = {
-				culture = inuit
-				size = 1814
-			}
-			create_pop = {
-				culture = irish
-				size = 9091
+				culture = anglo_canadian
+				religion = protestant
+				size = 29025
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 9090
+				religion = catholic
+				size = 5275
+			}
+			create_pop = {
+				culture = irish
+				religion = protestant
+				size = 11679
+			}
+			create_pop = {
+				culture = irish
+				religion = catholic
+				size = 12443
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = protestant
+				size = 403
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = catholic
+				size = 5316
+			}
+			create_pop = {
+				culture = inuit
+				religion = animist
+				size = 2859
 			}
 		}
 	}
@@ -1199,35 +1218,57 @@
 		region_state:HBC = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 798
-			}
-			create_pop = {
-				culture = siouan
-				size = 1635
+				religion = protestant
+				size = 2605
 			}
 			create_pop = {
 				culture = metis
-				size = 2193
+				religion = catholic
+				size = 3906
 			}
 		}
 		region_state:IRC = {
 			create_pop = {
 				culture = cree
-				size = 2393
-			}
-			create_pop = {
-				culture = siouan
-				size = 2393
+				religion = animist
+				size = 3483
 			}
 		}
 		region_state:BLF = {
 			create_pop = {
-				culture = siouan
-				size = 3070
+				culture = metis
+				religion = catholic
+				size = 6710
 			}
 			create_pop = {
 				culture = metis
-				size = 997
+				religion = animist
+				size = 558
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 8826
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = catholic
+				size = 1768
+			}
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 3805
+			}
+			create_pop = {
+				culture = dakota
+				religion = animist
+				size = 4224
+			}
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 6358
 			}
 		}
 	}
@@ -1235,57 +1276,84 @@
 		region_state:ORG = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 1319
+				religion = protestant
+				size = 11536
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = catholic
+				size = 1098
 			}
 			create_pop = {
 				culture = salish
-				size = 5559
+				religion = animist
+				size = 13829
 			}
 			create_pop = {
-				culture = athabaskan
-				size = 1421
-			}
-		}
-		region_state:ATB = {
-			create_pop = {
-				culture = athabaskan
-				size = 6030
-			}
-		}
-		region_state:HBC = {
-			create_pop = {
-				culture = anglo_canadian
-				size = 367
+				culture = metis
+				religion = catholic
+				size = 2786
 			}
 			create_pop = {
-				culture = athabaskan
-				size = 2638
+				culture = metis
+				religion = animist
+				size = 1805
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = catholic
+				size = 3336
 			}
 		}
 	}
 	s:STATE_SASKATCHEWAN = {
 		region_state:HBC = {
 			create_pop = {
-				culture = anglo_canadian
-				size = 1467
-			}
-			create_pop = {
-				culture = siouan
-				size = 2053
+				culture = metis
+				religion = protestant
+				size = 1433
 			}
 			create_pop = {
 				culture = metis
-				size = 7820
+				religion = catholic
+				size = 4465
+			}
+			create_pop = {
+				culture = metis
+				religion = animist
+				size = 1184
+			}
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 7375
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 7180
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = catholic
+				size = 2712
+			}
+			create_pop = {
+				culture = dakota
+				religion = animist
+				size = 2950
 			}
 		}
 		region_state:IRC = {
 			create_pop = {
-				culture = siouan
-				size = 3910
+				culture = cree
+				religion = animist
+				size = 9486
 			}
 			create_pop = {
-				culture = cree
-				size = 11730
+				culture = dakota
+				religion = animist
+				size = 4215
 			}
 		}
 	}
@@ -1293,44 +1361,91 @@
 		region_state:HBC = {
 			create_pop = {
 				culture = anglo_canadian
-				size = 4060
-			}
-			create_pop = {
-				culture = siouan
-				size = 3281
-			}
-			create_pop = {
-				culture = metis
 				religion = protestant
-				size = 1093
+				size = 4248
 			}
 			create_pop = {
-				culture = athabaskan
-				size = 4375
+				culture = anglo_canadian
+				religion = catholic
+				size = 911
 			}
 			create_pop = {
 				culture = metis
-				size = 5470
+				religion = catholic
+				size = 2000
+			}
+			create_pop = {
+				culture = metis
+				religion = animist
+				size = 179
+			}
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 2578
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = protestant
+				size = 500
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = catholic
+				size = 4000
 			}
 		}
 		region_state:IRC = {
 			create_pop = {
 				culture = cree
-				size = 3281
+				religion = animist
+				size = 2149
 			}
 		}
 	}
 	s:STATE_YUKON_TERRITORY = {
-		region_state:HBC = {
-			create_pop = {
-				culture = athabaskan
-				size = 5500
-			}
-		}
 		region_state:ATB = {
 			create_pop = {
 				culture = athabaskan
-				size = 5333
+				religion = animist
+				size = 1009
+			}
+			create_pop = {
+				culture = inuit
+				religion = animist
+				size = 1006
+			}
+		}
+		region_state:HBC = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 2819
+			}
+			create_pop = {
+				culture = inuit
+				religion = animist
+				size = 2015
+			}
+			create_pop = {
+				culture = metis
+				religion = catholic
+				size = 332
+			}
+			create_pop = {
+				culture = metis
+				religion = animist
+				size = 1208
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 1136
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = catholic
+				size = 475
 			}
 		}
 	}
@@ -1338,7 +1453,40 @@
 		region_state:HBC = {
 			create_pop = {
 				culture = athabaskan
-				size = 12759
+				religion = animist
+				size = 6167
+			}
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 5140
+			}
+			create_pop = {
+				culture = inuit
+				religion = animist
+				size = 4115
+			}
+			create_pop = {
+				culture = metis
+				religion = protestant
+				size = 2057
+			}
+			create_pop = {
+				culture = metis
+				religion = catholic
+				size = 2317
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 2201
+			}
+		}
+		region_state:ATB = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 2003
 			}
 		}
 	}
@@ -1346,7 +1494,38 @@
 		region_state:HBC = {
 			create_pop = {
 				culture = inuit
-				size = 11980
+				religion = animist
+				size = 13750
+			}
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 5000
+			}
+			create_pop = {
+				culture = metis
+				religion = protestant
+				size = 500
+			}
+			create_pop = {
+				culture = metis
+				religion = catholic
+				size = 2000
+			}
+			create_pop = {
+				culture = metis
+				religion = animist
+				size = 1250
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 2000
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = catholic
+				size = 500
 			}
 		}
 	}

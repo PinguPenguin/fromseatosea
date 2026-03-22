@@ -1,32 +1,49 @@
 ﻿POPS = {
 
 	s:STATE_KEEWATIN = {
-	
+		region_state:IRC = {
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 2503
+			}
+			create_pop = {
+				culture = inuit
+				religion = animist
+				size = 1113
+			}
+			create_pop = {
+				culture = metis
+				religion = catholic
+				size = 910
+			}
+		}
 		region_state:HBC = {
 			create_pop = {
 				culture = cree
-				size = 8719
+				religion = catholic
+				size = 152
+			}
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 2000
+			}
+			create_pop = {
+				culture = inuit
+				religion = animist
+				size = 889
 			}
 			create_pop = {
 				culture = metis
-				size = 14534
-			}
-			create_pop = {
-				culture = athabaskan
-				size = 11625
-			}
-			create_pop = {
-				culture = metis
-			religion = protestant
-				size = 2903
-			}
-			create_pop = {
-				culture = siouan
-				size = 8719
+				religion = catholic
+				size = 727
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 10788
+				religion = protestant
+				size = 706
 			}
 		}
-	}}
+	}
+}

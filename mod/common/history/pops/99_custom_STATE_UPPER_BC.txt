@@ -1,31 +1,81 @@
 ﻿POPS = {
 
 	s:STATE_UPPER_BC = {
-	
 		region_state:ATB = {
 			create_pop = {
 				culture = athabaskan
-				size = 8164
-			}
-			create_pop = {
-				culture = anglo_canadian
-				size = 1133
-			}
-			create_pop = {
-				culture = athabaskan
-				size = 22106
-			}
-			create_pop = {
-				culture = athabaskan
-				size = 4396
+				religion = animist
+				size = 1864
 			}
 			create_pop = {
 				culture = salish
-				size = 17205
+				religion = animist
+				size = 1297
+			}
+		}
+		region_state:HBC = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 3110
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 4082
+				religion = protestant
+				size = 1886
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = catholic
+				size = 707
+			}
+			create_pop = {
+				culture = metis
+				religion = catholic
+				size = 846
+			}
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 3326
 			}
 		}
-	}}
+		region_state:ORG = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 4357
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 2636
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = catholic
+				size = 987
+			}
+			create_pop = {
+				culture = metis
+				religion = protestant
+				size = 269
+			}
+			create_pop = {
+				culture = metis
+				religion = catholic
+				size = 1187
+			}
+			create_pop = {
+				culture = metis
+				religion = animist
+				size = 1449
+			}
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 5571
+			}
+		}
+	}
+}

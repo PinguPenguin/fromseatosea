@@ -4,3 +4,4 @@ gate.iml
 *.bkp
 *.dtmp
 /cmf
+/script/__pycache__

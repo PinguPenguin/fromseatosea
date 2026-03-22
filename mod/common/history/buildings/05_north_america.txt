@@ -2566,240 +2566,315 @@
 			}
 		}
 	}
-	s:STATE_ONTARIO={
-		region_state:HBC={
-			create_building={
-				building="building_logging_camp"
-				add_ownership={
-					company={
-						type=company_hbc
-						country="c:GBR"
-						levels=1
-					}
-				}
-				reserves=1
-				activate_production_methods={ "pm_saw_mills"  "pm_no_equipment" "pm_road_carts" "pm_hardwood" }
-			}
-		}
-		region_state:ONT={
-			create_building={
-				building="building_trade_center"
+	s:STATE_ONTARIO = {
+		region_state:ONT = {
+			create_building = {
+				building = "building_trade_center"
 				activate_production_methods={ "pm_trade_center_trade_quantity_normal" }
-				add_ownership={
-					building={
-						type="building_financial_district"
-						country="c:GBR"
-						levels=1
-						region="STATE_HOME_COUNTIES"
-					}
-				}
-				reserves=1
-			}
-			create_building={
-				building="building_sulfur_mine"
-				add_ownership={
-					building={
-						type="building_financial_district"
-						country="c:ONT"
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:GBR"
 						levels = 1
-						region="STATE_ONTARIO"
+						region = "STATE_HOME_COUNTIES"
 					}
 				}
-				reserves=1
-				activate_production_methods={ "pm_picks_and_shovels_building_sulfur_mine" "pm_no_explosives" "pm_no_steam_automation" "pm_road_carts"  }
+				reserves = 1
 			}
-			create_building={
-				building="building_wheat_farm"
-				add_ownership={
-					building={
-						type="building_manor_house"
-						country="c:ONT"
-						levels=1
-						region="STATE_ONTARIO"
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:ONT"
+						levels = 2
+						region = "STATE_ONTARIO"
 					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_simple_farming"  "pm_tools_disabled" "pm_citrus_orchards" }
 			}
-			create_building={
-				building="building_livestock_ranch"
-				add_ownership={
-					building={
-						type="building_livestock_ranch"
-						country="c:ONT"
-						levels=1
-						region="STATE_ONTARIO"
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_livestock_ranch"
+						country = "c:ONT"
+						levels = 1
+						region = "STATE_ONTARIO"
 					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated"  }
 			}
-			create_building={
-				building="building_tobacco_plantation"
-				add_ownership={
-					building={
-						type="building_manor_house"
-						country="c:ONT"
-						levels=1
-						region="STATE_ONTARIO"
-					}
-				}
-				reserves=1
-				activate_production_methods={ "default_building_tobacco_plantation" "pm_road_carts"  }
-			}
-			create_building={
-				building="building_barrack"
-				add_ownership={
-					country={
-						country="c:ONT"
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:ONT"
 						levels = 1
 					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_government_administration"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:ONT"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_construction_sector"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:ONT"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_logging_camp"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:ONT"
+						levels = 2
+						region = "STATE_ONTARIO"
+					}
+				}
+			}
+			create_building = {
+				building = "building_furniture_manufactory"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:ONT"
+						levels = 1
+						region = "STATE_ONTARIO"
+					}
+				}
 			}
 		}
 	}
-	s:STATE_NEW_BRUNSWICK={
-		region_state:NBS={
-			create_building={
-				building="building_lead_mine"
-				add_ownership={
-					building={
-						type="building_financial_district"
-						country="c:NBS"
-						levels=2
-						region="STATE_NEW_BRUNSWICK"
+	s:STATE_NEW_BRUNSWICK = {
+		region_state:NBS = {
+			create_building = {
+				building = "building_lead_mine"
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:NBS"
+						levels = 1
+						region = "STATE_NEW_BRUNSWICK"
 					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_picks_and_shovels_building_lead_mine" "pm_no_explosives" "pm_no_steam_automation" "pm_road_carts"  }
 			}
-			create_building={
-				building="building_logging_camp"
-				add_ownership={
-					building={
-						type="building_financial_district"
-						country="c:NBS"
-						levels=1
-						region="STATE_NEW_BRUNSWICK"
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:NBS"
+						levels = 3
+						region = "STATE_NEW_BRUNSWICK"
 					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_saw_mills" "pm_hardwood" "pm_no_equipment" "pm_road_carts"  }
 			}
-			create_building={
-				building="building_barrack"
-				add_ownership={
-					country={
-						country="c:NBS"
-						levels=2
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:NBS"
+						levels = 1
 					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_no_organization" }
 			}
-			create_building={
-				building="building_port"
-				add_ownership={
-					country={
-						country="c:NBS"
-						levels=1
-					}
-				}
-				reserves=1
-				activate_production_methods={ "pm_basic_port" }
-			}
-		}
-		region_state:NVS={
-			create_building={
-				building="building_trade_center"
-				activate_production_methods={ "pm_trade_center_trade_quantity_normal" }
-				add_ownership={
-					building={
-						type="building_financial_district"
-						country="c:GBR"
-						levels=2
-						region="STATE_HOME_COUNTIES"
-					}
-				}
-				reserves=1
-			}
-			create_building={
-				building="building_fishing_wharf"
-				add_ownership={
-					building={
-						type="building_fishing_wharf"
-						country="c:NVS"
-						levels=1
-						region="STATE_NEW_BRUNSWICK"
-					}
-				}
-				reserves=1
-				activate_production_methods={  "pm_unrefrigerated" "pm_fishing_trawlers" }
-			}
-			create_building={
-				building="building_barrack"
-				add_ownership={
-					country={
-						country="c:NVS"
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:NBS"
 						levels = 2
 					}
 				}
-				reserves=1
-				activate_production_methods={ "pm_no_organization" }
+				reserves = 1
+				activate_production_methods={ "pm_basic_port" }
 			}
-			create_building={
-				building="building_port"
-				add_ownership={
-					country={
-						country="c:NVS"
-						levels=1
+			create_building = {
+				building = "building_trade_center"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:NBS"
+						levels = 2
 					}
 				}
-				reserves=1
-				activate_production_methods={ "pm_basic_port" }
+			}
+			create_building = {
+				building = "building_fishing_wharf"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_fishing_wharf"
+						country = "c:NBS"
+						levels = 2
+						region = "STATE_NEW_BRUNSWICK"
+					}
+				}
+			}
+			create_building = {
+				building = "building_shipyard"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:NBS"
+						levels = 1
+						region = "STATE_NEW_BRUNSWICK"
+					}
+				}
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_wheat_farm"
+						country = "c:NBS"
+						levels = 1
+						region = "STATE_NEW_BRUNSWICK"
+					}
+				}
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_livestock_ranch"
+						country = "c:NBS"
+						levels = 1
+						region = "STATE_NEW_BRUNSWICK"
+					}
+				}
 			}
 		}
 	}
-	s:STATE_QUEBEC={
-		region_state:QUE={
-			create_building={
-				building="building_trade_center"
+	s:STATE_QUEBEC = {
+		region_state:QUE = {
+			create_building = {
+				building = "building_trade_center"
 				activate_production_methods={ "pm_trade_center_trade_quantity_normal" }
-				add_ownership={
-					building={
-						type="building_financial_district"
-						country="c:GBR"
-						levels=1
-						region="STATE_HOME_COUNTIES"
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:GBR"
+						levels = 1
+						region = "STATE_HOME_COUNTIES"
 					}
 				}
-				reserves=1
+				reserves = 1
 			}
-			create_building={
-				building="building_university"
+			create_building = {
+				building = "building_university"
 				add_ownership = {
-					country = { country = "c:QUE" levels = 1 }
+					country = {
+						country = "c:QUE"
+						levels = 1
+					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_scholastic_education" "pm_religious_academia" }
-			
 			}
-			create_building={
-				building="building_shipyard"
+			create_building = {
+				building = "building_iron_mine"
 				add_ownership = {
-					building = { type = "building_shipyard" country = "c:QUE" region = "STATE_QUEBEC" levels = 1 }
+					building = {
+						type = "building_financial_district"
+						country = "c:QUE"
+						levels = 1
+						region = "STATE_QUEBEC"
+					}
 				}
-				reserves=1
-				activate_production_methods={ "pm_basic_shipbuilding"  }
-			
+				reserves = 1
+				activate_production_methods={ "pm_picks_and_shovels_building_iron_mine" "pm_no_explosives" "pm_no_steam_automation" "pm_road_carts"  }
 			}
-			create_building={
-				building="building_military_shipyard"
-				reserves=1
-				activate_production_methods={ "pm_military_shipbuilding_wooden"  }
-			
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:QUE"
+						levels = 1
+						region = "STATE_QUEBEC"
+					}
+				}
+				reserves = 1
+				activate_production_methods={ "pm_saw_mills" "pm_hardwood" "pm_no_equipment" "pm_road_carts"  }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:QUE"
+						levels = 1
+						region = "STATE_QUEBEC"
+					}
+				}
+				reserves = 1
+				activate_production_methods={ "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled"  }
+			}
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:QUE"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods={ "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_construction_sector"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:QUE"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_textile_mill"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:QUE"
+						levels = 2
+						region = "STATE_QUEBEC"
+					}
+				}
+			}
+			create_building = {
+				building = "building_furniture_manufactory"
+				reserves = 1
 				add_ownership = {
 					building = {
 						type = "building_financial_district"
@@ -2809,129 +2884,128 @@
 					}
 				}
 			}
-			create_building={
-				building="building_iron_mine"
-				add_ownership = {
-					building = { type = "building_financial_district" country = "c:QUE" region = "STATE_QUEBEC" levels = 1 }
-				}
-				reserves=1
-				activate_production_methods={ "pm_picks_and_shovels_building_iron_mine" "pm_no_explosives" "pm_no_steam_automation" "pm_road_carts"  }
-			
-			}
-			create_building={
-				building="building_logging_camp"
-				add_ownership = {
-					building = { type = "building_financial_district" country = "c:QUE" region = "STATE_QUEBEC" levels = 1 }
-				}
-				reserves=1
-				activate_production_methods={ "pm_saw_mills" "pm_hardwood" "pm_no_equipment" "pm_road_carts"  }
-			
-			}
-			create_building={
-				building="building_wheat_farm"
-				add_ownership = {
-					building = { type = "building_manor_house" country = "c:QUE" region = "STATE_QUEBEC" levels = 1 }
-				}
-				reserves=1
-				activate_production_methods={ "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled"  }
-			
-			}
-			create_building={
-				building="building_barrack"
-				add_ownership = {
-					country = { country = "c:QUE" levels = 1 }
-				}
-				reserves=1
-				activate_production_methods={ "pm_no_organization" }
-			
-			}
-		
-
-			create_building={
-				building="building_logging_camp"
-				reserves=1
-				activate_production_methods={ "pm_saw_mills"  "pm_no_equipment" "pm_road_carts" "pm_hardwood" }
-			
+			create_building = {
+				building = "building_tooling_workshop"
+				reserves = 1
 				add_ownership = {
 					building = {
-						type = "building_manor_house"
+						type = "building_financial_district"
 						country = "c:QUE"
 						levels = 1
 						region = "STATE_QUEBEC"
 					}
 				}
 			}
-		
-}
-		
-	}
-	s:STATE_NEWFOUNDLAND={
-		region_state:GBR={
-			create_building={
-				building="building_fishing_wharf"
-				add_ownership={
-					building={
-						type="building_fishing_wharf"
-						country="c:GBR"
+			create_building = {
+				building = "building_paper_mill"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:QUE"
 						levels = 1
-						region="STATE_NEWFOUNDLAND"
+						region = "STATE_QUEBEC"
 					}
 				}
-				reserves=1
-				activate_production_methods={ "pm_fishing_trawlers" "pm_unrefrigerated"  }
 			}
 		}
 	}
-	s:STATE_ALBERTA={
-		region_state:HBC={
-			create_building={
-				building="building_logging_camp"
-				add_ownership={
-					company={
-						type=company_hbc
-						country="c:GBR"
-						levels=1
+	s:STATE_NEWFOUNDLAND = {
+		region_state:GBR = {
+			create_building = {
+				building = "building_fishing_wharf"
+				reserves = 2
+				add_ownership = {
+					building = {
+						type = "building_fishing_wharf"
+						country = "c:GBR"
+						levels = 3
+						region = "STATE_NEWFOUNDLAND"
 					}
 				}
-				reserves=1
+			}
+			create_building = {
+				building = "building_port"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:GBR"
+						levels = 1
+						region = "STATE_NEWFOUNDLAND"
+					}
+				}
+			}
+			create_building = {
+				building = "building_trade_center"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_trade_center"
+						country = "c:GBR"
+						levels = 1
+						region = "STATE_NEWFOUNDLAND"
+					}
+				}
+			}
+		}
+	}
+	s:STATE_ALBERTA = {
+		region_state:HBC = {
+		}
+		region_state:IRC = {
+		}
+		region_state:BLF = {
+		}
+	}
+	s:STATE_BRITISH_COLUMBIA = {
+		region_state:ORG = {
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:ORG"
+						levels = 1
+						region = "STATE_BRITISH_COLUMBIA"
+					}
+				}
+				reserves = 1
 				activate_production_methods={ "pm_saw_mills" "pm_hardwood" "pm_no_equipment" "pm_road_carts"  }
 			}
-		}
-		region_state:IRC={
-		}
-		region_state:BLF={
-		}
-	}
-	s:STATE_BRITISH_COLUMBIA={
-		region_state:ORG={
-			create_building={
-				building="building_logging_camp"
-				add_ownership={
-					building={
-						type="building_financial_district"
-						country="c:ORG"
-						levels=1
-						region="STATE_BRITISH_COLUMBIA"
-					}
-				}
-				reserves=1
-				activate_production_methods={ "pm_saw_mills" "pm_hardwood" "pm_no_equipment" "pm_road_carts"  }
-			}
-			create_building={
-				building="building_barrack"
-				add_ownership={
-					country={
-						country="c:ORG"
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:ORG"
 						levels = 1
 					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_no_organization" }
 			}
-		}
-		region_state:ATB={
-		}
-		region_state:HBC={
+			create_building = {
+				building = "building_fishing_wharf"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_fishing_wharf"
+						country = "c:ORG"
+						levels = 1
+						region = "STATE_BRITISH_COLUMBIA"
+					}
+				}
+			}
+			create_building = {
+				building = "building_port"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:ORG"
+						levels = 1
+					}
+				}
+			}
 		}
 	}
 	s:STATE_SASKATCHEWAN={
@@ -2940,41 +3014,76 @@
 		region_state:IRC={
 		}
 	}
-	s:STATE_MANITOBA={
-		region_state:HBC={
-			create_building={
-				building="building_barrack"
-				add_ownership={
-					country={
-						country="c:HBC"
+	s:STATE_MANITOBA = {
+		region_state:HBC = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:HBC"
 						levels = 1
 					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_no_organization" }
 			}
-			create_building={
-				building="building_logging_camp"
-				add_ownership={
-					company={
-						type=company_hbc
-						country="c:GBR"
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					country = {
+						country = "c:HBC"
 						levels = 1
 					}
 				}
-				reserves=1
+				reserves = 1
 				activate_production_methods={ "pm_saw_mills" "pm_hardwood" "pm_no_equipment" "pm_road_carts"  }
 			}
+			create_building = {
+				building = "building_wheat_farm"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_wheat_farm"
+						country = "c:HBC"
+						levels = 2
+						region = "STATE_MANITOBA"
+					}
+				}
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_livestock_ranch"
+						country = "c:HBC"
+						levels = 1
+						region = "STATE_MANITOBA"
+					}
+				}
+			}
 		}
-		region_state:IRC={
+		region_state:IRC = {
 		}
 	}
 	s:STATE_YUKON_TERRITORY={
 		region_state:HBC={
 		}
 	}
-	s:STATE_NORTHWEST_TERRITORIES={
-		region_state:HBC={
+	s:STATE_NORTHWEST_TERRITORIES = {
+		region_state:HBC = {
+			create_building = {
+				building = "building_logging_camp"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:HBC"
+						levels = 1
+					}
+				}
+			}
+		}
+		region_state:ATB = {
 		}
 	}
 	s:STATE_NUNAVUT={

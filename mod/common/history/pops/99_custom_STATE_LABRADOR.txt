@@ -2,18 +2,46 @@
 
 	s:STATE_LABRADOR = {
 		region_state:GBR = {
-		create_pop = {
-			culture = irish
-			size = 186000
-		}
-		create_pop = {
-			culture = inuit
-			size = 87000
-		}
-		create_pop = {
-			culture = anglo_canadian
-			size = 27000
-		}
+			create_pop = {
+				culture = inuit
+				religion = protestant
+				size = 1207
+			}
+			create_pop = {
+				culture = inuit
+				religion = catholic
+				size = 206
+			}
+			create_pop = {
+				culture = inuit
+				religion = animist
+				size = 2166
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 1572
+			}
+			create_pop = {
+				culture = cree
+				religion = protestant
+				size = 504
+			}
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 186
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = protestant
+				size = 182
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = catholic
+				size = 1123
+			}
 		}
 	}
 }
