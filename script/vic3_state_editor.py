@@ -337,7 +337,12 @@ def replace_top_level_entry(block_text: str, key: str, new_entry: str) -> str:
     found = find_top_level_entry_span(block_text, key)
     if found is None:
         raise KeyError(f"Could not find top-level entry {key}")
-    return block_text[: found.start] + new_entry + block_text[found.end :]
+    line_start = found.start
+    while line_start > 0 and block_text[line_start - 1] in " \t":
+        line_start -= 1
+    suffix = block_text[found.end :]
+    separator = "" if not suffix or suffix.startswith(("\n", "\r")) else "\n"
+    return block_text[:line_start] + new_entry + separator + suffix
 
 
 def insert_top_level_entry(block_text: str, new_entry: str) -> str:
@@ -1428,7 +1433,9 @@ class EditableTable(ttk.Frame):
         header.grid(row=0, column=0, sticky="ew")
         for column_index, column in enumerate(columns):
             ttk.Label(header, text=column.title).grid(row=0, column=column_index, sticky="w", padx=(0, 8))
+            header.columnconfigure(column_index, minsize=self._column_pixel_width(column))
         ttk.Label(header, text="").grid(row=0, column=len(columns), sticky="w")
+        header.columnconfigure(len(columns), minsize=80)
 
         scroll_frame = ttk.Frame(self)
         scroll_frame.grid(row=1, column=0, sticky="nsew")
@@ -1520,6 +1527,7 @@ class EditableTable(ttk.Frame):
         variables: dict[str, tk.StringVar] = {}
         widgets: dict[str, ttk.Widget] = {}
         for column_index, column in enumerate(self.columns):
+            frame.columnconfigure(column_index, minsize=self._column_pixel_width(column))
             variable = tk.StringVar(value=row.get(column.key, ""))
             variable.trace_add("write", self._handle_change)
             variables[column.key] = variable
@@ -1532,6 +1540,7 @@ class EditableTable(ttk.Frame):
         ttk.Button(frame, text="Remove", command=lambda: self._remove_row(frame)).grid(
             row=0, column=len(self.columns), sticky="w"
         )
+        frame.columnconfigure(len(self.columns), minsize=80)
         self.row_widgets.append(
             {
                 "frame": frame,
@@ -1583,6 +1592,12 @@ class EditableTable(ttk.Frame):
         if event.delta == 0:
             return
         self.rows_canvas.yview_scroll(int(-event.delta / 120), "units")
+
+    def _column_pixel_width(self, column: ColumnSpec) -> int:
+        pixels = max(88, column.width * 7)
+        if column.choices is not None:
+            pixels += 18
+        return pixels
 
 
 class PopTable(ttk.Frame):
@@ -2102,16 +2117,16 @@ class Vic3StateEditorApp:
                 ColumnSpec("building", "Building", 26, self.repo.building_choices),
                 ColumnSpec("level", "Level", 8),
                 ColumnSpec("reserves", "Reserves", 8),
-                ColumnSpec("ownership_mode", "Ownership", 12, BUILDING_OWNERSHIP_MODE_CHOICES),
-                ColumnSpec("ownership_country", "Own Country", 12),
-                ColumnSpec("ownership_levels", "Own Levels", 10),
+                ColumnSpec("ownership_mode", "Owner Mode", 12, BUILDING_OWNERSHIP_MODE_CHOICES),
+                ColumnSpec("ownership_country", "Owner Country", 12),
+                ColumnSpec("ownership_levels", "Owned Levels", 10),
                 ColumnSpec(
                     "ownership_building_type",
-                    "Own Building Type",
+                    "Owner Building",
                     24,
                     self.repo.ownership_building_type_choices,
                 ),
-                ColumnSpec("ownership_region", "Own Region", 22, sorted(self.repo.state_records)),
+                ColumnSpec("ownership_region", "Owner Region", 22, sorted(self.repo.state_records)),
             ],
             on_change=self._mark_dirty,
             add_label="Add building",

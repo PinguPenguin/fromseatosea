@@ -2801,20 +2801,18 @@
 }
 		
 	}
-	s:STATE_NEWFOUNDLAND={
-		region_state:GBR={
-			create_building={
-				building="building_fishing_wharf"
-				add_ownership={
-					building={
-						type="building_fishing_wharf"
-						country="c:GBR"
-						levels = 1
-						region="STATE_NEWFOUNDLAND"
+	s:STATE_NEWFOUNDLAND = {
+		region_state:GBR = {
+			create_building = {
+				building = "building_fishing_wharf"
+				level = 4
+				reserves = 2
+				add_ownership = {
+					country = {
+						country = "c:GBR"
+						levels = 2
 					}
 				}
-				reserves=1
-				activate_production_methods={ "pm_fishing_trawlers" "pm_unrefrigerated"  }
 			}
 		}
 	}
