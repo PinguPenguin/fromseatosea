@@ -2,19 +2,32 @@
 BUILDINGS = {
 	s:STATE_LABRADOR = {
 		region_state:GBR = {
-		
 			create_building = {
 				building = "building_fishing_wharf"
 				reserves = 1
 				activate_production_methods = { }
-			
-				level = 3
+				add_ownership = {
+					building = {
+						type = "building_fishing_wharf"
+						country = "c:GBR"
+						levels = 1
+						region = "STATE_LABRADOR"
+					}
+				}
 			}
 			create_building = {
 				building = "building_port"
 				reserves = 1
 				activate_production_methods = { }
-				add_ownership = { country = { country = "c:GBR" levels = 1 } }
-			}}
+				add_ownership = {
+					building = {
+						country = "c:GBR"
+						type = "building_port"
+						levels = 1
+						region = "STATE_LABRADOR"
+					}
+				}
+			}
+		}
 	}
 }

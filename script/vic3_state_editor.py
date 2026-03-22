@@ -1471,10 +1471,12 @@ class EditableTable(ttk.Frame):
         on_change: Callable[[], None],
         add_label: str,
         canvas_height: int = 320,
+        row_setup: Callable[[dict[str, tk.StringVar], dict[str, ttk.Widget], object | None], None] | None = None,
     ) -> None:
         super().__init__(master)
         self.columns = columns
         self.on_change = on_change
+        self.row_setup = row_setup
         self.row_widgets: list[dict[str, object]] = []
         self._suspend_callbacks = False
 
@@ -1598,6 +1600,13 @@ class EditableTable(ttk.Frame):
                 "metadata": metadata,
             }
         )
+        if self.row_setup is not None:
+            previous_suspend = self._suspend_callbacks
+            self._suspend_callbacks = True
+            try:
+                self.row_setup(variables, widgets, metadata)
+            finally:
+                self._suspend_callbacks = previous_suspend
         self._refresh_scroll_region()
         if trigger_change:
             self._handle_change()
@@ -2156,7 +2165,7 @@ class Vic3StateEditorApp:
             text=(
                 "One row per create_building block. State Owner chooses the region_state slice. "
                 "Levels is the total building level count. Owner Type chooses how those levels are owned. "
-                "Owner Location is only used for Financial District and Manor House ownership. "
+                "Owner Location is only used for Financial District and Manor House ownership, and defaults to the current state. "
                 "Unsupported rows stay available as Preserve."
             ),
             wraplength=1080,
@@ -2173,6 +2182,7 @@ class Vic3StateEditorApp:
             on_change=self._mark_dirty,
             add_label="Add building",
             canvas_height=420,
+            row_setup=self._configure_building_table_row,
         )
         self.buildings_table.grid(row=1, column=0, sticky="nsew")
 
@@ -2299,6 +2309,32 @@ class Vic3StateEditorApp:
             "owner_location": owner_location,
         }
 
+    def _building_owner_kind_uses_location(self, owner_kind: str) -> bool:
+        return owner_kind in {
+            BUILDING_OWNER_KIND_FINANCIAL_DISTRICT,
+            BUILDING_OWNER_KIND_MANOR_HOUSE,
+        }
+
+    def _default_building_owner_location(self, variables: dict[str, tk.StringVar]) -> None:
+        if not self.current_state_id:
+            return
+        owner_kind = variables["owner_kind"].get().strip()
+        owner_location = variables["owner_location"].get().strip()
+        if self._building_owner_kind_uses_location(owner_kind) and not owner_location:
+            variables["owner_location"].set(self.current_state_id)
+
+    def _configure_building_table_row(
+        self,
+        variables: dict[str, tk.StringVar],
+        _widgets: dict[str, ttk.Widget],
+        _metadata: object | None,
+    ) -> None:
+        def sync_owner_location(*_args: object) -> None:
+            self._default_building_owner_location(variables)
+
+        variables["owner_kind"].trace_add("write", sync_owner_location)
+        self._default_building_owner_location(variables)
+
     def _building_row_from_table(
         self,
         record: StateRecord,
@@ -2311,6 +2347,8 @@ class Vic3StateEditorApp:
         total_levels = row.get("levels", "").strip()
         owner_kind = row.get("owner_kind", "").strip()
         owner_location = row.get("owner_location", "").strip().strip('"')
+        if self._building_owner_kind_uses_location(owner_kind) and not owner_location:
+            owner_location = record.state_id
 
         if not building_id and not total_levels and not owner_location:
             return BuildingRow()
