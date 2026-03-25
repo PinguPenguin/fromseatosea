@@ -1,7 +1,0 @@
-﻿BUILDINGS = {
-
-	s:STATE_VANCOUVER_ISLAND = {
-		region_state:ORG = {
-		}
-	}
-}

@@ -1,9 +1,0 @@
-﻿
-BUILDINGS = {
-	s:STATE_KEEWATIN = {
-		region_state:IRC = {
-		}
-		region_state:HBC = {
-		}
-	}
-}
