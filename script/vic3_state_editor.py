@@ -975,15 +975,15 @@ def normalize_pop_rows(rows: list[PopRow]) -> list[PopRow]:
 
 def render_pop_state_block(record: StateRecord) -> str:
     lines = [f"\ts:{record.state_id} = {{"]
-    if record.wipe_vanilla_pops_on_save:
-        lines.append("\t\tkill_population_percent_in_state = {")
-        lines.append("\t\t\tpercent = 1")
-        lines.append("\t\t}")
     for owner_tag in record.editable_owner_tags():
         rows = normalize_pop_rows(record.pops_by_owner.get(owner_tag, []))
-        if not rows:
+        if not rows and not record.wipe_vanilla_pops_on_save:
             continue
         lines.append(f"\t\tregion_state:{owner_tag} = {{")
+        if record.wipe_vanilla_pops_on_save:
+            lines.append("\t\t\tkill_population_percent_in_state = {")
+            lines.append("\t\t\t\tpercent = 1")
+            lines.append("\t\t\t}")
         for row in rows:
             lines.append("\t\t\tcreate_pop = {")
             lines.append(f"\t\t\t\tculture = {row.culture}")
@@ -1711,6 +1711,7 @@ class ModRepository:
             building_blocks = building_occurrences.get(f"s:{state_id}", [])
 
             region_source, region_block = region_blocks[-1] if region_blocks else (None, None)
+            ownership_source, ownership_block = ownership_blocks[-1] if ownership_blocks else (None, None)
             owners, homelands = apply_state_history_blocks(ownership_blocks)
             culture_ids.update(culture for culture in homelands if culture)
 
