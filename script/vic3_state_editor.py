@@ -975,15 +975,20 @@ def normalize_pop_rows(rows: list[PopRow]) -> list[PopRow]:
 
 def render_pop_state_block(record: StateRecord) -> str:
     lines = [f"\ts:{record.state_id} = {{"]
-    if record.wipe_vanilla_pops_on_save:
+    owner_tags = record.editable_owner_tags()
+    if record.wipe_vanilla_pops_on_save and not owner_tags:
         lines.append("\t\tkill_population_percent_in_state = {")
         lines.append("\t\t\tpercent = 1")
         lines.append("\t\t}")
-    for owner_tag in record.editable_owner_tags():
+    for owner_tag in owner_tags:
         rows = normalize_pop_rows(record.pops_by_owner.get(owner_tag, []))
-        if not rows:
+        if not rows and not record.wipe_vanilla_pops_on_save:
             continue
         lines.append(f"\t\tregion_state:{owner_tag} = {{")
+        if record.wipe_vanilla_pops_on_save:
+            lines.append("\t\t\tkill_population_percent_in_state = {")
+            lines.append("\t\t\t\tpercent = 1")
+            lines.append("\t\t\t}")
         for row in rows:
             lines.append("\t\t\tcreate_pop = {")
             lines.append(f"\t\t\t\tculture = {row.culture}")

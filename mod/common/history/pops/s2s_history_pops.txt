@@ -1,10 +1,10 @@
-POPS = {
+﻿POPS = {
 
 	s:STATE_ALBERTA = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
@@ -17,6 +17,9 @@ POPS = {
 			}
 		}
 		region_state:IRC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = cree
 				religion = animist
@@ -24,6 +27,9 @@ POPS = {
 			}
 		}
 		region_state:BLF = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = metis
 				religion = catholic
@@ -195,10 +201,10 @@ POPS = {
 	}
 
 	s:STATE_BRITISH_COLUMBIA = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:ORG = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
@@ -404,10 +410,10 @@ POPS = {
 	}
 
 	s:STATE_MANITOBA = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
@@ -445,6 +451,9 @@ POPS = {
 			}
 		}
 		region_state:IRC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = cree
 				religion = animist
@@ -454,10 +463,10 @@ POPS = {
 	}
 
 	s:STATE_NEW_BRUNSWICK = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:NBS = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
@@ -497,10 +506,10 @@ POPS = {
 	}
 
 	s:STATE_NEWFOUNDLAND = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:GBR = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
@@ -684,10 +693,10 @@ POPS = {
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -720,6 +729,9 @@ POPS = {
 			}
 		}
 		region_state:ATB = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -809,10 +821,10 @@ POPS = {
 	}
 
 	s:STATE_NUNAVUT = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = inuit
 				religion = animist
@@ -852,10 +864,10 @@ POPS = {
 	}
 
 	s:STATE_ONTARIO = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:ONT = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
@@ -950,10 +962,10 @@ POPS = {
 	}
 
 	s:STATE_QUEBEC = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:QUE = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
@@ -1063,10 +1075,10 @@ POPS = {
 	}
 
 	s:STATE_SASKATCHEWAN = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = metis
 				religion = protestant
@@ -1104,6 +1116,9 @@ POPS = {
 			}
 		}
 		region_state:IRC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = cree
 				religion = animist
@@ -1220,12 +1235,11 @@ POPS = {
 			}
 		}
 	}
-
 	s:STATE_YUKON_TERRITORY = {
-		kill_population_percent_in_state = {
-			percent = 1
-		}
 		region_state:ATB = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -1238,6 +1252,9 @@ POPS = {
 			}
 		}
 		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -1270,5 +1287,4 @@ POPS = {
 			}
 		}
 	}
-
 }
