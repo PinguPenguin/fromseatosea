@@ -600,9 +600,6 @@
 	}
 
 	s:STATE_ONTARIO = {
-		region_state:HBC = {
-			remove_building = building_logging_camp
-		}
 		region_state:ONT = {
 			remove_building = building_wheat_farm
 			create_building = {
