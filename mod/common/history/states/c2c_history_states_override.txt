@@ -104,6 +104,9 @@
 			provinces = { x744A7A x7A5E12 x80F104 x8D6CB1 x93ACBB x9B27B9 xA4CD73 xB000C0 }
 			provinces = { xB080C0 xB1A86D xC95021 xCA480F xE6C706 }
 		}
+		region_state:HBC = {
+			set_state_owner = c:ONT
+		}
 	}
 
 	s:STATE_QUEBEC = {
