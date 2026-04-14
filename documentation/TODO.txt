@@ -1,5 +1,6 @@
 ----Immediate (bugfixes)----
--Add homelands
+- Fix NWT not being able to be colonized
+- Add coastal fjords to BC
 
 ----Short-term----
 -Complete state modding framework
