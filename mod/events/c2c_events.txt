@@ -1,0 +1,9 @@
+namespace = c2c_error_suppression
+
+c2c_error_suppression.0001 = {
+  hidden = yes
+  orphan = yes
+  trigger = {
+    exists = global_var:c2c_is_loaded
+  }
+}

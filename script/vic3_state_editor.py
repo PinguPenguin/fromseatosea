@@ -65,9 +65,9 @@ BUILDINGS_WRAPPER_PATTERN = re.compile(r"(?m)^([ \t]*)(BUILDINGS)\s*=\s*\{")
 STATES_WRAPPER_PATTERN = re.compile(r"(?m)^([ \t]*)(STATES)\s*=\s*\{")
 LOCALIZATION_PATTERN = re.compile(r'(?m)^\s*(STATE_[A-Z0-9_]+):\d?\s+"(.*)"\s*$')
 
-S2S_HISTORY_STATES_FILENAME = "s2s_history_states.txt"
-S2S_HISTORY_POPS_FILENAME = "s2s_history_pops.txt"
-S2S_HISTORY_BUILDINGS_FILENAME = "s2s_history_buildings.txt"
+C2C_HISTORY_STATES_FILENAME = "c2c_history_states.txt"
+C2C_HISTORY_POPS_FILENAME = "c2c_history_pops.txt"
+C2C_HISTORY_BUILDINGS_FILENAME = "c2c_history_buildings.txt"
 
 DARK_BG = "#14181e"
 DARK_PANEL = "#1b222c"
@@ -1620,9 +1620,9 @@ class ModRepository:
         self.vanilla_state_history_dir = game_root / "common" / "history" / "states" if game_root else None
         self.vanilla_pops_dir = game_root / "common" / "history" / "pops" if game_root else None
         self.vanilla_buildings_dir = game_root / "common" / "history" / "buildings" if game_root else None
-        self.state_history_output_path = self.state_history_dir / S2S_HISTORY_STATES_FILENAME
-        self.pop_output_path = self.pops_dir / S2S_HISTORY_POPS_FILENAME
-        self.building_output_path = self.buildings_dir / S2S_HISTORY_BUILDINGS_FILENAME
+        self.state_history_output_path = self.state_history_dir / C2C_HISTORY_STATES_FILENAME
+        self.pop_output_path = self.pops_dir / C2C_HISTORY_POPS_FILENAME
+        self.building_output_path = self.buildings_dir / C2C_HISTORY_BUILDINGS_FILENAME
         self.culture_choices: list[str] = []
         self.religion_choices: list[str] = []
         self.resource_choices: list[str] = []
@@ -2746,9 +2746,9 @@ class Vic3StateEditorApp:
                 " | ".join(
                     [
                         f"State regions: {record.region_source.name if record.region_source else 'missing'}",
-                        f"Pops: {record.pop_source.name if record.pop_source else S2S_HISTORY_POPS_FILENAME}",
-                        f"Buildings: {record.building_source.name if record.building_source else S2S_HISTORY_BUILDINGS_FILENAME}",
-                        f"Ownership: {record.ownership_source.name if record.ownership_source else S2S_HISTORY_STATES_FILENAME}",
+                        f"Pops: {record.pop_source.name if record.pop_source else C2C_HISTORY_POPS_FILENAME}",
+                        f"Buildings: {record.building_source.name if record.building_source else C2C_HISTORY_BUILDINGS_FILENAME}",
+                        f"Ownership: {record.ownership_source.name if record.ownership_source else C2C_HISTORY_STATES_FILENAME}",
                     ]
                 )
             )
