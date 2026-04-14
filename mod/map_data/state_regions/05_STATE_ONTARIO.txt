@@ -1,7 +1,7 @@
 ﻿STATE_ONTARIO = {
     id = 310
     subsistence_building = "building_subsistence_farm"
-    provinces = { "x1e31a0" "x65f177" "x0183a1" "x9b27b9" "x744a7a" "x93acbb" "xe6c706" "xa4cd73" "x232dbd" "x4c056c" "x41e621" "xb1a86d" "xc95021" "x343e89" "x8d6cb1" "x6aebc5" "x80f104" "xb080c0" "x4d24ac" "x48e362" "x0b249e" "x08c8af" "x117c95" "x7a5e12" "xca480f" "x20e92a" "x480b4b" "xb000c0" "x0538f5" }
+    provinces = { "x1e31a0" "x65f177" "x0183a1" "x9b27b9" "x744a7a" "x93acbb" "xe6c706" "xa4cd73" "x232dbd" "x4c056c" "x41e621" "xb1a86d" "xc95021" "x343e89" "x8d6cb1" "x6aebc5" "x80f104" "xb080c0" "x4d24ac" "x48e362" "x0b249e" "x08c8af" "x117c95" "x7a5e12" "xca480f" "x20e92a" "x480b4b" "xb000c0" "x0538f5" "x6e31a1" }
     traits = { "state_trait_great_lakes" }
     city = "xb000c0"
     farm = "x80f104"

@@ -102,10 +102,7 @@
 			provinces = { x0183A1 x0538F5 x08C8AF x0B249E x117C95 x1E31A0 x20E92A x232DBD }
 			provinces = { x343E89 x41E621 x480B4B x48E362 x4C056C x4D24AC x65F177 x6AEBC5 }
 			provinces = { x744A7A x7A5E12 x80F104 x8D6CB1 x93ACBB x9B27B9 xA4CD73 xB000C0 }
-			provinces = { xB080C0 xB1A86D xC95021 xCA480F xE6C706 }
-		}
-		region_state:HBC = {
-			set_state_owner = c:ONT
+			provinces = { xB080C0 xB1A86D xC95021 xCA480F xE6C706 x6E31A1 }
 		}
 	}
 

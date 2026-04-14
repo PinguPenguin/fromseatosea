@@ -864,11 +864,6 @@
 	}
 
 	s:STATE_ONTARIO = {
-		region_state:HBC = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
 		region_state:ONT = {
 			kill_population_percent_in_state = {
 				percent = 1
