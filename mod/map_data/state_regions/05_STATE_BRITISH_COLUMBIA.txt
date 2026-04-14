@@ -1,0 +1,27 @@
+STATE_BRITISH_COLUMBIA = {
+    id = 315
+    subsistence_building = "building_subsistence_farm"
+    provinces = { "x2541a9" "xe06c22" "xc8510a" "x28613e" "x9aef89" "x5ae4f9" "x53444f" "x0fd228" "x4ebd49" "x37c6ac" "x5bb5b5" "x9a3053" "x4b2499" "x4c08a9" "x515be2" "x9a96c1" "x37d2e9" "x6a0a2c" "xe3380d" "xabc1f1" "x04d4ba" "x46bacd" "xcf67bb" "xad1122" "x09ec2e" "xfe866d" "xd833d7" "x304439" "x3b97b7" "x064fe6" "x89c9ac" "x1d0c09" "x38dffe" "xee0358" "xb3d999" "x90bfef" "xc5762f" "xbf338d" "x774bea" "xe33420" "xa3cc82" "x21ce74" "x06bb33" "x0d33a7" "x44535c" "x83ec3f" "x277ac6" "xfd59a0" "x08b5f9" "xd1eae5" "x4d3ace" "xda702a" "xa599df" "xbd2011" "xde9e89" "x1bd217" "x75646f" "x51b430" "x48a9d1" "xddd8d9" "x95dd40" "xe52f87" "x893e23" "x6040c0" "xc40501" }
+    traits = { "state_trait_rocky_mountains" "state_trait_columbia_river" }
+    city = "x28613e"
+    port = "x38dffe"
+    farm = "xe06c22"
+    mine = "xc8510a"
+    wood = "x2541a9"
+    arable_land = 30
+    arable_resources = { "building_livestock_ranch" "building_wheat_farm" }
+    capped_resources = {
+        building_iron_mine = 4
+        building_logging_camp = 45
+        building_fishing_wharf = 12
+        building_whaling_station = 2
+        building_coal_mine = 8
+        building_sulfur_mine = 10
+    }
+    resource = {
+        type = "building_gold_field"
+        depleted_type = "building_gold_mine"
+        undiscovered_amount = 2
+    }
+    naval_exit_id = 3154
+}
