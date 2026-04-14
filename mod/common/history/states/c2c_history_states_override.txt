@@ -1,4 +1,4 @@
-STATES = {
+﻿STATES = {
 
 	s:STATE_ALBERTA = {
 		set_owner_of_provinces = {
