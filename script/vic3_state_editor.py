@@ -65,7 +65,7 @@ BUILDINGS_WRAPPER_PATTERN = re.compile(r"(?m)^([ \t]*)(BUILDINGS)\s*=\s*\{")
 STATES_WRAPPER_PATTERN = re.compile(r"(?m)^([ \t]*)(STATES)\s*=\s*\{")
 LOCALIZATION_PATTERN = re.compile(r'(?m)^\s*(STATE_[A-Z0-9_]+):\d?\s+"(.*)"\s*$')
 
-C2C_HISTORY_STATES_FILENAME = "c2c_history_states.txt"
+C2C_HISTORY_STATES_FILENAME = "c2c_history_states_override.txt"
 C2C_HISTORY_POPS_FILENAME = "c2c_history_pops.txt"
 C2C_HISTORY_BUILDINGS_FILENAME = "c2c_history_buildings.txt"
 
