@@ -1,4 +1,4 @@
-namespace = c2c_error_suppression
+﻿namespace = c2c_error_suppression
 
 c2c_error_suppression.0001 = {
   hidden = yes

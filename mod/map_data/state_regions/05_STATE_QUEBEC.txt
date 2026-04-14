@@ -1,4 +1,4 @@
-STATE_QUEBEC = {
+﻿STATE_QUEBEC = {
     id = 312
     subsistence_building = "building_subsistence_farm"
     provinces = { "xab9c44" "x3ea9c4" "xe6153b" "x0b40b9" "xb5e4ec" "x9f961d" "xb9dd91" "xfc2bfd" "x8df3c2" "x6fcb2d" "xf6d76f" "xd0550d" "x9c19e2" "x1a9915" "x61804d" "xec29f7" "x2557a8" "xdf6f96" "xd040c0" "x25aba0" "xb838ec" "xf723ee" "xd31a5c" "xe47745" "x3000c0" "xddea3f" "xa69ab7" "xa5be2d" "x328a2e" "xde17d2" "xcfcb67" "x80e040" "xd45d25" "x271c30" "x0707c7" "x6480ae" "xd11049" "x3b30da" "x617b18" "x721a36" "xfda361" "x804729" "xe9c5aa" "xda0669" "x10547b" "xf0c080" "x1b5812" "xa1b5a5" "x4ecb15" "x521409" }
