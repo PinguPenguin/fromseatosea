@@ -341,12 +341,6 @@
 				}
 			}
 		}
-		region_state:NVS = {
-			remove_building = building_trade_center
-			remove_building = building_fishing_wharf
-			remove_building = building_barrack
-			remove_building = building_port
-		}
 	}
 
 	s:STATE_NEWFOUNDLAND = {
@@ -680,9 +674,6 @@
 			remove_building = building_sulfur_mine
 			remove_building = building_tobacco_plantation
 		}
-		region_state:HBC = {
-			remove_building = building_logging_camp
-		}
 	}
 
 	s:STATE_ONTARIO_PENINSULA = {
@@ -927,9 +918,6 @@
 			remove_building = building_shipyard
 			remove_building = building_military_shipyard
 			remove_building = building_port
-		}
-		region_state:HBC = {
-			remove_building = building_logging_camp
 		}
 	}
 
