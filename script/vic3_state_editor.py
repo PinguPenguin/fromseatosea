@@ -62,7 +62,12 @@ STATE_REGION_PATTERN = re.compile(r"(?m)^([ \t]*)(STATE_[A-Z0-9_]+)\s*=\s*\{")
 STATE_HISTORY_PATTERN = re.compile(r"(?m)^([ \t]*)(s:STATE_[A-Z0-9_]+)\s*=\s*\{")
 POP_STATE_SECTION_PATTERN = re.compile(r"(?m)^([ \t]*)(s:STATE_[A-Z0-9_]+)\s*=\s*\{")
 BUILDINGS_WRAPPER_PATTERN = re.compile(r"(?m)^([ \t]*)(BUILDINGS)\s*=\s*\{")
+STATES_WRAPPER_PATTERN = re.compile(r"(?m)^([ \t]*)(STATES)\s*=\s*\{")
 LOCALIZATION_PATTERN = re.compile(r'(?m)^\s*(STATE_[A-Z0-9_]+):\d?\s+"(.*)"\s*$')
+
+C2C_HISTORY_STATES_FILENAME = "c2c_history_states_override.txt"
+C2C_HISTORY_POPS_FILENAME = "c2c_history_pops.txt"
+C2C_HISTORY_BUILDINGS_FILENAME = "c2c_history_buildings.txt"
 
 DARK_BG = "#14181e"
 DARK_PANEL = "#1b222c"
@@ -189,6 +194,7 @@ class StateRecord:
     building_state_extras: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     canada_focus: bool = False
+    wipe_vanilla_pops_on_save: bool = False
     dirty: bool = False
 
     def owner_tags(self) -> list[str]:
@@ -247,6 +253,17 @@ def detect_newline(path: Path) -> str:
     if b"\n" in data:
         return "\n"
     return DEFAULT_NEWLINE
+
+
+def combine_history_paths(mod_dir: Path, vanilla_dir: Path | None) -> list[Path]:
+    combined: dict[str, Path] = {}
+    if vanilla_dir is not None and vanilla_dir.is_dir():
+        for path in vanilla_dir.glob("*.txt"):
+            combined[path.name.lower()] = path
+    if mod_dir.is_dir():
+        for path in mod_dir.glob("*.txt"):
+            combined[path.name.lower()] = path
+    return [combined[name] for name in sorted(combined)]
 
 
 def find_matching_brace(text: str, brace_index: int) -> int:
@@ -355,9 +372,31 @@ def replace_top_level_entry(block_text: str, key: str, new_entry: str) -> str:
     line_start = found.start
     while line_start > 0 and block_text[line_start - 1] in " \t":
         line_start -= 1
-    suffix = block_text[found.end :]
-    separator = "" if not suffix or suffix.startswith(("\n", "\r")) else "\n"
-    return block_text[:line_start] + new_entry + separator + suffix
+    prefix = block_text[:line_start].rstrip("\r\n")
+    suffix = block_text[found.end :].lstrip("\r\n")
+    if not suffix:
+        separator = "\n" if prefix.rstrip().endswith("{") else "\n\n"
+        return prefix + separator + new_entry
+    separator = "\n" if suffix.startswith("}") else "\n\n"
+    return prefix + separator + new_entry + separator + suffix
+
+
+def remove_top_level_entry(block_text: str, key: str) -> str:
+    found = find_top_level_entry_span(block_text, key)
+    if found is None:
+        return block_text
+    line_start = found.start
+    while line_start > 0 and block_text[line_start - 1] in " \t":
+        line_start -= 1
+    prefix = block_text[:line_start].rstrip("\r\n")
+    suffix = block_text[found.end :].lstrip("\r\n")
+    if not suffix:
+        return prefix
+    if prefix.rstrip().endswith("{") or suffix.startswith("}"):
+        separator = "\n"
+    else:
+        separator = "\n\n"
+    return prefix + separator + suffix
 
 
 def insert_top_level_entry(block_text: str, new_entry: str) -> str:
@@ -453,6 +492,11 @@ def parse_homeland_culture(raw: str) -> str:
     return normalize_culture_id(value) if value is not None else ""
 
 
+def parse_homeland_effect_culture(raw: str, key: str) -> str:
+    value = parse_assignment_value(raw, key)
+    return normalize_culture_id(value) if value is not None else ""
+
+
 def parse_state_history_block(block_text: str) -> tuple[list[OwnershipSlice], list[str], list[TopLevelEntry]]:
     owners: list[OwnershipSlice] = []
     homelands: list[str] = []
@@ -470,6 +514,30 @@ def parse_state_history_block(block_text: str) -> tuple[list[OwnershipSlice], li
         if tag_match:
             owners.append(OwnershipSlice(tag_match.group(1), len(provinces)))
     return owners, homelands, entries
+
+
+def apply_state_history_blocks(blocks: list[tuple[Path, str]]) -> tuple[list[OwnershipSlice], list[str]]:
+    owners: list[OwnershipSlice] = []
+    homelands: list[str] = []
+    homeland_set: set[str] = set()
+
+    for _path, block_text in blocks:
+        block_owners = parse_ownership_block(block_text)
+        if block_owners:
+            owners = block_owners
+        for entry in parse_top_level_entries(block_text):
+            if entry.key == "remove_homeland":
+                culture = parse_homeland_effect_culture(entry.raw, "remove_homeland")
+                if culture and culture in homeland_set:
+                    homelands = [existing for existing in homelands if existing != culture]
+                    homeland_set.remove(culture)
+            elif entry.key == "add_homeland":
+                culture = parse_homeland_effect_culture(entry.raw, "add_homeland")
+                if culture and culture not in homeland_set:
+                    homelands.append(culture)
+                    homeland_set.add(culture)
+
+    return owners, homelands
 
 
 def parse_ownership_block(block_text: str) -> list[OwnershipSlice]:
@@ -550,10 +618,29 @@ def replace_pop_state_section(text: str, key: str, new_section: str) -> str:
         joiner = "\n\n" if prefix else ""
         return f"{prefix}{joiner}{new_section}\n{suffix.lstrip(chr(10)).lstrip(chr(13))}"
     start, end, _old = found
-    suffix = text[end:]
-    if suffix and not suffix.startswith(("\n", "\r")):
-        suffix = "\n" + suffix
-    return text[:start] + new_section + suffix
+    prefix = text[:start].rstrip("\r\n")
+    suffix = text[end:].lstrip("\r\n")
+    if not suffix:
+        separator = "\n" if prefix.rstrip().endswith("{") else "\n\n"
+        return prefix + separator + new_section
+    separator = "\n" if suffix.startswith("}") else "\n\n"
+    return prefix + separator + new_section + separator + suffix
+
+
+def remove_pop_state_section(text: str, key: str) -> str:
+    found = find_pop_state_section(text, key)
+    if found is None:
+        return text
+    start, end, _old = found
+    prefix = text[:start].rstrip("\r\n")
+    suffix = text[end:].lstrip("\r\n")
+    if not suffix:
+        return prefix
+    if prefix.rstrip().endswith("{") or suffix.startswith("}"):
+        separator = "\n"
+    else:
+        separator = "\n\n"
+    return prefix + separator + suffix
 
 
 def parse_pops_by_owner_tolerant(section_text: str) -> dict[str, list[PopRow]]:
@@ -598,6 +685,116 @@ def parse_pops_by_owner_tolerant(section_text: str) -> dict[str, list[PopRow]]:
     return dict(pops_by_owner)
 
 
+def normalize_religion_id(value: str) -> str:
+    return value.strip().strip('"').removeprefix("rel:")
+
+
+def parse_create_pop_entry(raw: str) -> PopRow | None:
+    culture_match = re.search(r"(?m)^\s*culture\s*=\s*([A-Za-z0-9_:]+)\s*$", raw)
+    size_match = re.search(r"(?m)^\s*size\s*=\s*(-?\d+)\s*$", raw)
+    if not culture_match or not size_match:
+        return None
+    religion_match = re.search(r"(?m)^\s*religion\s*=\s*([A-Za-z0-9_:]+)\s*$", raw)
+    return PopRow(
+        culture=normalize_culture_id(culture_match.group(1)),
+        religion=normalize_religion_id(religion_match.group(1)) if religion_match else "",
+        size=size_match.group(1),
+    )
+
+
+def apply_pop_kill_effect(
+    owner_rows: dict[str, dict[tuple[str, str], int]],
+    percent: float,
+    owner_tag: str | None = None,
+    culture: str | None = None,
+    religion: str | None = None,
+) -> None:
+    remaining_ratio = max(0.0, 1.0 - percent)
+    owner_tags = [owner_tag] if owner_tag is not None else list(owner_rows)
+    for current_owner in owner_tags:
+        bucket = owner_rows.get(current_owner)
+        if not bucket:
+            continue
+        for key in list(bucket):
+            current_culture, current_religion = key
+            if culture and current_culture != culture:
+                continue
+            if religion and current_religion != religion:
+                continue
+            remaining = int(round(bucket[key] * remaining_ratio))
+            if remaining <= 0:
+                del bucket[key]
+            else:
+                bucket[key] = remaining
+
+
+def apply_pop_effect_blocks(blocks: list[tuple[Path, str]]) -> tuple[dict[str, list[PopRow]], int]:
+    owner_rows: dict[str, dict[tuple[str, str], int]] = {}
+    unsupported_effects = 0
+
+    def ensure_owner(owner_tag: str) -> dict[tuple[str, str], int]:
+        return owner_rows.setdefault(owner_tag, {})
+
+    for _path, block_text in blocks:
+        for entry in parse_top_level_entries(block_text):
+            if entry.key == "kill_population_percent_in_state":
+                if re.search(r"(?m)^\s*pop_type\s*=", entry.raw):
+                    unsupported_effects += 1
+                    continue
+                percent = parse_assignment_float(entry.raw, "percent")
+                if percent is None:
+                    unsupported_effects += 1
+                    continue
+                culture_value = parse_assignment_value(entry.raw, "culture")
+                religion_value = parse_assignment_value(entry.raw, "religion")
+                apply_pop_kill_effect(
+                    owner_rows,
+                    percent,
+                    culture=normalize_culture_id(culture_value) if culture_value else None,
+                    religion=normalize_religion_id(religion_value) if religion_value else None,
+                )
+                continue
+            if not entry.key.startswith("region_state:"):
+                continue
+
+            owner_tag = entry.key.partition(":")[2]
+            bucket = ensure_owner(owner_tag)
+            for owner_entry in parse_top_level_entries(entry.raw):
+                if owner_entry.key == "create_pop":
+                    row = parse_create_pop_entry(owner_entry.raw)
+                    if row is None:
+                        continue
+                    size = parse_int_string(row.size)
+                    if size is None or size <= 0:
+                        continue
+                    key = (row.culture, row.religion)
+                    bucket[key] = bucket.get(key, 0) + size
+                elif owner_entry.key == "kill_population_percent_in_state":
+                    if re.search(r"(?m)^\s*pop_type\s*=", owner_entry.raw):
+                        unsupported_effects += 1
+                        continue
+                    percent = parse_assignment_float(owner_entry.raw, "percent")
+                    if percent is None:
+                        unsupported_effects += 1
+                        continue
+                    culture_value = parse_assignment_value(owner_entry.raw, "culture")
+                    religion_value = parse_assignment_value(owner_entry.raw, "religion")
+                    apply_pop_kill_effect(
+                        owner_rows,
+                        percent,
+                        owner_tag=owner_tag,
+                        culture=normalize_culture_id(culture_value) if culture_value else None,
+                        religion=normalize_religion_id(religion_value) if religion_value else None,
+                    )
+
+    pops_by_owner: dict[str, list[PopRow]] = {}
+    for owner_tag, bucket in owner_rows.items():
+        rows = [PopRow(culture, religion, str(size)) for (culture, religion), size in bucket.items() if size > 0]
+        if rows:
+            pops_by_owner[owner_tag] = rows
+    return pops_by_owner, unsupported_effects
+
+
 def parse_assignment_value(raw: str, key: str) -> str | None:
     match = re.search(rf'(?<![A-Za-z0-9_]){re.escape(key)}\s*=\s*(?:"([^"]+)"|([^\s{{}}]+))', raw)
     if not match:
@@ -608,6 +805,11 @@ def parse_assignment_value(raw: str, key: str) -> str | None:
 def parse_assignment_int(raw: str, key: str) -> str | None:
     match = re.search(rf"(?<![A-Za-z0-9_]){re.escape(key)}\s*=\s*(-?\d+)", raw)
     return match.group(1) if match else None
+
+
+def parse_assignment_float(raw: str, key: str) -> float | None:
+    match = re.search(rf"(?<![A-Za-z0-9_]){re.escape(key)}\s*=\s*(-?\d+(?:\.\d+)?)", raw)
+    return float(match.group(1)) if match else None
 
 
 def normalize_country_tag(value: str) -> str:
@@ -773,9 +975,20 @@ def normalize_pop_rows(rows: list[PopRow]) -> list[PopRow]:
 
 def render_pop_state_block(record: StateRecord) -> str:
     lines = [f"\ts:{record.state_id} = {{"]
-    for owner_tag in record.editable_owner_tags():
-        lines.append(f"\t\tregion_state:{owner_tag} = {{")
+    owner_tags = record.editable_owner_tags()
+    if record.wipe_vanilla_pops_on_save and not owner_tags:
+        lines.append("\t\tkill_population_percent_in_state = {")
+        lines.append("\t\t\tpercent = 1")
+        lines.append("\t\t}")
+    for owner_tag in owner_tags:
         rows = normalize_pop_rows(record.pops_by_owner.get(owner_tag, []))
+        if not rows and not record.wipe_vanilla_pops_on_save:
+            continue
+        lines.append(f"\t\tregion_state:{owner_tag} = {{")
+        if record.wipe_vanilla_pops_on_save:
+            lines.append("\t\t\tkill_population_percent_in_state = {")
+            lines.append("\t\t\t\tpercent = 1")
+            lines.append("\t\t\t}")
         for row in rows:
             lines.append("\t\t\tcreate_pop = {")
             lines.append(f"\t\t\t\tculture = {row.culture}")
@@ -814,6 +1027,24 @@ def render_state_history_block(record: StateRecord, original_block: str) -> str:
         rebuilt += "\n"
     rebuilt += "}"
     return rebuilt
+
+
+def render_state_history_effect_block(record: StateRecord, baseline_homelands: list[str]) -> str | None:
+    baseline = [normalize_culture_id(culture) for culture in baseline_homelands if normalize_culture_id(culture)]
+    desired = [normalize_culture_id(culture) for culture in record.homelands if normalize_culture_id(culture)]
+
+    remove_order = [culture for culture in baseline if culture not in desired]
+    add_order = [culture for culture in desired if culture not in baseline]
+    if not remove_order and not add_order:
+        return None
+
+    lines = [f"\ts:{record.state_id} = {{"]
+    for culture in remove_order:
+        lines.append(f"\t\tremove_homeland = cu:{culture}")
+    for culture in add_order:
+        lines.append(f"\t\tadd_homeland = cu:{culture}")
+    lines.append("\t}")
+    return "\n".join(lines)
 
 
 def render_ordered_entries(
@@ -960,6 +1191,118 @@ def render_building_state_block(record: StateRecord, wrapper_block: str | None =
         lines.append(normalize_entry_indentation(raw_extra.rstrip(), owner_indent))
     lines.append(f"{state_indent}}}")
     return "\n".join(lines)
+
+
+def normalize_rendered_text(raw: str) -> str:
+    return re.sub(r"\s+", "", raw)
+
+
+def apply_building_effect_blocks(blocks: list[tuple[Path, str]]) -> tuple[list[BuildingRow], list[str], int]:
+    rows_by_owner: dict[str, dict[str, BuildingRow]] = {}
+    owner_order: list[str] = []
+    unsupported_entries = 0
+
+    for _path, block_text in blocks:
+        for entry in parse_top_level_entries(block_text):
+            if not entry.key.startswith("region_state:"):
+                if entry.key.strip():
+                    unsupported_entries += 1
+                continue
+
+            owner_tag = entry.key.partition(":")[2]
+            if owner_tag not in rows_by_owner:
+                rows_by_owner[owner_tag] = {}
+                owner_order.append(owner_tag)
+            owner_bucket = rows_by_owner[owner_tag]
+
+            for owner_entry in parse_top_level_entries(entry.raw):
+                if owner_entry.key == "create_building":
+                    row, unsupported_ownership = parse_building_row(owner_tag, owner_entry.raw)
+                    if row.building.strip():
+                        owner_bucket[row.building.strip()] = row
+                    if unsupported_ownership:
+                        unsupported_entries += 1
+                elif owner_entry.key == "remove_building":
+                    building_id = parse_assignment_value(owner_entry.raw, "remove_building") or ""
+                    if building_id:
+                        owner_bucket.pop(building_id, None)
+                else:
+                    unsupported_entries += 1
+
+    rows: list[BuildingRow] = []
+    for owner_tag in owner_order:
+        rows.extend(rows_by_owner.get(owner_tag, {}).values())
+    return rows, owner_order, unsupported_entries
+
+
+def render_building_effect_state_block(record: StateRecord, baseline_rows: list[BuildingRow]) -> str | None:
+    def group_rows(rows: list[BuildingRow]) -> tuple[dict[str, dict[str, BuildingRow]], list[str]]:
+        grouped: dict[str, dict[str, BuildingRow]] = {}
+        owner_order: list[str] = []
+        for row in rows:
+            owner_tag = row.owner_tag.strip()
+            building_id = row.building.strip()
+            if not owner_tag or not building_id:
+                continue
+            if owner_tag not in grouped:
+                grouped[owner_tag] = {}
+                owner_order.append(owner_tag)
+            grouped[owner_tag][building_id] = row
+        return grouped, owner_order
+
+    desired_grouped, desired_owner_order = group_rows(record.buildings)
+    baseline_grouped, baseline_owner_order = group_rows(baseline_rows)
+
+    owner_order: list[str] = []
+    for owner_tag in record.editable_owner_tags():
+        if owner_tag not in owner_order:
+            owner_order.append(owner_tag)
+    for owner_tag in desired_owner_order + baseline_owner_order:
+        if owner_tag not in owner_order:
+            owner_order.append(owner_tag)
+
+    create_indent = "\t\t\t"
+    child_indent = create_indent + "\t"
+    nested_indent = child_indent + "\t"
+    deep_indent = nested_indent + "\t"
+
+    lines = [f"\ts:{record.state_id} = {{"]
+    has_ops = False
+    for owner_tag in owner_order:
+        desired_bucket = desired_grouped.get(owner_tag, {})
+        baseline_bucket = baseline_grouped.get(owner_tag, {})
+        building_order: list[str] = []
+        for building_id in list(desired_bucket) + list(baseline_bucket):
+            if building_id not in building_order:
+                building_order.append(building_id)
+
+        owner_lines: list[str] = []
+        for building_id in building_order:
+            desired_row = desired_bucket.get(building_id)
+            baseline_row = baseline_bucket.get(building_id)
+            if baseline_row is None and desired_row is not None:
+                owner_lines.append(render_building_row(desired_row, create_indent, child_indent, nested_indent, deep_indent))
+            elif baseline_row is not None and desired_row is None:
+                owner_lines.append(f"{create_indent}remove_building = {building_id}")
+            elif baseline_row is not None and desired_row is not None:
+                baseline_text = normalize_rendered_text(
+                    render_building_row(baseline_row, create_indent, child_indent, nested_indent, deep_indent)
+                )
+                desired_text = normalize_rendered_text(
+                    render_building_row(desired_row, create_indent, child_indent, nested_indent, deep_indent)
+                )
+                if baseline_text != desired_text:
+                    owner_lines.append(f"{create_indent}remove_building = {building_id}")
+                    owner_lines.append(render_building_row(desired_row, create_indent, child_indent, nested_indent, deep_indent))
+
+        if owner_lines:
+            has_ops = True
+            lines.append(f"\t\tregion_state:{owner_tag} = {{")
+            lines.extend(owner_lines)
+            lines.append("\t\t}")
+
+    lines.append("\t}")
+    return "\n".join(lines) if has_ops else None
 
 
 def building_total_levels(row: BuildingRow) -> str:
@@ -1266,13 +1609,20 @@ def validate_record(record: StateRecord) -> None:
 
 
 class ModRepository:
-    def __init__(self, root: Path) -> None:
+    def __init__(self, root: Path, game_root: Path | None = None) -> None:
         self.root = root
+        self.game_root = game_root
         self.state_regions_dir = root / "mod" / "map_data" / "state_regions"
         self.state_history_dir = root / "mod" / "common" / "history" / "states"
         self.pops_dir = root / "mod" / "common" / "history" / "pops"
         self.buildings_dir = root / "mod" / "common" / "history" / "buildings"
         self.localization_file = root / "mod" / "localization" / "english" / "map_l_english.yml"
+        self.vanilla_state_history_dir = game_root / "common" / "history" / "states" if game_root else None
+        self.vanilla_pops_dir = game_root / "common" / "history" / "pops" if game_root else None
+        self.vanilla_buildings_dir = game_root / "common" / "history" / "buildings" if game_root else None
+        self.state_history_output_path = self.state_history_dir / C2C_HISTORY_STATES_FILENAME
+        self.pop_output_path = self.pops_dir / C2C_HISTORY_POPS_FILENAME
+        self.building_output_path = self.buildings_dir / C2C_HISTORY_BUILDINGS_FILENAME
         self.culture_choices: list[str] = []
         self.religion_choices: list[str] = []
         self.resource_choices: list[str] = []
@@ -1285,30 +1635,66 @@ class ModRepository:
         self.state_records: dict[str, StateRecord] = {}
         self.global_warnings: list[str] = []
 
-    def load(self) -> None:
-        localizations = parse_localizations(self.localization_file)
-        region_paths = sorted(self.state_regions_dir.glob("*.txt"), key=lambda path: path.name.lower())
-        ownership_paths = sorted(self.state_history_dir.glob("*.txt"), key=lambda path: path.name.lower())
-        pop_paths = sorted(self.pops_dir.glob("*.txt"), key=lambda path: path.name.lower())
-        building_paths = sorted(self.buildings_dir.glob("*.txt"), key=lambda path: path.name.lower())
+    def _combined_state_history_paths(self) -> list[Path]:
+        return combine_history_paths(self.state_history_dir, self.vanilla_state_history_dir)
 
-        region_occurrences = build_effective_blocks(region_paths, STATE_REGION_PATTERN)
-        ownership_occurrences = build_effective_blocks(ownership_paths, STATE_HISTORY_PATTERN)
-        pop_occurrences: dict[str, list[tuple[Path, str]]] = defaultdict(list)
-        for path in sorted(pop_paths, key=lambda item: item.name.lower()):
+    def _combined_pop_paths(self) -> list[Path]:
+        return combine_history_paths(self.pops_dir, self.vanilla_pops_dir)
+
+    def _combined_building_paths(self) -> list[Path]:
+        return combine_history_paths(self.buildings_dir, self.vanilla_buildings_dir)
+
+    def _load_state_history_occurrences(self, skip_state_id: str | None = None) -> dict[str, list[tuple[Path, str]]]:
+        occurrences: dict[str, list[tuple[Path, str]]] = defaultdict(list)
+        target_key = f"s:{skip_state_id}" if skip_state_id else None
+        for path in self._combined_state_history_paths():
+            text = read_text(path)
+            for key, _start, _end, block_text in iter_named_blocks(text, STATE_HISTORY_PATTERN):
+                if path == self.state_history_output_path and target_key is not None and key == target_key:
+                    continue
+                occurrences[key].append((path, block_text))
+        return occurrences
+
+    def _load_pop_occurrences(self, skip_state_id: str | None = None) -> dict[str, list[tuple[Path, str]]]:
+        occurrences: dict[str, list[tuple[Path, str]]] = defaultdict(list)
+        target_key = f"s:{skip_state_id}" if skip_state_id else None
+        for path in self._combined_pop_paths():
             text = read_text(path)
             for key, _start, _end, section_text in iter_pop_state_sections(text):
-                pop_occurrences[key].append((path, section_text))
-        building_occurrences: dict[str, list[tuple[Path, str]]] = defaultdict(list)
-        for path in sorted(building_paths, key=lambda item: item.name.lower()):
+                if path == self.pop_output_path and target_key is not None and key == target_key:
+                    continue
+                occurrences[key].append((path, section_text))
+        return occurrences
+
+    def _load_building_occurrences(self, skip_state_id: str | None = None) -> dict[str, list[tuple[Path, str]]]:
+        occurrences: dict[str, list[tuple[Path, str]]] = defaultdict(list)
+        target_key = f"s:{skip_state_id}" if skip_state_id else None
+        for path in self._combined_building_paths():
             text = read_text(path)
             wrapper = find_named_block(text, "BUILDINGS", BUILDINGS_WRAPPER_PATTERN)
             if wrapper is None:
                 continue
             _start, _end, wrapper_block = wrapper
             for entry in parse_top_level_entries(wrapper_block):
-                if entry.key.startswith("s:STATE_"):
-                    building_occurrences[entry.key].append((path, entry.raw))
+                if not entry.key.startswith("s:STATE_"):
+                    continue
+                if path == self.building_output_path and target_key is not None and entry.key == target_key:
+                    continue
+                occurrences[entry.key].append((path, entry.raw))
+        return occurrences
+
+    def load(self) -> None:
+        localizations = parse_localizations(self.localization_file)
+        region_paths = sorted(self.state_regions_dir.glob("*.txt"), key=lambda path: path.name.lower())
+        region_occurrences = build_effective_blocks(region_paths, STATE_REGION_PATTERN)
+        ownership_occurrences = self._load_state_history_occurrences()
+        pop_occurrences = self._load_pop_occurrences()
+        building_occurrences = self._load_building_occurrences()
+        vanilla_pop_keys: set[str] = set()
+        if self.vanilla_pops_dir is not None and self.vanilla_pops_dir.is_dir():
+            for path in sorted(self.vanilla_pops_dir.glob("*.txt"), key=lambda item: item.name.lower()):
+                for key, _start, _end, _section_text in iter_pop_state_sections(read_text(path)):
+                    vanilla_pop_keys.add(key.removeprefix("s:"))
 
         culture_ids: set[str] = set()
         religion_ids: set[str] = set()
@@ -1330,16 +1716,9 @@ class ModRepository:
             building_blocks = building_occurrences.get(f"s:{state_id}", [])
 
             region_source, region_block = region_blocks[-1] if region_blocks else (None, None)
-            ownership_source, ownership_block = ownership_blocks[-1] if ownership_blocks else (None, None)
-            pop_source, pop_block = pop_blocks[-1] if pop_blocks else (None, None)
-            building_source, building_block = building_blocks[-1] if building_blocks else (None, None)
+            owners, homelands = apply_state_history_blocks(ownership_blocks)
+            culture_ids.update(culture for culture in homelands if culture)
 
-            owners: list[OwnershipSlice] = []
-            homelands: list[str] = []
-            state_history_template_entries: list[TopLevelEntry] = []
-            if ownership_block:
-                owners, homelands, state_history_template_entries = parse_state_history_block(ownership_block)
-                culture_ids.update(culture for culture in homelands if culture)
             arable_land = ""
             arable_resources: list[str] = []
             capped_resources: list[ResourceCountRow] = []
@@ -1354,49 +1733,32 @@ class ModRepository:
                     if row.depleted_type:
                         resource_ids.add(row.depleted_type)
 
-            pops_by_owner: dict[str, list[PopRow]] = {}
-            extra_pop_tags: list[str] = []
-            if pop_block:
-                owner_tags = {owner.tag for owner in owners}
-                parsed_pops = parse_pops_by_owner_tolerant(pop_block)
-                for owner_tag, pops in parsed_pops.items():
-                    pops_by_owner[owner_tag] = pops
-                    if owner_tag not in owner_tags:
-                        extra_pop_tags.append(owner_tag)
-                    for row in pops:
-                        if row.culture:
-                            culture_ids.add(row.culture)
+            pops_by_owner, unsupported_pop_effects = apply_pop_effect_blocks(pop_blocks)
+            owner_tags = {owner.tag for owner in owners}
+            extra_pop_tags = [owner_tag for owner_tag in pops_by_owner if owner_tag not in owner_tags]
+            for pops in pops_by_owner.values():
+                for row in pops:
+                    if row.culture:
+                        culture_ids.add(row.culture)
                     if row.religion:
                         religion_ids.add(row.religion)
 
-            buildings: list[BuildingRow] = []
-            building_owner_extras: dict[str, list[str]] = {}
-            building_state_extras: list[str] = []
-            building_owner_tags: list[str] = []
-            unsupported_building_rows = 0
-            if building_block:
-                (
-                    buildings,
-                    building_owner_extras,
-                    building_state_extras,
-                    building_owner_tags,
-                    unsupported_building_rows,
-                ) = parse_building_state_block(building_block)
-                for row in buildings:
-                    if row.building:
-                        building_ids.add(row.building)
-                    if row.ownership_building_type:
-                        ownership_building_type_ids.add(row.ownership_building_type)
+            buildings, building_owner_tags, unsupported_building_entries = apply_building_effect_blocks(building_blocks)
+            for row in buildings:
+                if row.building:
+                    building_ids.add(row.building)
+                if row.ownership_building_type:
+                    ownership_building_type_ids.add(row.ownership_building_type)
 
             warnings: list[str] = []
             if len(region_blocks) > 1:
                 warnings.append("Multiple state-region definitions found; editing the last-loaded one.")
             if len(ownership_blocks) > 1:
-                warnings.append("Multiple ownership blocks found; reading the last-loaded one.")
+                warnings.append("Multiple ownership history effects found; showing the combined result.")
             if len(pop_blocks) > 1:
-                warnings.append("Multiple pop blocks found; editing the last-loaded one.")
+                warnings.append("Multiple pop history effects found; showing the combined result.")
             if len(building_blocks) > 1:
-                warnings.append("Multiple building blocks found; editing the last-loaded one.")
+                warnings.append("Multiple building history effects found; showing the combined result.")
             if extra_pop_tags:
                 warnings.append(
                     "Pop data contains owner tags not present in state history: "
@@ -1410,16 +1772,20 @@ class ModRepository:
                     + ", ".join(sorted(extra_building_tags))
                     + "."
                 )
-            if unsupported_building_rows:
+            if unsupported_pop_effects:
                 warnings.append(
-                    f"{unsupported_building_rows} building row(s) use unsupported ownership patterns; leave mode as preserve to round-trip them."
+                    f"{unsupported_pop_effects} pop history effect(s) use filters the editor does not model; displayed totals may be approximate."
                 )
-            if any(building_owner_extras.values()) or building_state_extras:
-                warnings.append("Building data contains unsupported non-create_building entries that will be preserved.")
-            if pop_source is None:
-                warnings.append("No pop block exists yet; save will create a new per-state pop file.")
-            if building_source is None:
-                warnings.append("No building block exists yet; save will create a new per-state building file.")
+            if unsupported_building_entries:
+                warnings.append(
+                    f"{unsupported_building_entries} building history entr{'' if unsupported_building_entries == 1 else 'ies'} use patterns the editor does not model; saving this state will rewrite only remove/create_building changes."
+                )
+            if not ownership_blocks:
+                warnings.append(f"No homeland history effect exists yet; save will write to {self.state_history_output_path.name}.")
+            if not pop_blocks:
+                warnings.append(f"No pop history effect exists yet; save will write to {self.pop_output_path.name}.")
+            if not building_blocks:
+                warnings.append(f"No building history effect exists yet; save will write to {self.building_output_path.name}.")
 
             canada_focus = state_id in DEFAULT_CANADIAN_STATES
 
@@ -1428,22 +1794,23 @@ class ModRepository:
                 display_name=localizations.get(state_id, state_id.removeprefix("STATE_").replace("_", " ").title()),
                 owners=owners,
                 region_source=region_source,
-                pop_source=pop_source,
-                building_source=building_source,
-                ownership_source=ownership_source,
+                pop_source=self.pop_output_path,
+                building_source=self.building_output_path,
+                ownership_source=self.state_history_output_path,
                 homelands=homelands,
                 loaded_homelands=list(homelands),
-                state_history_template_entries=state_history_template_entries,
+                state_history_template_entries=[],
                 arable_land=arable_land,
                 arable_resources=arable_resources,
                 capped_resources=capped_resources,
                 discoverable_resources=discoverables,
                 pops_by_owner=pops_by_owner,
                 buildings=buildings,
-                building_owner_extras=building_owner_extras,
-                building_state_extras=building_state_extras,
+                building_owner_extras={},
+                building_state_extras=[],
                 warnings=warnings,
                 canada_focus=canada_focus,
+                wipe_vanilla_pops_on_save=state_id in vanilla_pop_keys,
             )
 
         self.state_records = records
@@ -1467,25 +1834,41 @@ class ModRepository:
         self._save_building_block(record)
 
     def _save_state_history_block(self, record: StateRecord) -> None:
-        if record.homelands == record.loaded_homelands:
-            return
-        if record.ownership_source is None:
-            if not record.homelands:
+        baseline_blocks = self._load_state_history_occurrences(skip_state_id=record.state_id).get(f"s:{record.state_id}", [])
+        _baseline_owners, baseline_homelands = apply_state_history_blocks(baseline_blocks)
+        state_block = render_state_history_effect_block(record, baseline_homelands)
+        source = self.state_history_output_path
+        newline = detect_newline(source)
+        state_key = f"s:{record.state_id}"
+        original_text = read_text(source) if source.exists() else None
+
+        if original_text is None:
+            if state_block is None:
+                record.loaded_homelands = list(record.homelands)
+                record.ownership_source = source
                 return
-            raise ValueError(f"{record.state_id} has no state-history source file")
-        path = record.ownership_source
-        text = read_text(path)
-        block_key = f"s:{record.state_id}"
-        found = find_named_block(text, block_key, STATE_HISTORY_PATTERN)
-        if found is None:
-            raise KeyError(f"Could not find state-history block for {record.state_id}")
-        _start, _end, original_block = found
-        new_block = render_state_history_block(record, original_block)
-        if new_block != original_block:
-            newline = detect_newline(path)
-            updated = replace_named_block(text, block_key, STATE_HISTORY_PATTERN, new_block)
-            write_text(path, updated, newline)
+            updated = f"STATES = {{\n\n{state_block}\n}}\n"
+        else:
+            wrapper = find_named_block(original_text, "STATES", STATES_WRAPPER_PATTERN)
+            if wrapper is None:
+                if state_block is None:
+                    updated = original_text
+                else:
+                    updated = f"STATES = {{\n\n{state_block}\n}}\n"
+            else:
+                wrapper_start, wrapper_end, wrapper_block = wrapper
+                if state_block is None:
+                    updated_wrapper = remove_top_level_entry(wrapper_block, state_key)
+                elif find_top_level_entry_span(wrapper_block, state_key) is not None:
+                    updated_wrapper = replace_top_level_entry(wrapper_block, state_key, state_block)
+                else:
+                    updated_wrapper = insert_top_level_entry(wrapper_block, state_block)
+                updated = original_text[:wrapper_start] + updated_wrapper + original_text[wrapper_end:]
+
+        if original_text is None or updated != original_text:
+            write_text(source, updated, newline)
         record.loaded_homelands = list(record.homelands)
+        record.ownership_source = source
 
     def _save_state_region(self, record: StateRecord) -> None:
         if record.region_source is None:
@@ -1502,45 +1885,54 @@ class ModRepository:
         write_text(path, updated, newline)
 
     def _save_pop_block(self, record: StateRecord) -> None:
-        source = record.pop_source or (self.pops_dir / f"99_manual_{record.state_id}.txt")
+        source = self.pop_output_path
         newline = detect_newline(source)
+        state_key = f"s:{record.state_id}"
         state_block = render_pop_state_block(record)
-        if source.exists():
-            text = read_text(source)
-            if find_pop_state_section(text, f"s:{record.state_id}"):
-                updated = replace_pop_state_section(text, f"s:{record.state_id}", state_block)
-            else:
-                updated = f"POPS = {{\n\n{state_block}\n}}\n"
-        else:
+        original_text = read_text(source) if source.exists() else None
+
+        if original_text is None:
             updated = f"POPS = {{\n\n{state_block}\n}}\n"
-        write_text(source, updated, newline)
+        else:
+            updated = replace_pop_state_section(original_text, state_key, state_block)
+
+        if original_text is None or updated != original_text:
+            write_text(source, updated, newline)
         record.pop_source = source
 
     def _save_building_block(self, record: StateRecord) -> None:
-        source = record.building_source or (self.buildings_dir / f"99_manual_{record.state_id}.txt")
+        source = self.building_output_path
         newline = detect_newline(source)
         state_key = f"s:{record.state_id}"
+        baseline_blocks = self._load_building_occurrences(skip_state_id=record.state_id).get(state_key, [])
+        baseline_rows, _baseline_owner_tags, _unsupported_entries = apply_building_effect_blocks(baseline_blocks)
+        state_block = render_building_effect_state_block(record, baseline_rows)
+        original_text = read_text(source) if source.exists() else None
 
-        wrapper_block: str | None = None
-        if source.exists():
-            text = read_text(source)
-            wrapper = find_named_block(text, "BUILDINGS", BUILDINGS_WRAPPER_PATTERN)
-            if wrapper is not None:
+        if original_text is None:
+            if state_block is None:
+                record.building_source = source
+                return
+            updated = f"BUILDINGS = {{\n\n{state_block}\n}}\n"
+        else:
+            wrapper = find_named_block(original_text, "BUILDINGS", BUILDINGS_WRAPPER_PATTERN)
+            if wrapper is None:
+                if state_block is None:
+                    updated = original_text
+                else:
+                    updated = f"BUILDINGS = {{\n\n{state_block}\n}}\n"
+            else:
                 wrapper_start, wrapper_end, wrapper_block = wrapper
-                state_block = render_building_state_block(record, wrapper_block)
-                if find_top_level_entry_span(wrapper_block, state_key) is not None:
+                if state_block is None:
+                    updated_wrapper = remove_top_level_entry(wrapper_block, state_key)
+                elif find_top_level_entry_span(wrapper_block, state_key) is not None:
                     updated_wrapper = replace_top_level_entry(wrapper_block, state_key, state_block)
                 else:
                     updated_wrapper = insert_top_level_entry(wrapper_block, state_block)
-                updated = text[:wrapper_start] + updated_wrapper + text[wrapper_end:]
-            else:
-                state_block = render_building_state_block(record)
-                updated = f"BUILDINGS = {{\n\n{state_block}\n}}\n"
-        else:
-            state_block = render_building_state_block(record)
-            updated = f"BUILDINGS = {{\n\n{state_block}\n}}\n"
+                updated = original_text[:wrapper_start] + updated_wrapper + original_text[wrapper_end:]
 
-        write_text(source, updated, newline)
+        if original_text is None or updated != original_text:
+            write_text(source, updated, newline)
         record.building_source = source
 
 
@@ -2354,9 +2746,9 @@ class Vic3StateEditorApp:
                 " | ".join(
                     [
                         f"State regions: {record.region_source.name if record.region_source else 'missing'}",
-                        f"Pops: {record.pop_source.name if record.pop_source else 'new per-state file on save'}",
-                        f"Buildings: {record.building_source.name if record.building_source else 'new per-state file on save'}",
-                        f"Ownership: {record.ownership_source.name if record.ownership_source else 'missing'}",
+                        f"Pops: {record.pop_source.name if record.pop_source else C2C_HISTORY_POPS_FILENAME}",
+                        f"Buildings: {record.building_source.name if record.building_source else C2C_HISTORY_BUILDINGS_FILENAME}",
+                        f"Ownership: {record.ownership_source.name if record.ownership_source else C2C_HISTORY_STATES_FILENAME}",
                     ]
                 )
             )
@@ -2861,9 +3253,49 @@ def default_repo_root() -> Path:
     return script_dir.parent
 
 
+def resolve_game_root(candidate: Path | None) -> Path | None:
+    if candidate is None:
+        return None
+    candidate = candidate.expanduser()
+    if (candidate / "common").is_dir() and (candidate / "map_data").is_dir():
+        return candidate.resolve()
+    if (candidate / "game" / "common").is_dir() and (candidate / "game" / "map_data").is_dir():
+        return (candidate / "game").resolve()
+    return None
+
+
+def default_game_root() -> Path | None:
+    env_candidates = [
+        os.environ.get("VIC3_GAME_DIR"),
+        os.environ.get("VICTORIA3_GAME_DIR"),
+    ]
+    path_candidates = [
+        Path(r"C:\Program Files (x86)\Steam\steamapps\common\Victoria 3\game"),
+        Path(r"C:\Program Files\Steam\steamapps\common\Victoria 3\game"),
+        Path.home() / "Games" / "Victoria 3" / "game",
+    ]
+    for raw in env_candidates:
+        if not raw:
+            continue
+        resolved = resolve_game_root(Path(raw))
+        if resolved is not None:
+            return resolved
+    for candidate in path_candidates:
+        resolved = resolve_game_root(candidate)
+        if resolved is not None:
+            return resolved
+    return None
+
+
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Manual Victoria 3 state demographics/resource/building editor")
     parser.add_argument("--root", type=Path, default=default_repo_root(), help="Repository root")
+    parser.add_argument(
+        "--game-root",
+        type=Path,
+        default=default_game_root(),
+        help="Victoria 3 game directory (the folder containing common/ and map_data/).",
+    )
     parser.add_argument(
         "--check",
         action="store_true",
@@ -2898,7 +3330,7 @@ def run_check(repository: ModRepository) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
-    repository = ModRepository(args.root.resolve())
+    repository = ModRepository(args.root.resolve(), resolve_game_root(args.game_root))
     try:
         repository.load()
     except Exception as exc:  # noqa: BLE001

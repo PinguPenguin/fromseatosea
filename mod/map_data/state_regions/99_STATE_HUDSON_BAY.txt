@@ -1,0 +1,5 @@
+﻿STATE_HUDSON_BAY = {
+    id = 3044
+    provinces = { "x6FDDFB" }
+#impassable = { "x6FDDFB" }
+}

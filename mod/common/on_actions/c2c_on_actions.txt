@@ -1,0 +1,47 @@
+﻿on_game_started = {
+    on_actions = {
+        on_c2c_start
+    }
+}
+on_c2c_start = {
+    effect = {
+        set_global_variable = {
+            name = c2c_is_loaded
+            value = yes
+        }
+        s:STATE_ONTARIO = {
+            set_owner_of_provinces = {
+                country = c:ONT
+                provinces = {
+                    xE6C706
+                }
+            }
+        }
+        s:STATE_BRITISH_COLUMBIA = {
+            set_owner_of_provinces = {
+                country = c:ORG
+                provinces = {
+                    x064FE6 x06BB33
+                }
+            }
+        }
+        s:STATE_NEW_BRUNSWICK = {
+            set_owner_of_provinces = {
+                country = c:NBS
+                provinces = {
+                    x082153
+                }
+            }
+        }
+		#temp bugfix to give NWT all to HBC
+        s:STATE_NORTHWEST_TERRITORIES = {
+            set_owner_of_provinces = {
+                country = c:HBC
+                provinces = {
+                    x14B03B x15FC1A x1F0BA5 x2EB016 xC97FEC xCB7E23 xD31F1A xDEF7F2
+                    xE742CD xFD9177
+                }
+            }
+        }
+    }
+}

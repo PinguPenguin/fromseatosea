@@ -1,0 +1,20 @@
+﻿STATE_MANITOBA = {
+    id = 317
+    subsistence_building = "building_subsistence_farm"
+    provinces = { "x9b2805" "x82d3d9" "x0c5ff1" "xb6b0df" "xc0edb2" "x93caeb" "x4c1d1a" "x70d5d4" "x590948" "x1ca447" "xb4cf1f" "x04f2ac" "x54c371" "x6d49fc" "xe6d78f" "xfa6f32" "x7a8faa" "x4eec4b" "xfcf1d9" "x5a1a92" "x9ab469" "x3ec4d4" "x1ca16d" "x39c944" "xd93231" "x788ef7" "x8f1029" "xcb7964" "x2c03aa" "xc2d264" "xe7cf1b" "x7bce24" "x708b11" "xe1ca38" "x1e6e7b" "x5b8f90" "xe11ec4" "x8c94f5" "x03240f" "x93f868" "x8e2e54" "x5f7d84" "x9237cc" "xd41b85" "xc0e000" "x553c99" "x5b87f0" "x006ff6" "xc80b9f" "xe63fea" "xe6b251" "x3a6b83" "x16b6ed" "x42f2e2" "xef1e85" "xb9b479" "x4f4505" "x00a040" "x3b6e83" "x80d06a" "x67745a" "xb8b41c" "x174627" "x89c7f6" "xed0d09" "x542639" "x80a040" "xab2cd1" "xf3596d" "x6de48c" "x30db4e" "x21a006" "x4a8ed2" }
+    traits = { "state_trait_canadian_prairies" }
+    city = "x590948"
+    farm = "xfa6f32"
+    mine = "x42f2e2"
+    wood = "x54c371"
+    arable_land = 220
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 8
+        building_logging_camp = 35
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 35
+    }
+}
