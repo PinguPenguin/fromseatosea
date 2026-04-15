@@ -33,5 +33,15 @@ on_c2c_start = {
                 }
             }
         }
+		#temp bugfix to give NWT all to HBC
+        s:STATE_NORTHWEST_TERRITORIES = {
+            set_owner_of_provinces = {
+                country = c:HBC
+                provinces = {
+                    x14B03B x15FC1A x1F0BA5 x2EB016 xC97FEC xCB7E23 xD31F1A xDEF7F2
+                    xE742CD xFD9177
+                }
+            }
+        }
     }
 }

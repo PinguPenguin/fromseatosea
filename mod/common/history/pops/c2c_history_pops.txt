@@ -747,11 +747,6 @@
 			kill_population_percent_in_state = {
 				percent = 1
 			}
-			create_pop = {
-				culture = athabaskan
-				religion = animist
-				size = 2003
-			}
 		}
 	}
 
