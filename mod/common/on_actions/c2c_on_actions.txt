@@ -17,5 +17,21 @@ on_c2c_start = {
                 }
             }
         }
+        s:STATE_BRITISH_COLUMBIA = {
+            set_owner_of_provinces = {
+                country = c:ORG
+                provinces = {
+                    x064FE6 x06BB33
+                }
+            }
+        }
+        s:STATE_NEW_BRUNSWICK = {
+            set_owner_of_provinces = {
+                country = c:NBS
+                provinces = {
+                    x082153
+                }
+            }
+        }
     }
 }

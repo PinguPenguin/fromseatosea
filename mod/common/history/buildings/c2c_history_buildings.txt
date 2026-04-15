@@ -341,6 +341,12 @@
 				}
 			}
 		}
+		region_state:NVS = {
+			remove_building = building_trade_center
+			remove_building = building_fishing_wharf
+			remove_building = building_barrack
+			remove_building = building_port
+		}
 	}
 
 	s:STATE_NEWFOUNDLAND = {

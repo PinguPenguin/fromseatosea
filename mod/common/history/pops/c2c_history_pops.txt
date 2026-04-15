@@ -236,6 +236,16 @@
 				size = 3336
 			}
 		}
+		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:ATB = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
 	}
 
 	s:STATE_EDMONTON = {
@@ -501,6 +511,11 @@
 				culture = irish
 				religion = protestant
 				size = 17465
+			}
+		}
+		region_state:NVS = {
+			kill_population_percent_in_state = {
+				percent = 1
 			}
 		}
 	}

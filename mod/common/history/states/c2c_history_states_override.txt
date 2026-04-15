@@ -24,7 +24,7 @@
 	s:STATE_BRITISH_COLUMBIA = {
 		set_owner_of_provinces = {
 			country = c:ORG
-			provinces = { x04D4BA x064FE6 x06BB33 x08B5F9 x09EC2E x0D33A7 x0FD228 x1BD217 }
+			provinces = { x04D4BA x08B5F9 x09EC2E x0D33A7 x0FD228 x1BD217 }
 			provinces = { x1D0C09 x21CE74 x2541A9 x277AC6 x28613E x304439 x37C6AC x37D2E9 }
 			provinces = { x38DFFE x3B97B7 x44535C x46BACD x48A9D1 x4B2499 x4C08A9 x4D3ACE }
 			provinces = { x4EBD49 x515BE2 x51B430 x53444F x5AE4F9 x5BB5B5 x6040C0 x6A0A2C }
@@ -34,6 +34,15 @@
 			provinces = { xDDD8D9 xDE9E89 xE06C22 xE33420 xE3380D xE52F87 xEE0358 xFD59A0 }
 			provinces = { xFE866D }
 		}
+		# Leave one province with HBC and one with ATB so the startup transfer collapses the phantom vanilla split cleanly.
+		set_owner_of_provinces = {
+			country = c:HBC
+			provinces = { x064FE6 }
+		}
+		set_owner_of_provinces = {
+			country = c:ATB
+			provinces = { x06BB33 }
+		}
 	}
 
 	s:STATE_MANITOBA = {
@@ -42,6 +51,20 @@
 			provinces = { x04F2AC x21A006 x54C371 xB6B0DF xD93231 xE11EC4 }
 		}
 		add_homeland = cu:franco_canadian
+	}
+
+	s:STATE_NEW_BRUNSWICK = {
+		set_owner_of_provinces = {
+			country = c:NBS
+			provinces = { xF01C37 x8ED253 xC91FD7 x70A0CE x71A015 x8E553E x484A09 xDE0FD5 }
+			provinces = { x20CF66 xEE2FFF x493CD4 x70C040 xD090A6 x740012 x62FC6A x4D9EEE }
+			provinces = { x5A0CA8 x326F36 x66DFE7 xBB0F05 x7040C0 }
+		}
+		# Leave one province with NVS so the startup transfer collapses the phantom vanilla split cleanly.
+		set_owner_of_provinces = {
+			country = c:NVS
+			provinces = { x082153 }
+		}
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
