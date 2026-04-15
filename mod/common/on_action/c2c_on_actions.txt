@@ -14,6 +14,12 @@ on_c2c_start = {
 
 #Rideau actually belongs to Upper Canada, waow
 on_game_started = {
+	on_actions = {
+		c2c_map_startup
+	}
+}
+
+c2c_map_startup = {
     effect = {
         s:STATE_ONTARIO = {
             set_owner_of_provinces = {
