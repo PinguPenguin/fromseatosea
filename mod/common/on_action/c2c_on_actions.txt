@@ -9,5 +9,13 @@ on_c2c_start = {
             name = c2c_is_loaded
             value = yes
         }
+        s:STATE_ONTARIO = {
+            set_owner_of_provinces = {
+                country = c:ONT
+                provinces = {
+                    xE6C706
+                }
+            }
+        }
     }
 }
