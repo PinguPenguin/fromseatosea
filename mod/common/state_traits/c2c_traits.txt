@@ -1,4 +1,4 @@
-state_trait_burrard_inlet = {
+﻿state_trait_burrard_inlet = {
 	icon = "gfx/interface/icons/state_trait_icons/fjords.dds"
 
 	modifier = {
