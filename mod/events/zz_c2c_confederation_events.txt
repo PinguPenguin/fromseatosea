@@ -1,0 +1,66 @@
+namespace = can_aus
+
+can_aus.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.5.t
+	desc = can_aus.6.d
+	flavor = can_aus.5.f
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				OR = {
+					country_has_primary_culture = cu:anglo_canadian
+					country_has_primary_culture = cu:franco_canadian
+				}
+				any_scope_state = {
+					OR = {
+						state_region = s:STATE_NEWFOUNDLAND
+						state_region = s:STATE_LABRADOR
+						state_region = s:STATE_NOVA_SCOTIA
+						state_region = s:STATE_NEW_BRUNSWICK
+						state_region = s:STATE_SAINT_LAURENT
+						state_region = s:STATE_QUEBEC_SAGUENAY
+						state_region = s:STATE_NOUVEAU_QUEBEC
+						state_region = s:STATE_ONTARIO_PENINSULA
+						state_region = s:STATE_ALGOMA
+						state_region = s:STATE_NORTHWEST_ONTARIO
+						state_region = s:STATE_MANITOBA
+						state_region = s:STATE_SASKATCHEWAN
+						state_region = s:STATE_ALBERTA
+						state_region = s:STATE_BC_INTERIOR
+						state_region = s:STATE_BRITISH_COLUMBIA
+						state_region = s:STATE_YUKON_TERRITORY
+						state_region = s:STATE_NORTHWEST_TERRITORIES
+						state_region = s:STATE_NUNAVUT
+					}
+					count >= 15
+				}
+			}
+			save_scope_as = canada_country
+		}
+	}
+
+	option = {
+		name = can_aus.5.a
+		add_modifier = {
+			name = gbr_unified_canada
+			days = normal_modifier_time
+		}
+	}
+}
