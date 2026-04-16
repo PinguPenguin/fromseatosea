@@ -1,0 +1,3 @@
+﻿l_english:
+ state_trait_burrard_inlet:0 "Burrard Inlet"
+ state_trait_port_of_prince_rupert:0 "Port of Prince Rupert"
