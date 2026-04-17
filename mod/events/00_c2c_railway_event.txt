@@ -1,0 +1,62 @@
+namespace = major_railways
+
+major_railways.3 = {
+	type = country_event
+	event_image = {
+		video = "unspecific_trains"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	duration = 3
+	placement = scope:pacific_railroad_end
+	title = major_railways.3.t
+	desc = major_railways.3.d
+	flavor = major_railways.3.f
+
+	trigger = {
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				state_region = s:STATE_BRITISH_COLUMBIA
+			}
+			save_scope_as = pacific_railroad_end
+		}
+	}
+
+	option = { # settle the west coast
+		name = major_railways.3.a
+		default_option = yes
+
+		every_scope_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_BC_INTERIOR
+					state_region = s:STATE_BRITISH_COLUMBIA
+				}
+			}
+			add_modifier = {
+				name = canada_settlement_mod
+				days = normal_modifier_time
+				multiplier = 2
+			}
+		}
+	}
+	option = { # settle the prairies
+		name = major_railways.3.b
+		every_scope_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_ALBERTA
+					state_region = s:STATE_SASKATCHEWAN
+					state_region = s:STATE_MANITOBA
+				}
+			}
+			add_modifier = {
+				name = canada_settlement_mod
+				days = normal_modifier_time
+			}
+		}
+	}
+}
