@@ -1,0 +1,300 @@
+REPLACE_OR_CREATE:ATB = {
+	color = { 97 73 102 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_ALASKA
+}
+
+REPLACE_OR_CREATE:NEW = {
+	color = { 255 211 56 }
+
+	country_type = colonial
+	tier = principality
+
+	cultures = { british }
+	capital = STATE_NEWFOUNDLAND
+	is_named_from_capital = yes
+}
+
+CPW = {
+	color = { 234 67 143 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_NORTHWEST_TERRITORIES
+}
+
+DGB = {
+	color = { 90 23 43 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_NORTHWEST_TERRITORIES
+}
+
+DKL = {
+	color = { 34 176 78 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+DNZ = {
+	color = { 66 54 15 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+ECR = {
+	color = { 6 250 121 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_NUNAVUT
+}
+
+GVT = {
+	color = { 23 152 88 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { siouan }
+	capital = STATE_MONTANA
+}
+
+GWC = {
+	color = { 56 59 65 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_YUKON_TERRITORY
+}
+
+HDA = {
+	color = { 180 14 23 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+INK = {
+	color = { 20 30 120 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { inuit }
+	capital = STATE_NUNAVUT
+}
+
+INN = {
+	color = { 239 131 3 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_NUNAVUT
+}
+
+INV = {
+	color = { 30 45 180 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { inuit }
+	capital = STATE_NORTHWEST_TERRITORIES
+}
+
+KTN = {
+	color = { 25 163 105 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+LLT = {
+	color = { 56 75 93 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+OJI = {
+	color = { 114 73 9 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_NUNAVUT
+}
+
+SAL = {
+	color = { 170 204 203 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_WASHINGTON
+}
+
+STU = {
+	color = { 75 65 145 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_NORTHWEST_TERRITORIES
+}
+
+SVY = {
+	color = { 45 32 145 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_NORTHWEST_TERRITORIES
+}
+
+SWC = {
+	color = { 73 146 169 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_NUNAVUT
+}
+
+SWP = {
+	color = { 56 87 34 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+SYX = {
+	color = { 167 56 4 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+TLT = {
+	color = { 34 65 178 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+TTC = {
+	color = { 17 64 81 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_YUKON_TERRITORY
+}
+
+WCR = {
+	color = { 187 197 129 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_NUNAVUT
+}
+
+WKS = {
+	color = { 53 94 59 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+usfp_ALG = {
+	color = { 114 73 25 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { algonquian }
+	capital = STATE_QUEBEC
+}
+
+usfp_ATK = {
+	color = { 114 100 25 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_QUEBEC
+}
+
+usfp_IPQ = {
+	color = { 10 15 60 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { inuit }
+	capital = STATE_ALASKA
+}
+
+usfp_TSI = {
+	color = { 165 240 34 }
+
+	country_type = decentralized
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_BRITISH_COLUMBIA
+}

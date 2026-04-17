@@ -1,0 +1,224 @@
+COUNTRIES = {
+	c:ATB ?= {
+		remove_modifier = native_conscription_10
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:CTF ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:IRC ?= {
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:NEW ?= {
+		effect_starting_technology_tier_2_tech = yes
+
+		activate_law = law_type:law_colonial_administration
+		activate_law = law_type:law_wealth_voting
+		activate_law = law_type:law_religious_schools
+		activate_law = law_type:law_freedom_of_conscience
+		activate_law = law_type:law_women_own_property
+		activate_law = law_type:law_per_capita_based_taxation
+		activate_law = law_type:law_appointed_bureaucrats
+		activate_law = law_type:law_right_of_assembly
+		activate_law = law_type:law_racial_segregation
+		activate_law = law_type:law_mercantilism
+		activate_law = law_type:law_interventionism
+		activate_law = law_type:law_homesteading
+
+		ig:ig_armed_forces ?= {
+			add_ruling_interest_group = yes
+		}
+		c:GBR = {
+			create_diplomatic_pact = {
+				country = c:NEW
+				type = colony
+			}
+		}
+		add_taxed_goods = g:grain
+	}
+
+	c:CPW ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:DGB ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:DKL ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:DNZ ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:ECR ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:GVT ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:GWC ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:HDA ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+	}
+
+	c:INK ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:INN ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:INV ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:KTN ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:LLT ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:OJI ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:SAL ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+	}
+
+	c:STU ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:SVY ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:SWC ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:SWP ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:SYX ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:TLT ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:TTC ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:WCR ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:WKS ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+	}
+
+	c:usfp_ALG ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:usfp_ATK ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:usfp_IPQ ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		activate_law = law_type:law_slavery_banned
+	}
+
+	c:usfp_TSI ?= {
+		effect_starting_technology_tier_4_tech = yes
+		effect_starting_politics_traditional = yes
+		effect_native_conscription_10 = yes
+		activate_law = law_type:law_slavery_banned
+	}
+}

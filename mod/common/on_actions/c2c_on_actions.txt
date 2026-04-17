@@ -19,7 +19,7 @@ on_c2c_start = {
         }
         s:STATE_BRITISH_COLUMBIA = {
             set_owner_of_provinces = {
-                country = c:ORG
+                country = c:DKL
                 provinces = {
                     x064FE6 x06BB33
                 }
@@ -33,13 +33,18 @@ on_c2c_start = {
                 }
             }
         }
-		#temp bugfix to give NWT all to HBC
+		# Collapse the temporary Yukon/NWT vanilla split onto the usfp owner map.
         s:STATE_NORTHWEST_TERRITORIES = {
             set_owner_of_provinces = {
-                country = c:HBC
+                country = c:GWC
                 provinces = {
-                    x14B03B x15FC1A x1F0BA5 x2EB016 xC97FEC xCB7E23 xD31F1A xDEF7F2
-                    xE742CD xFD9177
+                    x1F0BA5 xCB7E23 xE742CD xFD9177
+                }
+            }
+            set_owner_of_provinces = {
+                country = c:usfp_IPQ
+                provinces = {
+                    x14B03B x15FC1A x2EB016 xC97FEC xD31F1A xDEF7F2
                 }
             }
         }
