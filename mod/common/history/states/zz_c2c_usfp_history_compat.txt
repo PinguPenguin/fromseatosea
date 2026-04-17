@@ -1,0 +1,445 @@
+STATES = {
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_ALBERTA = {
+		set_owner_of_provinces = {
+			country = c:BLF
+			provinces = { x664d82 x6b4b18 x7ef3c4 x84be26 xa93567 xbdac6b xf56f14 }
+		}
+		set_owner_of_provinces = {
+			country = c:GVT
+			provinces = { x0ad7a5 xa68f40 xcb25ca x144e07 x518d4f }
+		}
+		set_owner_of_provinces = {
+			country = c:IRC
+			provinces = { x471b95 xb4ed84 x7911bb }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_ALGOMA = {
+		set_owner_of_provinces = {
+			country = c:CTF
+			provinces = { x42f312 x6b2093 xaba06f x1f0d15 x263f77 x26ef2a x2ad0e3 x2b36a1
+			             x313bb2 x4020c0 x520bf5 x56a6fd x5e776d x676e1e x724f63 x7b1ae4
+			             x8f87b9 x90a5c2 x993abf xa07380 xa794c1 xa7b9ee xb2d5dc xba1406
+			             xbab329 xc0a0c0 xd2b39a xde7b99 xea4fc0 xeaebd8 xf03811 }
+		}
+		set_owner_of_provinces = {
+			country = c:OJI
+			provinces = { x88147f xc75f8c }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_ATHABASCA = {
+		set_owner_of_provinces = {
+			country = c:CPW
+			provinces = { x0e80fb x487992 x4c24ef x771c6f x80a0a3 x8626e9 x87acec x91d858
+			             x926957 x9a52f2 xa09daf xa3151a xa489ba xa4c569 xa91fd6 xcdac4c
+			             xe32d1b xef3ed9 xfe3901 }
+		}
+		set_owner_of_provinces = {
+			country = c:DNZ
+			provinces = { x0877da x1392fd x22820c x3673d9 x381007 x3d060d x4fb5bd x89c402
+			             x8d811f x8e154a x97d4a4 x980251 x9eaabc xa45402 xaa6118 xaeb7c9
+			             xb1775f xb66b81 xb84007 xcd72ad xd1d7e7 xdc6a00 xe225be xe85e02
+			             xeaef3d xec5a3a xef3717 }
+		}
+		set_owner_of_provinces = {
+			country = c:IRC
+			provinces = { x02a092 x043fc9 x0a84c8 x186af1 x1f8897 x2d5c98 x2f5b26 x3628b1
+			             x40a0ea x4e9b73 x7502d8 x81ed91 x886e4a xc04000 xc17db9 xc286c9
+			             xc6334c xc94f32 xe154e6 xe4209a xe54214 xe6e5c3 xe99cd6 xef9af6
+			             xf057a9 xf7a1c4 }
+		}
+		set_owner_of_provinces = {
+			country = c:SVY
+			provinces = { x0a5171 x0ec207 x120eea x150075 x21e777 x317ba1 x394c8f x3f4262
+			             x4d6778 x62957e x74e2cf x7b461e x9a96ba xaf9ce8 xb27e30 xc9be8f
+			             xcd4c74 xd8277c xdc7245 xe1c1a4 xe2baeb xf5d3a9 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_BC_INTERIOR = {
+		set_owner_of_provinces = {
+			country = c:DKL
+			provinces = { x2bbea4 x52c081 x5c6656 }
+		}
+		set_owner_of_provinces = {
+			country = c:KTN
+			provinces = { x06eeac x453f2b x521640 x5a6f3e x61cacb x738afd x7bdc98 x804a90
+			             x83b2a7 x8b9b2e x9b5b04 x9c275b xaa8177 xafe769 xb3a699 xd9a050
+			             xdcf8ed xdd172e xe01e2e xe764c0 xfbe9a2 xfd4c5e }
+		}
+		set_owner_of_provinces = {
+			country = c:SWP
+			provinces = { x0eae6c x335573 x497376 x4d08e1 x69c90f x70aaaf x77ad45 x8d62e7
+			             xa0d447 xc0a000 xcdaf46 xe811d1 xede38b xee83f2 }
+		}
+		set_owner_of_provinces = {
+			country = c:SYX
+			provinces = { x0d5e87 x34c789 x362e8f x490d37 x4df1b5 x605f60 x852913 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_BRITISH_COLUMBIA = {
+		set_owner_of_provinces = {
+			country = c:DKL
+			provinces = { x08b5f9 x1d0c09 x28613e x4b2499 x75646f x774bea xa599df xad1122
+			             xde9e89 xe33420 x064fe6 x06bb33 }
+		}
+		set_owner_of_provinces = {
+			country = c:LLT
+			provinces = { x2541a9 x37c6ac x37d2e9 x46bacd x53444f x83ec3f x90bfef xabc1f1
+			             xd833d7 }
+		}
+		set_owner_of_provinces = {
+			country = c:SAL
+			provinces = { x38dffe x4c08a9 x4d3ace x4ebd49 xe06c22 xe3380d xe52f87 }
+		}
+		set_owner_of_provinces = {
+			country = c:SYX
+			provinces = { x09ec2e x21ce74 x3b97b7 x95dd40 xb3d999 xc40501 xc8510a xcf67bb
+			             xd1eae5 xda702a xee0358 }
+		}
+		set_owner_of_provinces = {
+			country = c:WKS
+			provinces = { x04d4ba x0d33a7 x0fd228 x277ac6 x304439 x48a9d1 x51b430 x5bb5b5
+			             x893e23 x89c9ac x9a96c1 x9aef89 xa3cc82 xbd2011 xbf338d xc5762f
+			             xddd8d9 xfd59a0 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_EDMONTON = {
+		set_owner_of_provinces = {
+			country = c:DNZ
+			provinces = { x001b22 x060c67 x0e6b0a x1c413a x3b027f x4e03e3 x670a46 x6a64cd
+			             x6dc09d x759e96 x7a03dc x89c61f x933c14 xa150dd xa74a2f xa86910
+			             xbe8dc0 xcb77d5 xdfa1bb xf11edd xfcb25c }
+		}
+		set_owner_of_provinces = {
+			country = c:IRC
+			provinces = { x12af70 x594542 x6241e5 x6b0266 x70370b x7f49e7 x00f631 x072ddc
+			             x107893 x10bf0f x1197cd x23ba24 x285a4e x2fa24b x397f40 x3991ab
+			             x39e46c x402b2e x433bc6 x518f22 x51cec5 x52fcb4 x55f9ab x56971b
+			             x5779a2 x583eaa x673ca0 x676674 x67cabb x7340b5 x799cfa x840a15
+			             x8a6d99 x8f67dc x907360 x92aabe x92ad8f xa75296 xa9976f xb2b31f
+			             xc07fc1 xc3d71f xc45e08 xc4e828 xc5a257 xd1a1d9 xdaac5c xdcc985
+			             xeddf68 xefa433 xf4ec2d xfca61c }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_KEEWATIN = {
+		set_owner_of_provinces = {
+			country = c:CPW
+			provinces = { x0cdfef x165b36 x187c58 x1c140f x2275df x395554 x3e8475 x44ef6b
+			             x4503e6 x45d044 x555bad x5b4e49 x5e806d x5f1f9d x75f292 x7ee88a
+			             x7f8573 x86d18a x8a7316 x9455f5 xb448a4 xb4abac xbb5ea2 xe19213
+			             xe25d1f xe7cb96 xf73080 xf779d9 xf9bb2e xfa5fa2 }
+		}
+		set_owner_of_provinces = {
+			country = c:OJI
+			provinces = { xad40b0 }
+		}
+		set_owner_of_provinces = {
+			country = c:SWC
+			provinces = { x00f433 x09ccbb x544568 x5cc4c6 x7122b4 x78225b xbe34c5 xc587cd
+			             xcca2c5 xd0d2b7 }
+		}
+		set_owner_of_provinces = {
+			country = c:WCR
+			provinces = { x0c1436 x0c2c81 x0e6ed3 x0f245d x13fc0f x1510b9 x180d7a x18f5ee
+			             x1ee51c x24df1c x253e84 x3612f5 x38d2b3 x40e000 x43ecf0 x44cca9
+			             x46b922 x4d0581 x55e100 x57afc4 x5be5bf x5e3093 x65f69e x6a73e3
+			             x6c06d8 x70f127 x7a3e48 x7a790a x7a8dc0 x8521ab x857dd7 x85f1ea
+			             x86229f x9d05eb x9e3dc0 xa182ab xa57384 xa9c5c0 xb0f3c2 xba7439
+			             xc61e9b xc8467f xc9790e xc9870b xc99667 xca95ea xd1f715 xdd60f3
+			             xe0f215 xf2ad8f xf2debd xf4a9f1 xf73ff8 xf7af04 xf8510f xf91e7e
+			             xfb1b79 xfd8b0c }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_LABRADOR = {
+		set_owner_of_provinces = {
+			country = c:NEW
+			provinces = { x5ef6eb }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_NORTHWEST_ONTARIO = {
+		set_owner_of_provinces = {
+			country = c:CTF
+			provinces = { x0fe1b2 x101204 x15c12c x22e40f x271949 x343659 x3c2a27 x48dfb9
+			             x490d2a x4d3033 x569e74 x62baf4 x77bc8d x7bd091 x7cf31c x827b75
+			             x866c8a x8d992e x9aa464 x9c3f51 xa22f7e xa24eb6 xb27fd6 xb4f7b9
+			             xce6d4a xd29273 xd3807d xd5cd71 xd64816 xe50d46 xe99d1d xfa9af5
+			             x24171d x3cb77d x54f237 x5d7155 x5f5f99 x64970e x780aaa x9577b0
+			             x99f3c4 x9cc0d0 x9dbfa5 xc134a4 xc5041f xd319eb xd389de xff5559 }
+		}
+		set_owner_of_provinces = {
+			country = c:OJI
+			provinces = { x011713 x037f88 x04633f x08335d x0e2f58 x11deb9 x13f9fa x196c5f
+			             x1c5746 x1e2884 x20f7a5 x2f2c82 x33bd4e x37d9e8 x3927f5 x398e4c
+			             x41a233 x4b09c5 x4cf9f7 x4dffcd x5699d1 x58158a x5a3d13 x5fd282
+			             x64ad7d x6b64f8 x6e78ac x7383df x7fb431 x99ab17 x9df567 x9e7cad
+			             xa83989 xb0cb2a xbe6ade xc33c7e xc42b28 xd6162e xd849e6 xe0da0b
+			             xe1f252 xe58c05 xe61337 xef374f xf2120d xf6a5a4 }
+		}
+		set_owner_of_provinces = {
+			country = c:SWC
+			provinces = { x00cb48 x00f376 x06958b x08f7a9 x0d2f27 x0d7566 x1176c6 x1695df
+			             x192c84 x1b4c6d x1c6f98 x1ddb81 x20327a x208af2 x23c839 x243b2a
+			             x280a1d x297066 x2a8963 x2b78b9 x2bc058 x2dd641 x2e6c75 x2f570d
+			             x31a991 x355aca x36b818 x383ea0 x388c4e x399ca7 x3e7368 x406000
+			             x411a9b x4164f7 x4a04b2 x4c823a x4f35d0 x4f738b x560e55 x5b8a5f
+			             x5d9879 x61c521 x61cd70 x6334f9 x6893b6 x6a902f x6bcc92 x6cbb4f
+			             x6e6170 x6e90ea x6ffe7e x76a0e6 x78a3ba x795ad3 x79dc59 x7ab82c
+			             x824210 x853b98 x903279 x932b65 x93bd4c x940c24 x9cc19e xa00289
+			             xa2f8dd xa6f3ba xa70030 xa7d370 xab2c76 xab9db4 xacd62e xad5354
+			             xad7d1f xae0541 xb026c2 xb090ad xb4468d xb54962 xb6b30d xbdbecb
+			             xcf1990 xcfbce8 xd03bf3 xd17651 xd2ee35 xd37405 xd5f515 xd7414c
+			             xd841d9 xdce271 xdd7290 xdeda97 xe756c1 xe961e9 xeb4bdb xed6465
+			             xf3d744 xf45c86 xfbb002 xfc4f0d xfe02ce xff8a91 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_NORTHWEST_TERRITORIES = {
+		set_owner_of_provinces = {
+			country = c:GWC
+			provinces = { x1f0ba5 xcb7e23 xe742cd xfd9177 x0efeb5 x2d2b9a x2fb1a9 x48efd3
+			             x4de6d8 x57a279 x65cd76 x69bf88 x793a86 x8d0001 x911e83 xbfec14
+			             xc3ec0a xc666bd xc83863 xd3d91d xf2bab1 xf3cdf6 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_NORTH_SASKATCHEWAN = {
+		set_owner_of_provinces = {
+			country = c:CPW
+			provinces = { x01b33d x06ab9d x08b4f9 x0a2ccf x12e022 x166b44 x17c895 x19a2ee
+			             x1ef389 x1fde39 x2322de x280549 x281860 x2837f0 x3168f1 x364cb6
+			             x43634b x43ad4a x44502c x4623ff x4ad41c x4b1fa6 x4e53e1 x5410de
+			             x58a79e x5b2e01 x5c25d6 x5c699d x5ddbf4 x5fee31 x6ae53a x73f1e8
+			             x79210d x7a4b9b x7f64bc x8080a7 x871aa5 x8da75a x8e4372 x922237
+			             x928ee3 x94b087 x95534b x97993b x9ff6e4 xaeb7c5 xbbb0e5 xc09f00
+			             xc0d10f xc10e8d xc18671 xc6c382 xc826e9 xce1d48 xce6b2c xcedae2
+			             xd0df51 xd30931 xd9665f xd9c98f xdd93b6 xe1280e xe1dcd7 xe3a0fd
+			             xe4775e xe51c72 xea25bc xebafe0 xef8b24 xf01c28 xf083ed xf42c50
+			             xf7519a xff08d7 }
+		}
+		set_owner_of_provinces = {
+			country = c:IRC
+			provinces = { x13a156 x1757cc x1d94aa x34b4d3 x3fe00a x3ffb80 x4c29e7 x50ddcb
+			             x5b8650 x5bb079 x5d8481 x6dad90 x6efbd9 x85cf1d x8b891e x9add51
+			             xc2043b xd3cb06 xd97c0e xe7c7cd xefca8a xfb2b8c }
+		}
+		set_owner_of_provinces = {
+			country = c:WCR
+			provinces = { x0ae42e x1e17c5 x21a007 x3b6c38 x8bcfe8 x90cf2d xb6c4a3 xc06000
+			             xda9446 xdf3ac1 xeef418 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_NOUVEAU_QUEBEC = {
+		set_owner_of_provinces = {
+			country = c:ECR
+			provinces = { x0214df x04464b x048c88 x0f855d x104f0a x11fd71 x14e213 x191e87
+			             x193f3b x1c9ca2 x1ec3c7 x1f46d0 x1fd040 x220b8d x232423 x2437ce
+			             x2a8839 x376d14 x392025 x3c9588 x3f2bfb x42b6b7 x43b321 x44d5c6
+			             x46c43b x4b1a1d x4c8b4f x4d0622 x4decb4 x4ea501 x507c6b x5233fc
+			             x52846a x56f70f x5b10c0 x5ba141 x5c3957 x6443eb x68370f x684ad0
+			             x68dbf9 x6af51d x6b1341 x6d188a x6fa797 x706aad x732d2d x798f9e
+			             x7c74e8 x7e3609 x80c199 x81378e x82a9af x86f0bb x889a4c x89ce59
+			             x8b6679 x8c76a6 x90b03e x917230 x92174d x955d56 x95a010 x9a6a15
+			             x9acbbf x9c85fa x9dbe36 xa23f03 xa7ea05 xad0aec xaf8f89 xb040b8
+			             xb67dfb xb7a766 xb7ff8a xb95e82 xbca821 xbed37a xc0a695 xc1a1e6
+			             xc236bd xc239f2 xc43f22 xc4c803 xc6f8c3 xc82b9f xc9a97e xd3f860
+			             xd5828b xda3fbc xdac797 xdae151 xddcd0d xe5a8d9 xe61c07 xea82c4
+			             xebc6d3 xed6b51 xef033c xef8303 xf1724f xf2bf7e xf3f346 xfb68bf
+			             xfbad9b xffbebc }
+		}
+		set_owner_of_provinces = {
+			country = c:INK
+			provinces = { x0000c0 x038c02 x0452f3 x06255c x062e92 x06f336 x084179 x085d59
+			             x0aa539 x0b4dfd x0b737c x0b9764 x0c6ae4 x11192e x13c360 x141935
+			             x16cfcb x1b97e4 x1e71b4 x1f7ba8 x21597f x21d72e x23f6cc x247a18
+			             x25dc66 x2793a0 x290b54 x29c046 x2a40f1 x2c4c0f x2f1701 x307a15
+			             x326543 x32dfd2 x350047 x36876c x38b429 x3c2f86 x3ed2db x4112aa
+			             x46467a x499fb6 x4a9f05 x4aaee7 x4b32dc x4d27e6 x4d370f x4f1a54
+			             x4f335a x5040af x517a80 x51949a x51cf24 x53e74e x53e955 x54d79e
+			             x561cf3 x568c12 x59fba8 x5b8149 x5d1b1a x5e9628 x5ef02f x6040c4
+			             x60fc5c x62ce97 x63918e x66a256 x66fdf8 x67c76e x683fb6 x68402a
+			             x69e64d x6b3eb5 x6d2618 x6e6753 x76a99e x773791 x788810 x795074
+			             x79e1c6 x7ae0a2 x7b728d x7bb2f1 x7bdad0 x7c3f68 x7d7012 x7e0b84
+			             x7f0c4f x8329d3 x834484 x864a3a x8a6937 x8b2119 x8cf0b9 x8e1dac
+			             x9050b8 x907833 x92f132 x9315bc x939a08 x95e0dc x96b85f x972704
+			             x9b5749 x9b6054 x9b7a14 x9c5236 x9d0d78 x9d46b1 xa54a42 xa67c5c
+			             xa7b019 xa8be58 xa9f068 xaa9cdb xab6fe2 xaba573 xabcf6b xae1ef2
+			             xaf2efe xb0da28 xb3aed8 xb6023c xb671b8 xb70866 xba04a4 xbb2c30
+			             xbb606d xbb863e xbd1776 xc04bb6 xc0a7ef xc13d2c xc303bd xc62d1b
+			             xc75269 xc83b39 xc8d924 xc940c5 xca5e91 xca6f1b xcd957e xce0625
+			             xd03cd5 xd1352b xd17183 xd20107 xd34de8 xd414f5 xd4a5dd xd4e8b5
+			             xd51f8e xd5666e xd74d19 xd822ec xd93335 xd99aa0 xd9e9fb xddbfbd
+			             xdeeedd xe29144 xe2ffd8 xe40566 xe58487 xe94e94 xea49d9 xeabc88
+			             xeb2882 xeb9966 xec2cf8 xec8b7d xefcd73 xf04d97 xf0de11 xf306c9
+			             xf35b22 xf3df90 xf5f4e3 xf7e5fd xf9db91 xfe2104 xfe2408 xff1907 }
+		}
+		set_owner_of_provinces = {
+			country = c:INN
+			provinces = { x0450df x171edd x1b2a0a x1b5387 x1c322f x1de99f x22f3b7 x2334f4
+			             x25379c x2bf734 x315ef7 x3288ef x340423 x3884e9 x38c993 x3a1131
+			             x406040 x432d6d x488bfb x5ee3f1 x6084e4 x6792eb x6e7083 x71ac15
+			             x71bcd8 x721561 x76410f x7a0f83 x7c2b11 x7cec81 x824434 x87dec2
+			             x8d0fee x943ccb x9ae75e xa4b0df xa5b2ec xae70af xb0f75b xc0de62
+			             xc8540f xca4bcc xd09e14 xd272bd xdb25c8 xe2b5da xf6b33d xfccedb
+			             xfe65fc xff3ae7 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_NUNAVUT = {
+		set_owner_of_provinces = {
+			country = c:CPW
+			provinces = { x0905c3 x1be2b8 x299979 x445f70 x5d2a9c x6b9fdb x926422 x9b110f
+			             xa11994 xacd40b xe0af0c xe43828 xeb9059 xf89214 }
+		}
+		set_owner_of_provinces = {
+			country = c:INV
+			provinces = { x345296 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_ONTARIO = {
+		set_owner_of_provinces = {
+			country = c:CTF
+			provinces = { x0538f5 x480b4b x48e362 x4c056c x4d24ac x65f177 x93acbb xc95021
+			             xca480f }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_SASKATCHEWAN = {
+		set_owner_of_provinces = {
+			country = c:GVT
+			provinces = { x6a28ce x8015b3 xca657a xe74adb xee8586 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_UPPER_BC = {
+		set_owner_of_provinces = {
+			country = c:DKL
+			provinces = { x2600c9 x6a10e2 xda096e x377b09 x3d7cf6 x5a9ba4 x63fbf3 x6c8005
+			             x6c8c52 x6f3aaf x795d42 x8dcfda xa01450 xa78118 xb6226d xb8325d
+			             xbbf2bb xc7ab8a xcb92d8 xd1aa6a xd369b9 xf0e9a1 xfefb89 }
+		}
+		set_owner_of_provinces = {
+			country = c:DNZ
+			provinces = { x098440 x2e14f8 x862333 xde98a3 xe02548 x03a13c x084c04 x25dd86
+			             x267f51 x27d1c9 x3108cf x34c75e x364f5d x36edbc x396fb1 x59f3fc
+			             x5c8e10 x6031e8 x65e312 x666995 x670613 x7fd1c6 x81606b xa697bd
+			             xa968d6 xaba1a8 xc50a34 xc826fd xda1e50 xdc970d xde374d xe240d1
+			             xe7d0d3 xe9b547 }
+		}
+		set_owner_of_provinces = {
+			country = c:HDA
+			provinces = { x003e09 x0d541b x5d8407 x607082 x74b3f3 x853c2d xa941a4 }
+		}
+		set_owner_of_provinces = {
+			country = c:SVY
+			provinces = { x196bbc x1c6431 x1fd5d0 x20156d x252116 x383856 x40028f x475882
+			             x4f2908 x5f06d2 x653b62 x87d0f6 x9860f4 x9c4123 xa504be xb175d9
+			             xb98d8c xc087bc xc0a02f xc132c8 xc7414d xf23e90 xfc10d7 xff5a75 }
+		}
+		set_owner_of_provinces = {
+			country = c:SWP
+			provinces = { x123bdd xa4c072 }
+		}
+		set_owner_of_provinces = {
+			country = c:TLT
+			provinces = { x0019c8 x004080 x0361f9 x03ea0d x05085f x07c186 x094ee3 x0c324c
+			             x0c50ab x0f979f x0fc30c x105e9e x124b70 x13bf55 x149257 x17186d
+			             x172779 x173d99 x17ac99 x1a457c x1c0d58 x202671 x20a6bc x20d07c
+			             x23e4de x2613cc x27b8cb x2da2d0 x2f367f x2f6de4 x35417d x361836
+			             x367cc4 x398ab7 x3a5746 x3f6e46 x411ce0 x42cc6b x4383d7 x45712d
+			             x457edc x45ccd8 x4a2d16 x4ad217 x4afa0e x4cb32b x4d34b5 x4d47eb
+			             x502bc0 x53fa26 x54c8a5 x56dfdd x58555f x58a2f5 x5fbaa3 x63fc5c
+			             x664323 x674c91 x6d09cf x6d883b x6e651a x6ef14a x7088d1 x711438
+			             x768b68 x77fcf9 x784fac x7e9185 x7ec219 x7fe760 x827c30 x83263b
+			             x846bbd x84daef x85c5de x86384c x88982e x8a0525 x8a2d02 x8b7e77
+			             x8d9e74 x8da2a3 x90ec1e x945793 x97f1db x9bcbb0 x9c09f4 x9c4ebd
+			             x9d30a0 xa24464 xa595a4 xa9c721 xaac55e xab945f xad0c56 xb20af0
+			             xb2b319 xb34974 xb44559 xb55800 xb795cf xb84cb1 xbb7ed9 xbbc5f1
+			             xc0c173 xc0f62f xc39ee7 xc84186 xca984f xcbefc9 xd02fba xdb5bfc
+			             xdb73a1 xdff28b xe49b22 xe77af1 xe85e08 xe8d2d0 xe973d5 xe97a12
+			             xef46b1 xf7e225 xface14 x003c0a x780f19 x8c21f3 xbad980 xc8f21a
+			             xe057f6 xee19e4 x9d1421 xf0ad76 }
+		}
+		set_owner_of_provinces = {
+			country = c:WKS
+			provinces = { x0ef29e x5249e0 x63dabd x9540cc xa12143 xa3dd6f xbd3e1f xc79097
+			             xeef6b1 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_VANCOUVER_ISLAND = {
+		set_owner_of_provinces = {
+			country = c:SAL
+			provinces = { xc9a9ab xe9ac75 }
+		}
+		set_owner_of_provinces = {
+			country = c:WKS
+			provinces = { x24fab0 x2b750f x34639f x64e0b4 x6dfdd1 x76cd59 x7a8f60 x999e9b
+			             xc0b693 xfdf070 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_YUKON_TERRITORY = {
+		set_owner_of_provinces = {
+			country = c:GWC
+			provinces = { x05137c x096d1f x09bd9a x14a33f x15a49a x183a03 x19ee3b x1a6735
+			             x23aea8 x244229 x24c2c1 x2754df x2c272d x2d2c2d x2d5321 x2e3941
+			             x30d4a3 x33a055 x365975 x37b983 x38c295 x39101e x3cc6b1 x3e2849
+			             x400644 x403c43 x44b13a x47136c x47676b x4bf0e8 x4f1d47 x5255b3
+			             x55143a x5817b5 x6286e4 x6a4cd7 x703870 x7298a0 x73210a x7626d3
+			             x7c4be7 x81667a x833289 x898427 x89a524 x8b29ac x8c2b38 x90af53
+			             x93473a x9e99fc x9f9a64 xa43b5f xa63a3f xa86f61 xa8d5f5 xa8e775
+			             xaba3f4 xac9f19 xaf1462 xaf2c3d xb2a8e6 xb38a2c xb39c1b xb58175
+			             xb8405d xb9b72b xb9e827 xbcdb8d xbfd8b9 xc4080a xcb038a xcb16ec
+			             xd62445 xdb7755 xdd8241 xde80ac xe0383c xe13ab4 xe280a6 xe4b798
+			             xef3d84 xf9820f xfa31e3 xfb2b85 xfbaf0c xfc8cbc xfd7e50 xfe60e4
+			             xff4334 }
+		}
+		set_owner_of_provinces = {
+			country = c:HBC
+			provinces = { xb3cc99 }
+		}
+		set_owner_of_provinces = {
+			country = c:TLT
+			provinces = { x07a351 x07ecf5 x0a10af x0bb9b5 x0dba60 x12ebc2 x145f3e x17c9d9
+			             x193697 x194ba1 x24e698 x26408b x2ca985 x2e6271 x344699 x354974
+			             x377cb2 x38af9b x411a5c x42b6c5 x446ec5 x44d809 x44eb95 x4556cd
+			             x4e7d04 x4ec559 x518e76 x55129e x5d50cd x61dcfe x62ae36 x63735d
+			             x646cd4 x6d753e x76372f x787004 x83b0c8 x852cce x8a38cf x8b696a
+			             x8d7e0a x8fcd85 x9ca01a x9e9486 xa13095 xa9afa9 xb3b289 xb605a8
+			             xbef70d xc0d262 xcfc665 xd1fe3a xd58b87 xd709ea xd905fa xd97d42
+			             xdae588 xdc2f4c xe46b89 xe7c2e0 xe7ef77 xef10b4 xf54f0b xf70820
+			             xf8016c xf95e56 xfa64b0 xfc9250 x08da68 x1c7f21 x3ac631 x4209be
+			             x7290a1 xad0039 xd363ad xf965be xfbeedf }
+		}
+		set_owner_of_provinces = {
+			country = c:TTC
+			provinces = { x0044d7 x0079c0 x014651 x041de6 x0468df x04ec92 x07b4a4 x09c878
+			             x0a0ac6 x0a9ef9 x0fbe18 x116717 x1447b1 x14aa5f x15af5a x191f58
+			             x1dbe3c x1e4e5a x1e8de4 x20ad45 x251e32 x26dabe x26e543 x28d00b
+			             x2b542b x2d838f x2df021 x362102 x3a98aa x3b8a74 x3e9fac x408266
+			             x44f2f1 x456ec5 x45a693 x4b6fb2 x4b7fc1 x4be082 x4c1efa x4da9f6
+			             x50a90c x515deb x51b1be x55a5a9 x564c3e x5767ac x5bd01e x5db6e8
+			             x5e5525 x663178 x6c2d9c x6c5ad1 x6df16b x6e2546 x6e27ad x728ba5
+			             x763725 x771f99 x7d3108 x7db318 x7df691 x7ed5e1 x7edee5 x8253d3
+			             x857920 x892013 x8b7244 x8c71ed x8eeb71 x9095ba x90a9a1 x957643
+			             x9b49e4 x9cdec7 xa037fa xa0d757 xa2542e xa378db xa3f090 xa43670
+			             xa5f977 xa8a09f xaaec04 xadc92c xae0626 xb0556f xb16c7b xb41f04
+			             xb641fb xb6d5bc xb90c53 xbb7546 xbc77b1 xc06f11 xc08080 xc109ef
+			             xc1fe36 xc52505 xcc1729 xce5ede xcfa677 xd1f111 xd6a5c9 xd7c839
+			             xda042c xdae598 xdb1a94 xdc9785 xdd4100 xdd4d82 xe121da xe1af70
+			             xe24714 xe7714e xec5c0f xf04641 xf07b0d xf21f47 xf47376 xf678a1
+			             xf679c1 xf89626 xf96bff xfa828a xfb9977 xff6d40 xff96ca x2c2868
+			             x3e2cbf xaf1060 xbf1b61 }
+		}
+	}
+}

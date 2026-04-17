@@ -43,5 +43,22 @@ on_c2c_start = {
                 }
             }
         }
+		# Reapply USFP-compatible owners after the vanilla-split cleanup above.
+		s:STATE_BRITISH_COLUMBIA = {
+			set_owner_of_provinces = {
+				country = c:DKL
+				provinces = { x064FE6 x06BB33 }
+			}
+		}
+		s:STATE_NORTHWEST_TERRITORIES = {
+			set_owner_of_provinces = {
+				country = c:ATB
+				provinces = { x14B03B x15FC1A x2EB016 xC97FEC xD31F1A xDEF7F2 }
+			}
+			set_owner_of_provinces = {
+				country = c:GWC
+				provinces = { x1F0BA5 xCB7E23 xE742CD xFD9177 }
+			}
+		}
     }
 }
