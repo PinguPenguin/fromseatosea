@@ -1,4 +1,4 @@
-![thumbnail.png](/mod/.metadata/thumbnail.png)
+![releasePDXthumbnail.png]("/image/releasePDXthumbnail.png")
 
 A modification for the Paradox Interactive game, "Victoria 3".
 This mod is still in *very* early development. It aims to give the player an improved gameplay experience in Canada by overhauling the states/provinces, adding resources, companies, and (eventually) flavour events and journal entries.
