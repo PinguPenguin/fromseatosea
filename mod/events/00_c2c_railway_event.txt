@@ -1,4 +1,4 @@
-namespace = major_railways
+﻿namespace = major_railways
 
 major_railways.3 = {
 	type = country_event
