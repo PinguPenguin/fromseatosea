@@ -296,16 +296,12 @@ STATES = {
 	s:STATE_NUNAVUT = {
 		set_owner_of_provinces = {
 			country = c:CPW
-			provinces = { x048659 x07cd51 x0905c3 x1bcef6 x1be2b8 x1c0e3a x1c2526 x1e90cb
-			             x1f88d4 x299979 x29ac5e x29ede0 x30737e x394e70 x3fe8f9 x445f70
-			             x4577e6 x5bea85 x5d2a9c x67bb39 x6b9fdb x7aa1be x7f3b2a x87b6f9
-			             x8a9401 x926422 x97182b x98fec3 x9b110f x9d053d xa11994 xa9b6bc
-			             xacd40b xad0330 xafb041 xb37f05 xb85ba1 xb9f7c2 xc04080 xcd9a92
-			             xd1a412 xd205c1 xd6b890 xe0af0c xe43828 xeb9059 xeeec84 xf89214 }
+			provinces = { x0905c3 x1be2b8 x299979 x445f70 x5d2a9c x6b9fdb x926422 x9b110f
+			             xa11994 xacd40b xe0af0c xe43828 xeb9059 xf89214 }
 		}
 		set_owner_of_provinces = {
 			country = c:INV
-			provinces = { x345296 x8c5744 }
+			provinces = { x345296 }
 		}
 	}
 	# Reapply USFP owner assignments within c2c's split Canadian state layout.
