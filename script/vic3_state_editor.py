@@ -14,6 +14,16 @@ from pathlib import Path
 from tkinter import messagebox, ttk
 from typing import Callable
 
+try:
+    import numpy as np
+except Exception:  # noqa: BLE001
+    np = None
+
+try:
+    from PIL import Image
+except Exception:  # noqa: BLE001
+    Image = None
+
 
 CANADA_RELEVANT_TAGS = {
     "ATB",
@@ -68,6 +78,9 @@ LOCALIZATION_PATTERN = re.compile(r'(?m)^\s*(STATE_[A-Z0-9_]+):\d?\s+"(.*)"\s*$'
 C2C_HISTORY_STATES_FILENAME = "c2c_history_states_override.txt"
 C2C_HISTORY_POPS_FILENAME = "c2c_history_pops.txt"
 C2C_HISTORY_BUILDINGS_FILENAME = "c2c_history_buildings.txt"
+DEFAULT_USFP_DIRNAME = "Hail, Columbia!"
+POP_SOURCE_VANILLA = "vanilla"
+POP_SOURCE_USFP = "usfp"
 
 DARK_BG = "#14181e"
 DARK_PANEL = "#1b222c"
@@ -137,6 +150,13 @@ class OwnershipSlice:
 
 
 @dataclass
+class StateOverlap:
+    source_state_id: str
+    overlap_provinces: int
+    source_province_count: int
+
+
+@dataclass
 class PopRow:
     culture: str = ""
     religion: str = ""
@@ -173,6 +193,13 @@ class BuildingRow:
 
 
 @dataclass
+class PopulationReassignmentPlan:
+    source_kind: str
+    assigned_pops: dict[str, dict[str, list[PopRow]]] = field(default_factory=dict)
+    overlaps_by_state: dict[str, list[StateOverlap]] = field(default_factory=dict)
+
+
+@dataclass
 class StateRecord:
     state_id: str
     display_name: str
@@ -183,7 +210,11 @@ class StateRecord:
     ownership_source: Path | None
     homelands: list[str] = field(default_factory=list)
     loaded_homelands: list[str] = field(default_factory=list)
+    claims: list[str] = field(default_factory=list)
+    loaded_claims: list[str] = field(default_factory=list)
     state_history_template_entries: list[TopLevelEntry] = field(default_factory=list)
+    province_ids: list[str] = field(default_factory=list)
+    nearby_states: list[str] = field(default_factory=list)
     arable_land: str = ""
     arable_resources: list[str] = field(default_factory=list)
     capped_resources: list[ResourceCountRow] = field(default_factory=list)
@@ -255,15 +286,35 @@ def detect_newline(path: Path) -> str:
     return DEFAULT_NEWLINE
 
 
-def combine_history_paths(mod_dir: Path, vanilla_dir: Path | None) -> list[Path]:
+def combine_layered_paths(layer_dirs: list[Path | None]) -> list[Path]:
     combined: dict[str, Path] = {}
-    if vanilla_dir is not None and vanilla_dir.is_dir():
-        for path in vanilla_dir.glob("*.txt"):
-            combined[path.name.lower()] = path
-    if mod_dir.is_dir():
-        for path in mod_dir.glob("*.txt"):
+    for layer_dir in layer_dirs:
+        if layer_dir is None or not layer_dir.is_dir():
+            continue
+        for path in layer_dir.glob("*.txt"):
             combined[path.name.lower()] = path
     return [combined[name] for name in sorted(combined)]
+
+
+def combine_history_paths(mod_dir: Path, vanilla_dir: Path | None) -> list[Path]:
+    return combine_layered_paths([vanilla_dir, mod_dir])
+
+
+def default_usfp_root(repo_root: Path | None = None) -> Path | None:
+    base_root = repo_root or default_repo_root()
+    candidate = base_root.parent.parent / DEFAULT_USFP_DIRNAME
+    if (candidate / "common").is_dir():
+        return candidate.resolve()
+    return None
+
+
+def resolve_usfp_root(candidate: Path | None) -> Path | None:
+    if candidate is None:
+        return None
+    candidate = candidate.expanduser()
+    if (candidate / "common" / "history" / "pops").is_dir():
+        return candidate.resolve()
+    return None
 
 
 def find_matching_brace(text: str, brace_index: int) -> int:
@@ -497,9 +548,10 @@ def parse_homeland_effect_culture(raw: str, key: str) -> str:
     return normalize_culture_id(value) if value is not None else ""
 
 
-def parse_state_history_block(block_text: str) -> tuple[list[OwnershipSlice], list[str], list[TopLevelEntry]]:
+def parse_state_history_block(block_text: str) -> tuple[list[OwnershipSlice], list[str], list[str], list[TopLevelEntry]]:
     owners: list[OwnershipSlice] = []
     homelands: list[str] = []
+    claims: list[str] = []
     entries = parse_top_level_entries(block_text)
     for entry in entries:
         if entry.key != "create_state":
@@ -507,19 +559,25 @@ def parse_state_history_block(block_text: str) -> tuple[list[OwnershipSlice], li
                 culture = parse_homeland_culture(entry.raw)
                 if culture:
                     homelands.append(culture)
+            elif entry.key == "add_claim":
+                claim_tag = parse_country_tag(entry.raw, "add_claim")
+                if claim_tag:
+                    claims.append(claim_tag)
             continue
         tag_match = re.search(r"country\s*=\s*c:([A-Z0-9_]+)", entry.raw)
         provinces_match = re.search(r"owned_provinces\s*=\s*\{([^}]*)\}", entry.raw, re.S)
         provinces = re.findall(r'"([^"]+)"', provinces_match.group(1)) if provinces_match else []
         if tag_match:
             owners.append(OwnershipSlice(tag_match.group(1), len(provinces)))
-    return owners, homelands, entries
+    return owners, homelands, claims, entries
 
 
-def apply_state_history_blocks(blocks: list[tuple[Path, str]]) -> tuple[list[OwnershipSlice], list[str]]:
+def apply_state_history_blocks(blocks: list[tuple[Path, str]]) -> tuple[list[OwnershipSlice], list[str], list[str]]:
     owners: list[OwnershipSlice] = []
     homelands: list[str] = []
     homeland_set: set[str] = set()
+    claims: list[str] = []
+    claim_set: set[str] = set()
 
     for _path, block_text in blocks:
         block_owners = parse_ownership_block(block_text)
@@ -536,12 +594,22 @@ def apply_state_history_blocks(blocks: list[tuple[Path, str]]) -> tuple[list[Own
                 if culture and culture not in homeland_set:
                     homelands.append(culture)
                     homeland_set.add(culture)
+            elif entry.key == "remove_claim":
+                claim_tag = parse_country_tag(entry.raw, "remove_claim")
+                if claim_tag and claim_tag in claim_set:
+                    claims = [existing for existing in claims if existing != claim_tag]
+                    claim_set.remove(claim_tag)
+            elif entry.key == "add_claim":
+                claim_tag = parse_country_tag(entry.raw, "add_claim")
+                if claim_tag and claim_tag not in claim_set:
+                    claims.append(claim_tag)
+                    claim_set.add(claim_tag)
 
-    return owners, homelands
+    return owners, homelands, claims
 
 
 def parse_ownership_block(block_text: str) -> list[OwnershipSlice]:
-    owners, _homelands, _entries = parse_state_history_block(block_text)
+    owners, _homelands, _claims, _entries = parse_state_history_block(block_text)
     return owners
 
 
@@ -569,6 +637,84 @@ def parse_state_region_block(block_text: str) -> tuple[str, list[str], list[Reso
         elif entry.key == "resource":
             discoverables.append(parse_discoverable_resource(entry.raw))
     return arable_land, arable_resources, capped_resources, discoverables
+
+
+def parse_state_region_provinces(block_text: str) -> list[str]:
+    provinces_match = re.search(r"(?m)^\s*provinces\s*=\s*\{([^}]*)\}", block_text, re.S)
+    if not provinces_match:
+        return []
+    return [province.lower() for province in re.findall(r'"([^"]+)"', provinces_match.group(1))]
+
+
+def province_id_to_int(province_id: str) -> int | None:
+    value = province_id.strip().lower()
+    if not re.fullmatch(r"x[0-9a-f]{6}", value):
+        return None
+    return int(value[1:], 16)
+
+
+def load_effective_state_region_provinces(paths: list[Path]) -> dict[str, list[str]]:
+    provinces_by_state: dict[str, list[str]] = {}
+    for state_id, blocks in build_effective_blocks(paths, STATE_REGION_PATTERN).items():
+        if not blocks:
+            continue
+        _source, block_text = blocks[-1]
+        provinces = parse_state_region_provinces(block_text)
+        if provinces:
+            provinces_by_state[state_id] = provinces
+    return provinces_by_state
+
+
+def build_state_neighbor_graph(
+    province_map_path: Path | None,
+    provinces_by_state: dict[str, list[str]],
+) -> dict[str, list[str]]:
+    if province_map_path is None or not province_map_path.exists() or Image is None or np is None:
+        return {}
+
+    province_to_state: dict[int, str] = {}
+    for state_id, province_ids in provinces_by_state.items():
+        for province_id in province_ids:
+            packed = province_id_to_int(province_id)
+            if packed is not None:
+                province_to_state[packed] = state_id
+    if not province_to_state:
+        return {}
+
+    image = Image.open(province_map_path).convert("RGB")
+    pixels = np.asarray(image, dtype=np.uint32)
+    packed_pixels = (pixels[:, :, 0] << 16) | (pixels[:, :, 1] << 8) | pixels[:, :, 2]
+
+    edge_pairs: list[np.ndarray] = []
+    right_a = packed_pixels[:, :-1]
+    right_b = packed_pixels[:, 1:]
+    right_mask = right_a != right_b
+    if np.any(right_mask):
+        edge_pairs.append(np.stack([right_a[right_mask], right_b[right_mask]], axis=1))
+
+    down_a = packed_pixels[:-1, :]
+    down_b = packed_pixels[1:, :]
+    down_mask = down_a != down_b
+    if np.any(down_mask):
+        edge_pairs.append(np.stack([down_a[down_mask], down_b[down_mask]], axis=1))
+
+    if not edge_pairs:
+        return {}
+
+    all_pairs = np.vstack(edge_pairs)
+    all_pairs.sort(axis=1)
+    unique_pairs = np.unique(all_pairs, axis=0)
+
+    neighbors: dict[str, set[str]] = defaultdict(set)
+    for first, second in unique_pairs.tolist():
+        state_a = province_to_state.get(int(first))
+        state_b = province_to_state.get(int(second))
+        if state_a is None or state_b is None or state_a == state_b:
+            continue
+        neighbors[state_a].add(state_b)
+        neighbors[state_b].add(state_a)
+
+    return {state_id: sorted(state_ids) for state_id, state_ids in neighbors.items()}
 
 
 def build_effective_blocks(paths: list[Path], pattern: re.Pattern[str]) -> dict[str, list[tuple[Path, str]]]:
@@ -1029,20 +1175,40 @@ def render_state_history_block(record: StateRecord, original_block: str) -> str:
     return rebuilt
 
 
-def render_state_history_effect_block(record: StateRecord, baseline_homelands: list[str]) -> str | None:
+def render_state_history_effect_block(
+    record: StateRecord,
+    baseline_homelands: list[str],
+    baseline_claims: list[str],
+) -> str | None:
     baseline = [normalize_culture_id(culture) for culture in baseline_homelands if normalize_culture_id(culture)]
     desired = [normalize_culture_id(culture) for culture in record.homelands if normalize_culture_id(culture)]
+    baseline_claim_list = [
+        normalize_country_tag(claim_tag)
+        for claim_tag in baseline_claims
+        if normalize_country_tag(claim_tag)
+    ]
+    desired_claim_list = [
+        normalize_country_tag(claim_tag)
+        for claim_tag in record.claims
+        if normalize_country_tag(claim_tag)
+    ]
 
     remove_order = [culture for culture in baseline if culture not in desired]
     add_order = [culture for culture in desired if culture not in baseline]
-    if not remove_order and not add_order:
+    remove_claims = [claim_tag for claim_tag in baseline_claim_list if claim_tag not in desired_claim_list]
+    add_claims = [claim_tag for claim_tag in desired_claim_list if claim_tag not in baseline_claim_list]
+    if not remove_order and not add_order and not remove_claims and not add_claims:
         return None
 
     lines = [f"\ts:{record.state_id} = {{"]
+    for claim_tag in remove_claims:
+        lines.append(f"\t\tremove_claim = c:{claim_tag}")
     for culture in remove_order:
         lines.append(f"\t\tremove_homeland = cu:{culture}")
     for culture in add_order:
         lines.append(f"\t\tadd_homeland = cu:{culture}")
+    for claim_tag in add_claims:
+        lines.append(f"\t\tadd_claim = c:{claim_tag}")
     lines.append("\t}")
     return "\n".join(lines)
 
@@ -1463,6 +1629,18 @@ def validate_record(record: StateRecord) -> None:
         cleaned_homelands.append(culture_id)
     record.homelands = cleaned_homelands
 
+    cleaned_claims: list[str] = []
+    seen_claims: set[str] = set()
+    for claim_tag in record.claims:
+        normalized_tag = normalize_country_tag(claim_tag)
+        if not normalized_tag or normalized_tag in seen_claims:
+            continue
+        if not re.fullmatch(r"[A-Z0-9_]+", normalized_tag):
+            raise ValueError(f"Claim tag '{claim_tag}' is not a valid country tag")
+        cleaned_claims.append(normalized_tag)
+        seen_claims.add(normalized_tag)
+    record.claims = cleaned_claims
+
     cleaned_arable_resources: list[str] = []
     for resource in record.arable_resources:
         resource_id = resource.strip()
@@ -1609,17 +1787,21 @@ def validate_record(record: StateRecord) -> None:
 
 
 class ModRepository:
-    def __init__(self, root: Path, game_root: Path | None = None) -> None:
+    def __init__(self, root: Path, game_root: Path | None = None, usfp_root: Path | None = None) -> None:
         self.root = root
         self.game_root = game_root
+        self.usfp_root = usfp_root
         self.state_regions_dir = root / "mod" / "map_data" / "state_regions"
         self.state_history_dir = root / "mod" / "common" / "history" / "states"
         self.pops_dir = root / "mod" / "common" / "history" / "pops"
         self.buildings_dir = root / "mod" / "common" / "history" / "buildings"
         self.localization_file = root / "mod" / "localization" / "english" / "map_l_english.yml"
+        self.province_map_path = root / "mod" / "map_data" / "provinces.png"
+        self.vanilla_state_regions_dir = game_root / "map_data" / "state_regions" if game_root else None
         self.vanilla_state_history_dir = game_root / "common" / "history" / "states" if game_root else None
         self.vanilla_pops_dir = game_root / "common" / "history" / "pops" if game_root else None
         self.vanilla_buildings_dir = game_root / "common" / "history" / "buildings" if game_root else None
+        self.usfp_pops_dir = usfp_root / "common" / "history" / "pops" if usfp_root else None
         self.state_history_output_path = self.state_history_dir / C2C_HISTORY_STATES_FILENAME
         self.pop_output_path = self.pops_dir / C2C_HISTORY_POPS_FILENAME
         self.building_output_path = self.buildings_dir / C2C_HISTORY_BUILDINGS_FILENAME
@@ -1633,6 +1815,9 @@ class ModRepository:
         self.building_choices: list[str] = []
         self.ownership_building_type_choices: list[str] = []
         self.state_records: dict[str, StateRecord] = {}
+        self.state_neighbors: dict[str, list[str]] = {}
+        self.vanilla_state_region_provinces: dict[str, list[str]] = {}
+        self._pop_reassignment_cache: dict[str, PopulationReassignmentPlan] = {}
         self.global_warnings: list[str] = []
 
     def _combined_state_history_paths(self) -> list[Path]:
@@ -1643,6 +1828,19 @@ class ModRepository:
 
     def _combined_building_paths(self) -> list[Path]:
         return combine_history_paths(self.buildings_dir, self.vanilla_buildings_dir)
+
+    def _population_source_paths(self, source_kind: str) -> list[Path]:
+        if source_kind == POP_SOURCE_VANILLA:
+            return combine_layered_paths([self.vanilla_pops_dir])
+        if source_kind == POP_SOURCE_USFP:
+            return combine_layered_paths([self.vanilla_pops_dir, self.usfp_pops_dir])
+        raise ValueError(f"Unknown population source '{source_kind}'")
+
+    def population_source_options(self) -> list[tuple[str, str]]:
+        options = [(POP_SOURCE_VANILLA, "Vanilla Pop History")]
+        if self.usfp_pops_dir is not None and self.usfp_pops_dir.is_dir():
+            options.append((POP_SOURCE_USFP, "Vanilla + USFP Effective Pop History"))
+        return options
 
     def _load_state_history_occurrences(self, skip_state_id: str | None = None) -> dict[str, list[tuple[Path, str]]]:
         occurrences: dict[str, list[tuple[Path, str]]] = defaultdict(list)
@@ -1683,13 +1881,26 @@ class ModRepository:
                 occurrences[entry.key].append((path, entry.raw))
         return occurrences
 
+    def _load_pop_occurrences_from_paths(self, paths: list[Path]) -> dict[str, list[tuple[Path, str]]]:
+        occurrences: dict[str, list[tuple[Path, str]]] = defaultdict(list)
+        for path in paths:
+            text = read_text(path)
+            for key, _start, _end, section_text in iter_pop_state_sections(text):
+                occurrences[key].append((path, section_text))
+        return occurrences
+
     def load(self) -> None:
+        self.global_warnings = []
+        self._pop_reassignment_cache.clear()
         localizations = parse_localizations(self.localization_file)
         region_paths = sorted(self.state_regions_dir.glob("*.txt"), key=lambda path: path.name.lower())
         region_occurrences = build_effective_blocks(region_paths, STATE_REGION_PATTERN)
         ownership_occurrences = self._load_state_history_occurrences()
         pop_occurrences = self._load_pop_occurrences()
         building_occurrences = self._load_building_occurrences()
+        self.vanilla_state_region_provinces = load_effective_state_region_provinces(
+            combine_layered_paths([self.vanilla_state_regions_dir])
+        )
         vanilla_pop_keys: set[str] = set()
         if self.vanilla_pops_dir is not None and self.vanilla_pops_dir.is_dir():
             for path in sorted(self.vanilla_pops_dir.glob("*.txt"), key=lambda item: item.name.lower()):
@@ -1716,14 +1927,16 @@ class ModRepository:
             building_blocks = building_occurrences.get(f"s:{state_id}", [])
 
             region_source, region_block = region_blocks[-1] if region_blocks else (None, None)
-            owners, homelands = apply_state_history_blocks(ownership_blocks)
+            owners, homelands, claims = apply_state_history_blocks(ownership_blocks)
             culture_ids.update(culture for culture in homelands if culture)
 
+            province_ids: list[str] = []
             arable_land = ""
             arable_resources: list[str] = []
             capped_resources: list[ResourceCountRow] = []
             discoverables: list[DiscoverableResourceRow] = []
             if region_block:
+                province_ids = parse_state_region_provinces(region_block)
                 arable_land, arable_resources, capped_resources, discoverables = parse_state_region_block(region_block)
                 resource_ids.update(arable_resources)
                 resource_ids.update(row.resource for row in capped_resources if row.resource)
@@ -1799,7 +2012,11 @@ class ModRepository:
                 ownership_source=self.state_history_output_path,
                 homelands=homelands,
                 loaded_homelands=list(homelands),
+                claims=claims,
+                loaded_claims=list(claims),
                 state_history_template_entries=[],
+                province_ids=province_ids,
+                nearby_states=[],
                 arable_land=arable_land,
                 arable_resources=arable_resources,
                 capped_resources=capped_resources,
@@ -1814,6 +2031,14 @@ class ModRepository:
             )
 
         self.state_records = records
+        provinces_by_state = {
+            state_id: record.province_ids
+            for state_id, record in records.items()
+            if record.province_ids
+        }
+        self.state_neighbors = build_state_neighbor_graph(self.province_map_path, provinces_by_state)
+        for state_id, record in self.state_records.items():
+            record.nearby_states = list(self.state_neighbors.get(state_id, []))
         self.culture_choices = sorted(culture_ids)
         self.religion_choices = sorted(religion_ids)
         self.resource_choices = sorted(resource_ids)
@@ -1826,6 +2051,127 @@ class ModRepository:
             self.discoverable_depleted_type_choices,
         ) = build_resource_choice_lists(resource_ids)
 
+    def nearby_claim_suggestions(self, state_id: str) -> list[tuple[str, list[str]]]:
+        record = self.state_records.get(state_id)
+        if record is None:
+            return []
+
+        suggestions: dict[str, list[str]] = defaultdict(list)
+        for nearby_state_id in record.nearby_states:
+            nearby_record = self.state_records.get(nearby_state_id)
+            if nearby_record is None:
+                continue
+            nearby_label = nearby_record.display_name
+            for claim_tag in nearby_record.claims:
+                if nearby_label not in suggestions[claim_tag]:
+                    suggestions[claim_tag].append(nearby_label)
+        return sorted(suggestions.items(), key=lambda item: (item[0], item[1]))
+
+    def population_reassignment_plan(self, source_kind: str) -> PopulationReassignmentPlan:
+        cached = self._pop_reassignment_cache.get(source_kind)
+        if cached is not None:
+            return cached
+
+        if not self.vanilla_state_region_provinces:
+            raise ValueError("Vanilla state regions are unavailable; population reassignment needs --game-root.")
+
+        source_occurrences = self._load_pop_occurrences_from_paths(self._population_source_paths(source_kind))
+        target_records = [
+            record
+            for record in self.state_records.values()
+            if record.canada_focus and record.province_ids
+        ]
+        target_state_ids = [record.state_id for record in target_records]
+        target_province_sets = {record.state_id: set(record.province_ids) for record in target_records}
+
+        overlaps_by_state: dict[str, list[StateOverlap]] = defaultdict(list)
+        overlaps_by_source: dict[str, list[tuple[str, int, int]]] = defaultdict(list)
+        for source_state_id, source_provinces in self.vanilla_state_region_provinces.items():
+            source_set = set(source_provinces)
+            if not source_set:
+                continue
+            source_count = len(source_set)
+            for target_state_id in target_state_ids:
+                overlap_count = len(source_set & target_province_sets[target_state_id])
+                if overlap_count <= 0:
+                    continue
+                overlaps_by_state[target_state_id].append(
+                    StateOverlap(source_state_id, overlap_count, source_count)
+                )
+                overlaps_by_source[source_state_id].append((target_state_id, overlap_count, source_count))
+
+        assigned_counters: dict[str, dict[str, Counter[tuple[str, str]]]] = defaultdict(dict)
+        for source_state_id, targets in overlaps_by_source.items():
+            source_pops, _unsupported_effects = apply_pop_effect_blocks(
+                source_occurrences.get(f"s:{source_state_id}", [])
+            )
+            if not source_pops:
+                continue
+            weights = [overlap_count for _target_state_id, overlap_count, _source_count in targets]
+            for owner_tag, rows in source_pops.items():
+                for row in normalize_pop_rows(rows):
+                    size = parse_int_string(row.size)
+                    if size is None or size <= 0:
+                        continue
+                    allocations = allocate_proportional(size, weights)
+                    for allocation, (target_state_id, _overlap_count, _source_count) in zip(allocations, targets):
+                        if allocation <= 0:
+                            continue
+                        owner_bucket = assigned_counters.setdefault(target_state_id, {}).setdefault(owner_tag, Counter())
+                        owner_bucket[(row.culture, row.religion)] += allocation
+
+        assigned_pops: dict[str, dict[str, list[PopRow]]] = {}
+        for target_state_id in target_state_ids:
+            owner_rows: dict[str, list[PopRow]] = {}
+            for owner_tag, counter in assigned_counters.get(target_state_id, {}).items():
+                owner_rows[owner_tag] = [
+                    PopRow(culture, religion, str(size))
+                    for (culture, religion), size in sorted(counter.items(), key=lambda item: (item[0][0], item[0][1]))
+                    if size > 0
+                ]
+            assigned_pops[target_state_id] = owner_rows
+            overlaps_by_state[target_state_id].sort(
+                key=lambda overlap: (-overlap.overlap_provinces, overlap.source_state_id)
+            )
+
+        plan = PopulationReassignmentPlan(
+            source_kind=source_kind,
+            assigned_pops=assigned_pops,
+            overlaps_by_state=dict(overlaps_by_state),
+        )
+        self._pop_reassignment_cache[source_kind] = plan
+        return plan
+
+    def apply_population_reassignment(self, source_kind: str, state_ids: list[str]) -> list[str]:
+        plan = self.population_reassignment_plan(source_kind)
+        updated_state_ids: list[str] = []
+        new_culture_ids = set(self.culture_choices)
+        new_religion_ids = set(self.religion_choices)
+
+        for state_id in state_ids:
+            record = self.state_records.get(state_id)
+            if record is None:
+                continue
+            assigned_rows = plan.assigned_pops.get(state_id)
+            if assigned_rows is None:
+                continue
+            record.pops_by_owner = {
+                owner_tag: [PopRow(row.culture, row.religion, row.size) for row in rows]
+                for owner_tag, rows in assigned_rows.items()
+            }
+            for rows in record.pops_by_owner.values():
+                for row in rows:
+                    if row.culture:
+                        new_culture_ids.add(row.culture)
+                    if row.religion:
+                        new_religion_ids.add(row.religion)
+            record.dirty = True
+            updated_state_ids.append(state_id)
+
+        self.culture_choices = sorted(new_culture_ids)
+        self.religion_choices = sorted(new_religion_ids)
+        return updated_state_ids
+
     def save_state(self, record: StateRecord) -> None:
         validate_record(record)
         self._save_state_history_block(record)
@@ -1835,8 +2181,8 @@ class ModRepository:
 
     def _save_state_history_block(self, record: StateRecord) -> None:
         baseline_blocks = self._load_state_history_occurrences(skip_state_id=record.state_id).get(f"s:{record.state_id}", [])
-        _baseline_owners, baseline_homelands = apply_state_history_blocks(baseline_blocks)
-        state_block = render_state_history_effect_block(record, baseline_homelands)
+        _baseline_owners, baseline_homelands, baseline_claims = apply_state_history_blocks(baseline_blocks)
+        state_block = render_state_history_effect_block(record, baseline_homelands, baseline_claims)
         source = self.state_history_output_path
         newline = detect_newline(source)
         state_key = f"s:{record.state_id}"
@@ -1845,6 +2191,7 @@ class ModRepository:
         if original_text is None:
             if state_block is None:
                 record.loaded_homelands = list(record.homelands)
+                record.loaded_claims = list(record.claims)
                 record.ownership_source = source
                 return
             updated = f"STATES = {{\n\n{state_block}\n}}\n"
@@ -1868,6 +2215,7 @@ class ModRepository:
         if original_text is None or updated != original_text:
             write_text(source, updated, newline)
         record.loaded_homelands = list(record.homelands)
+        record.loaded_claims = list(record.claims)
         record.ownership_source = source
 
     def _save_state_region(self, record: StateRecord) -> None:
@@ -2387,11 +2735,18 @@ class Vic3StateEditorApp:
         self.summary_var = tk.StringVar(value="")
         self.arable_land_var = tk.StringVar()
         self.arable_land_var.trace_add("write", lambda *_args: self._mark_dirty())
+        self.population_source_label_to_kind: dict[str, str] = {}
+        self.population_source_kind_to_label: dict[str, str] = {}
+        self.population_source_var = tk.StringVar(value="")
+        self.population_source_var.trace_add("write", lambda *_args: self._on_population_source_changed())
 
         self.owner_tables: dict[str, PopTable] = {}
         self.owner_total_vars: dict[str, tk.StringVar] = {}
         self.owner_notebook: ttk.Notebook | None = None
         self.aggregate_text: tk.Text | None = None
+        self.population_source_combo: ttk.Combobox | None = None
+        self.population_preview_text: tk.Text | None = None
+        self.claims_table: EditableTable | None = None
         self.homelands_table: EditableTable | None = None
         self.arable_table: EditableTable | None = None
         self.capped_table: EditableTable | None = None
@@ -2401,8 +2756,11 @@ class Vic3StateEditorApp:
         self.resources_content: ttk.Frame | None = None
         self._resources_window: int | None = None
         self.state_listbox: tk.Listbox | None = None
+        self.nearby_claims_listbox: tk.Listbox | None = None
+        self.nearby_claim_tags: list[str] = []
 
         self._build_ui()
+        self._refresh_population_source_choices()
         self.refresh_state_list()
         if self.filtered_state_ids:
             self.select_state(self.filtered_state_ids[0])
@@ -2541,14 +2899,66 @@ class Vic3StateEditorApp:
 
         population_tab = ttk.Frame(notebook, padding=8)
         notebook.add(population_tab, text="Population")
-        self.owner_notebook = ttk.Notebook(population_tab)
-        self.owner_notebook.grid(row=0, column=0, sticky="nsew")
         population_tab.columnconfigure(0, weight=1)
-        population_tab.rowconfigure(0, weight=1)
-        ttk.Label(population_tab, text="Aggregate summary").grid(row=1, column=0, sticky="w", pady=(12, 4))
-        self.aggregate_text = tk.Text(
-            population_tab,
-            height=12,
+        population_tab.rowconfigure(1, weight=1)
+        population_tools = ttk.LabelFrame(population_tab, text="Population Reassignment", padding=10)
+        population_tools.grid(row=0, column=0, sticky="ew", pady=(0, 10))
+        population_tools.columnconfigure(1, weight=1)
+        ttk.Label(
+            population_tools,
+            text=(
+                "Project vanilla or USFP pop history onto c2c states by province overlap. "
+                "This replaces the selected states' in-memory population rows and marks them dirty."
+            ),
+            wraplength=1050,
+        ).grid(row=0, column=0, columnspan=4, sticky="w", pady=(0, 8))
+        ttk.Label(population_tools, text="Source layout").grid(row=1, column=0, sticky="w")
+        self.population_source_combo = ttk.Combobox(
+            population_tools,
+            textvariable=self.population_source_var,
+            state="readonly",
+            width=34,
+        )
+        self.population_source_combo.grid(row=1, column=1, sticky="w", padx=(8, 12))
+        ttk.Button(
+            population_tools,
+            text="Reassign Current State",
+            command=self._reassign_current_population,
+        ).grid(row=1, column=2, sticky="w", padx=(0, 8))
+        ttk.Button(
+            population_tools,
+            text="Reassign All Canada States",
+            command=self._reassign_all_canadian_population,
+        ).grid(row=1, column=3, sticky="w")
+
+        population_split = ttk.Panedwindow(population_tab, orient=tk.VERTICAL)
+        population_split.grid(row=1, column=0, sticky="nsew")
+
+        population_editor_frame = ttk.Frame(population_split)
+        population_editor_frame.columnconfigure(0, weight=1)
+        population_editor_frame.rowconfigure(0, weight=1)
+        self.owner_notebook = ttk.Notebook(population_editor_frame)
+        self.owner_notebook.grid(row=0, column=0, sticky="nsew")
+        population_split.add(population_editor_frame, weight=5)
+
+        population_detail_frame = ttk.Frame(population_split, padding=(0, 8, 0, 0))
+        population_detail_frame.columnconfigure(0, weight=1)
+        population_detail_frame.rowconfigure(0, weight=1)
+        population_detail_notebook = ttk.Notebook(population_detail_frame)
+        population_detail_notebook.grid(row=0, column=0, sticky="nsew")
+
+        population_preview_tab = ttk.Frame(population_detail_notebook, padding=8)
+        population_detail_notebook.add(population_preview_tab, text="Overlap Preview")
+        population_preview_tab.columnconfigure(0, weight=1)
+        population_preview_tab.rowconfigure(1, weight=1)
+        ttk.Label(
+            population_preview_tab,
+            text="Preview how vanilla or USFP source states map onto this c2c state before applying reassignment.",
+            wraplength=1040,
+        ).grid(row=0, column=0, sticky="w", pady=(0, 6))
+        self.population_preview_text = tk.Text(
+            population_preview_tab,
+            height=6,
             wrap="word",
             bg=DARK_ELEVATED,
             fg=DARK_FG,
@@ -2560,7 +2970,100 @@ class Vic3StateEditorApp:
             highlightcolor=ACCENT,
             relief="flat",
         )
-        self.aggregate_text.grid(row=2, column=0, sticky="nsew")
+        self.population_preview_text.grid(row=1, column=0, sticky="nsew")
+
+        aggregate_tab = ttk.Frame(population_detail_notebook, padding=8)
+        population_detail_notebook.add(aggregate_tab, text="Aggregate Summary")
+        aggregate_tab.columnconfigure(0, weight=1)
+        aggregate_tab.rowconfigure(1, weight=1)
+        ttk.Label(
+            aggregate_tab,
+            text="Culture and religion totals across all owner tabs for the current state.",
+            wraplength=1040,
+        ).grid(row=0, column=0, sticky="w", pady=(0, 6))
+        self.aggregate_text = tk.Text(
+            aggregate_tab,
+            height=8,
+            wrap="word",
+            bg=DARK_ELEVATED,
+            fg=DARK_FG,
+            insertbackground=DARK_FG,
+            selectbackground=ACCENT,
+            selectforeground=DARK_FG,
+            highlightthickness=1,
+            highlightbackground=DARK_BORDER,
+            highlightcolor=ACCENT,
+            relief="flat",
+        )
+        self.aggregate_text.grid(row=1, column=0, sticky="nsew")
+        population_split.add(population_detail_frame, weight=2)
+
+        claims_tab = ttk.Frame(notebook, padding=8)
+        notebook.add(claims_tab, text="Claims")
+        claims_tab.columnconfigure(0, weight=3)
+        claims_tab.columnconfigure(1, weight=2)
+        claims_tab.rowconfigure(1, weight=1)
+        ttk.Label(
+            claims_tab,
+            text=(
+                "Current state claims save as add_claim/remove_claim lines in c2c history overrides. "
+                "Nearby suggestions are gathered from claims on province-adjacent states."
+            ),
+            wraplength=1080,
+        ).grid(row=0, column=0, columnspan=2, sticky="w", pady=(0, 8))
+
+        current_claims_frame = ttk.LabelFrame(claims_tab, text="Current Claims", padding=10)
+        current_claims_frame.grid(row=1, column=0, sticky="nsew", padx=(0, 8))
+        current_claims_frame.columnconfigure(0, weight=1)
+        current_claims_frame.rowconfigure(0, weight=1)
+        self.claims_table = EditableTable(
+            current_claims_frame,
+            columns=[ColumnSpec("tag", "Claim Tag", 14, sorted(CANADA_RELEVANT_TAGS))],
+            on_change=self._mark_dirty,
+            add_label="Add claim",
+            canvas_height=280,
+        )
+        self.claims_table.grid(row=0, column=0, sticky="nsew")
+
+        nearby_claims_frame = ttk.LabelFrame(claims_tab, text="Nearby Claims", padding=10)
+        nearby_claims_frame.grid(row=1, column=1, sticky="nsew")
+        nearby_claims_frame.columnconfigure(0, weight=1)
+        nearby_claims_frame.rowconfigure(1, weight=1)
+        ttk.Label(
+            nearby_claims_frame,
+            text="Select claim tags seen on neighboring states, then add them to the current state.",
+            wraplength=360,
+        ).grid(row=0, column=0, sticky="w", pady=(0, 8))
+        self.nearby_claims_listbox = tk.Listbox(
+            nearby_claims_frame,
+            exportselection=False,
+            selectmode=tk.EXTENDED,
+            bg=DARK_ELEVATED,
+            fg=DARK_FG,
+            selectbackground=ACCENT,
+            selectforeground=DARK_FG,
+            highlightthickness=1,
+            highlightbackground=DARK_BORDER,
+            highlightcolor=ACCENT,
+            relief="flat",
+            activestyle="none",
+            height=16,
+        )
+        self.nearby_claims_listbox.grid(row=1, column=0, sticky="nsew")
+        self.nearby_claims_listbox.bind("<Double-Button-1>", lambda _event: self._add_selected_nearby_claims())
+        nearby_buttons = ttk.Frame(nearby_claims_frame)
+        nearby_buttons.grid(row=2, column=0, sticky="w", pady=(8, 0))
+        ttk.Button(nearby_buttons, text="Add Selected Nearby Claims", command=self._add_selected_nearby_claims).grid(
+            row=0,
+            column=0,
+            sticky="w",
+            padx=(0, 8),
+        )
+        ttk.Button(nearby_buttons, text="Add All Nearby Claims", command=self._add_all_nearby_claims).grid(
+            row=0,
+            column=1,
+            sticky="w",
+        )
 
         homelands_tab = ttk.Frame(notebook, padding=8)
         notebook.add(homelands_tab, text="Homelands")
@@ -2755,6 +3258,11 @@ class Vic3StateEditorApp:
             self.warning_var.set("Warnings: " + " ".join(record.warnings) if record.warnings else "")
             self.summary_var.set(self._build_owner_summary(record))
             self.arable_land_var.set(record.arable_land)
+            if self.claims_table is not None:
+                nearby_tags = [tag for tag, _state_names in self.repo.nearby_claim_suggestions(record.state_id)]
+                claim_choices = sorted(set(CANADA_RELEVANT_TAGS) | set(record.claims) | set(nearby_tags))
+                self.claims_table.set_column_choices("tag", claim_choices)
+                self.claims_table.set_rows([{"tag": claim_tag} for claim_tag in record.claims] or [{"tag": ""}])
             if self.homelands_table is not None:
                 self.homelands_table.set_rows(
                     [{"culture": culture} for culture in record.homelands] or [{"culture": ""}]
@@ -2786,7 +3294,9 @@ class Vic3StateEditorApp:
                     row_metadata=list(record.buildings) or [None],
                 )
             self._rebuild_owner_tabs(record)
+            self._refresh_nearby_claims(record)
             self._refresh_aggregate_summary(record)
+            self._refresh_population_overlap_summary(record)
             self.status_var.set(f"Loaded {record.display_name}")
         finally:
             self.loading_ui = False
@@ -3031,6 +3541,8 @@ class Vic3StateEditorApp:
             return
         record = self.repo.state_records[self.current_state_id]
         record.arable_land = self.arable_land_var.get()
+        if self.claims_table is not None:
+            record.claims = [row["tag"] for row in self.claims_table.get_rows()]
         if self.homelands_table is not None:
             record.homelands = [row["culture"] for row in self.homelands_table.get_rows()]
         if self.arable_table is not None:
@@ -3088,6 +3600,232 @@ class Vic3StateEditorApp:
         if self.current_state_id is None:
             return None
         return self.repo.state_records[self.current_state_id]
+
+    def _refresh_population_source_choices(self) -> None:
+        options = self.repo.population_source_options()
+        self.population_source_label_to_kind = {label: kind for kind, label in options}
+        self.population_source_kind_to_label = {kind: label for kind, label in options}
+        labels = [label for _kind, label in options]
+        if self.population_source_combo is not None:
+            self.population_source_combo.configure(values=labels)
+        selected_label = self.population_source_var.get().strip()
+        if selected_label not in self.population_source_label_to_kind and labels:
+            self.population_source_var.set(labels[0])
+
+    def _current_population_source_kind(self) -> str:
+        label = self.population_source_var.get().strip()
+        if label in self.population_source_label_to_kind:
+            return self.population_source_label_to_kind[label]
+        if self.population_source_kind_to_label:
+            return next(iter(self.population_source_kind_to_label))
+        return POP_SOURCE_VANILLA
+
+    def _current_claim_tags_from_table(self) -> list[str]:
+        if self.claims_table is None:
+            return []
+        cleaned: list[str] = []
+        seen: set[str] = set()
+        for row in self.claims_table.get_rows():
+            claim_tag = normalize_country_tag(row.get("tag", ""))
+            if not claim_tag or claim_tag in seen:
+                continue
+            cleaned.append(claim_tag)
+            seen.add(claim_tag)
+        return cleaned
+
+    def _refresh_nearby_claims(self, record: StateRecord | None = None) -> None:
+        if self.nearby_claims_listbox is None:
+            return
+        if record is None:
+            record = self._current_record()
+        self.nearby_claims_listbox.delete(0, tk.END)
+        self.nearby_claim_tags = []
+        if record is None:
+            return
+
+        current_claims = set(self._current_claim_tags_from_table() or record.claims)
+        for claim_tag, state_names in self.repo.nearby_claim_suggestions(record.state_id):
+            already_assigned = " [already assigned]" if claim_tag in current_claims else ""
+            label = f"{claim_tag} - {', '.join(state_names)}{already_assigned}"
+            self.nearby_claims_listbox.insert(tk.END, label)
+            self.nearby_claim_tags.append(claim_tag)
+        if not self.nearby_claim_tags:
+            self.nearby_claims_listbox.insert(tk.END, "No nearby claims found.")
+
+    def _add_selected_nearby_claims(self) -> None:
+        record = self._current_record()
+        if record is None or self.claims_table is None or self.nearby_claims_listbox is None:
+            return
+
+        selected_tags = [
+            self.nearby_claim_tags[index]
+            for index in self.nearby_claims_listbox.curselection()
+            if 0 <= index < len(self.nearby_claim_tags)
+        ]
+        if not selected_tags:
+            self.status_var.set("Select one or more nearby claims to add")
+            return
+
+        current_claims = self._current_claim_tags_from_table()
+        seen = set(current_claims)
+        added_tags: list[str] = []
+        for claim_tag in selected_tags:
+            if claim_tag in seen:
+                continue
+            current_claims.append(claim_tag)
+            seen.add(claim_tag)
+            added_tags.append(claim_tag)
+        if not added_tags:
+            self.status_var.set(f"{record.display_name} already has those nearby claims")
+            return
+
+        self.claims_table.set_rows([{"tag": claim_tag} for claim_tag in current_claims])
+        self._mark_dirty()
+        self._refresh_nearby_claims(record)
+        self.status_var.set(f"Added {len(added_tags)} nearby claim(s) to {record.display_name}")
+
+    def _add_all_nearby_claims(self) -> None:
+        record = self._current_record()
+        if record is None or self.claims_table is None:
+            return
+        if not self.nearby_claim_tags:
+            self.status_var.set(f"No nearby claims available for {record.display_name}")
+            return
+
+        current_claims = self._current_claim_tags_from_table()
+        seen = set(current_claims)
+        added_tags: list[str] = []
+        for claim_tag in self.nearby_claim_tags:
+            if claim_tag in seen:
+                continue
+            current_claims.append(claim_tag)
+            seen.add(claim_tag)
+            added_tags.append(claim_tag)
+        if not added_tags:
+            self.status_var.set(f"{record.display_name} already has every nearby claim")
+            return
+
+        self.claims_table.set_rows([{"tag": claim_tag} for claim_tag in current_claims])
+        self._mark_dirty()
+        self._refresh_nearby_claims(record)
+        self.status_var.set(f"Added {len(added_tags)} nearby claim(s) to {record.display_name}")
+
+    def _set_text_widget(self, widget: tk.Text | None, text: str) -> None:
+        if widget is None:
+            return
+        widget.configure(state="normal")
+        widget.delete("1.0", tk.END)
+        widget.insert("1.0", text)
+        widget.configure(state="disabled")
+
+    def _display_name_for_state_id(self, state_id: str) -> str:
+        record = self.repo.state_records.get(state_id)
+        if record is not None:
+            return record.display_name
+        return state_id.removeprefix("STATE_").replace("_", " ").title()
+
+    def _refresh_population_overlap_summary(self, record: StateRecord | None = None) -> None:
+        if self.population_preview_text is None:
+            return
+        if record is None:
+            record = self._current_record()
+        if record is None:
+            self._set_text_widget(self.population_preview_text, "Select a state to preview population reassignment.")
+            return
+
+        source_label = self.population_source_var.get().strip() or "Selected source layout"
+        try:
+            plan = self.repo.population_reassignment_plan(self._current_population_source_kind())
+        except Exception as exc:  # noqa: BLE001
+            self._set_text_widget(self.population_preview_text, f"{source_label} preview unavailable.\n\n{exc}")
+            return
+
+        overlaps = plan.overlaps_by_state.get(record.state_id, [])
+        assigned_rows = plan.assigned_pops.get(record.state_id, {})
+        assigned_total = sum(
+            parse_int_string(row.size) or 0
+            for rows in assigned_rows.values()
+            for row in rows
+        )
+        lines = [
+            f"Source layout: {source_label}",
+            f"Projected assigned population: {assigned_total} across {len(assigned_rows)} owner slice(s).",
+            "",
+        ]
+        if not overlaps:
+            lines.append("No overlapping vanilla or USFP source states were found for this c2c state.")
+        else:
+            lines.append("Incoming source states by overlapping provinces:")
+            for overlap in overlaps:
+                share = 0.0
+                if overlap.source_province_count > 0:
+                    share = (overlap.overlap_provinces / overlap.source_province_count) * 100.0
+                lines.append(
+                    f"  {self._display_name_for_state_id(overlap.source_state_id)}: "
+                    f"{overlap.overlap_provinces}/{overlap.source_province_count} provinces ({share:.1f}%)"
+                )
+        if assigned_total == 0:
+            lines.extend(
+                [
+                    "",
+                    "Applying this source would clear the state's pop rows because nothing is assigned from the selected layout.",
+                ]
+            )
+        self._set_text_widget(self.population_preview_text, "\n".join(lines))
+
+    def _on_population_source_changed(self) -> None:
+        if self.loading_ui:
+            return
+        self._refresh_population_overlap_summary()
+
+    def _apply_population_reassignment(self, state_ids: list[str], scope_label: str) -> None:
+        if not state_ids:
+            self.status_var.set(f"No states selected for {scope_label.lower()}")
+            return
+        self._stash_current_state()
+        source_label = self.population_source_var.get().strip() or "selected source layout"
+        try:
+            updated_state_ids = self.repo.apply_population_reassignment(self._current_population_source_kind(), state_ids)
+        except Exception as exc:  # noqa: BLE001
+            messagebox.showerror("Population reassignment failed", str(exc))
+            self.status_var.set(f"{scope_label} failed")
+            self._refresh_population_overlap_summary()
+            return
+
+        if self.current_state_id is not None and self.current_state_id in self.repo.state_records:
+            self._show_state(self.repo.state_records[self.current_state_id])
+        self.refresh_state_list()
+        if not updated_state_ids:
+            self.status_var.set(f"{scope_label} from {source_label} made no changes")
+            return
+        if len(updated_state_ids) == 1:
+            state_name = self.repo.state_records[updated_state_ids[0]].display_name
+            self.status_var.set(f"Reassigned {state_name} from {source_label}")
+            return
+        self.status_var.set(f"Reassigned {len(updated_state_ids)} states from {source_label}")
+
+    def _reassign_current_population(self) -> None:
+        record = self._current_record()
+        if record is None:
+            return
+        self._apply_population_reassignment([record.state_id], "Current-state pop reassignment")
+
+    def _reassign_all_canadian_population(self) -> None:
+        state_ids = [record.state_id for record in self.repo.state_records.values() if record.canada_focus]
+        if not state_ids:
+            self.status_var.set("No Canada-focused states are loaded")
+            return
+        source_label = self.population_source_var.get().strip() or "selected source layout"
+        proceed = messagebox.askyesno(
+            "Reassign all Canada states?",
+            (
+                f"Replace population rows across {len(state_ids)} Canada-focused states using {source_label}?\n\n"
+                "This changes the in-memory editor state only until you save."
+            ),
+        )
+        if not proceed:
+            return
+        self._apply_population_reassignment(state_ids, "Canada-wide pop reassignment")
 
     def _on_pop_slider(self, owner_tag: str, row_index: int, target_percent: float) -> None:
         if self.loading_ui or self.slider_adjusting:
@@ -3226,6 +3964,7 @@ class Vic3StateEditorApp:
             if not proceed:
                 return
         self.repo.load()
+        self._refresh_population_source_choices()
         self.status_var.set("Reloaded from disk")
         self.refresh_state_list()
         target = reselect_state or self.current_state_id
@@ -3288,13 +4027,20 @@ def default_game_root() -> Path | None:
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Manual Victoria 3 state demographics/resource/building editor")
-    parser.add_argument("--root", type=Path, default=default_repo_root(), help="Repository root")
+    repo_root = default_repo_root()
+    parser = argparse.ArgumentParser(description="Manual Victoria 3 state demographics/resource/building/claims editor")
+    parser.add_argument("--root", type=Path, default=repo_root, help="Repository root")
     parser.add_argument(
         "--game-root",
         type=Path,
         default=default_game_root(),
         help="Victoria 3 game directory (the folder containing common/ and map_data/).",
+    )
+    parser.add_argument(
+        "--usfp-root",
+        type=Path,
+        default=default_usfp_root(repo_root),
+        help="Optional Hail, Columbia! directory (the folder containing common/history/pops).",
     )
     parser.add_argument(
         "--check",
@@ -3318,11 +4064,14 @@ def run_check(repository: ModRepository) -> int:
         print(f"  Ownership source: {first.ownership_source}")
         print(f"  Owners: {', '.join(owner.tag for owner in first.owners) or '(none)'}")
         print(f"  Homelands: {', '.join(first.homelands) or '(none)'}")
+        print(f"  Claims: {', '.join(first.claims) or '(none)'}")
+        print(f"  Nearby claims: {', '.join(tag for tag, _state_names in repository.nearby_claim_suggestions(first.state_id)) or '(none)'}")
     print(f"Known cultures: {len(repository.culture_choices)}")
     print(f"Known religions: {len(repository.religion_choices)}")
     print(f"Known resource/building ids: {len(repository.resource_choices)}")
     print(f"Known starting building ids: {len(repository.building_choices)}")
     print(f"Known ownership building types: {len(repository.ownership_building_type_choices)}")
+    print(f"Population reassignment sources: {', '.join(label for _kind, label in repository.population_source_options())}")
     warning_count = sum(len(record.warnings) for record in repository.state_records.values())
     print(f"Per-state warnings: {warning_count}")
     return 0
@@ -3330,7 +4079,11 @@ def run_check(repository: ModRepository) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv or sys.argv[1:])
-    repository = ModRepository(args.root.resolve(), resolve_game_root(args.game_root))
+    repository = ModRepository(
+        args.root.resolve(),
+        resolve_game_root(args.game_root),
+        resolve_usfp_root(args.usfp_root),
+    )
     try:
         repository.load()
     except Exception as exc:  # noqa: BLE001
