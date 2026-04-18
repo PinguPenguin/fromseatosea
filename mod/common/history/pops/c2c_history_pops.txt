@@ -743,6 +743,11 @@
 				size = 2201
 			}
 		}
+		region_state:ATB = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
 	}
 
 	s:STATE_NOUVEAU_QUEBEC = {
@@ -1245,7 +1250,6 @@
 			}
 		}
 	}
-
 	s:STATE_YUKON_TERRITORY = {
 		region_state:ATB = {
 			kill_population_percent_in_state = {

@@ -119,6 +119,8 @@
 	}
 
 	s:STATE_EDMONTON = {
+		region_state:BLF = {
+		}
 		region_state:HBC = {
 			create_building = {
 				building = "building_logging_camp"
@@ -130,6 +132,15 @@
 					}
 				}
 			}
+		}
+		region_state:IRC = {
+		}
+	}
+
+	s:STATE_KEEWATIN = {
+		region_state:IRC = {
+		}
+		region_state:HBC = {
 		}
 	}
 
@@ -381,6 +392,8 @@
 	}
 
 	s:STATE_NORTH_SASKATCHEWAN = {
+		region_state:IRC = {
+		}
 		region_state:HBC = {
 			create_building = {
 				building = "building_logging_camp"
@@ -1094,5 +1107,13 @@
 				}
 			}
 		}
+		region_state:ORG = {
+		}
 	}
+
+	s:STATE_VANCOUVER_ISLAND = {
+		region_state:ORG = {
+		}
+	}
+
 }
