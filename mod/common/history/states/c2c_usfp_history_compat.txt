@@ -1,5 +1,5 @@
 STATES = {
-	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	# Reapply HC owner assignments within c2c split Canadian state layout
 	s:STATE_ALBERTA = {
 		set_owner_of_provinces = {
 			country = c:BLF
