@@ -1,9 +1,4 @@
 ﻿STATES = {
-	s:STATE_ONTARIO = {
-		remove_claim = c:HBC #overriding usfp for rideau
-		add_claim = c:ONT
-	}
-	
 	s:STATE_ALGOMA = {
 		add_claim = c:HBC
 		add_claim = c:ONT

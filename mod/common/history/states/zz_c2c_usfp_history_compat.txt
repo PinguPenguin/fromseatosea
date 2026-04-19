@@ -1,19 +1,4 @@
 STATES = {
-	# Reapply HC owner assignments within c2c split Canadian state layout
-	s:STATE_ALBERTA = {
-		set_owner_of_provinces = {
-			country = c:BLF
-			provinces = { x664d82 x6b4b18 x7ef3c4 x84be26 xa93567 xbdac6b xf56f14 }
-		}
-		set_owner_of_provinces = {
-			country = c:GVT
-			provinces = { x0ad7a5 xa68f40 xcb25ca x144e07 x518d4f }
-		}
-		set_owner_of_provinces = {
-			country = c:IRC
-			provinces = { x471b95 xb4ed84 x7911bb }
-		}
-	}
 	# Reapply USFP owner assignments within c2c's split Canadian state layout.
 	s:STATE_ALGOMA = {
 		set_owner_of_provinces = {
@@ -77,34 +62,6 @@ STATES = {
 		set_owner_of_provinces = {
 			country = c:SYX
 			provinces = { x0d5e87 x34c789 x362e8f x490d37 x4df1b5 x605f60 x852913 }
-		}
-	}
-	# Reapply USFP owner assignments within c2c's split Canadian state layout.
-	s:STATE_BRITISH_COLUMBIA = {
-		set_owner_of_provinces = {
-			country = c:DKL
-			provinces = { x08b5f9 x1d0c09 x28613e x4b2499 x75646f x774bea xa599df xad1122
-			             xde9e89 xe33420 x064fe6 x06bb33 }
-		}
-		set_owner_of_provinces = {
-			country = c:LLT
-			provinces = { x2541a9 x37c6ac x37d2e9 x46bacd x53444f x83ec3f x90bfef xabc1f1
-			             xd833d7 }
-		}
-		set_owner_of_provinces = {
-			country = c:SAL
-			provinces = { x38dffe x4c08a9 x4d3ace x4ebd49 xe06c22 xe3380d xe52f87 }
-		}
-		set_owner_of_provinces = {
-			country = c:SYX
-			provinces = { x09ec2e x21ce74 x3b97b7 x95dd40 xb3d999 xc40501 xc8510a xcf67bb
-			             xd1eae5 xda702a xee0358 }
-		}
-		set_owner_of_provinces = {
-			country = c:WKS
-			provinces = { x04d4ba x0d33a7 x0fd228 x277ac6 x304439 x48a9d1 x51b430 x5bb5b5
-			             x893e23 x89c9ac x9a96c1 x9aef89 xa3cc82 xbd2011 xbf338d xc5762f
-			             xddd8d9 xfd59a0 }
 		}
 	}
 	# Reapply USFP owner assignments within c2c's split Canadian state layout.
@@ -208,11 +165,6 @@ STATES = {
 			             x4de6d8 x57a279 x65cd76 x69bf88 x793a86 x8d0001 x911e83 xbfec14
 			             xc3ec0a xc666bd xc83863 xd3d91d xf2bab1 xf3cdf6 }
 		}
-		#manual tweak
-		set_owner_of_provinces = {
-			country = c:INV
-			provinces = { x15FC1A x14B03B xC97FEC x2EB016 xDEF7F2 xD31F1A }
-		}
 	}
 	# Reapply USFP owner assignments within c2c's split Canadian state layout.
 	s:STATE_NORTH_SASKATCHEWAN = {
@@ -309,21 +261,9 @@ STATES = {
 			provinces = { x345296 }
 		}
 	}
-	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	# Remove USFP's HBC claim from Rideau after USFP claims load.
 	s:STATE_ONTARIO = {
 		remove_claim = c:HBC
-		set_owner_of_provinces = {
-			country = c:CTF
-			provinces = { x0538f5 x480b4b x48e362 x4c056c x4d24ac x65f177 x93acbb xc95021
-			             xca480f }
-		}
-	}
-	# Reapply USFP owner assignments within c2c's split Canadian state layout.
-	s:STATE_SASKATCHEWAN = {
-		set_owner_of_provinces = {
-			country = c:GVT
-			provinces = { x6a28ce x8015b3 xca657a xe74adb xee8586 }
-		}
 	}
 	# Reapply USFP owner assignments within c2c's split Canadian state layout.
 	s:STATE_UPPER_BC = {
@@ -391,61 +331,6 @@ STATES = {
 			country = c:WKS
 			provinces = { x24fab0 x2b750f x34639f x64e0b4 x6dfdd1 x76cd59 x7a8f60 x999e9b
 			             xc0b693 xfdf070 }
-		}
-	}
-	# Reapply USFP owner assignments within c2c's split Canadian state layout.
-	s:STATE_YUKON_TERRITORY = {
-		set_owner_of_provinces = {
-			country = c:GWC
-			provinces = { x05137c x096d1f x09bd9a x14a33f x15a49a x183a03 x19ee3b x1a6735
-			             x23aea8 x244229 x24c2c1 x2754df x2c272d x2d2c2d x2d5321 x2e3941
-			             x30d4a3 x33a055 x365975 x37b983 x38c295 x39101e x3cc6b1 x3e2849
-			             x400644 x403c43 x44b13a x47136c x47676b x4bf0e8 x4f1d47 x5255b3
-			             x55143a x5817b5 x6286e4 x6a4cd7 x703870 x7298a0 x73210a x7626d3
-			             x7c4be7 x81667a x833289 x898427 x89a524 x8b29ac x8c2b38 x90af53
-			             x93473a x9e99fc x9f9a64 xa43b5f xa63a3f xa86f61 xa8d5f5 xa8e775
-			             xaba3f4 xac9f19 xaf1462 xaf2c3d xb2a8e6 xb38a2c xb39c1b xb58175
-			             xb8405d xb9b72b xb9e827 xbcdb8d xbfd8b9 xc4080a xcb038a xcb16ec
-			             xd62445 xdb7755 xdd8241 xde80ac xe0383c xe13ab4 xe280a6 xe4b798
-			             xef3d84 xf9820f xfa31e3 xfb2b85 xfbaf0c xfc8cbc xfd7e50 xfe60e4
-			             xff4334 }
-		}
-		set_owner_of_provinces = {
-			country = c:HBC
-			provinces = { xb3cc99 }
-		}
-		set_owner_of_provinces = {
-			country = c:TLT
-			provinces = { x07a351 x07ecf5 x0a10af x0bb9b5 x0dba60 x12ebc2 x145f3e x17c9d9
-			             x193697 x194ba1 x24e698 x26408b x2ca985 x2e6271 x344699 x354974
-			             x377cb2 x38af9b x411a5c x42b6c5 x446ec5 x44d809 x44eb95 x4556cd
-			             x4e7d04 x4ec559 x518e76 x55129e x5d50cd x61dcfe x62ae36 x63735d
-			             x646cd4 x6d753e x76372f x787004 x83b0c8 x852cce x8a38cf x8b696a
-			             x8d7e0a x8fcd85 x9ca01a x9e9486 xa13095 xa9afa9 xb3b289 xb605a8
-			             xbef70d xc0d262 xcfc665 xd1fe3a xd58b87 xd709ea xd905fa xd97d42
-			             xdae588 xdc2f4c xe46b89 xe7c2e0 xe7ef77 xef10b4 xf54f0b xf70820
-			             xf8016c xf95e56 xfa64b0 xfc9250 x08da68 x1c7f21 x3ac631 x4209be
-			             x7290a1 xad0039 xd363ad xf965be xfbeedf }
-		}
-		set_owner_of_provinces = {
-			country = c:TTC
-			provinces = { x0044d7 x0079c0 x014651 x041de6 x0468df x04ec92 x07b4a4 x09c878
-			             x0a0ac6 x0a9ef9 x0fbe18 x116717 x1447b1 x14aa5f x15af5a x191f58
-			             x1dbe3c x1e4e5a x1e8de4 x20ad45 x251e32 x26dabe x26e543 x28d00b
-			             x2b542b x2d838f x2df021 x362102 x3a98aa x3b8a74 x3e9fac x408266
-			             x44f2f1 x456ec5 x45a693 x4b6fb2 x4b7fc1 x4be082 x4c1efa x4da9f6
-			             x50a90c x515deb x51b1be x55a5a9 x564c3e x5767ac x5bd01e x5db6e8
-			             x5e5525 x663178 x6c2d9c x6c5ad1 x6df16b x6e2546 x6e27ad x728ba5
-			             x763725 x771f99 x7d3108 x7db318 x7df691 x7ed5e1 x7edee5 x8253d3
-			             x857920 x892013 x8b7244 x8c71ed x8eeb71 x9095ba x90a9a1 x957643
-			             x9b49e4 x9cdec7 xa037fa xa0d757 xa2542e xa378db xa3f090 xa43670
-			             xa5f977 xa8a09f xaaec04 xadc92c xae0626 xb0556f xb16c7b xb41f04
-			             xb641fb xb6d5bc xb90c53 xbb7546 xbc77b1 xc06f11 xc08080 xc109ef
-			             xc1fe36 xc52505 xcc1729 xce5ede xcfa677 xd1f111 xd6a5c9 xd7c839
-			             xda042c xdae598 xdb1a94 xdc9785 xdd4100 xdd4d82 xe121da xe1af70
-			             xe24714 xe7714e xec5c0f xf04641 xf07b0d xf21f47 xf47376 xf678a1
-			             xf679c1 xf89626 xf96bff xfa828a xfb9977 xff6d40 xff96ca x2c2868
-			             x3e2cbf xaf1060 xbf1b61 }
 		}
 	}
 }
