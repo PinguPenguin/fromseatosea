@@ -69,7 +69,7 @@
 
 	s:STATE_NORTHWEST_TERRITORIES = {
 		set_owner_of_provinces = {
-			country = c:ATB
+			country = c:INV
 			provinces = { x14B03B x15FC1A x1F0BA5 x2EB016 xC97FEC xCB7E23 xD31F1A xDEF7F2 }
 			provinces = { xE742CD xFD9177 }
 		}
