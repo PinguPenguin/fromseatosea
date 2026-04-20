@@ -69,7 +69,7 @@ STATE_NORTHWEST_TERRITORIES
 STATE_ONTARIO
 STATE_QUEBEC
 
-common/history/pops/c2c_history_pops.txt
+common/history/pops/zz_c2c_history_pops.txt
 STATE_ALBERTA
 STATE_BRITISH_COLUMBIA
 STATE_MANITOBA

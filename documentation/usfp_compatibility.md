@@ -6,6 +6,7 @@ This pass treats `Hail, Columbia!` as a dependency that loads before c2c.
 
 - `mod/common/history/states/zz_c2c_usfp_history_compat.txt` reapplies the province-owner changes from `usfp_history_states_canada.txt` and `usfp_history_states_natives.txt` onto c2c's split Canadian states.
 - `mod/common/on_actions/c2c_on_actions.txt` now reapplies the BC and western-north owners that c2c's startup cleanup would otherwise overwrite.
+- `mod/common/history/pops/zz_c2c_history_pops.txt` loads after USFP pop history and wipes the vanilla-state region-state populations c2c overrides before recreating c2c's values.
 
 ## Common Overrides
 
@@ -26,9 +27,9 @@ This pass treats `Hail, Columbia!` as a dependency that loads before c2c.
   Proposed merge: add a c2c-side override for `can_aus.5`.
 
 - Pop history:
-  c2c `c2c_history_pops.txt` overlaps USFP `usfp_history_native_pops.txt` in `STATE_ALBERTA`, `STATE_BRITISH_COLUMBIA`, `STATE_MANITOBA`, `STATE_NORTHWEST_TERRITORIES`, `STATE_NUNAVUT`, `STATE_ONTARIO`, `STATE_QUEBEC`, and `STATE_SASKATCHEWAN`.
+  c2c `zz_c2c_history_pops.txt` overlaps USFP `usfp_history_native_pops.txt` in `STATE_ALBERTA`, `STATE_BRITISH_COLUMBIA`, `STATE_MANITOBA`, `STATE_NORTHWEST_TERRITORIES`, `STATE_NUNAVUT`, `STATE_ONTARIO`, `STATE_QUEBEC`, and `STATE_SASKATCHEWAN`.
   c2c also overlaps USFP `usfp_history_natives_extra_pops.txt` in `STATE_NEW_BRUNSWICK`.
-  Proposed merge: redistribute USFP's native-pop changes onto c2c's split states instead of letting c2c's later pop history win on the vanilla regions.
+  Handled by loading c2c's pop history after USFP and using `kill_population_percent_in_state` in c2c's vanilla-state region-state blocks.
 
 - Building history:
   No direct Canadian overlap found between c2c `c2c_history_buildings.txt` and USFP `usfp_history_buildings.txt`.
