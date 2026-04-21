@@ -344,11 +344,6 @@
 				size = 17465
 			}
 		}
-		region_state:NVS = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
 	}
 
 	s:STATE_NEWFOUNDLAND = {
@@ -452,7 +447,7 @@
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
-		region_state:HBC = {
+		region_state:INV = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -545,7 +540,7 @@
 	}
 
 	s:STATE_NUNAVUT = {
-		region_state:HBC = {
+		region_state:INV = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -578,11 +573,6 @@
 	}
 
 	s:STATE_ONTARIO = {
-		region_state:HBC = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
 		region_state:ONT = {
 			kill_population_percent_in_state = {
 				percent = 1
@@ -866,12 +856,12 @@
 	}
 
 	s:STATE_YUKON_TERRITORY = {
-		region_state:ATB = {
+		region_state:TTC = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
 		}
-		region_state:HBC = {
+		region_state:TLT = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -1282,7 +1272,7 @@
 	}
 
 	s:STATE_NEW_BRUNSWICK = {
-		region_state:NVS = {
+		region_state:NBS = {
 			create_pop = {
 				culture = algonquian
 				religion = animist
@@ -1428,7 +1418,7 @@
 	}
 
 	s:STATE_YUKON_TERRITORY = {
-		region_state:ATB = {
+		region_state:TTC = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist

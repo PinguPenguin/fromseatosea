@@ -113,8 +113,6 @@
 	}
 
 	s:STATE_EDMONTON = {
-		region_state:BLF = {
-		}
 		region_state:HBC = {
 			create_building = {
 				building = "building_logging_camp"
@@ -333,12 +331,6 @@
 				}
 			}
 		}
-		region_state:NVS = {
-			remove_building = building_trade_center
-			remove_building = building_fishing_wharf
-			remove_building = building_barrack
-			remove_building = building_port
-		}
 	}
 
 	s:STATE_NEWFOUNDLAND = {
@@ -450,13 +442,13 @@
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
-		region_state:HBC = {
+		region_state:INV = {
 			create_building = {
 				building = "building_logging_camp"
 				reserves = 1
 				add_ownership = {
 					country = {
-						country = "c:HBC"
+						country = "c:INV"
 						levels = 1
 					}
 				}
@@ -598,9 +590,6 @@
 	}
 
 	s:STATE_ONTARIO = {
-		region_state:HBC = {
-			remove_building = building_logging_camp
-		}
 		region_state:ONT = {
 			remove_building = building_wheat_farm
 			create_building = {

@@ -6,7 +6,8 @@ This pass treats `Hail, Columbia!` as a dependency that loads before c2c.
 
 - `mod/common/history/states/zz_c2c_usfp_history_compat.txt` reapplies the province-owner changes from `usfp_history_states_canada.txt` and `usfp_history_states_natives.txt` onto c2c's split Canadian states.
 - `zz_c2c_usfp_history_compat.txt` also restores USFP owners whose vanilla provinces land in c2c custom states, including `usfp_ALG`, `usfp_ATK`, and `usfp_TSI`.
-- `mod/common/on_actions/c2c_on_actions.txt` now reapplies the BC and western-north owners that c2c's startup cleanup would otherwise overwrite.
+- `mod/common/history/states/c2c_history_states_vanilla.txt` pre-applies USFP's northern startup owner cleanup in Northwest Territories, Nunavut, and Yukon so USFP does not need to convert c2c HBC/ATB shell region_states at game start.
+- `mod/common/on_actions/c2c_on_actions.txt` still handles the remaining BC startup cleanup.
 - `mod/common/history/pops/zz_c2c_history_pops.txt` loads after USFP pop history and wipes the vanilla-state region-state populations c2c overrides before recreating c2c's values.
 - `zz_c2c_history_pops.txt` splits USFP native pop history across c2c custom states and ports USFP's Quebec/Ontario native pop moves onto the c2c split-state layout.
 - `zz_c2c_history_pops.txt` also fills persistent owner-only c2c/USFP northern region_states found by auditing final province ownership against pop history: `IRC` in Athabasca, `CPW` in Keewatin, `DGB`/`GWC`/`INV`/`STU`/`SVY` in Northwest Territories, `INV` in Nunavut, `GWC`/`TLT`/`TTC`/`usfp_IPQ` in Yukon, and `NEW` in Labrador. The deliberate one-province startup-transfer shells in British Columbia and Ontario remain unpopulated because `c2c_on_actions.txt` immediately collapses them.
