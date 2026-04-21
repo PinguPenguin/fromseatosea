@@ -9,6 +9,7 @@ This pass treats `Hail, Columbia!` as a dependency that loads before c2c.
 - `mod/common/on_actions/c2c_on_actions.txt` now reapplies the BC and western-north owners that c2c's startup cleanup would otherwise overwrite.
 - `mod/common/history/pops/zz_c2c_history_pops.txt` loads after USFP pop history and wipes the vanilla-state region-state populations c2c overrides before recreating c2c's values.
 - `zz_c2c_history_pops.txt` splits USFP native pop history across c2c custom states and ports USFP's Quebec/Ontario native pop moves onto the c2c split-state layout.
+- `zz_c2c_history_pops.txt` also fills persistent owner-only c2c/USFP northern region_states found by auditing final province ownership against pop history: `IRC` in Athabasca, `CPW` in Keewatin, `DGB`/`GWC`/`INV`/`STU`/`SVY` in Northwest Territories, `INV` in Nunavut, `GWC`/`TLT`/`TTC`/`usfp_IPQ` in Yukon, and `NEW` in Labrador. The deliberate one-province startup-transfer shells in British Columbia and Ontario remain unpopulated because `c2c_on_actions.txt` immediately collapses them.
 
 ## Common Overrides
 
