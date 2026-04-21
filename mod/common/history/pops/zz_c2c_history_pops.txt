@@ -1,21 +1,6 @@
 ﻿POPS = {
 
 	s:STATE_ALBERTA = {
-		region_state:HBC = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 2605
-			}
-			create_pop = {
-				culture = metis
-				religion = catholic
-				size = 3906
-			}
-		}
 		region_state:IRC = {
 			kill_population_percent_in_state = {
 				percent = 1
@@ -204,16 +189,6 @@
 				culture = franco_canadian
 				religion = catholic
 				size = 3336
-			}
-		}
-		region_state:HBC = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
-		region_state:ATB = {
-			kill_population_percent_in_state = {
-				percent = 1
 			}
 		}
 	}
@@ -507,11 +482,6 @@
 				culture = anglo_canadian
 				religion = protestant
 				size = 2201
-			}
-		}
-		region_state:ATB = {
-			kill_population_percent_in_state = {
-				percent = 1
 			}
 		}
 	}
@@ -821,46 +791,6 @@
 	}
 
 	s:STATE_SASKATCHEWAN = {
-		region_state:HBC = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-			create_pop = {
-				culture = metis
-				religion = protestant
-				size = 1433
-			}
-			create_pop = {
-				culture = metis
-				religion = catholic
-				size = 4465
-			}
-			create_pop = {
-				culture = metis
-				religion = animist
-				size = 1184
-			}
-			create_pop = {
-				culture = cree
-				religion = animist
-				size = 7375
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 7180
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = catholic
-				size = 2712
-			}
-			create_pop = {
-				culture = dakota
-				religion = animist
-				size = 2950
-			}
-		}
 		region_state:IRC = {
 			kill_population_percent_in_state = {
 				percent = 1
@@ -937,25 +867,6 @@
 		}
 	}
 
-	s:STATE_VANCOUVER_ISLAND = {
-		region_state:ORG = {
-			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 15258
-			}
-			create_pop = {
-				culture = salish
-				religion = animist
-				size = 8950
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = catholic
-				size = 4948
-			}
-		}
-	}
 	s:STATE_YUKON_TERRITORY = {
 		region_state:ATB = {
 			kill_population_percent_in_state = {
@@ -985,21 +896,6 @@
 	}
 
 	s:STATE_ALBERTA = {
-		region_state:DNZ = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
-		region_state:SVY = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
-		region_state:CPW = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
 		region_state:GVT = {
 			kill_population_percent_in_state = {
 				percent = 1
@@ -1047,11 +943,6 @@
 	}
 
 	s:STATE_BRITISH_COLUMBIA = {
-		region_state:HDA = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
 		region_state:SAL = {
 			kill_population_percent_in_state = {
 				percent = 1
@@ -1092,11 +983,6 @@
 				size = 2432
 			}
 		}
-		region_state:SWP = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
 		region_state:DKL = {
 			kill_population_percent_in_state = {
 				percent = 1
@@ -1105,31 +991,6 @@
 				culture = athabaskan
 				religion = animist
 				size = 3158
-			}
-		}
-		region_state:DNZ = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
-		region_state:TLT = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
-		region_state:usfp_TSI = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
-		region_state:SVY = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
-		region_state:KTN = {
-			kill_population_percent_in_state = {
-				percent = 1
 			}
 		}
 	}
@@ -1234,16 +1095,6 @@
 				size = 1600
 			}
 		}
-		region_state:SWC = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
-		region_state:WCR = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
 	}
 
 	s:STATE_KEEWATIN = {
@@ -1259,19 +1110,6 @@
 				culture = cree
 				religion = animist
 				size = 1000
-			}
-		}
-	}
-
-	s:STATE_SASKATCHEWAN = {
-		region_state:CPW = {
-			kill_population_percent_in_state = {
-				percent = 1
-			}
-		}
-		region_state:WCR = {
-			kill_population_percent_in_state = {
-				percent = 1
 			}
 		}
 	}
@@ -1300,11 +1138,6 @@
 					culture = cu:algonquian
 				}
 				move_pop = s:STATE_ONTARIO.region_state:CTF
-			}
-		}
-		region_state:OJI = {
-			kill_population_percent_in_state = {
-				percent = 1
 			}
 		}
 	}
@@ -1598,13 +1431,6 @@
 		region_state:GWC = {
 			create_pop = {
 				culture = athabaskan
-				religion = animist
-				size = 1000
-			}
-		}
-		region_state:INV = {
-			create_pop = {
-				culture = inuit
 				religion = animist
 				size = 1000
 			}

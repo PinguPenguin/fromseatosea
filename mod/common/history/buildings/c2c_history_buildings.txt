@@ -1,11 +1,5 @@
 ﻿BUILDINGS = {
 
-	s:STATE_ALBERTA = {
-		region_state:HBC = {
-			remove_building = building_logging_camp
-		}
-	}
-
 	s:STATE_ALGOMA = {
 		region_state:HBC = {
 			create_building = {
@@ -1107,11 +1101,6 @@
 				}
 			}
 		}
-		region_state:ORG = {
-		}
-	}
-
-	s:STATE_VANCOUVER_ISLAND = {
 		region_state:ORG = {
 		}
 	}
