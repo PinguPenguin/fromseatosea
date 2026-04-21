@@ -248,6 +248,20 @@ STATES = {
 			             xc8540f xca4bcc xd09e14 xd272bd xdb25c8 xe2b5da xf6b33d xfccedb
 			             xfe65fc xff3ae7 }
 		}
+		set_owner_of_provinces = {
+			country = c:usfp_ALG
+			provinces = { xd87585 x48e333 xb70a86 x912a4c xff9824 x8d25e9 xd4f421 xa459b4
+			             xaf45d7 x76c5cf x20f60d xc0960b x372676 xa34b9c x47430b xec09d5 }
+		}
+	}
+	# Reapply USFP owner assignments within c2c's split Canadian state layout.
+	s:STATE_QUEBEC_SAGUENAY = {
+		set_owner_of_provinces = {
+			country = c:usfp_ATK
+			provinces = { xe36dac xe4eb3c x681a84 xfa2fd7 x7673f1 x26ef74 x93518a xccb94b
+			             x4aca5f x32a6f4 xd48872 xb0d24a xe55165 xeda6be x06e7aa x369b85
+			             x35e144 }
+		}
 	}
 	# Reapply USFP owner assignments within c2c's split Canadian state layout.
 	s:STATE_NUNAVUT = {
@@ -314,6 +328,12 @@ STATES = {
 			             xdb73a1 xdff28b xe49b22 xe77af1 xe85e08 xe8d2d0 xe973d5 xe97a12
 			             xef46b1 xf7e225 xface14 x003c0a x780f19 x8c21f3 xbad980 xc8f21a
 			             xe057f6 xee19e4 x9d1421 xf0ad76 }
+		}
+		set_owner_of_provinces = {
+			country = c:usfp_TSI
+			provinces = { x5e0cd6 x462445 x353f41 xbb5d4e xd46521 x9b707d xbc873d xe9756f
+			             x83a2f7 x75ce92 x3ef318 x89cec2 x26fe6e xc4f8be x5dc4e3 xcec8bc
+			             xa5c52c x3f0544 xd3e426 x32e810 xe040c0 }
 		}
 		set_owner_of_provinces = {
 			country = c:WKS

@@ -1302,4 +1302,533 @@
 			}
 		}
 	}
+
+	# Reapply and split USFP native pop history across c2c's Canadian state layout.
+	# c2c loads after USFP, so vanilla-region USFP pops must be recreated where
+	# their owner provinces now live in c2c custom states.
+	s:STATE_ALBERTA = {
+		region_state:DNZ = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:SVY = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:CPW = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:GVT = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = siouan
+				religion = animist
+				size = 1000
+			}
+		}
+	}
+
+	s:STATE_ATHABASCA = {
+		region_state:CPW = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 3000
+			}
+		}
+		region_state:DNZ = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 5625
+			}
+		}
+		region_state:SVY = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 2000
+			}
+		}
+	}
+
+	s:STATE_EDMONTON = {
+		region_state:DNZ = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 4375
+			}
+		}
+	}
+
+	s:STATE_BRITISH_COLUMBIA = {
+		region_state:HDA = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:SAL = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 2600
+			}
+		}
+		region_state:SYX = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 1222
+			}
+		}
+		region_state:LLT = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 1000
+			}
+		}
+		region_state:WKS = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 2432
+			}
+		}
+		region_state:SWP = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:DKL = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 3158
+			}
+		}
+		region_state:DNZ = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:TLT = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:usfp_TSI = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:SVY = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:KTN = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+	}
+
+	s:STATE_BC_INTERIOR = {
+		region_state:DKL = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 789
+			}
+		}
+		region_state:KTN = {
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 2000
+			}
+		}
+		region_state:SWP = {
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 2625
+			}
+		}
+		region_state:SYX = {
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 778
+			}
+		}
+	}
+
+	s:STATE_UPPER_BC = {
+		region_state:DKL = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 6053
+			}
+		}
+		region_state:DNZ = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 10000
+			}
+		}
+		region_state:HDA = {
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 5000
+			}
+		}
+		region_state:SVY = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 2000
+			}
+		}
+		region_state:SWP = {
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 375
+			}
+		}
+		region_state:TLT = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 20000
+			}
+		}
+		region_state:usfp_TSI = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 5000
+			}
+		}
+		region_state:WKS = {
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 1216
+			}
+		}
+	}
+
+	s:STATE_VANCOUVER_ISLAND = {
+		region_state:SAL = {
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 400
+			}
+		}
+		region_state:WKS = {
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 1352
+			}
+		}
+	}
+
+	s:STATE_MANITOBA = {
+		region_state:CTF = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = algonquian
+				religion = animist
+				size = 1000
+			}
+		}
+		region_state:OJI = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 1600
+			}
+		}
+		region_state:SWC = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:WCR = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+	}
+
+	s:STATE_KEEWATIN = {
+		region_state:OJI = {
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 400
+			}
+		}
+		region_state:SWC = {
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 3000
+			}
+		}
+		region_state:WCR = {
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 1000
+			}
+		}
+	}
+
+	s:STATE_SASKATCHEWAN = {
+		region_state:CPW = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:WCR = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+	}
+
+	s:STATE_NORTH_SASKATCHEWAN = {
+		region_state:CPW = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 4000
+			}
+		}
+		region_state:WCR = {
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 1000
+			}
+		}
+	}
+
+	s:STATE_ONTARIO = {
+		region_state:ONT = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:algonquian
+				}
+				move_pop = s:STATE_ONTARIO.region_state:CTF
+			}
+		}
+		region_state:OJI = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+	}
+
+	s:STATE_ALGOMA = {
+		region_state:HBC = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:algonquian
+				}
+				move_pop = s:STATE_ALGOMA.region_state:CTF
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:cree
+				}
+				move_pop = s:STATE_ALGOMA.region_state:OJI
+			}
+		}
+		region_state:ONT = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:algonquian
+				}
+				move_pop = s:STATE_ALGOMA.region_state:CTF
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:cree
+				}
+				move_pop = s:STATE_ALGOMA.region_state:OJI
+			}
+		}
+		region_state:OJI = {
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 417
+			}
+		}
+	}
+
+	s:STATE_NORTHWEST_ONTARIO = {
+		region_state:HBC = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:algonquian
+				}
+				move_pop = s:STATE_NORTHWEST_ONTARIO.region_state:CTF
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:cree
+				}
+				move_pop = s:STATE_NORTHWEST_ONTARIO.region_state:SWC
+			}
+		}
+		region_state:ONT = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:algonquian
+				}
+				move_pop = s:STATE_NORTHWEST_ONTARIO.region_state:CTF
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:cree
+				}
+				move_pop = s:STATE_NORTHWEST_ONTARIO.region_state:SWC
+			}
+		}
+		region_state:OJI = {
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 9583
+			}
+		}
+	}
+
+	s:STATE_QUEBEC_SAGUENAY = {
+		region_state:QUE = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:cree
+				}
+				move_pop = s:STATE_QUEBEC_SAGUENAY.region_state:usfp_ATK
+			}
+		}
+	}
+
+	s:STATE_NOUVEAU_QUEBEC = {
+		region_state:HBC = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:inuit
+				}
+				move_pop = s:STATE_NOUVEAU_QUEBEC.region_state:INK
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:cree
+				}
+				move_pop = s:STATE_NOUVEAU_QUEBEC.region_state:ECR
+			}
+		}
+		region_state:ECR = {
+			kill_population_percent_in_state = {
+				percent = 0.75
+			}
+		}
+		region_state:INN = {
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 4500
+			}
+		}
+		region_state:usfp_ALG = {
+			create_pop = {
+				culture = algonquian
+				religion = animist
+				size = 2000
+			}
+		}
+	}
+
+	s:STATE_NUNAVUT = {
+		region_state:CPW = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 1000
+			}
+		}
+	}
+
+	s:STATE_NORTHWEST_TERRITORIES = {
+		region_state:CPW = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 4000
+			}
+		}
+	}
+
+	s:STATE_NEW_BRUNSWICK = {
+		region_state:NBS = {
+			create_pop = {
+				culture = algonquian
+				religion = animist
+				size = 800
+			}
+		}
+		region_state:NVS = {
+			create_pop = {
+				culture = algonquian
+				religion = animist
+				size = 1500
+			}
+		}
+	}
 }
