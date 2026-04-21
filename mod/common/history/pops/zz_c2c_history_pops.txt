@@ -150,7 +150,7 @@
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 2585
+				size = 3585
 			}
 		}
 	}
@@ -217,27 +217,25 @@
 				religion = animist
 				size = 1371
 			}
+			create_pop = {
+				culture = dakota
+				religion = animist
+				size = 2520
+			}
 		}
 	}
 
 	s:STATE_KEEWATIN = {
-		region_state:IRC = {
+		region_state:HBC = {
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 2503
+				size = 5503
 			}
 			create_pop = {
 				culture = inuit
 				religion = animist
 				size = 1113
-			}
-		}
-		region_state:HBC = {
-			create_pop = {
-				culture = cree
-				religion = animist
-				size = 2000
 			}
 		}
 	}
@@ -1019,6 +1017,11 @@
 				religion = animist
 				size = 6053
 			}
+			create_pop = {
+				culture = salish
+				religion = animist
+				size = 1000
+			}
 		}
 		region_state:DNZ = {
 			create_pop = {
@@ -1150,12 +1153,6 @@
 				}
 				move_pop = s:STATE_ALGOMA.region_state:CTF
 			}
-			every_scope_pop = {
-				limit = {
-					culture = cu:cree
-				}
-				move_pop = s:STATE_ALGOMA.region_state:OJI
-			}
 		}
 		region_state:ONT = {
 			every_scope_pop = {
@@ -1168,7 +1165,7 @@
 				limit = {
 					culture = cu:cree
 				}
-				move_pop = s:STATE_ALGOMA.region_state:OJI
+				move_pop = s:STATE_ALGOMA.region_state:HBC
 			}
 		}
 	}
@@ -1371,36 +1368,9 @@
 	}
 
 	s:STATE_BC_INTERIOR = {
-		region_state:DKL = {
-			create_pop = {
-				culture = athabaskan
-				religion = animist
-				size = 1000
-			}
-		}
 		region_state:SYX = {
 			create_pop = {
 				culture = salish
-				religion = animist
-				size = 1000
-			}
-		}
-	}
-
-	s:STATE_EDMONTON = {
-		region_state:BLF = {
-			create_pop = {
-				culture = dakota
-				religion = animist
-				size = 2520
-			}
-		}
-	}
-
-	s:STATE_KEEWATIN = {
-		region_state:OJI = {
-			create_pop = {
-				culture = cree
 				religion = animist
 				size = 1000
 			}
@@ -1441,16 +1411,6 @@
 		region_state:INV = {
 			create_pop = {
 				culture = inuit
-				religion = animist
-				size = 1000
-			}
-		}
-	}
-
-	s:STATE_UPPER_BC = {
-		region_state:SWP = {
-			create_pop = {
-				culture = salish
 				religion = animist
 				size = 1000
 			}

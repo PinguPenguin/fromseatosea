@@ -85,12 +85,8 @@
 
 	s:STATE_KEEWATIN = {
 	create_state = {
-			country = c:IRC
-			owned_provinces = { "x09454b" "x32ce68" }
-		}
-	create_state = {
 			country = c:HBC
-			owned_provinces = { "x002497" "x00f433" "x044b0b" "x0782f1" "x0791f2" "x08045e" "x09ccbb" "x0b8443" "x0c1436" "x0c2c81" "x0c6fd7" "x0cdfef" "x0db4ca" "x0e6ed3" "x0e7e40" "x0f245d" "x12c464" "x131829" "x1328f8" "x13fc0f" "x1510b9" "x165b36" "x180d7a" "x187c58" "x18f5ee" "x1a0e35" "x1c140f" "x1ee51c" "x21166d" "x2256ce" "x2275df" "x24df1c" "x253e84" "x2b9e9f" "x30c051" "x3612f5" "x38d2b3" "x395554" "x3e3e84" "x3e8475" "x3eb341" "x3f7017" "x40e000" "x40e52d" "x42f582" "x43b793" "x43ecf0" "x44cca9" "x44ef6b" "x4503e6" "x45d044" "x464f48" "x4676bd" "x46b922" "x4992a9" "x4d0581" "x4ff4d0" "x521e7c" "x528228" "x544568" "x555bad" "x55e100" "x563d7f" "x56a6c4" "x57afc4" "x594f3c" "x5b4e49" "x5be5bf" "x5cc4c6" "x5d7496" "x5e3093" "x5e806d" "x5f1f9d" "x5fc402" "x6137ea" "x6219bb" "x65f69e" "x68c879" "x6911e2" "x6a73e3" "x6b748e" "x6c06d8" "x6e8c90" "x6f9dbe" "x70f127" "x7122b4" "x71e534" "x75f292" "x76718f" "x78225b" "x7a3e48" "x7a790a" "x7a8dc0" "x7b9c23" "x7ce9e2" "x7ee88a" "x7f8573" "x8020c0" "x813c7a" "x832eb1" "x8521ab" "x857dd7" "x85f1ea" "x85f6fb" "x86229f" "x86d18a" "x8a7316" "x8b9e21" "x8be8b5" "x92e099" "x9455f5" "x956f56" "x9a54dd" "x9cb866" "x9d05eb" "x9e3dc0" "xa0231c" "xa03446" "xa182ab" "xa57384" "xa9c5c0" "xaa5d63" "xad40b0" "xae76e5" "xb0f3c2" "xb1c965" "xb448a4" "xb4abac" "xb5c055" "xb7b9d2" "xb84746" "xb8ab1d" "xb8e561" "xba7439" "xbb5ea2" "xbe34c5" "xc02fed" "xc036ec" "xc587cd" "xc61e9b" "xc8467f" "xc923b4" "xc9790e" "xc9870b" "xc99667" "xca15a3" "xca95ea" "xcca2c5" "xd0913b" "xd0d2b7" "xd1f715" "xd48023" "xd4b179" "xd4d86f" "xd7ce04" "xd81024" "xdab83f" "xdbbc41" "xdc2b47" "xdd60f3" "xe0a3a3" "xe0f215" "xe15693" "xe19213" "xe25d1f" "xe5081d" "xe58d80" "xe7cb96" "xe857dc" "xe9fe5b" "xea8d91" "xeb9647" "xeed579" "xf2ad8f" "xf2b4ce" "xf2debd" "xf4a9f1" "xf5931b" "xf66d8e" "xf73080" "xf73ff8" "xf770e6" "xf779d9" "xf7af04" "xf8510f" "xf88dc6" "xf91e7e" "xf9bb2e" "xfa5fa2" "xfb1b79" "xfd8b0c" "xff1988" }
+			owned_provinces = { "x002497" "x00f433" "x044b0b" "x0782f1" "x0791f2" "x08045e" "x09ccbb" "x0b8443" "x0c1436" "x0c2c81" "x0c6fd7" "x0cdfef" "x0db4ca" "x0e6ed3" "x0e7e40" "x0f245d" "x12c464" "x131829" "x1328f8" "x13fc0f" "x1510b9" "x165b36" "x180d7a" "x187c58" "x18f5ee" "x1a0e35" "x1c140f" "x1ee51c" "x21166d" "x2256ce" "x2275df" "x24df1c" "x253e84" "x2b9e9f" "x30c051" "x32ce68" "x3612f5" "x38d2b3" "x395554" "x3e3e84" "x3e8475" "x3eb341" "x3f7017" "x40e000" "x40e52d" "x42f582" "x43b793" "x43ecf0" "x44cca9" "x44ef6b" "x4503e6" "x45d044" "x464f48" "x4676bd" "x46b922" "x4992a9" "x4d0581" "x4ff4d0" "x521e7c" "x528228" "x544568" "x555bad" "x55e100" "x563d7f" "x56a6c4" "x57afc4" "x594f3c" "x5b4e49" "x5be5bf" "x5cc4c6" "x5d7496" "x5e3093" "x5e806d" "x5f1f9d" "x5fc402" "x6137ea" "x6219bb" "x65f69e" "x68c879" "x6911e2" "x6a73e3" "x6b748e" "x6c06d8" "x6e8c90" "x6f9dbe" "x70f127" "x7122b4" "x71e534" "x75f292" "x76718f" "x78225b" "x7a3e48" "x7a790a" "x7a8dc0" "x7b9c23" "x7ce9e2" "x7ee88a" "x7f8573" "x8020c0" "x813c7a" "x832eb1" "x8521ab" "x857dd7" "x85f1ea" "x85f6fb" "x86229f" "x86d18a" "x8a7316" "x8b9e21" "x8be8b5" "x92e099" "x9455f5" "x956f56" "x9a54dd" "x9cb866" "x9d05eb" "x9e3dc0" "xa0231c" "xa03446" "xa182ab" "xa57384" "xa9c5c0" "xaa5d63" "xad40b0" "xae76e5" "xb0f3c2" "xb1c965" "xb448a4" "xb4abac" "xb5c055" "xb7b9d2" "xb84746" "xb8ab1d" "xb8e561" "xba7439" "xbb5ea2" "xbe34c5" "xc02fed" "xc036ec" "xc587cd" "xc61e9b" "xc8467f" "xc923b4" "xc9790e" "xc9870b" "xc99667" "xca15a3" "xca95ea" "xcca2c5" "xd0913b" "xd0d2b7" "xd1f715" "xd48023" "xd4b179" "xd4d86f" "xd7ce04" "xd81024" "xdab83f" "xdbbc41" "xdc2b47" "xdd60f3" "xe0a3a3" "xe0f215" "xe15693" "xe19213" "xe25d1f" "xe5081d" "xe58d80" "xe7cb96" "xe857dc" "xe9fe5b" "xea8d91" "xeb9647" "xeed579" "xf2ad8f" "xf2b4ce" "xf2debd" "xf4a9f1" "xf5931b" "xf66d8e" "xf73080" "xf73ff8" "xf770e6" "xf779d9" "xf7af04" "xf8510f" "xf88dc6" "xf91e7e" "xf9bb2e" "xfa5fa2" "xfb1b79" "xfd8b0c" "xff1988" "x09454b" }
 		}
 	add_homeland = cu:anglo_canadian
 	add_homeland = cu:metis
@@ -114,16 +110,12 @@
 
 	s:STATE_EDMONTON = {
 	create_state = {
-			country = c:BLF
-			owned_provinces = { "x0ed37a" "x12af70" "x594542" "x6241e5" "x6b0266" "x70370b" "x7f49e7" }
-		}
-	create_state = {
 			country = c:HBC
 			owned_provinces = { "x001b22" "x00f631" "x060c67" "x072ddc" "x0e6b0a" "x107893" "x10bf0f" "x1197cd" "x1c413a" "x23ba24" "x285a4e" "x2fa24b" "x311442" "x397f40" "x3991ab" "x39e46c" "x3b027f" "x402b2e" "x433bc6" "x4e03e3" "x4f80b8" "x518f22" "x51cec5" "x52fcb4" "x55f9ab" "x56971b" "x5779a2" "x583eaa" "x5a43d4" "x617dfb" "x61c9b8" "x670a46" "x673ca0" "x676674" "x67cabb" "x69bed1" "x6a64cd" "x6dc09d" "x7050f0" "x7340b5" "x74c214" "x759e96" "x75be3e" "x799cfa" "x7a03dc" "x840a15" "x872d1d" "x89c61f" "x8a6d99" "x8f67dc" "x907360" "x92aabe" "x92ad8f" "x933c14" "x973257" "x98f80a" "xa150dd" "xa74a2f" "xa75296" "xa86910" "xa8913b" "xa9976f" "xb2b31f" "xbe8dc0" "xc07fc1" "xc33300" "xc3d71f" "xc45e08" "xc4e828" "xc5a257" "xcac792" "xcb77d5" "xd1a1d9" "xd44fbb" "xd71124" "xdaac5c" "xdcc985" "xdfa1bb" "xeb7e0e" "xeddf68" "xefa433" "xf11edd" "xf2dfa3" "xf3ad96" "xf4ec2d" "xfb8137" "xfca61c" "xfcb25c" }
 		}
 	create_state = {
 			country = c:IRC
-			owned_provinces = { "x253a98" "x26db64" "x2a6d2a" "x44a1d9" "x55dbf6" "xa2b002" "xb12674" "xb24198" "xb88cbc" "xb94fd8" "xf43cc8" "xfadebc" }
+			owned_provinces = { "x0ed37a" "x12af70" "x594542" "x6241e5" "x6b0266" "x70370b" "x7f49e7" "x253a98" "x26db64" "x2a6d2a" "x44a1d9" "x55dbf6" "xa2b002" "xb12674" "xb24198" "xb88cbc" "xb94fd8" "xf43cc8" "xfadebc" }
 		}
 	add_homeland = cu:athabaskan
 	add_homeland = cu:anglo_canadian

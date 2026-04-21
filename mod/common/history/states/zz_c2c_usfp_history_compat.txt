@@ -8,10 +8,6 @@
 			             x8f87b9 x90a5c2 x993abf xa07380 xa794c1 xa7b9ee xb2d5dc xba1406
 			             xbab329 xc0a0c0 xd2b39a xde7b99 xea4fc0 xeaebd8 xf03811 }
 		}
-		set_owner_of_provinces = {
-			country = c:OJI
-			provinces = { x88147f xc75f8c }
-		}
 	}
 	# Reapply USFP owner assignments within c2c's split Canadian state layout.
 	s:STATE_ATHABASCA = {
@@ -44,10 +40,6 @@
 	}
 	# Reapply USFP owner assignments within c2c's split Canadian state layout.
 	s:STATE_BC_INTERIOR = {
-		set_owner_of_provinces = {
-			country = c:DKL
-			provinces = { x2bbea4 x52c081 x5c6656 }
-		}
 		set_owner_of_provinces = {
 			country = c:KTN
 			provinces = { x06eeac x453f2b x521640 x5a6f3e x61cacb x738afd x7bdc98 x804a90
@@ -91,10 +83,6 @@
 			             x4503e6 x45d044 x555bad x5b4e49 x5e806d x5f1f9d x75f292 x7ee88a
 			             x7f8573 x86d18a x8a7316 x9455f5 xb448a4 xb4abac xbb5ea2 xe19213
 			             xe25d1f xe7cb96 xf73080 xf779d9 xf9bb2e xfa5fa2 }
-		}
-		set_owner_of_provinces = {
-			country = c:OJI
-			provinces = { xad40b0 }
 		}
 		set_owner_of_provinces = {
 			country = c:SWC
@@ -285,7 +273,8 @@
 			country = c:DKL
 			provinces = { x2600c9 x6a10e2 xda096e x377b09 x3d7cf6 x5a9ba4 x63fbf3 x6c8005
 			             x6c8c52 x6f3aaf x795d42 x8dcfda xa01450 xa78118 xb6226d xb8325d
-			             xbbf2bb xc7ab8a xcb92d8 xd1aa6a xd369b9 xf0e9a1 xfefb89 }
+			             xbbf2bb xc7ab8a xcb92d8 xd1aa6a xd369b9 xf0e9a1 xfefb89
+			             x123bdd xa4c072 }
 		}
 		set_owner_of_provinces = {
 			country = c:DNZ
@@ -304,10 +293,6 @@
 			provinces = { x196bbc x1c6431 x1fd5d0 x20156d x252116 x383856 x40028f x475882
 			             x4f2908 x5f06d2 x653b62 x87d0f6 x9860f4 x9c4123 xa504be xb175d9
 			             xb98d8c xc087bc xc0a02f xc132c8 xc7414d xf23e90 xfc10d7 xff5a75 }
-		}
-		set_owner_of_provinces = {
-			country = c:SWP
-			provinces = { x123bdd xa4c072 }
 		}
 		set_owner_of_provinces = {
 			country = c:TLT
