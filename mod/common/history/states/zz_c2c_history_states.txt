@@ -241,7 +241,7 @@ STATES = {
 			country = c:CTF
 			owned_provinces = {
 				"x3cb77d" "x0fe1b2" "xe50d46" "x8d992e" "x866c8a" "x490d2a" "x343659" "xce6d4a"
-				"x101204" "x5f5f99" "x24171d" "x99f3c4" "xc5041f" "x54f237" "x15c12c" "xb4f7b9"
+				"x101204" "x5f5f99" "x24171d" "x99f3c4" "xc5041f" "x15c12c" "xb4f7b9"
 				"x569e74" "x9dbfa5" "xd64816" "xa24eb6" "xb27fd6" "x64970e" "xd3807d" "xd389de"
 				"x4d3033" "x271949" "x9577b0" "xd319eb" "x22e40f" "xff5559" "xa22f7e" "x9cc0d0"
 				"x62baf4" "x9c3f51" "xe99d1d" "x7cf31c" "x827b75" "x77bc8d" "xfa9af5" "x7bd091"
@@ -269,7 +269,7 @@ STATES = {
 		create_state = {
 			country = c:ONT
 			owned_provinces = {
-				"x3ebfed"
+				"x3ebfed" "x54f237"
 			}
 		}
 		add_homeland = cu:anglo_canadian

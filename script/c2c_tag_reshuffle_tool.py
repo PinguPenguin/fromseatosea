@@ -29,8 +29,7 @@ import vic3_state_editor as vse
 DEFAULT_GAME_ROOT = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Victoria 3")
 DEFAULT_USFP_ROOT = Path(r"C:\Users\jubju\Documents\VicModding\Hail, Columbia!")
 
-C2C_STATE_CUSTOM = Path("common/history/states/c2c_history_states_custom.txt")
-C2C_STATE_VANILLA = Path("common/history/states/c2c_history_states_vanilla.txt")
+C2C_STATE_HISTORY = Path("common/history/states/zz_c2c_history_states.txt")
 C2C_POP_HISTORY = Path("common/history/pops/zz_c2c_history_pops.txt")
 C2C_BUILDING_HISTORY = Path("common/history/buildings/c2c_history_buildings.txt")
 
@@ -208,8 +207,7 @@ class C2CTagRepository:
         self.game_root = game_root
         self.upstream_mod = upstream_mod if upstream_mod and upstream_mod.exists() else None
 
-        self.state_custom_path = self.mod_root / C2C_STATE_CUSTOM
-        self.state_vanilla_path = self.mod_root / C2C_STATE_VANILLA
+        self.state_history_path = self.mod_root / C2C_STATE_HISTORY
         self.pop_path = self.mod_root / C2C_POP_HISTORY
         self.building_path = self.mod_root / C2C_BUILDING_HISTORY
 
@@ -305,10 +303,10 @@ class C2CTagRepository:
         return regions
 
     def scan_custom_state_ids(self) -> set[str]:
-        if not self.state_custom_path.exists():
+        if not self.state_history_path.exists():
             return set()
         result: set[str] = set()
-        text = vse.read_text(self.state_custom_path)
+        text = vse.read_text(self.state_history_path)
         for key, _start, _end, block in vse.iter_named_blocks(text, vse.STATE_HISTORY_PATTERN):
             if any(entry.key == "create_state" for entry in vse.parse_top_level_entries(block)):
                 result.add(key.removeprefix("s:"))
@@ -607,39 +605,10 @@ class C2CTagRepository:
         groups: OrderedDict[str, list[str]],
         desired_owner_by_province: dict[str, str],
     ) -> SaveResult:
-        override_path = self.find_later_state_ownership_override(state_id, after_path=self.state_custom_path)
-        if override_path is not None:
-            return self.save_state_override_diff(override_path, state_id, groups, desired_owner_by_province)
-
-        existing = self.find_state_blocks(self.state_custom_path, state_id)
+        existing = self.find_state_blocks(self.state_history_path, state_id)
         preserved = self.preserved_state_entries_from_blocks(existing, ownership_keys={"create_state", "set_owner_of_provinces"})
         block = self.render_custom_state_block(state_id, groups, preserved)
-        return self.update_states_file(self.state_custom_path, f"s:{state_id}", block)
-
-    def find_later_state_ownership_override(self, state_id: str, after_path: Path) -> Path | None:
-        after_key = path_key(after_path)
-        seen_after = False
-        target: Path | None = None
-        for path in self.history_files("states"):
-            current_key = path_key(path)
-            if current_key == after_key:
-                seen_after = True
-                continue
-            if not seen_after or not self.is_c2c_mod_file(path):
-                continue
-
-            existing = self.find_state_blocks(path, state_id)
-            if not existing:
-                continue
-            if any(self.state_block_has_ownership(block) for _start, _end, block in existing):
-                target = path
-        return target
-
-    def state_block_has_ownership(self, block: str) -> bool:
-        return any(
-            entry.key in {"create_state", "set_owner_of_provinces"}
-            for entry in vse.parse_top_level_entries(block)
-        )
+        return self.update_states_file(self.state_history_path, f"s:{state_id}", block)
 
     def state_blocks_owner_by_province(
         self,
@@ -668,61 +637,28 @@ class C2CTagRepository:
                         owner_by_province[province] = tag
         return owner_by_province
 
-    def is_c2c_mod_file(self, path: Path) -> bool:
-        try:
-            path.resolve().relative_to(self.mod_root.resolve())
-            return True
-        except ValueError:
-            return False
-
-    def save_state_override_diff(
-        self,
-        path: Path,
-        state_id: str,
-        groups: OrderedDict[str, list[str]],
-        desired_owner_by_province: dict[str, str],
-    ) -> SaveResult:
-        skip = {(path_key(path), f"s:{state_id}")}
-        baseline = self.load_effective_ownership(skip_blocks=skip, apply_startup_effects=False)
-        existing = self.find_state_blocks(path, state_id)
-        explicit_override_owners = self.state_blocks_owner_by_province(state_id, existing)
-        changed: OrderedDict[str, list[str]] = OrderedDict()
-        for tag, provinces in groups.items():
-            for province in provinces:
-                desired_owner = desired_owner_by_province.get(province, "")
-                if baseline.get(province, "") != desired_owner or province in explicit_override_owners:
-                    changed.setdefault(tag, []).append(province)
-
-        preserved = self.preserved_state_entries_from_blocks(
-            existing,
-            ownership_keys={"create_state", "set_owner_of_provinces"},
-        )
-        block = None
-        if changed or preserved:
-            block = self.render_vanilla_state_block(state_id, changed, preserved)
-        return self.update_states_file(path, f"s:{state_id}", block)
-
     def save_vanilla_state_diff(
         self,
         state_id: str,
         groups: OrderedDict[str, list[str]],
         desired_owner_by_province: dict[str, str],
     ) -> SaveResult:
-        skip = {(path_key(self.state_vanilla_path), f"s:{state_id}")}
+        skip = {(path_key(self.state_history_path), f"s:{state_id}")}
         baseline = self.load_effective_ownership(skip_blocks=skip, apply_startup_effects=False)
-        region = self.state_regions[state_id]
+        existing = self.find_state_blocks(self.state_history_path, state_id)
+        explicit_master_owners = self.state_blocks_owner_by_province(state_id, existing)
         changed: OrderedDict[str, list[str]] = OrderedDict()
         for tag, provinces in groups.items():
             for province in provinces:
-                if baseline.get(province, "") != desired_owner_by_province.get(province, ""):
+                desired_owner = desired_owner_by_province.get(province, "")
+                if baseline.get(province, "") != desired_owner or province in explicit_master_owners:
                     changed.setdefault(tag, []).append(province)
 
-        existing = self.find_state_blocks(self.state_vanilla_path, state_id)
         preserved = self.preserved_state_entries_from_blocks(existing, ownership_keys={"set_owner_of_provinces"})
         block = None
         if changed or preserved:
             block = self.render_vanilla_state_block(state_id, changed, preserved)
-        return self.update_states_file(self.state_vanilla_path, f"s:{state_id}", block)
+        return self.update_states_file(self.state_history_path, f"s:{state_id}", block)
 
     def find_state_block(self, path: Path, state_id: str) -> tuple[int, int, str] | None:
         blocks = self.find_state_blocks(path, state_id)
@@ -1269,7 +1205,7 @@ class C2CReshuffleApp:
         self.refresh_owner_tree()
         self.schedule_render()
         region = self.repository.state_regions[state_id]
-        kind = "custom create_state" if self.repository.is_custom_history_state(state_id) else "vanilla set_owner diff"
+        kind = "master create_state" if self.repository.is_custom_history_state(state_id) else "master set_owner diff"
         self.summary_var.set(f"{state_id} from {region.source_name}; save mode: {kind}.")
 
     def refresh_owner_tree(self) -> None:
@@ -1977,8 +1913,7 @@ def run_check(repository: C2CTagRepository) -> int:
     print(f"Unowned/unknown provinces: {unknown}")
     print(f"Custom create_state states: {len(repository.custom_state_ids)}")
     print(f"Loaded sources: {', '.join(source.name for source in repository.sources)}")
-    print(f"State custom output: {repository.state_custom_path}")
-    print(f"State vanilla output: {repository.state_vanilla_path}")
+    print(f"State history output: {repository.state_history_path}")
     print(f"Pop output: {repository.pop_path}")
     print(f"Building output: {repository.building_path}")
     return 0 if repository.state_regions and assigned else 1
