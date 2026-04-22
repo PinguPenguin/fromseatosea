@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import colorsys
+import math
 import re
 import sys
 import tkinter as tk
@@ -60,6 +61,7 @@ WARNING = "#ffbe76"
 MIN_SCALE = 0.08
 MAX_SCALE = 1.50
 ZOOM_FACTOR = 1.35
+RENDER_MARGIN = 320
 
 
 @dataclass
@@ -585,7 +587,7 @@ class C2CTagRepository:
         groups = self.desired_groups(state_id, desired_owner_by_province)
         result = SaveResult()
         if self.is_custom_history_state(state_id):
-            result.add(self.save_custom_state_block(state_id, groups))
+            result.add(self.save_custom_state_block(state_id, groups, desired_owner_by_province))
         else:
             result.add(self.save_vanilla_state_diff(state_id, groups, desired_owner_by_province))
 
@@ -599,11 +601,106 @@ class C2CTagRepository:
             )
         return result
 
-    def save_custom_state_block(self, state_id: str, groups: OrderedDict[str, list[str]]) -> SaveResult:
-        existing = self.find_state_block(self.state_custom_path, state_id)
-        preserved = self.preserved_state_entries(existing[2] if existing else None, ownership_keys={"create_state", "set_owner_of_provinces"})
+    def save_custom_state_block(
+        self,
+        state_id: str,
+        groups: OrderedDict[str, list[str]],
+        desired_owner_by_province: dict[str, str],
+    ) -> SaveResult:
+        override_path = self.find_later_state_ownership_override(state_id, after_path=self.state_custom_path)
+        if override_path is not None:
+            return self.save_state_override_diff(override_path, state_id, groups, desired_owner_by_province)
+
+        existing = self.find_state_blocks(self.state_custom_path, state_id)
+        preserved = self.preserved_state_entries_from_blocks(existing, ownership_keys={"create_state", "set_owner_of_provinces"})
         block = self.render_custom_state_block(state_id, groups, preserved)
         return self.update_states_file(self.state_custom_path, f"s:{state_id}", block)
+
+    def find_later_state_ownership_override(self, state_id: str, after_path: Path) -> Path | None:
+        after_key = path_key(after_path)
+        seen_after = False
+        target: Path | None = None
+        for path in self.history_files("states"):
+            current_key = path_key(path)
+            if current_key == after_key:
+                seen_after = True
+                continue
+            if not seen_after or not self.is_c2c_mod_file(path):
+                continue
+
+            existing = self.find_state_blocks(path, state_id)
+            if not existing:
+                continue
+            if any(self.state_block_has_ownership(block) for _start, _end, block in existing):
+                target = path
+        return target
+
+    def state_block_has_ownership(self, block: str) -> bool:
+        return any(
+            entry.key in {"create_state", "set_owner_of_provinces"}
+            for entry in vse.parse_top_level_entries(block)
+        )
+
+    def state_blocks_owner_by_province(
+        self,
+        state_id: str,
+        blocks: list[tuple[int, int, str]],
+    ) -> dict[str, str]:
+        owner_by_province: dict[str, str] = {}
+        region = self.state_regions.get(state_id)
+        state_provinces = set(region.provinces) if region else set()
+
+        for _start, _end, block in blocks:
+            for entry in vse.parse_top_level_entries(strip_line_comments(block)):
+                if entry.key not in {"create_state", "set_owner_of_provinces"}:
+                    continue
+                tag = parse_country_tag(entry.raw)
+                if not tag:
+                    continue
+                if entry.key == "create_state":
+                    provinces = extract_province_lists(entry.raw, "owned_provinces")
+                    if not provinces and region:
+                        provinces = region.provinces
+                else:
+                    provinces = extract_province_lists(entry.raw, "provinces")
+                for province in provinces:
+                    if not state_provinces or province in state_provinces:
+                        owner_by_province[province] = tag
+        return owner_by_province
+
+    def is_c2c_mod_file(self, path: Path) -> bool:
+        try:
+            path.resolve().relative_to(self.mod_root.resolve())
+            return True
+        except ValueError:
+            return False
+
+    def save_state_override_diff(
+        self,
+        path: Path,
+        state_id: str,
+        groups: OrderedDict[str, list[str]],
+        desired_owner_by_province: dict[str, str],
+    ) -> SaveResult:
+        skip = {(path_key(path), f"s:{state_id}")}
+        baseline = self.load_effective_ownership(skip_blocks=skip, apply_startup_effects=False)
+        existing = self.find_state_blocks(path, state_id)
+        explicit_override_owners = self.state_blocks_owner_by_province(state_id, existing)
+        changed: OrderedDict[str, list[str]] = OrderedDict()
+        for tag, provinces in groups.items():
+            for province in provinces:
+                desired_owner = desired_owner_by_province.get(province, "")
+                if baseline.get(province, "") != desired_owner or province in explicit_override_owners:
+                    changed.setdefault(tag, []).append(province)
+
+        preserved = self.preserved_state_entries_from_blocks(
+            existing,
+            ownership_keys={"create_state", "set_owner_of_provinces"},
+        )
+        block = None
+        if changed or preserved:
+            block = self.render_vanilla_state_block(state_id, changed, preserved)
+        return self.update_states_file(path, f"s:{state_id}", block)
 
     def save_vanilla_state_diff(
         self,
@@ -620,18 +717,27 @@ class C2CTagRepository:
                 if baseline.get(province, "") != desired_owner_by_province.get(province, ""):
                     changed.setdefault(tag, []).append(province)
 
-        existing = self.find_state_block(self.state_vanilla_path, state_id)
-        preserved = self.preserved_state_entries(existing[2] if existing else None, ownership_keys={"set_owner_of_provinces"})
+        existing = self.find_state_blocks(self.state_vanilla_path, state_id)
+        preserved = self.preserved_state_entries_from_blocks(existing, ownership_keys={"set_owner_of_provinces"})
         block = None
         if changed or preserved:
             block = self.render_vanilla_state_block(state_id, changed, preserved)
         return self.update_states_file(self.state_vanilla_path, f"s:{state_id}", block)
 
     def find_state_block(self, path: Path, state_id: str) -> tuple[int, int, str] | None:
+        blocks = self.find_state_blocks(path, state_id)
+        return blocks[0] if blocks else None
+
+    def find_state_blocks(self, path: Path, state_id: str) -> list[tuple[int, int, str]]:
         if not path.exists():
-            return None
+            return []
+        key = f"s:{state_id}"
         text = vse.read_text(path)
-        return vse.find_named_block(text, f"s:{state_id}", vse.STATE_HISTORY_PATTERN)
+        return [
+            (start, end, block)
+            for block_key, start, end, block in vse.iter_named_blocks(text, vse.STATE_HISTORY_PATTERN)
+            if block_key == key
+        ]
 
     def preserved_state_entries(self, block: str | None, ownership_keys: set[str]) -> list[str]:
         if not block:
@@ -641,6 +747,16 @@ class C2CTagRepository:
             if entry.key in ownership_keys:
                 continue
             preserved.append(entry.raw)
+        return preserved
+
+    def preserved_state_entries_from_blocks(
+        self,
+        blocks: list[tuple[int, int, str]],
+        ownership_keys: set[str],
+    ) -> list[str]:
+        preserved: list[str] = []
+        for _start, _end, block in blocks:
+            preserved.extend(self.preserved_state_entries(block, ownership_keys))
         return preserved
 
     def render_custom_state_block(
@@ -694,12 +810,13 @@ class C2CTagRepository:
                 updated = f"{original.rstrip()}\n\nSTATES = {{\n\n{new_block}\n}}\n"
             else:
                 wrapper_start, wrapper_end, wrapper_block = wrapper
-                if new_block is None:
-                    updated_wrapper = vse.remove_top_level_entry(wrapper_block, key)
-                elif vse.find_top_level_entry_span(wrapper_block, key) is None:
-                    updated_wrapper = vse.insert_top_level_entry(wrapper_block, new_block)
+                if not self.state_history_blocks_in_wrapper(wrapper_block, key):
+                    if new_block is None:
+                        updated_wrapper = wrapper_block
+                    else:
+                        updated_wrapper = vse.insert_top_level_entry(wrapper_block, new_block)
                 else:
-                    updated_wrapper = vse.replace_top_level_entry(wrapper_block, key, new_block)
+                    updated_wrapper = self.replace_state_history_blocks(wrapper_block, key, new_block)
                 updated = original[:wrapper_start] + updated_wrapper + original[wrapper_end:]
 
         if original != updated:
@@ -707,6 +824,37 @@ class C2CTagRepository:
             vse.write_text(path, updated, newline)
             result.changed_files.add(path)
         return result
+
+    def state_history_blocks_in_wrapper(self, wrapper_block: str, key: str) -> list[tuple[int, int, str]]:
+        return [
+            (start, end, block)
+            for block_key, start, end, block in vse.iter_named_blocks(wrapper_block, vse.STATE_HISTORY_PATTERN)
+            if block_key == key
+        ]
+
+    def replace_state_history_blocks(self, wrapper_block: str, key: str, new_block: str | None) -> str:
+        matches = self.state_history_blocks_in_wrapper(wrapper_block, key)
+        if not matches:
+            if new_block is None:
+                return wrapper_block
+            return vse.insert_top_level_entry(wrapper_block, new_block)
+
+        updated = wrapper_block
+        for start, end, _block in reversed(matches[1:]):
+            updated = self.remove_text_span(updated, start, end)
+
+        first_start, first_end, _first_block = matches[0]
+        if new_block is None:
+            return self.remove_text_span(updated, first_start, first_end)
+        return updated[:first_start] + new_block + updated[first_end:]
+
+    def remove_text_span(self, text: str, start: int, end: int) -> str:
+        prefix = text[:start].rstrip("\r\n")
+        suffix = text[end:].lstrip("\r\n")
+        if not suffix:
+            return prefix
+        separator = "\n" if prefix.rstrip().endswith("{") or suffix.startswith("}") else "\n\n"
+        return prefix + separator + suffix
 
     def sync_pop_history(
         self,
@@ -734,10 +882,12 @@ class C2CTagRepository:
             create_empty_missing=False,
         )
         result = SaveResult(warnings=warnings)
+        if new_block == block:
+            return result
         if new_block is None:
             updated = vse.remove_pop_state_section(text, f"s:{state_id}")
         else:
-            updated = text[:start] + new_block + text[end:]
+            updated = vse.replace_pop_state_section(text, f"s:{state_id}", new_block)
         if updated != text:
             vse.write_text(self.pop_path, updated, vse.detect_newline(self.pop_path))
             result.changed_files.add(self.pop_path)
@@ -771,9 +921,11 @@ class C2CTagRepository:
             redirects,
             kind="buildings",
             move_orphans=move_orphans,
-            create_empty_missing=True,
+            create_empty_missing=False,
         )
         result = SaveResult(warnings=warnings)
+        if new_block == state_entry.raw:
+            return result
         if new_block is None:
             updated_wrapper = vse.remove_top_level_entry(wrapper_block, state_key)
         else:
@@ -799,13 +951,15 @@ class C2CTagRepository:
         desired_order = list(groups)
         owner_blocks: OrderedDict[str, str] = OrderedDict()
         extras: list[str] = []
+        changed = False
 
         for entry in vse.parse_top_level_entries(block):
             if entry.key.startswith("region_state:"):
                 owner = entry.key.partition(":")[2].upper()
                 if owner in desired_tags:
                     if owner in owner_blocks:
-                        owner_blocks[owner] = self.merge_region_state_blocks(entry.raw, owner_blocks[owner], kind=kind)
+                        owner_blocks[owner] = self.merge_region_state_blocks(owner_blocks[owner], entry.raw, kind=kind)
+                        changed = True
                     else:
                         owner_blocks[owner] = entry.raw
                     continue
@@ -824,19 +978,25 @@ class C2CTagRepository:
                         else:
                             owner_blocks[target] = renamed
                         warnings.append(f"Moved orphan {kind} region_state:{owner} to region_state:{target} in {state_id}.")
+                        changed = True
                         continue
 
                 if self.region_state_has_entries(entry.raw):
                     warnings.append(f"Removed orphan {kind} region_state:{owner} from {state_id}.")
+                changed = True
                 continue
             extras.append(entry.raw)
 
         if create_empty_missing:
             for tag in desired_order:
-                owner_blocks.setdefault(tag, f"\t\tregion_state:{tag} = {{\n\t\t}}")
+                if tag not in owner_blocks:
+                    owner_blocks[tag] = f"\t\tregion_state:{tag} = {{\n\t\t}}"
+                    changed = True
 
         if not owner_blocks and not extras:
             return None, warnings
+        if not changed:
+            return block, warnings
 
         lines = [f"\ts:{state_id} = {{"]
         for tag in desired_order:
@@ -912,9 +1072,19 @@ class C2CReshuffleApp:
         self.pending_view_center: tuple[float, float] | None = None
         self.preview_owner_cache: dict[str, str] | None = None
         self.display_photo = None
+        self.selection_photo = None
         self.render_after_id: str | None = None
         self.view_left = 0
         self.view_top = 0
+        self.virtual_width = 1
+        self.virtual_height = 1
+        self.tile_left = 0
+        self.tile_top = 0
+        self.tile_right = 0
+        self.tile_bottom = 0
+        self.tile_packed = None
+        self.tag_label_bboxes: list[tuple[int, int, int, int]] = []
+        self.tag_labels_hidden = False
 
         self.search_var = tk.StringVar()
         self.target_tag_var = tk.StringVar()
@@ -1001,8 +1171,9 @@ class C2CReshuffleApp:
         ttk.Button(buttons, text="Assign Selected", command=self.assign_selected).grid(row=0, column=0, sticky="ew", pady=2)
         ttk.Button(buttons, text="Select Tag Provinces", command=self.select_owner_provinces).grid(row=1, column=0, sticky="ew", pady=2)
         ttk.Button(buttons, text="Clear Selection", command=self.clear_selection).grid(row=2, column=0, sticky="ew", pady=2)
-        ttk.Button(buttons, text="Save State History", command=self.save_current_state).grid(row=3, column=0, sticky="ew", pady=(10, 2))
-        ttk.Button(buttons, text="Reload From Disk", command=self.reload_from_disk).grid(row=4, column=0, sticky="ew", pady=2)
+        ttk.Button(buttons, text="Save Selected State", command=self.save_selected_state).grid(row=3, column=0, sticky="ew", pady=(10, 2))
+        ttk.Button(buttons, text="Save All Changed States", command=self.save_all_changed_states).grid(row=4, column=0, sticky="ew", pady=2)
+        ttk.Button(buttons, text="Reload From Disk", command=self.reload_from_disk).grid(row=5, column=0, sticky="ew", pady=2)
         buttons.columnconfigure(0, weight=1)
 
         options = ttk.Frame(left, style="Panel.TFrame")
@@ -1035,8 +1206,8 @@ class C2CReshuffleApp:
             xscrollcommand=self.h_scroll.set,
             yscrollcommand=self.v_scroll.set,
         )
-        self.h_scroll.configure(command=self.canvas.xview)
-        self.v_scroll.configure(command=self.canvas.yview)
+        self.h_scroll.configure(command=self.on_xscroll)
+        self.v_scroll.configure(command=self.on_yscroll)
         self.h_scroll.pack(side=tk.BOTTOM, fill=tk.X)
         self.v_scroll.pack(side=tk.RIGHT, fill=tk.Y)
         self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
@@ -1051,6 +1222,7 @@ class C2CReshuffleApp:
         self.canvas.bind("<Button-5>", self.on_mousewheel)
         self.canvas.bind("<ButtonPress-2>", self.start_pan)
         self.canvas.bind("<B2-Motion>", self.do_pan)
+        self.canvas.bind("<Configure>", lambda _event: self.schedule_render(delay=40))
 
     def refresh_state_list(self) -> None:
         query = self.search_var.get().strip().lower()
@@ -1136,10 +1308,12 @@ class C2CReshuffleApp:
         self.schedule_render()
         self.status_var.set(f"Map display: {mode}.")
 
-    def schedule_render(self) -> None:
+    def schedule_render(self, delay: int = 20, replace: bool = True) -> None:
         if self.render_after_id is not None:
+            if not replace:
+                return
             self.root.after_cancel(self.render_after_id)
-        self.render_after_id = self.root.after(20, self.render_map)
+        self.render_after_id = self.root.after(delay, self.render_map)
 
     def render_map(self) -> None:
         self.render_after_id = None
@@ -1149,9 +1323,47 @@ class C2CReshuffleApp:
         self.view_left, self.view_top, view_right, view_bottom = bounds
         source_width = view_right - self.view_left
         source_height = view_bottom - self.view_top
-        width = max(1, int(source_width * self.scale))
-        height = max(1, int(source_height * self.scale))
-        source = self.repository.province_image.crop(bounds)
+        self.virtual_width = max(1, int(source_width * self.scale))
+        self.virtual_height = max(1, int(source_height * self.scale))
+        self.canvas.configure(scrollregion=(0, 0, self.virtual_width, self.virtual_height))
+        self.restore_pending_view_center(self.virtual_width, self.virtual_height)
+        self.canvas.update_idletasks()
+
+        viewport_width = max(1, self.canvas.winfo_width())
+        viewport_height = max(1, self.canvas.winfo_height())
+        viewport_left = max(0, int(self.canvas.canvasx(0)))
+        viewport_top = max(0, int(self.canvas.canvasy(0)))
+        wanted_left = max(0, viewport_left - RENDER_MARGIN)
+        wanted_top = max(0, viewport_top - RENDER_MARGIN)
+        wanted_right = min(self.virtual_width, viewport_left + viewport_width + RENDER_MARGIN)
+        wanted_bottom = min(self.virtual_height, viewport_top + viewport_height + RENDER_MARGIN)
+
+        source_left = max(0, int(math.floor(wanted_left / max(self.scale, 0.0001))))
+        source_top = max(0, int(math.floor(wanted_top / max(self.scale, 0.0001))))
+        source_right = min(source_width, int(math.ceil(wanted_right / max(self.scale, 0.0001))))
+        source_bottom = min(source_height, int(math.ceil(wanted_bottom / max(self.scale, 0.0001))))
+        if source_right <= source_left or source_bottom <= source_top:
+            return
+
+        tile_left = max(0, int(source_left * self.scale))
+        tile_top = max(0, int(source_top * self.scale))
+        tile_right = min(self.virtual_width, max(tile_left + 1, int(math.ceil(source_right * self.scale))))
+        tile_bottom = min(self.virtual_height, max(tile_top + 1, int(math.ceil(source_bottom * self.scale))))
+        width = tile_right - tile_left
+        height = tile_bottom - tile_top
+        self.tile_left = tile_left
+        self.tile_top = tile_top
+        self.tile_right = tile_right
+        self.tile_bottom = tile_bottom
+
+        source = self.repository.province_image.crop(
+            (
+                self.view_left + source_left,
+                self.view_top + source_top,
+                self.view_left + source_right,
+                self.view_top + source_bottom,
+            )
+        )
         scaled = source.resize((width, height), Image.Resampling.NEAREST)
         arr = np.asarray(scaled, dtype=np.uint8)
         packed = (
@@ -1159,6 +1371,7 @@ class C2CReshuffleApp:
         ) + (
             arr[:, :, 1].astype(np.int32) << 8
         ) + arr[:, :, 2].astype(np.int32)
+        self.tile_packed = packed
         unique, inverse = np.unique(packed.reshape(-1), return_inverse=True)
         palette = np.zeros((len(unique), 3), dtype=np.uint8)
         selected_state = self.selected_state
@@ -1169,9 +1382,7 @@ class C2CReshuffleApp:
             province = packed_to_province(packed_value)
             state_id = self.repository.province_to_state.get(province)
             owner = display_ownership.get(province, "")
-            if province in self.selected_provinces:
-                palette[index] = np.array([247, 209, 84], dtype=np.uint8)
-            elif state_id is None:
+            if state_id is None:
                 palette[index] = np.array([18, 21, 26], dtype=np.uint8)
             elif selected_state and dim_other_states and state_id != selected_state:
                 palette[index] = np.array([30, 34, 40], dtype=np.uint8)
@@ -1184,11 +1395,12 @@ class C2CReshuffleApp:
         self.apply_selected_state_outline(rendered, packed)
         self.display_photo = ImageTk.PhotoImage(Image.fromarray(rendered))
         self.canvas.delete("all")
-        self.canvas.create_image(0, 0, image=self.display_photo, anchor="nw")
-        self.canvas.configure(scrollregion=(0, 0, width, height))
+        self.tag_label_bboxes.clear()
+        self.tag_labels_hidden = False
+        self.canvas.create_image(tile_left, tile_top, image=self.display_photo, anchor="nw")
+        self.update_selection_overlay()
         if self.show_labels_var.get():
-            self.draw_tag_labels(width, height, packed, display_ownership)
-        self.restore_pending_view_center(width, height)
+            self.draw_tag_labels(tile_left, tile_top, packed, display_ownership)
 
     def apply_selected_state_outline(self, rendered: object, packed: object) -> None:
         if not self.selected_state:
@@ -1216,7 +1428,50 @@ class C2CReshuffleApp:
         thick[:, :-1] |= outline[:, 1:]
         rendered[thick] = np.array([247, 209, 84], dtype=np.uint8)
 
-    def draw_tag_labels(self, width: int, height: int, packed: object, ownership: dict[str, str]) -> None:
+    def selected_province_boundary_mask(self, selected_mask: object, packed: object) -> object:
+        boundary = np.zeros_like(selected_mask, dtype=bool)
+        boundary[1:, :] |= selected_mask[1:, :] & (packed[1:, :] != packed[:-1, :])
+        boundary[:-1, :] |= selected_mask[:-1, :] & (packed[:-1, :] != packed[1:, :])
+        boundary[:, 1:] |= selected_mask[:, 1:] & (packed[:, 1:] != packed[:, :-1])
+        boundary[:, :-1] |= selected_mask[:, :-1] & (packed[:, :-1] != packed[:, 1:])
+        return boundary
+
+    def update_selection_overlay(self) -> None:
+        self.canvas.delete("selection_overlay")
+        if self.tile_packed is None or not self.selected_provinces:
+            self.selection_photo = None
+            return
+
+        values = np.array([province_to_packed(province) for province in self.selected_provinces], dtype=np.int32)
+        if len(values) == 1:
+            selected_mask = self.tile_packed == values[0]
+        else:
+            selected_mask = np.isin(self.tile_packed, values)
+        if not np.any(selected_mask):
+            self.selection_photo = None
+            return
+
+        height, width = self.tile_packed.shape
+        overlay = np.zeros((height, width, 4), dtype=np.uint8)
+        overlay[selected_mask] = np.array([247, 209, 84, 92], dtype=np.uint8)
+        boundary = self.selected_province_boundary_mask(selected_mask, self.tile_packed)
+        overlay[boundary] = np.array([16, 20, 26, 230], dtype=np.uint8)
+        self.selection_photo = ImageTk.PhotoImage(Image.fromarray(overlay, "RGBA"))
+        self.canvas.create_image(
+            self.tile_left,
+            self.tile_top,
+            image=self.selection_photo,
+            anchor="nw",
+            tags=("selection_overlay",),
+        )
+        self.canvas.tag_raise("tag_label_box")
+        self.canvas.tag_raise("tag_label")
+        if self.drag_box is not None:
+            self.canvas.tag_raise(self.drag_box)
+
+    def draw_tag_labels(self, tile_left: int, tile_top: int, packed: object, ownership: dict[str, str]) -> None:
+        self.tag_label_bboxes.clear()
+        self.tag_labels_hidden = False
         if not self.selected_state:
             return
         groups = self.repository.state_owner_groups(self.selected_state, ownership)
@@ -1226,8 +1481,8 @@ class C2CReshuffleApp:
             if not np.any(mask):
                 continue
             ys, xs = np.nonzero(mask)
-            x = int(np.mean(xs))
-            y = int(np.mean(ys))
+            x = tile_left + int(np.mean(xs))
+            y = tile_top + int(np.mean(ys))
             text_id = self.canvas.create_text(
                 x,
                 y,
@@ -1240,17 +1495,31 @@ class C2CReshuffleApp:
             if bbox is None:
                 continue
             x0, y0, x1, y1 = bbox
+            label_box = (x0 - 5, y0 - 3, x1 + 5, y1 + 3)
             rect_id = self.canvas.create_rectangle(
-                x0 - 5,
-                y0 - 3,
-                x1 + 5,
-                y1 + 3,
+                label_box[0],
+                label_box[1],
+                label_box[2],
+                label_box[3],
                 fill="#111820",
                 outline="#f7d154",
                 width=1,
                 tags=("tag_label_box",),
             )
+            self.tag_label_bboxes.append(label_box)
             self.canvas.tag_lower(rect_id, text_id)
+
+    def update_label_hover(self, canvas_x: float, canvas_y: float) -> None:
+        should_hide = any(
+            x0 <= canvas_x <= x1 and y0 <= canvas_y <= y1
+            for x0, y0, x1, y1 in self.tag_label_bboxes
+        )
+        if should_hide == self.tag_labels_hidden:
+            return
+        state = tk.HIDDEN if should_hide else tk.NORMAL
+        self.canvas.itemconfigure("tag_label", state=state)
+        self.canvas.itemconfigure("tag_label_box", state=state)
+        self.tag_labels_hidden = should_hide
 
     def canvas_to_province(self, canvas_x: float, canvas_y: float) -> str | None:
         if self.repository.province_rgb is None:
@@ -1268,6 +1537,23 @@ class C2CReshuffleApp:
             return (1, 1)
         left, top, right, bottom = self.repository.visible_map_bounds or (0, 0, *self.repository.province_image.size)
         return max(1, int((right - left) * scale)), max(1, int((bottom - top) * scale))
+
+    def viewport_needs_render(self) -> bool:
+        if self.display_photo is None:
+            return True
+        viewport_width = max(1, self.canvas.winfo_width())
+        viewport_height = max(1, self.canvas.winfo_height())
+        viewport_left = int(self.canvas.canvasx(0))
+        viewport_top = int(self.canvas.canvasy(0))
+        viewport_right = viewport_left + viewport_width
+        viewport_bottom = viewport_top + viewport_height
+        cushion = max(48, RENDER_MARGIN // 3)
+        return (
+            viewport_left < self.tile_left + cushion
+            or viewport_top < self.tile_top + cushion
+            or viewport_right > self.tile_right - cushion
+            or viewport_bottom > self.tile_bottom - cushion
+        )
 
     def remember_zoom_center(self, width: int, height: int) -> None:
         viewport_width = max(1, self.canvas.winfo_width())
@@ -1355,7 +1641,7 @@ class C2CReshuffleApp:
                 self.selected_provinces.add(province)
                 added += 1
         self.status_var.set(f"Box toggled selection. Selected: {len(self.selected_provinces)}.")
-        self.schedule_render()
+        self.update_selection_overlay()
 
     def toggle_province_selection(self, province: str | None) -> None:
         if not province or not self.selected_state:
@@ -1371,7 +1657,7 @@ class C2CReshuffleApp:
         else:
             self.selected_provinces.add(province)
             self.status_var.set(f"Selected {province} ({owner}).")
-        self.schedule_render()
+        self.update_selection_overlay()
 
     def on_right_click(self, event: tk.Event) -> str:
         province = self.canvas_to_province(self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
@@ -1388,7 +1674,10 @@ class C2CReshuffleApp:
         return "break"
 
     def on_motion(self, event: tk.Event) -> None:
-        province = self.canvas_to_province(self.canvas.canvasx(event.x), self.canvas.canvasy(event.y))
+        canvas_x = self.canvas.canvasx(event.x)
+        canvas_y = self.canvas.canvasy(event.y)
+        self.update_label_hover(canvas_x, canvas_y)
+        province = self.canvas_to_province(canvas_x, canvas_y)
         if not province:
             self.hover_var.set("")
             return
@@ -1411,12 +1700,24 @@ class C2CReshuffleApp:
             self.schedule_render()
         return "break"
 
+    def on_xscroll(self, *args: object) -> None:
+        self.canvas.xview(*args)
+        if self.viewport_needs_render():
+            self.schedule_render(delay=12, replace=False)
+
+    def on_yscroll(self, *args: object) -> None:
+        self.canvas.yview(*args)
+        if self.viewport_needs_render():
+            self.schedule_render(delay=12, replace=False)
+
     def start_pan(self, event: tk.Event) -> str:
         self.canvas.scan_mark(event.x, event.y)
         return "break"
 
     def do_pan(self, event: tk.Event) -> str:
         self.canvas.scan_dragto(event.x, event.y, gain=1)
+        if self.viewport_needs_render():
+            self.schedule_render(delay=12, replace=False)
         return "break"
 
     def select_state_in_list(self, state_id: str) -> None:
@@ -1470,59 +1771,171 @@ class C2CReshuffleApp:
             if display_ownership.get(province, "") == tag:
                 self.selected_provinces.add(province)
         self.status_var.set(f"Selected {len(self.selected_provinces)} province(s) owned by {tag}.")
-        self.schedule_render()
+        self.update_selection_overlay()
 
     def clear_selection(self) -> None:
         self.selected_provinces.clear()
-        self.schedule_render()
+        self.update_selection_overlay()
         self.status_var.set("Selection cleared.")
 
-    def save_current_state(self) -> None:
-        if not self.selected_state:
-            return
-        state_id = self.selected_state
-        groups = self.repository.state_owner_groups(state_id, self.owner_by_province)
-        if not groups:
-            messagebox.showerror("No owners", f"{state_id} has no owner tags to save.")
-            return
-        if self.clean_orphans_var.get():
+    def changed_state_ids(self) -> list[str]:
+        changed: set[str] = set()
+        province_ids = set(self.owner_by_province) | set(self.original_owner_by_province)
+        for province in province_ids:
+            if self.owner_by_province.get(province, "") == self.original_owner_by_province.get(province, ""):
+                continue
+            state_id = self.repository.province_to_state.get(province)
+            if state_id and state_id in self.repository.state_regions:
+                changed.add(state_id)
+        return sorted(changed)
+
+    def confirm_orphan_cleanup(self, state_ids: list[str]) -> bool:
+        if not self.clean_orphans_var.get():
+            return True
+
+        removed_by_state: list[tuple[str, list[str]]] = []
+        for state_id in state_ids:
+            groups = self.repository.state_owner_groups(state_id, self.owner_by_province)
             original_tags = set(self.repository.state_owner_groups(state_id, self.original_owner_by_province))
             removed_tags = sorted(original_tags - set(groups))
             if removed_tags:
-                message = (
-                    f"{state_id} no longer has these owner tags: {', '.join(removed_tags)}.\n\n"
-                    "The tool will clean matching pop/building region_state sections in c2c history."
-                )
-                if not messagebox.askyesno("Clean orphan region_state sections?", message):
-                    return
+                removed_by_state.append((state_id, removed_tags))
+        if not removed_by_state:
+            return True
 
-        try:
-            result = self.repository.save_state(
-                state_id,
-                self.owner_by_province,
-                self.redirects_by_state.get(state_id, {}),
-                move_orphans=self.move_orphans_var.get(),
-                clean_orphans=self.clean_orphans_var.get(),
+        if len(removed_by_state) == 1:
+            state_id, removed_tags = removed_by_state[0]
+            message = (
+                f"{state_id} no longer has these owner tags: {', '.join(removed_tags)}.\n\n"
+                "The tool will clean matching pop/building region_state sections in c2c history."
             )
+        else:
+            shown = "\n".join(
+                f"{state_id}: {', '.join(removed_tags)}"
+                for state_id, removed_tags in removed_by_state[:12]
+            )
+            extra = len(removed_by_state) - 12
+            if extra > 0:
+                shown += f"\n...and {extra} more state(s)."
+            message = (
+                "These states no longer have one or more owner tags:\n\n"
+                f"{shown}\n\n"
+                "The tool will clean matching pop/building region_state sections in c2c history."
+            )
+        return messagebox.askyesno("Clean orphan region_state sections?", message)
+
+    def refresh_saved_state_from_disk(
+        self,
+        state_id: str,
+        queued_ownership: dict[str, str],
+        previous_original: dict[str, str],
+    ) -> None:
+        self.refresh_saved_states_from_disk([state_id], queued_ownership, previous_original)
+
+    def refresh_saved_states_from_disk(
+        self,
+        state_ids: list[str],
+        queued_ownership: dict[str, str],
+        previous_original: dict[str, str],
+    ) -> None:
+        owner_by_province = dict(queued_ownership)
+        original_owner_by_province = dict(previous_original)
+
+        for state_id in state_ids:
+            region = self.repository.state_regions.get(state_id)
+            if region is None:
+                continue
+            for province in region.provinces:
+                owner = self.repository.history_ownership.get(province, "")
+                if owner:
+                    owner_by_province[province] = owner
+                    original_owner_by_province[province] = owner
+                else:
+                    owner_by_province.pop(province, None)
+                    original_owner_by_province.pop(province, None)
+
+        self.owner_by_province = owner_by_province
+        self.original_owner_by_province = original_owner_by_province
+
+    def save_current_state(self) -> None:
+        self.save_selected_state()
+
+    def save_selected_state(self) -> None:
+        if not self.selected_state:
+            return
+        self.save_states([self.selected_state])
+
+    def save_all_changed_states(self) -> None:
+        state_ids = self.changed_state_ids()
+        if not state_ids:
+            messagebox.showinfo("No session changes", "No states have ownership changes queued in this session.")
+            return
+        self.save_states(state_ids)
+
+    def save_states(self, state_ids: list[str]) -> None:
+        state_ids = [state_id for state_id in state_ids if state_id in self.repository.state_regions]
+        if not state_ids:
+            return
+
+        for state_id in state_ids:
+            groups = self.repository.state_owner_groups(state_id, self.owner_by_province)
+            if not groups:
+                messagebox.showerror("No owners", f"{state_id} has no owner tags to save.")
+                return
+        if not self.confirm_orphan_cleanup(state_ids):
+            return
+
+        queued_ownership = dict(self.owner_by_province)
+        previous_original = dict(self.original_owner_by_province)
+        result = SaveResult()
+        saved_states: list[str] = []
+        try:
+            for state_id in state_ids:
+                state_result = self.repository.save_state(
+                    state_id,
+                    self.owner_by_province,
+                    self.redirects_by_state.get(state_id, {}),
+                    move_orphans=self.move_orphans_var.get(),
+                    clean_orphans=self.clean_orphans_var.get(),
+                )
+                result.add(state_result)
+                saved_states.append(state_id)
         except Exception as exc:
-            messagebox.showerror("Save failed", str(exc))
+            if saved_states:
+                self.repository.load(load_image=False)
+                self.refresh_saved_states_from_disk(saved_states, queued_ownership, previous_original)
+                self.invalidate_display_cache()
+                for state_id in saved_states:
+                    self.redirects_by_state.pop(state_id, None)
+                self.selected_provinces.clear()
+                self.refresh_state_list()
+                if self.selected_state and self.selected_state in self.repository.state_regions:
+                    self.select_state(self.selected_state)
+                    self.select_state_in_list(self.selected_state)
+            messagebox.showerror("Save failed", f"{exc}\n\nSaved before failure: {len(saved_states)} state(s).")
             return
 
         self.repository.load(load_image=False)
-        self.original_owner_by_province = dict(self.repository.history_ownership)
-        self.owner_by_province = dict(self.repository.history_ownership)
+        self.refresh_saved_states_from_disk(saved_states, queued_ownership, previous_original)
         self.invalidate_display_cache()
-        self.redirects_by_state.pop(state_id, None)
+        for state_id in saved_states:
+            self.redirects_by_state.pop(state_id, None)
         self.selected_provinces.clear()
-        self.refresh_owner_tree()
-        self.schedule_render()
+        self.refresh_state_list()
+        if self.selected_state and self.selected_state in self.repository.state_regions:
+            self.select_state(self.selected_state)
+            self.select_state_in_list(self.selected_state)
+        else:
+            self.refresh_owner_tree()
+            self.schedule_render()
         changed = ", ".join(path.name for path in sorted(result.changed_files, key=lambda item: item.name)) or "no files"
         warning_text = "\n".join(result.warnings[:6])
-        self.status_var.set(f"Saved {state_id}: {changed}.")
+        state_label = saved_states[0] if len(saved_states) == 1 else f"{len(saved_states)} states"
+        self.status_var.set(f"Saved {state_label}: {changed}.")
         if result.warnings:
             messagebox.showwarning("Saved with cleanup notes", warning_text)
         else:
-            messagebox.showinfo("Saved", f"Saved {state_id}.\nChanged: {changed}.")
+            messagebox.showinfo("Saved", f"Saved {state_label}.\nChanged: {changed}.")
 
     def reload_from_disk(self) -> None:
         selected = self.selected_state
