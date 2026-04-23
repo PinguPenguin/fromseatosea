@@ -34,7 +34,7 @@ C2C_POP_HISTORY = Path("common/history/pops/zz_c2c_history_pops.txt")
 C2C_BUILDING_HISTORY = Path("common/history/buildings/c2c_history_buildings.txt")
 
 STATE_KEY_RE = re.compile(r"(?m)^([ \t]*)(STATE_[A-Za-z0-9_]+)\s*=\s*\{")
-COUNTRY_KEY_RE = re.compile(r"(?m)^([ \t]*)([A-Z0-9_]{2,4})\s*=\s*\{")
+COUNTRY_KEY_RE = re.compile(r"(?m)^([ \t]*)([A-Za-z0-9_]+)\s*=\s*\{")
 STRATEGIC_REGION_RE = re.compile(r"(?m)^([ \t]*)(?:INJECT:)?(region_[A-Za-z0-9_]+)\s*=\s*\{")
 GENERIC_BLOCK_RE = re.compile(r"(?m)^([ \t]*)([A-Za-z0-9_:.]+)\s*=\s*\{")
 RGB_PROVINCE_RE = re.compile(r'"?(x[0-9A-Fa-f]{6})"?')
@@ -140,14 +140,18 @@ def parse_country_tag(raw: str) -> str:
         if entry.key != "country":
             continue
         value = entry.raw.split("=", 1)[1].strip().strip('"')
-        return value.removeprefix("c:").strip().upper()
+        return strip_country_scope(value)
     match = re.search(r'(?m)^\s*country\s*=\s*(?:"?c:)?([A-Za-z0-9_]+)"?\s*$', raw)
-    return match.group(1).upper() if match else ""
+    return match.group(1).strip() if match else ""
 
 
 def parse_scope_tag(raw: str, key: str) -> str:
     match = re.search(rf'(?m)^\s*{re.escape(key)}\s*=\s*(?:"?c:)?([A-Za-z0-9_]+)"?\s*$', raw)
-    return match.group(1).upper() if match else ""
+    return match.group(1).strip() if match else ""
+
+
+def strip_country_scope(value: str) -> str:
+    return re.sub(r"(?i)^c:", "", value.strip().strip('"')).strip()
 
 
 def chunked(values: list[str], size: int) -> list[list[str]]:
@@ -225,6 +229,7 @@ class C2CTagRepository:
         self.history_ownership: dict[str, str] = {}
         self.ownership: dict[str, str] = {}
         self.country_colors: dict[str, tuple[int, int, int]] = {}
+        self.country_tag_by_key: dict[str, str] = {}
         self.custom_state_ids: set[str] = set()
         self.province_image_path: Path | None = None
         self.province_image = None
@@ -240,6 +245,7 @@ class C2CTagRepository:
                 self.province_to_state[province] = state_id
         self.custom_state_ids = self.scan_custom_state_ids()
         self.country_colors = self.scan_country_colors()
+        self.country_tag_by_key = {tag.casefold(): tag for tag in self.country_colors}
         self.history_ownership = self.load_effective_ownership(apply_startup_effects=False)
         self.ownership = dict(self.history_ownership)
         self.apply_startup_ownership_effects(self.ownership)
@@ -323,8 +329,12 @@ class C2CTagRepository:
                     for tag, _start, _end, block in vse.iter_named_blocks(text, COUNTRY_KEY_RE):
                         parsed = parse_color(block)
                         if parsed is not None:
-                            colors[tag.upper()] = parsed
+                            colors[tag] = parsed
         return colors
+
+    def canonical_country_tag(self, tag: str) -> str:
+        clean = strip_country_scope(tag)
+        return self.country_tag_by_key.get(clean.casefold(), clean)
 
     def history_files(self, folder: str) -> list[Path]:
         files: list[Path] = []
@@ -366,7 +376,7 @@ class C2CTagRepository:
 
                 for entry in vse.parse_top_level_entries(strip_line_comments(block)):
                     if entry.key == "create_state":
-                        tag = parse_country_tag(entry.raw)
+                        tag = self.canonical_country_tag(parse_country_tag(entry.raw))
                         if not tag:
                             continue
                         provinces = extract_province_lists(entry.raw, "owned_provinces")
@@ -376,7 +386,7 @@ class C2CTagRepository:
                             if province in state_provinces:
                                 ownership[province] = tag
                     elif entry.key == "set_owner_of_provinces":
-                        tag = parse_country_tag(entry.raw)
+                        tag = self.canonical_country_tag(parse_country_tag(entry.raw))
                         if not tag:
                             continue
                         for province in extract_province_lists(entry.raw, "provinces"):
@@ -458,15 +468,15 @@ class C2CTagRepository:
             state_provinces = set(region.provinces)
             for child in vse.parse_top_level_entries(entry.raw):
                 if child.key.startswith("region_state:"):
-                    old_tag = child.key.partition(":")[2].upper()
+                    old_tag = self.canonical_country_tag(child.key.partition(":")[2])
                     self.apply_region_state_owner_effect(ownership, region, old_tag, child.raw)
                 elif child.key == "set_state_owner":
-                    new_tag = parse_scope_tag(child.raw, "set_state_owner")
+                    new_tag = self.canonical_country_tag(parse_scope_tag(child.raw, "set_state_owner"))
                     if new_tag:
                         for province in region.provinces:
                             ownership[province] = new_tag
                 elif child.key == "set_owner_of_provinces":
-                    tag = parse_country_tag(child.raw)
+                    tag = self.canonical_country_tag(parse_country_tag(child.raw))
                     if not tag:
                         continue
                     for province in extract_province_lists(child.raw, "provinces"):
@@ -483,7 +493,7 @@ class C2CTagRepository:
         new_tag = ""
         for entry in vse.parse_top_level_entries(block):
             if entry.key == "set_state_owner":
-                new_tag = parse_scope_tag(entry.raw, "set_state_owner")
+                new_tag = self.canonical_country_tag(parse_scope_tag(entry.raw, "set_state_owner"))
                 break
         if not new_tag:
             return
@@ -564,7 +574,7 @@ class C2CTagRepository:
         groups: OrderedDict[str, list[str]] = OrderedDict()
         missing: list[str] = []
         for province in region.provinces:
-            tag = desired_owner_by_province.get(province, "").strip().upper()
+            tag = self.canonical_country_tag(desired_owner_by_province.get(province, ""))
             if not tag:
                 missing.append(province)
                 continue
@@ -623,7 +633,7 @@ class C2CTagRepository:
             for entry in vse.parse_top_level_entries(strip_line_comments(block)):
                 if entry.key not in {"create_state", "set_owner_of_provinces"}:
                     continue
-                tag = parse_country_tag(entry.raw)
+                tag = self.canonical_country_tag(parse_country_tag(entry.raw))
                 if not tag:
                     continue
                 if entry.key == "create_state":
@@ -891,7 +901,7 @@ class C2CTagRepository:
 
         for entry in vse.parse_top_level_entries(block):
             if entry.key.startswith("region_state:"):
-                owner = entry.key.partition(":")[2].upper()
+                owner = self.canonical_country_tag(entry.key.partition(":")[2])
                 if owner in desired_tags:
                     if owner in owner_blocks:
                         owner_blocks[owner] = self.merge_region_state_blocks(owner_blocks[owner], entry.raw, kind=kind)
@@ -984,7 +994,8 @@ class C2CTagRepository:
         return prefix + joiner + "\n".join(merged_source) + "\n" + suffix
 
     def color_for_tag(self, tag: str) -> tuple[int, int, int]:
-        return self.country_colors.get(tag.upper()) or stable_tag_color(tag)
+        canonical = self.canonical_country_tag(tag)
+        return self.country_colors.get(canonical) or self.country_colors.get(tag) or stable_tag_color(tag)
 
 
 class C2CReshuffleApp:
@@ -1667,7 +1678,7 @@ class C2CReshuffleApp:
     def assign_selected(self) -> None:
         if not self.selected_state:
             return
-        target = self.target_tag_var.get().strip().upper().removeprefix("C:")
+        target = self.repository.canonical_country_tag(self.target_tag_var.get())
         if not target:
             messagebox.showerror("Missing tag", "Enter a target country tag first.")
             return
@@ -1697,7 +1708,7 @@ class C2CReshuffleApp:
         if not self.selected_state:
             return
         selection = self.owner_tree.selection()
-        tag = selection[0] if selection else self.target_tag_var.get().strip().upper()
+        tag = selection[0] if selection else self.repository.canonical_country_tag(self.target_tag_var.get())
         if not tag:
             return
         self.selected_provinces.clear()

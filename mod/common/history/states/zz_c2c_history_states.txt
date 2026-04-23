@@ -384,7 +384,7 @@ STATES = {
 			}
 		}
 		create_state = {
-			country = c:USFP_ALG
+			country = c:usfp_ALG
 			owned_provinces = {
 				"x8d25e9" "xd4f421" "x71a953" "xec09d5" "xb70a86" "xff53c3" "x48e333" "xc0960b" "x20f60d" "xea68f6"
 				"xd87585" "xec6322" "xd1c961" "xc3ab02" "x0f9997" "x259187" "x76c5cf" "x3c581d" "xa459b4" "x161e99"
@@ -399,7 +399,7 @@ STATES = {
 
 	s:STATE_QUEBEC_SAGUENAY = {
 		create_state = {
-			country = c:USFP_ATK
+			country = c:usfp_ATK
 			owned_provinces = {
 				"xeda6be" "xccb94b" "x7673f1" "x2548ae" "x32a6f4" "xe36dac" "x681a84" "x369b85" "x06e7aa" "xa0c3e5"
 				"x93518a" "x83e4ff" "xfa2fd7" "xe55165" "x61e6e2" "x4aca5f" "xe4eb3c" "x35e144" "xac9ad6" "x26ef74"
