@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 from __future__ import annotations
 
 import argparse
@@ -38,6 +38,7 @@ COUNTRY_KEY_RE = re.compile(r"(?m)^([ \t]*)([A-Za-z0-9_]+)\s*=\s*\{")
 STRATEGIC_REGION_RE = re.compile(r"(?m)^([ \t]*)(?:INJECT:)?(region_[A-Za-z0-9_]+)\s*=\s*\{")
 GENERIC_BLOCK_RE = re.compile(r"(?m)^([ \t]*)([A-Za-z0-9_:.]+)\s*=\s*\{")
 RGB_PROVINCE_RE = re.compile(r'"?(x[0-9A-Fa-f]{6})"?')
+STATE_OWNERSHIP_KEYS = {"create_state", "set_owner_of_provinces"}
 
 CANADA_US_STRATEGIC_REGIONS = {
     "region_canada",
@@ -616,7 +617,7 @@ class C2CTagRepository:
         desired_owner_by_province: dict[str, str],
     ) -> SaveResult:
         existing = self.find_state_blocks(self.state_history_path, state_id)
-        preserved = self.preserved_state_entries_from_blocks(existing, ownership_keys={"create_state", "set_owner_of_provinces"})
+        preserved = self.preserved_state_entries_from_blocks(existing, ownership_keys=STATE_OWNERSHIP_KEYS)
         block = self.render_custom_state_block(state_id, groups, preserved)
         return self.update_states_file(self.state_history_path, f"s:{state_id}", block)
 
@@ -631,7 +632,7 @@ class C2CTagRepository:
 
         for _start, _end, block in blocks:
             for entry in vse.parse_top_level_entries(strip_line_comments(block)):
-                if entry.key not in {"create_state", "set_owner_of_provinces"}:
+                if entry.key not in STATE_OWNERSHIP_KEYS:
                     continue
                 tag = self.canonical_country_tag(parse_country_tag(entry.raw))
                 if not tag:
@@ -664,7 +665,7 @@ class C2CTagRepository:
                 if baseline.get(province, "") != desired_owner or province in explicit_master_owners:
                     changed.setdefault(tag, []).append(province)
 
-        preserved = self.preserved_state_entries_from_blocks(existing, ownership_keys={"set_owner_of_provinces"})
+        preserved = self.preserved_state_entries_from_blocks(existing, ownership_keys=STATE_OWNERSHIP_KEYS)
         block = None
         if changed or preserved:
             block = self.render_vanilla_state_block(state_id, changed, preserved)
@@ -713,9 +714,9 @@ class C2CTagRepository:
     ) -> str:
         lines = [f"\ts:{state_id} = {{"]
         for tag, provinces in groups.items():
-            lines.append("\t\tcreate_state = {")
+            lines.append("\t\tset_owner_of_provinces = {")
             lines.append(f"\t\t\tcountry = c:{tag}")
-            lines.extend(render_province_block("owned_provinces", provinces, "\t\t\t", quote=True))
+            lines.extend(render_province_block("provinces", provinces, "\t\t\t", quote=False))
             lines.append("\t\t}")
         for raw in preserved_entries:
             lines.append(vse.normalize_entry_indentation(raw.rstrip(), "\t\t"))
@@ -1216,7 +1217,7 @@ class C2CReshuffleApp:
         self.refresh_owner_tree()
         self.schedule_render()
         region = self.repository.state_regions[state_id]
-        kind = "master create_state" if self.repository.is_custom_history_state(state_id) else "master set_owner diff"
+        kind = "master set_owner full state" if self.repository.is_custom_history_state(state_id) else "master set_owner diff"
         self.summary_var.set(f"{state_id} from {region.source_name}; save mode: {kind}.")
 
     def refresh_owner_tree(self) -> None:
@@ -1922,7 +1923,9 @@ def run_check(repository: C2CTagRepository) -> int:
     print(f"State provinces: {province_total}")
     print(f"Owned provinces: {assigned}")
     print(f"Unowned/unknown provinces: {unknown}")
-    print(f"Custom create_state states: {len(repository.custom_state_ids)}")
+    full_history_states = sum(1 for state_id in repository.state_regions if repository.is_custom_history_state(state_id))
+    print(f"Full-history set_owner states: {full_history_states}")
+    print(f"Legacy create_state states read: {len(repository.custom_state_ids)}")
     print(f"Loaded sources: {', '.join(source.name for source in repository.sources)}")
     print(f"State history output: {repository.state_history_path}")
     print(f"Pop output: {repository.pop_path}")

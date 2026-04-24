@@ -1,12 +1,21 @@
 ﻿# c2c consolidated Canadian state history
 STATES = {
+	s:STATE_ALBERTA = {
+		set_owner_of_provinces = {
+			country = c:HBC
+			provinces = {
+				x00e000
+			}
+		}
+	}
+
 	s:STATE_ALGOMA = {
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:CTF
-			owned_provinces = {
-				"xbab329" "xc0a0c0" "x520bf5" "x993abf" "x56a6fd" "x676e1e" "x7b1ae4" "xa7b9ee" "x1f0d15" "x42f312"
-				"xb2d5dc" "x5e776d" "xaba06f" "x313bb2" "xba1406" "x6b2093" "xea4fc0" "x8f87b9" "x90a5c2" "xde7b99"
-				"xa07380"
+			provinces = {
+				xbab329 xc0a0c0 x520bf5 x993abf x56a6fd x676e1e x7b1ae4 xa7b9ee x1f0d15 x42f312
+				xb2d5dc x5e776d xaba06f x313bb2 xba1406 x6b2093 xea4fc0 x8f87b9 x90a5c2 xde7b99
+				xa07380
 			}
 		}
 		create_state = {
@@ -45,38 +54,38 @@ STATES = {
 				"x0ad3c1" "x8a563d" "x330ff6" "x208ea9"
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:CPW
-			owned_provinces = {
-				"xef3ed9" "xa09daf" "x8626e9" "xa4c569" "x771c6f" "xa3151a" "x0e80fb" "x80a0a3"
-				"x87acec" "x487992" "x4c24ef" "x91d858" "xa489ba" "x9a52f2" "xfe3901" "xa91fd6"
-				"x926957" "xcdac4c" "xe32d1b"
+			provinces = {
+				xef3ed9 xa09daf x8626e9 xa4c569 x771c6f xa3151a x0e80fb x80a0a3
+				x87acec x487992 x4c24ef x91d858 xa489ba x9a52f2 xfe3901 xa91fd6
+				x926957 xcdac4c xe32d1b
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:SVY
-			owned_provinces = {
-				"xaf9ce8" "xc9be8f" "xdc7245" "x120eea" "x394c8f" "x317ba1" "x21e777" "xb27e30"
-				"x9a96ba" "x62957e" "x0ec207" "xe2baeb" "xe1c1a4" "x4d6778" "xd8277c" "x0a5171"
-				"x150075" "x74e2cf" "xcd4c74" "xf5d3a9" "x7b461e" "x3f4262"
+			provinces = {
+				xaf9ce8 xc9be8f xdc7245 x120eea x394c8f x317ba1 x21e777 xb27e30
+				x9a96ba x62957e x0ec207 xe2baeb xe1c1a4 x4d6778 xd8277c x0a5171
+				x150075 x74e2cf xcd4c74 xf5d3a9 x7b461e x3f4262
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:DNZ
-			owned_provinces = {
-				"xb1775f" "xe85e02" "x89c402" "xaa6118" "x3d060d" "xe225be" "xeaef3d" "x8e154a"
-				"x3673d9" "x4fb5bd" "xd1d7e7" "x1392fd" "x97d4a4" "xb84007" "x22820c" "x980251"
-				"x0877da" "xdc6a00" "x381007" "xb66b81" "xef3717" "xaeb7c9" "x9eaabc" "xec5a3a"
-				"x8d811f" "xcd72ad" "xa45402"
+			provinces = {
+				xb1775f xe85e02 x89c402 xaa6118 x3d060d xe225be xeaef3d x8e154a
+				x3673d9 x4fb5bd xd1d7e7 x1392fd x97d4a4 xb84007 x22820c x980251
+				x0877da xdc6a00 x381007 xb66b81 xef3717 xaeb7c9 x9eaabc xec5a3a
+				x8d811f xcd72ad xa45402
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:IRC
-			owned_provinces = {
-				"x0a84c8" "xc94f32" "x1f8897" "xc6334c" "x02a092" "xe54214" "x043fc9" "xc286c9"
-				"xe154e6" "xe99cd6" "xc04000" "x40a0ea" "x186af1" "xe4209a" "xf7a1c4" "x3628b1"
-				"x2f5b26" "x886e4a" "x2d5c98" "x81ed91" "x7502d8" "xe6e5c3" "x4e9b73" "xf057a9"
-				"xc17db9" "xef9af6"
+			provinces = {
+				x0a84c8 xc94f32 x1f8897 xc6334c x02a092 xe54214 x043fc9 xc286c9
+				xe154e6 xe99cd6 xc04000 x40a0ea x186af1 xe4209a xf7a1c4 x3628b1
+				x2f5b26 x886e4a x2d5c98 x81ed91 x7502d8 xe6e5c3 x4e9b73 xf057a9
+				xc17db9 xef9af6
 			}
 		}
 		add_homeland = cu:anglo_canadian
@@ -96,25 +105,25 @@ STATES = {
 				"x2bbea4" "xd080f5" "xfa7d25"
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:KTN
-			owned_provinces = {
-				"xfbe9a2" "xe01e2e" "x7bdc98" "xfd4c5e" "x5a6f3e" "x06eeac" "xdcf8ed" "x9c275b"
-				"xdd172e" "xafe769" "x453f2b" "xb3a699" "xaa8177" "x9b5b04" "x61cacb" "x8b9b2e"
-				"xe764c0" "xd9a050" "x83b2a7" "x804a90" "x738afd" "x521640"
+			provinces = {
+				xfbe9a2 xe01e2e x7bdc98 xfd4c5e x5a6f3e x06eeac xdcf8ed x9c275b
+				xdd172e xafe769 x453f2b xb3a699 xaa8177 x9b5b04 x61cacb x8b9b2e
+				xe764c0 xd9a050 x83b2a7 x804a90 x738afd x521640
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:SWP
-			owned_provinces = {
-				"x497376" "x70aaaf" "xa0d447" "x69c90f" "xe811d1" "x335573" "xede38b" "xcdaf46"
-				"x0eae6c" "xee83f2" "x77ad45" "x8d62e7" "x4d08e1" "xc0a000"
+			provinces = {
+				x497376 x70aaaf xa0d447 x69c90f xe811d1 x335573 xede38b xcdaf46
+				x0eae6c xee83f2 x77ad45 x8d62e7 x4d08e1 xc0a000
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:SYX
-			owned_provinces = {
-				"x362e8f" "x0d5e87" "x852913" "x34c789" "x490d37" "x605f60" "x4df1b5"
+			provinces = {
+				x362e8f x0d5e87 x852913 x34c789 x490d37 x605f60 x4df1b5
 			}
 		}
 		add_homeland = cu:anglo_canadian
@@ -123,27 +132,48 @@ STATES = {
 		add_claim = c:ORG
 	}
 
-	s:STATE_EDMONTON = {
-		create_state = {
-			country = c:DNZ
-			owned_provinces = {
-				"x670a46" "x89c61f" "x7a03dc" "xf11edd" "x001b22" "x759e96" "x0e6b0a" "x6a64cd"
-				"x6dc09d" "xcb77d5" "x3b027f" "x060c67" "xfcb25c" "xa86910" "xa74a2f" "x933c14"
-				"x4e03e3" "xa150dd" "x1c413a" "xdfa1bb" "xbe8dc0"
+	s:STATE_BRITISH_COLUMBIA = {
+		set_owner_of_provinces = {
+			country = c:ORG
+			provinces = {
+				x064fe6 x06bb33
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
+			country = c:HBC
+			provinces = {
+				x1bd217
+			}
+		}
+		set_owner_of_provinces = {
+			country = c:ATB
+			provinces = {
+				x6040c0
+			}
+		}
+	}
+
+	s:STATE_EDMONTON = {
+		set_owner_of_provinces = {
+			country = c:DNZ
+			provinces = {
+				x670a46 x89c61f x7a03dc xf11edd x001b22 x759e96 x0e6b0a x6a64cd
+				x6dc09d xcb77d5 x3b027f x060c67 xfcb25c xa86910 xa74a2f x933c14
+				x4e03e3 xa150dd x1c413a xdfa1bb xbe8dc0
+			}
+		}
+		set_owner_of_provinces = {
 			country = c:IRC
-			owned_provinces = {
-				"xa75296" "x907360" "x70370b" "x673ca0" "x518f22" "xfca61c" "x433bc6" "xdcc985"
-				"x3991ab" "x0ed37a" "xdaac5c" "x7f49e7" "x51cec5" "xc45e08" "x676674" "x583eaa"
-				"x23ba24" "x10bf0f" "xc3d71f" "x2a6d2a" "x12af70" "x92aabe" "x072ddc" "xeddf68"
-				"x55dbf6" "x00f631" "x8a6d99" "xa2b002" "xb12674" "xc5a257" "x67cabb" "xb24198"
-				"xc4e828" "x285a4e" "x253a98" "x5779a2" "x6b0266" "xefa433" "x26db64" "xfadebc"
-				"x107893" "x594542" "xd1a1d9" "x2fa24b" "x39e46c" "x44a1d9" "x92ad8f" "x840a15"
-				"xf43cc8" "x799cfa" "xa9976f" "xb2b31f" "x8f67dc" "x6241e5" "xc07fc1" "x402b2e"
-				"x55f9ab" "x1197cd" "x56971b" "x7340b5" "xb94fd8" "xf4ec2d" "x397f40" "x52fcb4"
-				"xb88cbc"
+			provinces = {
+				xa75296 x907360 x70370b x673ca0 x518f22 xfca61c x433bc6 xdcc985
+				x3991ab x0ed37a xdaac5c x7f49e7 x51cec5 xc45e08 x676674 x583eaa
+				x23ba24 x10bf0f xc3d71f x2a6d2a x12af70 x92aabe x072ddc xeddf68
+				x55dbf6 x00f631 x8a6d99 xa2b002 xb12674 xc5a257 x67cabb xb24198
+				xc4e828 x285a4e x253a98 x5779a2 x6b0266 xefa433 x26db64 xfadebc
+				x107893 x594542 xd1a1d9 x2fa24b x39e46c x44a1d9 x92ad8f x840a15
+				xf43cc8 x799cfa xa9976f xb2b31f x8f67dc x6241e5 xc07fc1 x402b2e
+				x55f9ab x1197cd x56971b x7340b5 xb94fd8 xf4ec2d x397f40 x52fcb4
+				xb88cbc
 			}
 		}
 		create_state = {
@@ -179,33 +209,33 @@ STATES = {
 				"x92e099" "x4992a9" "x4676bd" "xad40b0" "xf88dc6" "x813c7a" "x1328f8" "x6b748e"
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:WCR
-			owned_provinces = {
-				"x0c2c81" "xca95ea" "x7a790a" "x13fc0f" "xfd8b0c" "x43ecf0" "xa182ab" "xf91e7e"
-				"x4d0581" "xc9870b" "x86229f" "x65f69e" "xc99667" "xfb1b79" "xc9790e" "x857dd7"
-				"x57afc4" "x85f1ea" "xc8467f" "xd1f715" "x44cca9" "x6c06d8" "xe0f215" "xc61e9b"
-				"x1510b9" "xb0f3c2" "xf4a9f1" "xf7af04" "x253e84" "xf73ff8" "x38d2b3" "x24df1c"
-				"x0f245d" "x0e6ed3" "xdd60f3" "x70f127" "x46b922" "x8521ab" "x5e3093" "x40e000"
-				"x1ee51c" "xa57384" "x5be5bf" "xf8510f" "x7a8dc0" "xba7439" "x18f5ee" "x9e3dc0"
-				"x180d7a" "x7a3e48" "x6a73e3" "xf2ad8f" "x0c1436" "xf2debd" "xa9c5c0" "x55e100"
-				"x9d05eb" "x3612f5"
+			provinces = {
+				x0c2c81 xca95ea x7a790a x13fc0f xfd8b0c x43ecf0 xa182ab xf91e7e
+				x4d0581 xc9870b x86229f x65f69e xc99667 xfb1b79 xc9790e x857dd7
+				x57afc4 x85f1ea xc8467f xd1f715 x44cca9 x6c06d8 xe0f215 xc61e9b
+				x1510b9 xb0f3c2 xf4a9f1 xf7af04 x253e84 xf73ff8 x38d2b3 x24df1c
+				x0f245d x0e6ed3 xdd60f3 x70f127 x46b922 x8521ab x5e3093 x40e000
+				x1ee51c xa57384 x5be5bf xf8510f x7a8dc0 xba7439 x18f5ee x9e3dc0
+				x180d7a x7a3e48 x6a73e3 xf2ad8f x0c1436 xf2debd xa9c5c0 x55e100
+				x9d05eb x3612f5
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:CPW
-			owned_provinces = {
-				"xb448a4" "x0cdfef" "xfa5fa2" "x44ef6b" "x5b4e49" "x5e806d" "x3e8475" "x7ee88a"
-				"x9455f5" "xb4abac" "xf779d9" "x86d18a" "x8a7316" "xe7cb96" "x1c140f" "x187c58"
-				"x555bad" "xf73080" "x7f8573" "x2275df" "xbb5ea2" "x4503e6" "x5f1f9d" "x165b36"
-				"x45d044" "x75f292" "xe25d1f" "xf9bb2e" "xe19213" "x395554"
+			provinces = {
+				xb448a4 x0cdfef xfa5fa2 x44ef6b x5b4e49 x5e806d x3e8475 x7ee88a
+				x9455f5 xb4abac xf779d9 x86d18a x8a7316 xe7cb96 x1c140f x187c58
+				x555bad xf73080 x7f8573 x2275df xbb5ea2 x4503e6 x5f1f9d x165b36
+				x45d044 x75f292 xe25d1f xf9bb2e xe19213 x395554
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:SWC
-			owned_provinces = {
-				"xcca2c5" "xc587cd" "x544568" "xbe34c5" "x78225b" "x5cc4c6" "x7122b4" "x09ccbb"
-				"x00f433" "xd0d2b7"
+			provinces = {
+				xcca2c5 xc587cd x544568 xbe34c5 x78225b x5cc4c6 x7122b4 x09ccbb
+				x00f433 xd0d2b7
 			}
 		}
 		add_homeland = cu:anglo_canadian
@@ -215,23 +245,23 @@ STATES = {
 	}
 
 	s:STATE_NORTHWEST_ONTARIO = {
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:OJI
-			owned_provinces = {
-				"x3927f5" "x1e2884" "xd6162e" "xf2120d" "xf6a5a4" "x0e2f58" "x11deb9" "x20f7a5" "xc42b28" "x37d9e8"
-				"x6e78ac" "x7383df" "x398e4c" "xc33c7e" "x33bd4e" "x196c5f" "x5a3d13" "x2f2c82" "x13f9fa" "xe0da0b"
-				"x99ab17" "xd849e6" "xe1f252" "x1c5746" "x4dffcd" "x41a233" "xef374f" "x037f88" "xb0cb2a" "xe61337"
-				"x6b64f8" "xbe6ade" "x5fd282" "x9df567" "x08335d" "xa83989" "x64ad7d" "xe58c05" "x4b09c5" "x5699d1"
-				"x4cf9f7" "x04633f" "x7fb431" "x011713" "x58158a" "x9e7cad"
+			provinces = {
+				x3927f5 x1e2884 xd6162e xf2120d xf6a5a4 x0e2f58 x11deb9 x20f7a5 xc42b28 x37d9e8
+				x6e78ac x7383df x398e4c xc33c7e x33bd4e x196c5f x5a3d13 x2f2c82 x13f9fa xe0da0b
+				x99ab17 xd849e6 xe1f252 x1c5746 x4dffcd x41a233 xef374f x037f88 xb0cb2a xe61337
+				x6b64f8 xbe6ade x5fd282 x9df567 x08335d xa83989 x64ad7d xe58c05 x4b09c5 x5699d1
+				x4cf9f7 x04633f x7fb431 x011713 x58158a x9e7cad
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:HBC
-			owned_provinces = {
-				"x403994" "x9ebd23" "xae2d58" "xf6ce39" "xa8c5e8" "x6ca726" "xbdd238" "x42ddae" "x5d7a14" "x5eacb8"
-				"x578996" "xa18606" "x90faea" "x1fd5f8" "xaebfff" "x49ad61" "x16db09" "x969229" "xe9f39b" "x171782"
-				"xfc4326" "xda3337" "xdb8797" "x4b096d" "xd2ce4c" "xd1db51" "x317fb3" "xd5540c" "xc8d6e6" "x0708ad"
-				"xe2fa8e" "x0db925" "xf738d5" "x83adcb" "x8d15cb" "x790e5b" "x6e31a1" "x677647" "x96c2fb"
+			provinces = {
+				x403994 x9ebd23 xae2d58 xf6ce39 xa8c5e8 x6ca726 xbdd238 x42ddae x5d7a14 x5eacb8
+				x578996 xa18606 x90faea x1fd5f8 xaebfff x49ad61 x16db09 x969229 xe9f39b x171782
+				xfc4326 xda3337 xdb8797 x4b096d xd2ce4c xd1db51 x317fb3 xd5540c xc8d6e6 x0708ad
+				xe2fa8e x0db925 xf738d5 x83adcb x8d15cb x790e5b x6e31a1 x677647 x96c2fb
 			}
 		}
 		create_state = {
@@ -240,30 +270,30 @@ STATES = {
 				"x3cb77d" "x3ebfed" "x54f237" "x9dbfa5" "xff5559" "xc134a4"
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:SWC
-			owned_provinces = {
-				"x1695df" "x1c6f98" "xb090ad" "xfbb002" "xdd7290" "x20327a" "x932b65" "xd7414c" "x3e7368" "xa7d370"
-				"xd03bf3" "x6a902f" "xb54962" "x2b78b9" "x6ffe7e" "x853b98" "x4164f7" "x297066" "x280a1d" "x383ea0"
-				"x4a04b2" "x76a0e6" "x79dc59" "xd5f515" "x5b8a5f" "x399ca7" "xf3d744" "x78a3ba" "x2e6c75" "x6893b6"
-				"xed6465" "xacd62e" "x824210" "xab2c76" "x1176c6" "x5d9879" "xcfbce8" "x61cd70" "xad5354" "x2dd641"
-				"xae0541" "xfc4f0d" "xdce271" "x903279" "xb4468d" "xeb4bdb" "xad7d1f" "x00cb48" "x6cbb4f" "xcf1990"
-				"x36b818" "x0d2f27" "x00f376" "xfe02ce" "xab9db4" "x388c4e" "x7ab82c" "x1b4c6d" "x0d7566" "x93bd4c"
-				"x560e55" "x208af2" "x31a991" "xd17651" "xf45c86" "xd841d9" "x2bc058" "x06958b" "x6bcc92" "xff8a91"
-				"x406000" "x355aca" "xa2f8dd" "x411a9b" "xe756c1" "x6e90ea" "x2f570d" "x4c823a" "xa70030" "xe961e9"
-				"x2a8963" "x61c521" "x4f35d0" "xbdbecb" "xd37405" "x9cc19e" "xdeda97" "x6334f9" "x940c24" "xa00289"
-				"x795ad3" "x23c839" "xd2ee35" "x192c84" "xb026c2" "x6e6170" "xb6b30d" "x1ddb81" "x4f738b" "xa6f3ba"
-				"x243b2a" "x08f7a9"
+			provinces = {
+				x1695df x1c6f98 xb090ad xfbb002 xdd7290 x20327a x932b65 xd7414c x3e7368 xa7d370
+				xd03bf3 x6a902f xb54962 x2b78b9 x6ffe7e x853b98 x4164f7 x297066 x280a1d x383ea0
+				x4a04b2 x76a0e6 x79dc59 xd5f515 x5b8a5f x399ca7 xf3d744 x78a3ba x2e6c75 x6893b6
+				xed6465 xacd62e x824210 xab2c76 x1176c6 x5d9879 xcfbce8 x61cd70 xad5354 x2dd641
+				xae0541 xfc4f0d xdce271 x903279 xb4468d xeb4bdb xad7d1f x00cb48 x6cbb4f xcf1990
+				x36b818 x0d2f27 x00f376 xfe02ce xab9db4 x388c4e x7ab82c x1b4c6d x0d7566 x93bd4c
+				x560e55 x208af2 x31a991 xd17651 xf45c86 xd841d9 x2bc058 x06958b x6bcc92 xff8a91
+				x406000 x355aca xa2f8dd x411a9b xe756c1 x6e90ea x2f570d x4c823a xa70030 xe961e9
+				x2a8963 x61c521 x4f35d0 xbdbecb xd37405 x9cc19e xdeda97 x6334f9 x940c24 xa00289
+				x795ad3 x23c839 xd2ee35 x192c84 xb026c2 x6e6170 xb6b30d x1ddb81 x4f738b xa6f3ba
+				x243b2a x08f7a9
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:CTF
-			owned_provinces = {
-				"x0fe1b2" "xe50d46" "x8d992e" "x866c8a" "x490d2a" "x343659" "xce6d4a" "x101204" "x5f5f99" "x24171d"
-				"x99f3c4" "xc5041f" "x15c12c" "xb4f7b9" "x569e74" "xd64816" "xa24eb6" "xb27fd6" "x64970e" "xd3807d"
-				"xd389de" "x4d3033" "x271949" "x9577b0" "xd319eb" "x22e40f" "xa22f7e" "x9cc0d0" "x62baf4" "x9c3f51"
-				"xe99d1d" "x7cf31c" "x827b75" "x77bc8d" "xfa9af5" "x7bd091" "x780aaa" "xd29273" "x5d7155" "x9aa464"
-				"xd5cd71" "x48dfb9" "x3c2a27"
+			provinces = {
+				x0fe1b2 xe50d46 x8d992e x866c8a x490d2a x343659 xce6d4a x101204 x5f5f99 x24171d
+				x99f3c4 xc5041f x15c12c xb4f7b9 x569e74 xd64816 xa24eb6 xb27fd6 x64970e xd3807d
+				xd389de x4d3033 x271949 x9577b0 xd319eb x22e40f xa22f7e x9cc0d0 x62baf4 x9c3f51
+				xe99d1d x7cf31c x827b75 x77bc8d xfa9af5 x7bd091 x780aaa xd29273 x5d7155 x9aa464
+				xd5cd71 x48dfb9 x3c2a27
 			}
 		}
 		add_homeland = cu:anglo_canadian
@@ -273,35 +303,35 @@ STATES = {
 	}
 
 	s:STATE_NORTH_SASKATCHEWAN = {
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:WCR
-			owned_provinces = {
-				"x90cf2d" "x3b6c38" "xeef418" "x8bcfe8" "xdf3ac1" "xda9446" "x1e17c5" "x0ae42e"
-				"x21a007" "xc06000" "xb6c4a3"
+			provinces = {
+				x90cf2d x3b6c38 xeef418 x8bcfe8 xdf3ac1 xda9446 x1e17c5 x0ae42e
+				x21a007 xc06000 xb6c4a3
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:IRC
-			owned_provinces = {
-				"x1d94aa" "x5b8650" "x5d8481" "xc203b7" "xe7c7cd" "x5bb079" "x85cf1d" "xb44927"
-				"x4c29e7" "xd3cb06" "xd97c0e" "x34b4d3" "x50ddcb" "x1757cc" "x8b891e" "x6dad90"
-				"xc2043b" "x6efbd9" "x3ffb80" "xfb2b8c" "x3fe00a" "x9705b3" "xefca8a" "x9add51"
-				"x13a156"
+			provinces = {
+				x1d94aa x5b8650 x5d8481 xc203b7 xe7c7cd x5bb079 x85cf1d xb44927
+				x4c29e7 xd3cb06 xd97c0e x34b4d3 x50ddcb x1757cc x8b891e x6dad90
+				xc2043b x6efbd9 x3ffb80 xfb2b8c x3fe00a x9705b3 xefca8a x9add51
+				x13a156
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:CPW
-			owned_provinces = {
-				"x2837f0" "x0a2ccf" "x7f64bc" "xc0d10f" "x9ff6e4" "xcedae2" "xd9c98f" "x06ab9d"
-				"x2322de" "xc09f00" "x922237" "x871aa5" "xe51c72" "x12e022" "x5c699d" "x94b087"
-				"xf01c28" "x19a2ee" "xc826e9" "xef8b24" "x280549" "xe3a0fd" "x4b1fa6" "xc18671"
-				"xd0df51" "x58a79e" "x08b4f9" "x364cb6" "xc6c382" "xc10e8d" "x5b2e01" "x3168f1"
-				"xf7519a" "x8080a7" "x01b33d" "xff08d7" "x928ee3" "xdd93b6" "x4623ff" "x95534b"
-				"x4e53e1" "x97993b" "xce6b2c" "x44502c" "xd9665f" "x7a4b9b" "x166b44" "x6ae53a"
-				"x1ef389" "x8e4372" "xea25bc" "x73f1e8" "x5410de" "xbbb0e5" "xf083ed" "x5c25d6"
-				"x43ad4a" "xf42c50" "x79210d" "xebafe0" "x1fde39" "xe1dcd7" "x5fee31" "x4ad41c"
-				"x5ddbf4" "x43634b" "xe4775e" "xaeb7c5" "xce1d48" "x281860" "xd30931" "x8da75a"
-				"xe1280e" "x17c895"
+			provinces = {
+				x2837f0 x0a2ccf x7f64bc xc0d10f x9ff6e4 xcedae2 xd9c98f x06ab9d
+				x2322de xc09f00 x922237 x871aa5 xe51c72 x12e022 x5c699d x94b087
+				xf01c28 x19a2ee xc826e9 xef8b24 x280549 xe3a0fd x4b1fa6 xc18671
+				xd0df51 x58a79e x08b4f9 x364cb6 xc6c382 xc10e8d x5b2e01 x3168f1
+				xf7519a x8080a7 x01b33d xff08d7 x928ee3 xdd93b6 x4623ff x95534b
+				x4e53e1 x97993b xce6b2c x44502c xd9665f x7a4b9b x166b44 x6ae53a
+				x1ef389 x8e4372 xea25bc x73f1e8 x5410de xbbb0e5 xf083ed x5c25d6
+				x43ad4a xf42c50 x79210d xebafe0 x1fde39 xe1dcd7 x5fee31 x4ad41c
+				x5ddbf4 x43634b xe4775e xaeb7c5 xce1d48 x281860 xd30931 x8da75a
+				xe1280e x17c895
 			}
 		}
 		create_state = {
@@ -321,44 +351,44 @@ STATES = {
 	}
 
 	s:STATE_NOUVEAU_QUEBEC = {
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:INK
-			owned_provinces = {
-				"x0c6ae4" "x6e6753" "x53e74e" "xbb606d" "xf9db91" "x4a9f05" "x307a15" "xfe2408" "x16cfcb" "x23f6cc"
-				"xa7b019" "xe58487" "x3c2f86" "x9b6054" "xeb2882" "x53e955" "x247a18" "x8b2119" "xb0da28" "xaf2efe"
-				"x8329d3" "x3ed2db" "xf3df90" "xbb863e" "x5e9628" "xdeeedd" "xd17183" "x0aa539" "x8cf0b9" "x1f7ba8"
-				"xbd1776" "x7c3f68" "xd1352b" "xa54a42" "xd5666e" "x9d46b1" "xec8b7d" "x92f132" "x21597f" "xaa9cdb"
-				"x11192e" "xaba573" "x7ae0a2" "x66fdf8" "x8e1dac" "xe29144" "x76a99e" "x67c76e" "xd20107" "x5b8149"
-				"x32dfd2" "x7bb2f1" "x7bdad0" "xab6fe2" "xba04a4" "xe94e94" "x62ce97" "x68402a" "x834484" "xd51f8e"
-				"x54d79e" "x4f335a" "x9050b8" "xec2cf8" "xa67c5c" "xc0a7ef" "xc13d2c" "x517a80" "x6d2618" "x95e0dc"
-				"xb6023c" "x1e71b4" "xc8d924" "x939a08" "x7d7012" "x326543" "x8a6937" "xc04bb6" "xf35b22" "xff1907"
-				"xd9e9fb" "x29c046" "x25dc66" "x0b4dfd" "xb3aed8" "xe40566" "x60fc5c" "x6040c4" "x21d72e" "x69e64d"
-				"x06f336" "x499fb6" "xd822ec" "x773791" "xc303bd" "x9d0d78" "xd4a5dd" "x683fb6" "xf7e5fd" "x795074"
-				"x864a3a" "xd99aa0" "x084179" "x0b737c" "x4d370f" "xfe2104" "xea49d9" "x2f1701" "x46467a" "x0000c0"
-				"xf306c9" "xcd957e" "x141935" "x4d27e6" "x9315bc" "xca6f1b" "x9c5236" "x51cf24" "x66a256" "xca5e91"
-				"x38b429" "x4f1a54" "xd4e8b5" "x290b54" "xd93335" "x96b85f" "xabcf6b" "xa8be58" "x63918e" "xf04d97"
-				"x0452f3" "x062e92" "x2c4c0f" "xb70866" "x972704" "xc75269" "xc83b39" "xa9f068" "x4aaee7" "x5040af"
-				"x9b5749" "x7f0c4f" "x9b7a14" "xce0625" "x7e0b84" "x568c12" "xd03cd5" "x36876c" "x085d59" "x06255c"
-				"xd74d19" "x561cf3" "xeabc88" "xb671b8" "xddbfbd" "xc940c5" "xf5f4e3" "x0b9764" "x51949a" "xefcd73"
-				"x4112aa" "xae1ef2" "x1b97e4" "x13c360" "x4b32dc" "xd34de8" "xbb2c30" "xc62d1b" "x2a40f1" "x79e1c6"
-				"xeb9966" "xf0de11" "x5d1b1a" "x59fba8" "x7b728d" "x6b3eb5" "xe2ffd8" "x5ef02f" "x038c02" "x907833"
-				"x350047" "x2793a0" "xd414f5" "x788810"
+			provinces = {
+				x0c6ae4 x6e6753 x53e74e xbb606d xf9db91 x4a9f05 x307a15 xfe2408 x16cfcb x23f6cc
+				xa7b019 xe58487 x3c2f86 x9b6054 xeb2882 x53e955 x247a18 x8b2119 xb0da28 xaf2efe
+				x8329d3 x3ed2db xf3df90 xbb863e x5e9628 xdeeedd xd17183 x0aa539 x8cf0b9 x1f7ba8
+				xbd1776 x7c3f68 xd1352b xa54a42 xd5666e x9d46b1 xec8b7d x92f132 x21597f xaa9cdb
+				x11192e xaba573 x7ae0a2 x66fdf8 x8e1dac xe29144 x76a99e x67c76e xd20107 x5b8149
+				x32dfd2 x7bb2f1 x7bdad0 xab6fe2 xba04a4 xe94e94 x62ce97 x68402a x834484 xd51f8e
+				x54d79e x4f335a x9050b8 xec2cf8 xa67c5c xc0a7ef xc13d2c x517a80 x6d2618 x95e0dc
+				xb6023c x1e71b4 xc8d924 x939a08 x7d7012 x326543 x8a6937 xc04bb6 xf35b22 xff1907
+				xd9e9fb x29c046 x25dc66 x0b4dfd xb3aed8 xe40566 x60fc5c x6040c4 x21d72e x69e64d
+				x06f336 x499fb6 xd822ec x773791 xc303bd x9d0d78 xd4a5dd x683fb6 xf7e5fd x795074
+				x864a3a xd99aa0 x084179 x0b737c x4d370f xfe2104 xea49d9 x2f1701 x46467a x0000c0
+				xf306c9 xcd957e x141935 x4d27e6 x9315bc xca6f1b x9c5236 x51cf24 x66a256 xca5e91
+				x38b429 x4f1a54 xd4e8b5 x290b54 xd93335 x96b85f xabcf6b xa8be58 x63918e xf04d97
+				x0452f3 x062e92 x2c4c0f xb70866 x972704 xc75269 xc83b39 xa9f068 x4aaee7 x5040af
+				x9b5749 x7f0c4f x9b7a14 xce0625 x7e0b84 x568c12 xd03cd5 x36876c x085d59 x06255c
+				xd74d19 x561cf3 xeabc88 xb671b8 xddbfbd xc940c5 xf5f4e3 x0b9764 x51949a xefcd73
+				x4112aa xae1ef2 x1b97e4 x13c360 x4b32dc xd34de8 xbb2c30 xc62d1b x2a40f1 x79e1c6
+				xeb9966 xf0de11 x5d1b1a x59fba8 x7b728d x6b3eb5 xe2ffd8 x5ef02f x038c02 x907833
+				x350047 x2793a0 xd414f5 x788810
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:ECR
-			owned_provinces = {
-				"x889a4c" "x3c9588" "xc1a1e6" "x955d56" "x191e87" "x8c76a6" "x7c74e8" "x1c9ca2" "x193f3b" "x9acbbf"
-				"x80c199" "xda3fbc" "xbed37a" "x95a010" "xed6b51" "x4d0622" "xb95e82" "x82a9af" "x0214df" "x9c85fa"
-				"xaf8f89" "x6b1341" "xb67dfb" "x0f855d" "xc43f22" "xc9a97e" "xdac797" "x5ba141" "xffbebc" "x6fa797"
-				"x8b6679" "x81378e" "x5b10c0" "x04464b" "x6af51d" "x46c43b" "x56f70f" "x92174d" "x5233fc" "xb7ff8a"
-				"x220b8d" "x52846a" "xe5a8d9" "xc239f2" "x4b1a1d" "x86f0bb" "x44d5c6" "x90b03e" "x3f2bfb" "xea82c4"
-				"x798f9e" "xa7ea05" "x5c3957" "xc82b9f" "xf2bf7e" "x68dbf9" "x4ea501" "x6443eb" "x9a6a15" "xd5828b"
-				"xc236bd" "xb040b8" "x684ad0" "xdae151" "xef8303" "x89ce59" "x1f46d0" "x917230" "xfb68bf" "x376d14"
-				"xef033c" "x7e3609" "x1ec3c7" "x1fd040" "xb7a766" "x2437ce" "xf3f346" "x732d2d" "xe61c07" "x392025"
-				"xbca821" "xad0aec" "x104f0a" "x4c8b4f" "x42b6b7" "x232423" "x43b321" "xd3f860" "x2a8839" "xf1724f"
-				"xc0a695" "xc4c803" "x507c6b" "xebc6d3" "x68370f" "xddcd0d" "x048c88" "x9dbe36" "x6d188a" "x4decb4"
-				"x11fd71" "x706aad" "xc6f8c3" "xa23f03" "xfbad9b" "x14e213"
+			provinces = {
+				x889a4c x3c9588 xc1a1e6 x955d56 x191e87 x8c76a6 x7c74e8 x1c9ca2 x193f3b x9acbbf
+				x80c199 xda3fbc xbed37a x95a010 xed6b51 x4d0622 xb95e82 x82a9af x0214df x9c85fa
+				xaf8f89 x6b1341 xb67dfb x0f855d xc43f22 xc9a97e xdac797 x5ba141 xffbebc x6fa797
+				x8b6679 x81378e x5b10c0 x04464b x6af51d x46c43b x56f70f x92174d x5233fc xb7ff8a
+				x220b8d x52846a xe5a8d9 xc239f2 x4b1a1d x86f0bb x44d5c6 x90b03e x3f2bfb xea82c4
+				x798f9e xa7ea05 x5c3957 xc82b9f xf2bf7e x68dbf9 x4ea501 x6443eb x9a6a15 xd5828b
+				xc236bd xb040b8 x684ad0 xdae151 xef8303 x89ce59 x1f46d0 x917230 xfb68bf x376d14
+				xef033c x7e3609 x1ec3c7 x1fd040 xb7a766 x2437ce xf3f346 x732d2d xe61c07 x392025
+				xbca821 xad0aec x104f0a x4c8b4f x42b6b7 x232423 x43b321 xd3f860 x2a8839 xf1724f
+				xc0a695 xc4c803 x507c6b xebc6d3 x68370f xddcd0d x048c88 x9dbe36 x6d188a x4decb4
+				x11fd71 x706aad xc6f8c3 xa23f03 xfbad9b x14e213
 			}
 		}
 		create_state = {
@@ -373,22 +403,22 @@ STATES = {
 				"x466830"
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:INN
-			owned_provinces = {
-				"x943ccb" "xc0de62" "x7c2b11" "x1b2a0a" "x1b5387" "xb0f75b" "xa5b2ec" "x0450df" "x38c993" "x432d6d"
-				"x6e7083" "xdb25c8" "x87dec2" "x5ee3f1" "xff3ae7" "xe2b5da" "x488bfb" "xfccedb" "x6084e4" "x824434"
-				"x8d0fee" "xca4bcc" "x2bf734" "x1c322f" "x721561" "x76410f" "x71ac15" "x7cec81" "xae70af" "x71bcd8"
-				"xd272bd" "x171edd" "xa4b0df" "xfe65fc" "x340423" "x315ef7" "x25379c" "x7a0f83" "x6792eb" "x406040"
-				"x22f3b7" "x3a1131" "x3288ef" "xf6b33d" "xc8540f" "x2334f4" "xd09e14" "x1de99f" "x3884e9" "x9ae75e"
+			provinces = {
+				x943ccb xc0de62 x7c2b11 x1b2a0a x1b5387 xb0f75b xa5b2ec x0450df x38c993 x432d6d
+				x6e7083 xdb25c8 x87dec2 x5ee3f1 xff3ae7 xe2b5da x488bfb xfccedb x6084e4 x824434
+				x8d0fee xca4bcc x2bf734 x1c322f x721561 x76410f x71ac15 x7cec81 xae70af x71bcd8
+				xd272bd x171edd xa4b0df xfe65fc x340423 x315ef7 x25379c x7a0f83 x6792eb x406040
+				x22f3b7 x3a1131 x3288ef xf6b33d xc8540f x2334f4 xd09e14 x1de99f x3884e9 x9ae75e
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:usfp_ALG
-			owned_provinces = {
-				"x8d25e9" "xd4f421" "x71a953" "xec09d5" "xb70a86" "xff53c3" "x48e333" "xc0960b" "x20f60d" "xea68f6"
-				"xd87585" "xec6322" "xd1c961" "xc3ab02" "x0f9997" "x259187" "x76c5cf" "x3c581d" "xa459b4" "x161e99"
-				"x352860" "x912a4c" "x372676" "xa34b9c" "x67cf61" "xaf45d7" "x19a366" "xff9824" "x47430b"
+			provinces = {
+				x8d25e9 xd4f421 x71a953 xec09d5 xb70a86 xff53c3 x48e333 xc0960b x20f60d xea68f6
+				xd87585 xec6322 xd1c961 xc3ab02 x0f9997 x259187 x76c5cf x3c581d xa459b4 x161e99
+				x352860 x912a4c x372676 xa34b9c x67cf61 xaf45d7 x19a366 xff9824 x47430b
 			}
 		}
 		add_homeland = cu:cree
@@ -398,12 +428,12 @@ STATES = {
 	}
 
 	s:STATE_QUEBEC_SAGUENAY = {
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:usfp_ATK
-			owned_provinces = {
-				"xeda6be" "xccb94b" "x7673f1" "x2548ae" "x32a6f4" "xe36dac" "x681a84" "x369b85" "x06e7aa" "xa0c3e5"
-				"x93518a" "x83e4ff" "xfa2fd7" "xe55165" "x61e6e2" "x4aca5f" "xe4eb3c" "x35e144" "xac9ad6" "x26ef74"
-				"xacc1e7" "xb0d24a" "xd48872"
+			provinces = {
+				xeda6be xccb94b x7673f1 x2548ae x32a6f4 xe36dac x681a84 x369b85 x06e7aa xa0c3e5
+				x93518a x83e4ff xfa2fd7 xe55165 x61e6e2 x4aca5f xe4eb3c x35e144 xac9ad6 x26ef74
+				xacc1e7 xb0d24a xd48872
 			}
 		}
 		create_state = {
@@ -435,86 +465,86 @@ STATES = {
 				"x8bc3a9" "x046319" "x872652" "xf18b54" "x671508"
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:TLT
-			owned_provinces = {
-				"x398ab7" "x86384c" "x003c0a" "x4cb32b" "xa9c721" "xe49b22" "xf7e225" "xaac55e"
-				"xdb5bfc" "x780f19" "xb2b319" "x172779" "x5fbaa3" "x8a2d02" "x2f367f" "xb795cf"
-				"x90ec1e" "xc84186" "xb20af0" "xface14" "x42cc6b" "x58555f" "x7fe760" "x0c50ab"
-				"xbad980" "x4afa0e" "x2da2d0" "x17186d" "xdff28b" "x664323" "x17ac99" "x7088d1"
-				"x6ef14a" "x9c4ebd" "x2f6de4" "x56dfdd" "x411ce0" "xe973d5" "xe057f6" "x2613cc"
-				"x9d1421" "xe8d2d0" "x23e4de" "xdb73a1" "xad0c56" "x4d34b5" "xe97a12" "xc0f62f"
-				"xe85e08" "x124b70" "x83263b" "x9d30a0" "x6e651a" "xa595a4" "x54c8a5" "x784fac"
-				"xf0ad76" "x63fc5c" "xb84cb1" "x8b7e77" "x202671" "xbbc5f1" "xab945f" "x85c5de"
-				"xc0c173" "x45ccd8" "x7e9185" "x27b8cb" "x768b68" "x6d09cf" "x0361f9" "x105e9e"
-				"x4ad217" "x8da2a3" "x13bf55" "x0c324c" "xc39ee7" "x45712d" "x0019c8" "x674c91"
-				"x8a0525" "x4383d7" "x3f6e46" "x1c0d58" "x8c21f3" "x4d47eb" "x20d07c" "x173d99"
-				"xb44559" "xe77af1" "x8d9e74" "xca984f" "x149257" "x367cc4" "x03ea0d" "xee19e4"
-				"x0fc30c" "x05085f" "x3a5746" "x07c186" "x97f1db" "x84daef" "xef46b1" "x457edc"
-				"x77fcf9" "xcbefc9" "x53fa26" "xd02fba" "x58a2f5" "x7ec219" "x004080" "x094ee3"
-				"x6d883b" "x1a457c" "x361836" "x711438" "x9c09f4" "xc8f21a" "xa24464" "x0f979f"
-				"x20a6bc" "x827c30" "x88982e" "xbb7ed9" "x502bc0" "x945793" "x4a2d16" "x35417d"
-				"xb55800" "xb34974" "x9bcbb0" "x846bbd"
+			provinces = {
+				x398ab7 x86384c x003c0a x4cb32b xa9c721 xe49b22 xf7e225 xaac55e
+				xdb5bfc x780f19 xb2b319 x172779 x5fbaa3 x8a2d02 x2f367f xb795cf
+				x90ec1e xc84186 xb20af0 xface14 x42cc6b x58555f x7fe760 x0c50ab
+				xbad980 x4afa0e x2da2d0 x17186d xdff28b x664323 x17ac99 x7088d1
+				x6ef14a x9c4ebd x2f6de4 x56dfdd x411ce0 xe973d5 xe057f6 x2613cc
+				x9d1421 xe8d2d0 x23e4de xdb73a1 xad0c56 x4d34b5 xe97a12 xc0f62f
+				xe85e08 x124b70 x83263b x9d30a0 x6e651a xa595a4 x54c8a5 x784fac
+				xf0ad76 x63fc5c xb84cb1 x8b7e77 x202671 xbbc5f1 xab945f x85c5de
+				xc0c173 x45ccd8 x7e9185 x27b8cb x768b68 x6d09cf x0361f9 x105e9e
+				x4ad217 x8da2a3 x13bf55 x0c324c xc39ee7 x45712d x0019c8 x674c91
+				x8a0525 x4383d7 x3f6e46 x1c0d58 x8c21f3 x4d47eb x20d07c x173d99
+				xb44559 xe77af1 x8d9e74 xca984f x149257 x367cc4 x03ea0d xee19e4
+				x0fc30c x05085f x3a5746 x07c186 x97f1db x84daef xef46b1 x457edc
+				x77fcf9 xcbefc9 x53fa26 xd02fba x58a2f5 x7ec219 x004080 x094ee3
+				x6d883b x1a457c x361836 x711438 x9c09f4 xc8f21a xa24464 x0f979f
+				x20a6bc x827c30 x88982e xbb7ed9 x502bc0 x945793 x4a2d16 x35417d
+				xb55800 xb34974 x9bcbb0 x846bbd
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:DNZ
-			owned_provinces = {
-				"xc826fd" "xdc970d" "x27d1c9" "x34c75e" "x2e14f8" "x81606b" "x03a13c" "x084c04"
-				"x25dd86" "x098440" "xaba1a8" "x5c8e10" "x65e312" "x364f5d" "xe9b547" "x670613"
-				"xe02548" "x862333" "xda1e50" "xc50a34" "x396fb1" "x59f3fc" "x666995" "x6031e8"
-				"xe7d0d3" "x267f51" "x3108cf" "xde98a3" "xa968d6" "x36edbc" "x7fd1c6" "xe240d1"
-				"xde374d" "xa697bd"
+			provinces = {
+				xc826fd xdc970d x27d1c9 x34c75e x2e14f8 x81606b x03a13c x084c04
+				x25dd86 x098440 xaba1a8 x5c8e10 x65e312 x364f5d xe9b547 x670613
+				xe02548 x862333 xda1e50 xc50a34 x396fb1 x59f3fc x666995 x6031e8
+				xe7d0d3 x267f51 x3108cf xde98a3 xa968d6 x36edbc x7fd1c6 xe240d1
+				xde374d xa697bd
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:SVY
-			owned_provinces = {
-				"xf23e90" "x5f06d2" "xc087bc" "x9c4123" "x4f2908" "xc132c8" "x20156d" "x1c6431"
-				"x196bbc" "xc7414d" "xa504be" "x252116" "xb175d9" "x653b62" "x1fd5d0" "xfc10d7"
-				"x40028f" "xb98d8c" "xff5a75" "x475882" "x9860f4" "x383856" "xc0a02f" "x87d0f6"
+			provinces = {
+				xf23e90 x5f06d2 xc087bc x9c4123 x4f2908 xc132c8 x20156d x1c6431
+				x196bbc xc7414d xa504be x252116 xb175d9 x653b62 x1fd5d0 xfc10d7
+				x40028f xb98d8c xff5a75 x475882 x9860f4 x383856 xc0a02f x87d0f6
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:DKL
-			owned_provinces = {
-				"x2600c9" "x63fbf3" "x6a10e2" "x8dcfda" "x6c8c52" "xd369b9" "xa4c072" "xa01450"
-				"xc7ab8a" "xd1aa6a" "x6f3aaf" "x795d42" "xf0e9a1" "x5a9ba4" "xcb92d8" "xb8325d"
-				"x6c8005" "x377b09" "xda096e" "x123bdd" "xa78118" "xb6226d" "xbbf2bb" "xfefb89"
-				"x3d7cf6"
+			provinces = {
+				x2600c9 x63fbf3 x6a10e2 x8dcfda x6c8c52 xd369b9 xa4c072 xa01450
+				xc7ab8a xd1aa6a x6f3aaf x795d42 xf0e9a1 x5a9ba4 xcb92d8 xb8325d
+				x6c8005 x377b09 xda096e x123bdd xa78118 xb6226d xbbf2bb xfefb89
+				x3d7cf6
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:usfp_TSI
-			owned_provinces = {
-				"x353f41" "xe040c0" "x9b707d" "x89cec2" "xd46521" "xcec8bc" "x5dc4e3" "xc4f8be"
-				"x83a2f7" "xbc873d" "xa5c52c" "x3ef318" "x462445" "x32e810" "xe9756f" "xbb5d4e"
-				"x26fe6e" "xd3e426" "x75ce92" "x5e0cd6" "x3f0544"
+			provinces = {
+				x353f41 xe040c0 x9b707d x89cec2 xd46521 xcec8bc x5dc4e3 xc4f8be
+				x83a2f7 xbc873d xa5c52c x3ef318 x462445 x32e810 xe9756f xbb5d4e
+				x26fe6e xd3e426 x75ce92 x5e0cd6 x3f0544
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:HBC
-			owned_provinces = {
-				"x99e6cc"
+			provinces = {
+				x99e6cc
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:HDA
-			owned_provinces = {
-				"x0d541b" "x003e09" "x5d8407" "x74b3f3" "x853c2d" "xa941a4" "x607082"
+			provinces = {
+				x0d541b x003e09 x5d8407 x74b3f3 x853c2d xa941a4 x607082
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:WKS
-			owned_provinces = {
-				"xeef6b1" "x63dabd" "xa12143" "xc79097" "x9540cc" "x5249e0" "xbd3e1f" "xa3dd6f"
-				"x0ef29e"
+			provinces = {
+				xeef6b1 x63dabd xa12143 xc79097 x9540cc x5249e0 xbd3e1f xa3dd6f
+				x0ef29e
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:ATB
-			owned_provinces = {
-				"xa6b63f"
+			provinces = {
+				xa6b63f
 			}
 		}
 		add_homeland = cu:anglo_canadian
@@ -524,17 +554,17 @@ STATES = {
 	}
 
 	s:STATE_VANCOUVER_ISLAND = {
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:WKS
-			owned_provinces = {
-				"xfdf070" "x6dfdd1" "x2b750f" "x24fab0" "x76cd59" "x7a8f60" "x34639f" "x999e9b"
-				"xc0b693" "x64e0b4"
+			provinces = {
+				xfdf070 x6dfdd1 x2b750f x24fab0 x76cd59 x7a8f60 x34639f x999e9b
+				xc0b693 x64e0b4
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:SAL
-			owned_provinces = {
-				"xe9ac75" "xc9a9ab"
+			provinces = {
+				xe9ac75 xc9a9ab
 			}
 		}
 		add_homeland = cu:anglo_canadian
@@ -563,10 +593,10 @@ STATES = {
 				"x8b0ab0" "x1253c5" "xbcb8d9" "x0a4a4c" "x1dc31a" "x0cc129" "x433b03"
 			}
 		}
-		create_state = {
+		set_owner_of_provinces = {
 			country = c:NEW
-			owned_provinces = {
-				"x5ef6eb"
+			provinces = {
+				x5ef6eb
 			}
 		}
 		add_homeland = cu:anglo_canadian
@@ -623,7 +653,7 @@ STATES = {
 		set_owner_of_provinces = {
 			country = c:INV
 			provinces = {
-				xfee697 x2138cb x07b539 xc85043 x858e73 xf3edbb x4f7471 x5e859f xf37f3b x29876f
+				x2138cb x07b539 xc85043 x858e73 xf3edbb x4f7471 x5e859f xf37f3b x29876f
 				xf4585f xcc84ab xb72721 x7d138a xcc6417 x232e7e x51d035 x825d0c x788ec2 x36bd4a
 				xa00925 xa13b9d xd24e46 xb639a1 x30f15a x00cffc xc6cc13 xc3e035 x6e9f87 xd19813
 				x3d5d3b xbde9ac xc32dda x26baae xce825b xf8a3cd x322dcd xeff801 x5b081a x3f9742
@@ -650,6 +680,12 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
+			country = c:HBC
+			provinces = {
+				xfee697
+			}
+		}
+		set_owner_of_provinces = {
 			country = c:STU
 			provinces = {
 				x9567d6
@@ -658,9 +694,9 @@ STATES = {
 		set_owner_of_provinces = {
 			country = c:GWC
 			provinces = {
-				x8d0001 x2fb1a9 x37c680 xbfec14 x69bf88 x48efd3 x05aa6f xc3ec0a xcb7e23 x1f0ba5
-				xfd9177 x57a279 xd4dcfc xc83863 xd3d91d x911e83 x495e68 x4de6d8 xf2bab1 x0efeb5
-				xe742cd xed8ed2 xfdb015 x65cd76 xc666bd x5aa64d xf3cdf6 x2d2b9a x793a86
+				x1f0ba5 xcb7e23 xe742cd xfd9177 x0efeb5 x2d2b9a x2fb1a9 x48efd3
+				x4de6d8 x57a279 x65cd76 x69bf88 x793a86 x8d0001 x911e83 xbfec14
+				xc3ec0a xc666bd xc83863 xd3d91d xf2bab1 xf3cdf6
 			}
 		}
 		add_homeland = cu:inuit
@@ -722,7 +758,7 @@ STATES = {
 				x13eb95 x38c8ce x230500 x887034 xa150ba xce7525 xa6d21b x59b5a5 x44eb96 xc30ebf
 				x7c6ae3 x66c03a x1767c4 x039447 xb92b2a xdb42aa x42d933 xe7dc8b x9855ca xda37ae
 				xcf5004 xe51c30 x5a4dde x56b22a xcdd6b3 x18d607 x5531d2 xe3d97e x1870c8 x254f41
-				x0561e5 x7b5176 x29ed74 x345296 x874218 xb050b6 xe888be x0cb925 xa415e8 xa0c61a
+				x0561e5 x7b5176 x29ed74 x874218 xb050b6 xe888be x0cb925 xa415e8 xa0c61a
 				xb2b547 x390d18 xc38223 x79a4b0 x1d0897 x7f647a xe2cbf6 x5cc98c x213d4f x1650b2
 				x871f81 xa0d363 xd0e463 xcd9a92 x597e64 x1d9a87 x14f63b xb554b7 x9bcc62 xb6d96a
 				x045d36 x9c9a7c xe8a8e7 x7c7a41 x0b75a6 xa874e1 x71f55a xcc7056 xc6496c x483c9e
@@ -796,6 +832,12 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
+			country = c:HBC
+			provinces = {
+				x345296
+			}
+		}
+		set_owner_of_provinces = {
 			country = c:CPW
 			provinces = {
 				x4159a8 x937cda xd68439 x926422 x7ca2cc x246ba0 xc02038 x691878 xeb9059 x0905c3
@@ -805,11 +847,32 @@ STATES = {
 		}
 	}
 
+	s:STATE_NEW_BRUNSWICK = {
+		set_owner_of_provinces = {
+			country = c:NVS
+			provinces = {
+				x70c040
+			}
+		}
+		set_owner_of_provinces = {
+			country = c:NBS
+			provinces = {
+				x082153
+			}
+		}
+	}
+
 	s:STATE_ONTARIO = {
 		set_owner_of_provinces = {
 			country = c:ONT
 			provinces = {
-				x4d24ac xca480f
+				x4d24ac xca480f xe6c706
+			}
+		}
+		set_owner_of_provinces = {
+			country = c:HBC
+			provinces = {
+				x0183a1
 			}
 		}
 		remove_claim = c:HBC
@@ -825,7 +888,42 @@ STATES = {
 		add_homeland = cu:iroquoian
 	}
 
+	s:STATE_SASKATCHEWAN = {
+		set_owner_of_provinces = {
+			country = c:HBC
+			provinces = {
+				x008174
+			}
+		}
+	}
+
 	s:STATE_YUKON_TERRITORY = {
+		set_owner_of_provinces = {
+			country = c:GWC
+			provinces = {
+				x400644 x2c272d x4f1d47 xc4080a xcb038a xaf1462 x8b29ac x2d5321 xcb16ec x096d1f
+				x2754df x1a6735 x365975 xa43b5f x6a4cd7 x47676b xff4334 xa86f61 x898427 x6286e4
+				xb58175 x44b13a xf9820f xfd7e50 xde80ac x90af53 xfc8cbc xaba3f4 xb2a8e6 xfbaf0c
+				xe4b798 xbfd8b9 xa8e775 x37b983 xfe60e4 x19ee3b xfa31e3 xac9f19 x47136c x2d2c2d
+				x7298a0 xe13ab4 x55143a x39101e x403c43 x833289 x3e2849 xdb7755 x09bd9a xef3d84
+				x183a03 x5817b5 xb39c1b x9e99fc x2e3941 xb9b72b x38c295 x81667a x7626d3 xbcdb8d
+				xb38a2c x15a49a x5255b3 xa63a3f x23aea8 x3cc6b1 xaf2c3d xd62445 xa8d5f5 x14a33f
+				x703870 x244229 x33a055 xdd8241 x4bf0e8 xb8405d xe0383c x24c2c1 x73210a x89a524
+				x93473a x30d4a3 xb9e827 x7c4be7 x8c2b38 x9f9a64 xfb2b85 xe280a6 x05137c
+			}
+		}
+		set_owner_of_provinces = {
+			country = c:HBC
+			provinces = {
+				xb3cc99
+			}
+		}
+		set_owner_of_provinces = {
+			country = c:ATB
+			provinces = {
+				x788e5f
+			}
+		}
 		add_homeland = cu:inuit
 	}
 

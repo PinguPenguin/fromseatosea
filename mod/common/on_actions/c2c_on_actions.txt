@@ -26,6 +26,9 @@ on_c2c_start = {
             }
         }
         s:STATE_NEW_BRUNSWICK = {
+            region_state:NVS = {
+                set_state_owner = c:NBS
+            }
             set_owner_of_provinces = {
                 country = c:NBS
                 provinces = {
@@ -38,6 +41,35 @@ on_c2c_start = {
 			set_owner_of_provinces = {
 				country = c:DKL
 				provinces = { x064FE6 x06BB33 }
+			}
+		}
+		# Collapse temporary shells seeded in state history for split-state startup cleanup.
+		s:STATE_ALBERTA = {
+			region_state:HBC = {
+				set_state_owner = c:BLF
+			}
+		}
+		s:STATE_SASKATCHEWAN = {
+			region_state:HBC = {
+				set_state_owner = c:IRC
+			}
+		}
+		s:STATE_ONTARIO = {
+			region_state:HBC = {
+				set_state_owner = c:ONT
+			}
+		}
+		s:STATE_BRITISH_COLUMBIA = {
+			region_state:HBC = {
+				set_state_owner = c:ORG
+			}
+			region_state:ATB = {
+				set_state_owner = c:ORG
+			}
+		}
+		s:STATE_UPPER_BC = {
+			region_state:HBC = {
+				set_state_owner = c:DNZ
 			}
 		}
     }
