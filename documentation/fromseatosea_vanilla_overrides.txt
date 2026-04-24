@@ -1,4 +1,4 @@
-Compared against Victoria 3 vanilla at:
+﻿Compared against Victoria 3 vanilla at:
 C:\Program Files (x86)\Steam\steamapps\common\Victoria 3\game
 
 Supported mod version target in metadata: 1.12.*
@@ -133,6 +133,9 @@ Vanilla definitions extended rather than replaced
 
 common/on_actions/c2c_on_actions.txt
 on_game_started # appends startup province ownership cleanup for the split Canadian states
+
+common/scripted_effects/c2c_map_startup_effect.txt
+INJECT:c2c_map_startup_effect # startup province ownership cleanup for split Canadian states
 
 Confirmed vanilla localization key replacements
 
