@@ -30,14 +30,14 @@
 			}
 		}
 	}
-	# Reapply USFP-compatible owners after the vanilla-split cleanup above.
+	# USFP compatible BC coastal ownership
 	s:STATE_BRITISH_COLUMBIA = {
 		set_owner_of_provinces = {
 			country = c:DKL
 			provinces = { x064FE6 x06BB33 }
 		}
 	}
-	# Collapse temporary shells seeded in state history for split-state startup cleanup.
+	# Final split state owner cleanup
 	s:STATE_ALBERTA = {
 		region_state:HBC = {
 			set_state_owner = c:BLF

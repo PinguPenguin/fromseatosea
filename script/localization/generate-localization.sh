@@ -10,6 +10,8 @@ fi
 echo "Generating new localization files from $baseLanguage as a base"
 echo ' '
 
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 while read -r language; do
   if [ -d "$2localization/$language/" ]
   then
@@ -23,4 +25,4 @@ while read -r language; do
       sed -i "s/l_$baseLanguage/l_$language/g" "$2$filename"
       mv "$2$filename" "$2${filename//l_$baseLanguage/l_$language}"
   done < <(find "$2." -wholename "*localization/$language/*.yml" -type f -printf "%P\n")
-done < languages.txt
+done < "$script_dir/languages.txt"

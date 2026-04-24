@@ -3246,11 +3246,11 @@ class Vic3StateEditorApp:
 
 
 def default_repo_root() -> Path:
-    script_dir = Path(__file__).resolve().parent
-    for candidate in [Path.cwd(), script_dir.parent]:
+    script_path = Path(__file__).resolve()
+    for candidate in [Path.cwd(), *script_path.parents]:
         if (candidate / "mod").is_dir() and (candidate / "script").is_dir():
-            return candidate
-    return script_dir.parent
+            return candidate.resolve()
+    return script_path.parents[2]
 
 
 def resolve_game_root(candidate: Path | None) -> Path | None:

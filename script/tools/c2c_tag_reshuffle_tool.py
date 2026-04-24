@@ -91,7 +91,11 @@ class SaveResult:
 
 
 def repo_root_from_script() -> Path:
-    return Path(__file__).resolve().parents[1]
+    script_path = Path(__file__).resolve()
+    for candidate in script_path.parents:
+        if (candidate / "mod").is_dir() and (candidate / "script").is_dir():
+            return candidate
+    return script_path.parents[2]
 
 
 def normalize_province(value: str) -> str:
