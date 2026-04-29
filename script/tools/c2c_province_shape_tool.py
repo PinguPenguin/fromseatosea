@@ -1158,26 +1158,37 @@ class ProvinceShapeApp:
             int(round(current[1] + uy * offset)),
         )
         group_lookup = self.group_lookup_for_scope(scope)
+        center_packed = self.packed_at_source(*current)
+        center_group = int(group_lookup[center_packed]) if center_packed is not None else 0
+        preferred_source = None
+        if center_packed is not None and center_group != 0 and self.source_allowed_for_group_push(center_packed):
+            preferred_source = (center_packed, center_group)
+            dest_packed = self.packed_at_source(*ahead)
+            if dest_packed is not None:
+                dest_group = int(group_lookup[dest_packed])
+                if dest_group != 0 and dest_group != center_group:
+                    return center_packed, center_group, dest_group
 
         source_packed = self.packed_at_source(*behind)
         dest_packed = self.packed_at_source(*ahead)
-        direct = self.group_pair_from_samples(source_packed, dest_packed, group_lookup)
+        direct = self.group_pair_from_samples(source_packed, dest_packed, group_lookup, preferred_source)
         if direct is not None:
             return direct
 
         source_packed = self.packed_at_source(*previous)
         dest_packed = self.packed_at_source(*current)
-        direct = self.group_pair_from_samples(source_packed, dest_packed, group_lookup)
+        direct = self.group_pair_from_samples(source_packed, dest_packed, group_lookup, preferred_source)
         if direct is not None:
             return direct
 
-        return self.infer_group_push_pair_from_brush(current, ux, uy, radius, group_lookup)
+        return self.infer_group_push_pair_from_brush(current, ux, uy, radius, group_lookup, preferred_source)
 
     def group_pair_from_samples(
         self,
         source_packed: int | None,
         dest_packed: int | None,
         group_lookup: object,
+        preferred_source: tuple[int, int] | None = None,
     ) -> tuple[int, int, int] | None:
         if source_packed is None or dest_packed is None or source_packed == dest_packed:
             return None
@@ -1185,6 +1196,10 @@ class ProvinceShapeApp:
         dest_group = int(group_lookup[dest_packed])
         if source_group == 0 or dest_group == 0 or source_group == dest_group:
             return None
+        if preferred_source is not None:
+            preferred_packed, preferred_group = preferred_source
+            if dest_group != preferred_group:
+                return preferred_packed, preferred_group, dest_group
         if not self.source_allowed_for_group_push(source_packed):
             return None
         return source_packed, source_group, dest_group
@@ -1196,6 +1211,7 @@ class ProvinceShapeApp:
         uy: float,
         radius: int,
         group_lookup: object,
+        preferred_source: tuple[int, int] | None = None,
     ) -> tuple[int, int, int] | None:
         if self.repository.rgb is None:
             return None
@@ -1221,21 +1237,24 @@ class ProvinceShapeApp:
         trailing = circle & (projection <= -max(1.0, radius * 0.15))
         leading = circle & (projection >= max(1.0, radius * 0.15))
 
-        source_group = self.dominant_index(group_index[trailing])
-        if source_group is None:
-            source_group = self.dominant_index(group_index[circle])
-        if source_group is None:
-            return None
+        if preferred_source is not None:
+            source_packed, source_group = preferred_source
+        else:
+            source_group = self.dominant_index(group_index[trailing])
+            if source_group is None:
+                source_group = self.dominant_index(group_index[circle])
+            if source_group is None:
+                return None
 
-        source_mask = circle & (group_index == source_group)
-        allowed_source_mask = source_mask & self.allowed_source_mask(packed)
-        if np.any(allowed_source_mask):
-            source_mask = allowed_source_mask
-        source_packed = self.dominant_packed(packed[source_mask & trailing])
-        if source_packed is None:
-            source_packed = self.dominant_packed(packed[source_mask])
-        if source_packed is None or not self.source_allowed_for_group_push(source_packed):
-            return None
+            source_mask = circle & (group_index == source_group)
+            allowed_source_mask = source_mask & self.allowed_source_mask(packed)
+            if np.any(allowed_source_mask):
+                source_mask = allowed_source_mask
+            source_packed = self.dominant_packed(packed[source_mask & trailing])
+            if source_packed is None:
+                source_packed = self.dominant_packed(packed[source_mask])
+            if source_packed is None or not self.source_allowed_for_group_push(source_packed):
+                return None
 
         leading_dest = leading & (group_index != source_group) & (group_index != 0)
         dest_group = self.dominant_index(group_index[leading_dest])
@@ -1580,6 +1599,7 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
 
 
 

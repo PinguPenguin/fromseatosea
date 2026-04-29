@@ -1,10 +1,10 @@
-{
+﻿{
 "name" : "[TESTING] From Sea to Sea",
 "id" : "com.github.PinguPenguin.fromseatosea",
 "version" : "0.0.1",
 "game_id" : "victoria3",
 "picture" : "thumbnail.png",
-"supported_game_version" : "1.12.*",
+"supported_game_version" : "1.13.*",
 "short_description" : "A Canada-focused mod that aims to make playing in Canada more fun and rewarding.",
 "tags" : [],
 "relationships" : [],
