@@ -10,7 +10,7 @@
     mine = "x47ff7e"
     wood = "x02b1b4"
     arable_land = 3
-    arable_resources = { }
+    arable_resources = {}
     capped_resources = {
         building_iron_mine = 35
         building_logging_camp = 4
