@@ -1,0 +1,41 @@
+﻿namespace = c2c_debug
+
+c2c_debug.1 = {
+	type = country_event
+	hidden = yes
+	orphan = yes
+
+	immediate = {
+		# Explicitly cover vanilla Canadian state regions and the c2c split regions.
+		s:STATE_NEWFOUNDLAND = { every_scope_state = { set_state_owner = root } }
+		s:STATE_LABRADOR = { every_scope_state = { set_state_owner = root } }
+		s:STATE_NOVA_SCOTIA = { every_scope_state = { set_state_owner = root } }
+		s:STATE_NEW_BRUNSWICK = { every_scope_state = { set_state_owner = root } }
+
+		s:STATE_QUEBEC = { every_scope_state = { set_state_owner = root } }
+		s:STATE_SAINT_LAURENT = { every_scope_state = { set_state_owner = root } }
+		s:STATE_QUEBEC_SAGUENAY = { every_scope_state = { set_state_owner = root } }
+		s:STATE_NOUVEAU_QUEBEC = { every_scope_state = { set_state_owner = root } }
+
+		s:STATE_ONTARIO = { every_scope_state = { set_state_owner = root } }
+		s:STATE_ONTARIO_PENINSULA = { every_scope_state = { set_state_owner = root } }
+		s:STATE_ALGOMA = { every_scope_state = { set_state_owner = root } }
+		s:STATE_NORTHWEST_ONTARIO = { every_scope_state = { set_state_owner = root } }
+
+		s:STATE_MANITOBA = { every_scope_state = { set_state_owner = root } }
+		s:STATE_KEEWATIN = { every_scope_state = { set_state_owner = root } }
+		s:STATE_SASKATCHEWAN = { every_scope_state = { set_state_owner = root } }
+		s:STATE_NORTH_SASKATCHEWAN = { every_scope_state = { set_state_owner = root } }
+		s:STATE_ALBERTA = { every_scope_state = { set_state_owner = root } }
+		s:STATE_EDMONTON = { every_scope_state = { set_state_owner = root } }
+		s:STATE_ATHABASCA = { every_scope_state = { set_state_owner = root } }
+		s:STATE_NORTHWEST_TERRITORIES = { every_scope_state = { set_state_owner = root } }
+		s:STATE_NUNAVUT = { every_scope_state = { set_state_owner = root } }
+
+		s:STATE_BRITISH_COLUMBIA = { every_scope_state = { set_state_owner = root } }
+		s:STATE_BC_INTERIOR = { every_scope_state = { set_state_owner = root } }
+		s:STATE_UPPER_BC = { every_scope_state = { set_state_owner = root } }
+		s:STATE_VANCOUVER_ISLAND = { every_scope_state = { set_state_owner = root } }
+		s:STATE_YUKON_TERRITORY = { every_scope_state = { set_state_owner = root } }
+	}
+}

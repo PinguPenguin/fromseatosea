@@ -126,9 +126,8 @@ INJECT:c2c_map_startup_effect # startup ownership cleanup for split Canadian sta
 
 common/strategic_regions/zz_c2c_strategic_regions.txt
 INJECT:region_canada
-INJECT:region_new_england
+INJECT:region_atlantic_coast
 INJECT:region_pacific_coast
-INJECT:region_great_plains
 
 Confirmed vanilla localization key replacements
 
