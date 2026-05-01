@@ -344,6 +344,41 @@
 				size = 17465
 			}
 		}
+		region_state:PEI = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 17000
+			}
+			create_pop = {
+				culture = anglo_canadian
+				religion = catholic
+				size = 2000
+			}
+			create_pop = {
+				culture = irish
+				religion = protestant
+				size = 5000
+			}
+			create_pop = {
+				culture = irish
+				religion = catholic
+				size = 8000
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = catholic
+				size = 1000
+			}
+			create_pop = {
+				culture = algonquian
+				religion = animist
+				size = 300
+			}
+		}
 	}
 
 	s:STATE_NEWFOUNDLAND = {

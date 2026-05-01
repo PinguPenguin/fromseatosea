@@ -1,0 +1,159 @@
+﻿PEI = { # Prince Edward Island
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "red"
+	color3 = "green"
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.5 0.18 } scale = { 1.0 0.36 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.97 0.5 } scale = { 0.06 1.0 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.21 0.96 } scale = { 0.14 0.08 } }
+		instance = { position = { 0.50 0.96 } scale = { 0.14 0.08 } }
+		instance = { position = { 0.79 0.96 } scale = { 0.14 0.08 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.21 0.025 } scale = { 0.14 0.10 } }
+		instance = { position = { 0.50 0.025 } scale = { 0.14 0.10 } }
+		instance = { position = { 0.79 0.025 } scale = { 0.14 0.10 } }
+		instance = { position = { 0.985 0.43 } scale = { 0.045 0.24 } }
+		instance = { position = { 0.985 0.68 } scale = { 0.045 0.24 } }
+	}
+	colored_emblem = {
+		texture = "ce_lion_passant_guardant_long.dds"
+		color1 = "yellow"
+		color2 = "azure"
+		color3 = "orange"
+		instance = { position = { 0.50 0.19 } scale = { 1.08 0.56 } }
+	}
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "teal"
+		color2 = "teal"
+		instance = { position = { 0.50 0.82 } scale = { 0.82 0.23 } }
+	}
+	colored_emblem = {
+		texture = "ce_coa_saf_tree.dds"
+		color1 = "brown"
+		color2 = "teal"
+		color3 = "brown_light"
+		instance = { position = { 0.60 0.65 } scale = { 0.70 0.62 } }
+	}
+	colored_emblem = {
+		texture = "ce_coa_saf_tree.dds"
+		color1 = "brown"
+		color2 = "teal"
+		color3 = "brown_light"
+		instance = { position = { 0.35 0.69 } scale = { 0.32 0.42 } }
+	}
+	colored_emblem = {
+		texture = "ce_coa_saf_tree.dds"
+		color1 = "brown"
+		color2 = "teal"
+		color3 = "brown_light"
+		instance = { position = { 0.40 0.69 } scale = { 0.32 0.42 } }
+	}
+	colored_emblem = {
+		texture = "ce_coa_saf_tree.dds"
+		color1 = "brown"
+		color2 = "teal"
+		color3 = "brown_light"
+		instance = { position = { 0.45 0.69 } scale = { 0.32 0.42 } }
+	}
+}
+
+sub_PEI = {
+	color1 = "white"
+	color2 = "red"
+	color3 = "green"
+
+	colored_emblem = {
+		texture = "ce_shield_heater_border.dds"
+		color1 = "white"
+		color2 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 1.0 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.5 0.275 } scale = { 0.395 0.295 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { position = { 0.5 0.43 } scale = { 0.395 0.012 } }
+	}
+	colored_emblem = {
+		texture = "ce_lion_passant_guardant_long.dds"
+		color1 = "yellow"
+		color2 = "azure"
+		color3 = "orange"
+		instance = { position = { 0.495 0.28 } scale = { 0.51 0.58 } }
+	}
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "teal"
+		color2 = "teal"
+		instance = { position = { 0.5 0.73 } scale = { 0.61 0.16 } }
+	}
+	colored_emblem = {
+		texture = "ce_coa_saf_tree.dds"
+		color1 = "brown"
+		color2 = "teal"
+		color3 = "brown_light"
+		instance = { position = { 0.59 0.62 } scale = { 0.25 0.34 } }
+	}
+	colored_emblem = {
+		texture = "ce_coa_saf_tree.dds"
+		color1 = "brown"
+		color2 = "teal"
+		color3 = "brown_light"
+		instance = { position = { 0.40 0.67 } scale = { 0.11 0.20 } }
+	}
+	colored_emblem = {
+		texture = "ce_coa_saf_tree.dds"
+		color1 = "brown"
+		color2 = "teal"
+		color3 = "brown_light"
+		instance = { position = { 0.44 0.67 } scale = { 0.11 0.20 } }
+	}
+	colored_emblem = {
+		texture = "ce_coa_saf_tree.dds"
+		color1 = "brown"
+		color2 = "teal"
+		color3 = "brown_light"
+		instance = { position = { 0.48 0.67 } scale = { 0.11 0.20 } }
+	}
+}
+
+PEI_subject = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "yellow"
+	color3 = "green"
+
+	sub = {
+		parent = "sub_PEI"
+		instance = { scale = { 0.5 0.5 } offset = { 0.5 0.25 } }
+	}
+}
+
+
+

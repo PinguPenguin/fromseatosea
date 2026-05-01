@@ -1,0 +1,18 @@
+﻿PEI_george_wright = {
+	# Administrator of Prince Edward Island at game start.
+	first_name = "George"
+	last_name = "Wright"
+	historical = yes
+	ruler = yes
+	ig_leader = yes
+	birth_date = 1779.12.29
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	interest_group = ig_landowners
+	ideology = ideology_moderate
+	home_region = STATE_NEW_BRUNSWICK
+	traits = {
+		tactful
+		persistent
+	}
+}

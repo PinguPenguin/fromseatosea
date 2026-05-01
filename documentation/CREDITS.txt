@@ -1,0 +1,46 @@
+CREDITS
+
+This mod incorporates, adapts, or was informed by the following resources, datasets, and tools.
+
+
+ARTWORK AND HERALDRY
+
+Escutcheon of Prince Edward Island.svg
+Source: Lieutenant Governor of Prince Edward Island, via Wikimedia Commons.
+SVG uploaded/created by Hayden Soloviev.
+Public domain in Canada.
+Source page: https://commons.wikimedia.org/wiki/File:Escutcheon_of_Prince_Edward_Island.svg
+Modified and adapted for use in this mod.
+
+Flag map of Canada (1868–1921).svg
+Created by Wikimedia Commons user Дмитрий-5-Аверин.
+Licensed under Creative Commons Attribution-ShareAlike 3.0 Unported:
+https://creativecommons.org/licenses/by-sa/3.0/
+Source page: https://commons.wikimedia.org/wiki/File:Flag_map_of_Canada_(1868%E2%80%931921).svg
+Modified and adapted for use in this mod.
+
+
+HISTORICAL DATA
+
+Railway placement and construction-date references are based in part on the Historical Canadian Railroads / Historical_Railways_1836_1922_05Dec09.shp dataset, created by the Cartography office, Geography Department, and made available via MDL Data / GEORIA / Borealis.
+
+License: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+Dataset identifier: doi:10.5683/SP2/UCCFVQ
+
+The dataset documentation cites, among other sources:
+- Christopher Andreae, Lines of Country: An Atlas of Railway and Waterway History in Canada. Erin, Ontario: Boston Mills Press, 1997.
+- National Atlas of Canada / GeoGratis base map railway data.
+- ESRI Canada ArcCANADA data.
+
+Modified and adapted for use in this mod.
+
+
+ACKNOWLEDGEMENTS
+
+While C2C directly uses "Hail, Columbia!" by CaelReader as a dependency, it was also a huge reference for modding in the first place. 
+I learned much about how modding works in Vic3 by referencing its files; a massive thank you for making such a great mod.
+
+Finally, thank you to the Victoria 3 Modding Co-op, the Victoria 3 wiki, and all those who helped me in creating and refining C2C.
+None of this would be possible without their guides, tools, and help.

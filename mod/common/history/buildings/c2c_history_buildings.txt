@@ -331,6 +331,32 @@
 				}
 			}
 		}
+		region_state:PEI = {
+			create_building = {
+				building = "building_wheat_farm"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_wheat_farm"
+						country = "c:PEI"
+						levels = 1
+						region = "STATE_NEW_BRUNSWICK"
+					}
+				}
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_livestock_ranch"
+						country = "c:PEI"
+						levels = 1
+						region = "STATE_NEW_BRUNSWICK"
+					}
+				}
+			}
+		}
 	}
 
 	s:STATE_NEWFOUNDLAND = {

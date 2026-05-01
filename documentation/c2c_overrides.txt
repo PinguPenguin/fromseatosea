@@ -47,6 +47,9 @@ map_data/provinces.png
 
 Vanilla definitions overridden from uniquely named files
 
+common/country_creation/c2c_releasable_countries.txt
+NBS
+
 common/history/states/c2c_history_states_override.txt
 STATE_ALBERTA
 STATE_BRITISH_COLUMBIA

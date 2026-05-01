@@ -24,6 +24,12 @@
 			set_state_owner = c:NBS
 		}
 		set_owner_of_provinces = {
+			country = c:PEI
+			provinces = {
+				x70C040
+			}
+		}
+		set_owner_of_provinces = {
 			country = c:NBS
 			provinces = {
 				x082153
@@ -64,6 +70,22 @@
 	s:STATE_UPPER_BC = {
 		region_state:HBC = {
 			set_state_owner = c:DNZ
+		}
+	}
+	# Preserve USFP's Newfoundland colony after c2c splits Labrador away.
+	if = {
+		limit = {
+			exists = c:NEW
+		}
+		s:STATE_NEWFOUNDLAND = {
+			every_scope_state = {
+				set_state_owner = c:NEW
+			}
+		}
+		s:STATE_LABRADOR = {
+			every_scope_state = {
+				set_state_owner = c:NEW
+			}
 		}
 	}
 }

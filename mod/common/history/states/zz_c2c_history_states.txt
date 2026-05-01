@@ -848,14 +848,14 @@ STATES = {
 	}
 
 	s:STATE_NEW_BRUNSWICK = {
-		set_owner_of_provinces = {
-			country = c:NVS
-			provinces = {
-				x70c040
+		create_state = {
+			country = c:PEI
+			owned_provinces = {
+				"x70c040"
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:NBS
+			country = c:NVS
 			provinces = {
 				x082153
 			}
