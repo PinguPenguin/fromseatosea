@@ -1,0 +1,6 @@
+﻿INJECT:geographic_region_american_bison_range = {
+	state_regions = {
+		STATE_MANITOBA
+		STATE_EDMONTON
+	}
+}

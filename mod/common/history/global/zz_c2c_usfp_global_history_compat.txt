@@ -1,0 +1,8 @@
+﻿GLOBAL = {
+	# c2c split northern regions define this trait in map_data instead of broad prairie regions.
+	s:STATE_ALBERTA = { remove_state_trait = state_trait_canadian_boreal_forests }
+	s:STATE_MANITOBA = { remove_state_trait = state_trait_canadian_boreal_forests }
+	s:STATE_SASKATCHEWAN = { remove_state_trait = state_trait_canadian_boreal_forests }
+
+	s:STATE_ONTARIO_PENINSULA = { add_state_trait = state_trait_american_chestnuts }
+}

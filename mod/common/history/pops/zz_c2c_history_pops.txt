@@ -482,7 +482,7 @@
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
-		region_state:INV = {
+		region_state:usfp_INV = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -575,7 +575,7 @@
 	}
 
 	s:STATE_NUNAVUT = {
-		region_state:INV = {
+		region_state:usfp_INV = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -891,12 +891,12 @@
 	}
 
 	s:STATE_YUKON_TERRITORY = {
-		region_state:TTC = {
+		region_state:usfp_TTC = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
 		}
-		region_state:TLT = {
+		region_state:usfp_TLT = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -919,7 +919,7 @@
 	}
 
 	s:STATE_ALBERTA = {
-		region_state:GVT = {
+		region_state:usfp_GVT = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -932,21 +932,21 @@
 	}
 
 	s:STATE_ATHABASCA = {
-		region_state:CPW = {
+		region_state:usfp_CPW = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 3000
 			}
 		}
-		region_state:DNZ = {
+		region_state:usfp_DNZ = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 5625
 			}
 		}
-		region_state:SVY = {
+		region_state:usfp_SVY = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -956,7 +956,7 @@
 	}
 
 	s:STATE_EDMONTON = {
-		region_state:DNZ = {
+		region_state:usfp_DNZ = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -966,7 +966,7 @@
 	}
 
 	s:STATE_BRITISH_COLUMBIA = {
-		region_state:SAL = {
+		region_state:usfp_SAL = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -976,7 +976,7 @@
 				size = 2600
 			}
 		}
-		region_state:SYX = {
+		region_state:usfp_SYX = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -986,7 +986,7 @@
 				size = 1222
 			}
 		}
-		region_state:LLT = {
+		region_state:usfp_LLT = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -996,7 +996,7 @@
 				size = 1000
 			}
 		}
-		region_state:WKS = {
+		region_state:usfp_WKS = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -1006,7 +1006,7 @@
 				size = 2432
 			}
 		}
-		region_state:DKL = {
+		region_state:usfp_DKL = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -1019,14 +1019,14 @@
 	}
 
 	s:STATE_BC_INTERIOR = {
-		region_state:KTN = {
+		region_state:usfp_KTN = {
 			create_pop = {
 				culture = salish
 				religion = animist
 				size = 2000
 			}
 		}
-		region_state:SWP = {
+		region_state:usfp_SWP = {
 			create_pop = {
 				culture = salish
 				religion = animist
@@ -1036,7 +1036,7 @@
 	}
 
 	s:STATE_UPPER_BC = {
-		region_state:DKL = {
+		region_state:usfp_DKL = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -1048,28 +1048,28 @@
 				size = 1000
 			}
 		}
-		region_state:DNZ = {
+		region_state:usfp_DNZ = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 10000
 			}
 		}
-		region_state:HDA = {
+		region_state:usfp_HDA = {
 			create_pop = {
 				culture = salish
 				religion = animist
 				size = 5000
 			}
 		}
-		region_state:SVY = {
+		region_state:usfp_SVY = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 2000
 			}
 		}
-		region_state:TLT = {
+		region_state:usfp_TLT = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -1083,7 +1083,7 @@
 				size = 5000
 			}
 		}
-		region_state:WKS = {
+		region_state:usfp_WKS = {
 			create_pop = {
 				culture = salish
 				religion = animist
@@ -1093,7 +1093,7 @@
 	}
 
 	s:STATE_VANCOUVER_ISLAND = {
-		region_state:WKS = {
+		region_state:usfp_WKS = {
 			create_pop = {
 				culture = salish
 				religion = animist
@@ -1113,7 +1113,7 @@
 				size = 1000
 			}
 		}
-		region_state:OJI = {
+		region_state:usfp_OJI = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -1126,14 +1126,14 @@
 	}
 
 	s:STATE_KEEWATIN = {
-		region_state:SWC = {
+		region_state:usfp_SWC = {
 			create_pop = {
 				culture = cree
 				religion = animist
 				size = 3000
 			}
 		}
-		region_state:WCR = {
+		region_state:usfp_WCR = {
 			create_pop = {
 				culture = cree
 				religion = animist
@@ -1143,14 +1143,14 @@
 	}
 
 	s:STATE_NORTH_SASKATCHEWAN = {
-		region_state:CPW = {
+		region_state:usfp_CPW = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 4000
 			}
 		}
-		region_state:WCR = {
+		region_state:usfp_WCR = {
 			create_pop = {
 				culture = cree
 				religion = animist
@@ -1215,10 +1215,10 @@
 				limit = {
 					culture = cu:cree
 				}
-				move_pop = s:STATE_NORTHWEST_ONTARIO.region_state:SWC
+				move_pop = s:STATE_NORTHWEST_ONTARIO.region_state:usfp_SWC
 			}
 		}
-		region_state:OJI = {
+		region_state:usfp_OJI = {
 			create_pop = {
 				culture = cree
 				religion = animist
@@ -1244,21 +1244,21 @@
 				limit = {
 					culture = cu:inuit
 				}
-				move_pop = s:STATE_NOUVEAU_QUEBEC.region_state:INK
+				move_pop = s:STATE_NOUVEAU_QUEBEC.region_state:usfp_INK
 			}
 			every_scope_pop = {
 				limit = {
 					culture = cu:cree
 				}
-				move_pop = s:STATE_NOUVEAU_QUEBEC.region_state:ECR
+				move_pop = s:STATE_NOUVEAU_QUEBEC.region_state:usfp_ECR
 			}
 		}
-		region_state:ECR = {
+		region_state:usfp_ECR = {
 			kill_population_percent_in_state = {
 				percent = 0.75
 			}
 		}
-		region_state:INN = {
+		region_state:usfp_INN = {
 			create_pop = {
 				culture = cree
 				religion = animist
@@ -1275,7 +1275,7 @@
 	}
 
 	s:STATE_NUNAVUT = {
-		region_state:CPW = {
+		region_state:usfp_CPW = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -1288,7 +1288,7 @@
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
-		region_state:CPW = {
+		region_state:usfp_CPW = {
 			kill_population_percent_in_state = {
 				percent = 1
 			}
@@ -1302,6 +1302,13 @@
 
 	s:STATE_NEW_BRUNSWICK = {
 		region_state:NBS = {
+			create_pop = {
+				culture = algonquian
+				religion = animist
+				size = 800
+			}
+		}
+		region_state:NVS = {
 			create_pop = {
 				culture = algonquian
 				religion = animist
@@ -1322,7 +1329,7 @@
 	}
 
 	s:STATE_KEEWATIN = {
-		region_state:CPW = {
+		region_state:usfp_CPW = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -1332,21 +1339,21 @@
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
-		region_state:DGB = {
+		region_state:usfp_DGB = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 1800
 			}
 		}
-		region_state:STU = {
+		region_state:usfp_STU = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 1900
 			}
 		}
-		region_state:SVY = {
+		region_state:usfp_SVY = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -1356,21 +1363,21 @@
 	}
 
 	s:STATE_YUKON_TERRITORY = {
-		region_state:GWC = {
+		region_state:usfp_GWC = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 1000
 			}
 		}
-		region_state:TLT = {
+		region_state:usfp_TLT = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 1200
 			}
 		}
-		region_state:TTC = {
+		region_state:usfp_TTC = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -1387,7 +1394,7 @@
 	}
 
 	s:STATE_BC_INTERIOR = {
-		region_state:SYX = {
+		region_state:usfp_SYX = {
 			create_pop = {
 				culture = salish
 				religion = animist
@@ -1417,7 +1424,7 @@
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
-		region_state:GWC = {
+		region_state:usfp_GWC = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist
@@ -1427,7 +1434,7 @@
 	}
 
 	s:STATE_NUNAVUT = {
-		region_state:INV = {
+		region_state:usfp_INV = {
 			create_pop = {
 				culture = inuit
 				religion = animist
@@ -1437,7 +1444,7 @@
 	}
 
 	s:STATE_VANCOUVER_ISLAND = {
-		region_state:SAL = {
+		region_state:usfp_SAL = {
 			create_pop = {
 				culture = salish
 				religion = animist
@@ -1447,7 +1454,7 @@
 	}
 
 	s:STATE_YUKON_TERRITORY = {
-		region_state:TTC = {
+		region_state:usfp_TTC = {
 			create_pop = {
 				culture = athabaskan
 				religion = animist

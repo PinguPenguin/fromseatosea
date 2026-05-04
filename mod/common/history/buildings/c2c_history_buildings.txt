@@ -468,13 +468,13 @@
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
-		region_state:INV = {
+		region_state:usfp_INV = {
 			create_building = {
 				building = "building_logging_camp"
 				reserves = 1
 				add_ownership = {
 					country = {
-						country = "c:INV"
+						country = "c:usfp_INV"
 						levels = 1
 					}
 				}
@@ -932,7 +932,6 @@
 				}
 			}
 			remove_building = building_shipyard
-			remove_building = building_military_shipyard
 			remove_building = building_port
 		}
 	}
@@ -952,18 +951,6 @@
 			}
 			create_building = {
 				building = "building_shipyard"
-				reserves = 1
-				add_ownership = {
-					building = {
-						type = "building_financial_district"
-						country = "c:QUE"
-						levels = 1
-						region = "STATE_QUEBEC"
-					}
-				}
-			}
-			create_building = {
-				building = "building_military_shipyard"
 				reserves = 1
 				add_ownership = {
 					building = {
@@ -1115,6 +1102,25 @@
 			}
 		}
 		region_state:ORG = {
+		}
+	}
+
+	s:STATE_BC_INTERIOR = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 1
+		}
+	}
+	s:STATE_UPPER_BC = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 1
+		}
+	}
+	s:STATE_KEEWATIN = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 1
 		}
 	}
 

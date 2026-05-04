@@ -55,7 +55,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:CPW
+			country = c:usfp_CPW
 			provinces = {
 				xef3ed9 xa09daf x8626e9 xa4c569 x771c6f xa3151a x0e80fb x80a0a3
 				x87acec x487992 x4c24ef x91d858 xa489ba x9a52f2 xfe3901 xa91fd6
@@ -63,7 +63,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:SVY
+			country = c:usfp_SVY
 			provinces = {
 				xaf9ce8 xc9be8f xdc7245 x120eea x394c8f x317ba1 x21e777 xb27e30
 				x9a96ba x62957e x0ec207 xe2baeb xe1c1a4 x4d6778 xd8277c x0a5171
@@ -71,7 +71,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:DNZ
+			country = c:usfp_DNZ
 			provinces = {
 				xb1775f xe85e02 x89c402 xaa6118 x3d060d xe225be xeaef3d x8e154a
 				x3673d9 x4fb5bd xd1d7e7 x1392fd x97d4a4 xb84007 x22820c x980251
@@ -106,7 +106,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:KTN
+			country = c:usfp_KTN
 			provinces = {
 				xfbe9a2 xe01e2e x7bdc98 xfd4c5e x5a6f3e x06eeac xdcf8ed x9c275b
 				xdd172e xafe769 x453f2b xb3a699 xaa8177 x9b5b04 x61cacb x8b9b2e
@@ -114,14 +114,14 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:SWP
+			country = c:usfp_SWP
 			provinces = {
 				x497376 x70aaaf xa0d447 x69c90f xe811d1 x335573 xede38b xcdaf46
 				x0eae6c xee83f2 x77ad45 x8d62e7 x4d08e1 xc0a000
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:SYX
+			country = c:usfp_SYX
 			provinces = {
 				x362e8f x0d5e87 x852913 x34c789 x490d37 x605f60 x4df1b5
 			}
@@ -155,7 +155,7 @@ STATES = {
 
 	s:STATE_EDMONTON = {
 		set_owner_of_provinces = {
-			country = c:DNZ
+			country = c:usfp_DNZ
 			provinces = {
 				x670a46 x89c61f x7a03dc xf11edd x001b22 x759e96 x0e6b0a x6a64cd
 				x6dc09d xcb77d5 x3b027f x060c67 xfcb25c xa86910 xa74a2f x933c14
@@ -210,7 +210,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:WCR
+			country = c:usfp_WCR
 			provinces = {
 				x0c2c81 xca95ea x7a790a x13fc0f xfd8b0c x43ecf0 xa182ab xf91e7e
 				x4d0581 xc9870b x86229f x65f69e xc99667 xfb1b79 xc9790e x857dd7
@@ -223,7 +223,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:CPW
+			country = c:usfp_CPW
 			provinces = {
 				xb448a4 x0cdfef xfa5fa2 x44ef6b x5b4e49 x5e806d x3e8475 x7ee88a
 				x9455f5 xb4abac xf779d9 x86d18a x8a7316 xe7cb96 x1c140f x187c58
@@ -232,7 +232,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:SWC
+			country = c:usfp_SWC
 			provinces = {
 				xcca2c5 xc587cd x544568 xbe34c5 x78225b x5cc4c6 x7122b4 x09ccbb
 				x00f433 xd0d2b7
@@ -246,7 +246,7 @@ STATES = {
 
 	s:STATE_NORTHWEST_ONTARIO = {
 		set_owner_of_provinces = {
-			country = c:OJI
+			country = c:usfp_OJI
 			provinces = {
 				x3927f5 x1e2884 xd6162e xf2120d xf6a5a4 x0e2f58 x11deb9 x20f7a5 xc42b28 x37d9e8
 				x6e78ac x7383df x398e4c xc33c7e x33bd4e x196c5f x5a3d13 x2f2c82 x13f9fa xe0da0b
@@ -271,7 +271,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:SWC
+			country = c:usfp_SWC
 			provinces = {
 				x1695df x1c6f98 xb090ad xfbb002 xdd7290 x20327a x932b65 xd7414c x3e7368 xa7d370
 				xd03bf3 x6a902f xb54962 x2b78b9 x6ffe7e x853b98 x4164f7 x297066 x280a1d x383ea0
@@ -304,7 +304,7 @@ STATES = {
 
 	s:STATE_NORTH_SASKATCHEWAN = {
 		set_owner_of_provinces = {
-			country = c:WCR
+			country = c:usfp_WCR
 			provinces = {
 				x90cf2d x3b6c38 xeef418 x8bcfe8 xdf3ac1 xda9446 x1e17c5 x0ae42e
 				x21a007 xc06000 xb6c4a3
@@ -320,7 +320,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:CPW
+			country = c:usfp_CPW
 			provinces = {
 				x2837f0 x0a2ccf x7f64bc xc0d10f x9ff6e4 xcedae2 xd9c98f x06ab9d
 				x2322de xc09f00 x922237 x871aa5 xe51c72 x12e022 x5c699d x94b087
@@ -352,7 +352,7 @@ STATES = {
 
 	s:STATE_NOUVEAU_QUEBEC = {
 		set_owner_of_provinces = {
-			country = c:INK
+			country = c:usfp_INK
 			provinces = {
 				x0c6ae4 x6e6753 x53e74e xbb606d xf9db91 x4a9f05 x307a15 xfe2408 x16cfcb x23f6cc
 				xa7b019 xe58487 x3c2f86 x9b6054 xeb2882 x53e955 x247a18 x8b2119 xb0da28 xaf2efe
@@ -376,7 +376,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:ECR
+			country = c:usfp_ECR
 			provinces = {
 				x889a4c x3c9588 xc1a1e6 x955d56 x191e87 x8c76a6 x7c74e8 x1c9ca2 x193f3b x9acbbf
 				x80c199 xda3fbc xbed37a x95a010 xed6b51 x4d0622 xb95e82 x82a9af x0214df x9c85fa
@@ -404,7 +404,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:INN
+			country = c:usfp_INN
 			provinces = {
 				x943ccb xc0de62 x7c2b11 x1b2a0a x1b5387 xb0f75b xa5b2ec x0450df x38c993 x432d6d
 				x6e7083 xdb25c8 x87dec2 x5ee3f1 xff3ae7 xe2b5da x488bfb xfccedb x6084e4 x824434
@@ -466,7 +466,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:TLT
+			country = c:usfp_TLT
 			provinces = {
 				x398ab7 x86384c x003c0a x4cb32b xa9c721 xe49b22 xf7e225 xaac55e
 				xdb5bfc x780f19 xb2b319 x172779 x5fbaa3 x8a2d02 x2f367f xb795cf
@@ -488,7 +488,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:DNZ
+			country = c:usfp_DNZ
 			provinces = {
 				xc826fd xdc970d x27d1c9 x34c75e x2e14f8 x81606b x03a13c x084c04
 				x25dd86 x098440 xaba1a8 x5c8e10 x65e312 x364f5d xe9b547 x670613
@@ -498,7 +498,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:SVY
+			country = c:usfp_SVY
 			provinces = {
 				xf23e90 x5f06d2 xc087bc x9c4123 x4f2908 xc132c8 x20156d x1c6431
 				x196bbc xc7414d xa504be x252116 xb175d9 x653b62 x1fd5d0 xfc10d7
@@ -506,7 +506,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:DKL
+			country = c:usfp_DKL
 			provinces = {
 				x2600c9 x63fbf3 x6a10e2 x8dcfda x6c8c52 xd369b9 xa4c072 xa01450
 				xc7ab8a xd1aa6a x6f3aaf x795d42 xf0e9a1 x5a9ba4 xcb92d8 xb8325d
@@ -529,13 +529,13 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:HDA
+			country = c:usfp_HDA
 			provinces = {
 				x0d541b x003e09 x5d8407 x74b3f3 x853c2d xa941a4 x607082
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:WKS
+			country = c:usfp_WKS
 			provinces = {
 				xeef6b1 x63dabd xa12143 xc79097 x9540cc x5249e0 xbd3e1f xa3dd6f
 				x0ef29e
@@ -555,14 +555,14 @@ STATES = {
 
 	s:STATE_VANCOUVER_ISLAND = {
 		set_owner_of_provinces = {
-			country = c:WKS
+			country = c:usfp_WKS
 			provinces = {
 				xfdf070 x6dfdd1 x2b750f x24fab0 x76cd59 x7a8f60 x34639f x999e9b
 				xc0b693 x64e0b4
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:SAL
+			country = c:usfp_SAL
 			provinces = {
 				xe9ac75 xc9a9ab
 			}
@@ -651,7 +651,7 @@ STATES = {
 
 	s:STATE_NORTHWEST_TERRITORIES = {
 		set_owner_of_provinces = {
-			country = c:INV
+			country = c:usfp_INV
 			provinces = {
 				x2138cb x07b539 xc85043 x858e73 xf3edbb x4f7471 x5e859f xf37f3b x29876f
 				xf4585f xcc84ab xb72721 x7d138a xcc6417 x232e7e x51d035 x825d0c x788ec2 x36bd4a
@@ -686,13 +686,13 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:STU
+			country = c:usfp_STU
 			provinces = {
 				x9567d6
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:GWC
+			country = c:usfp_GWC
 			provinces = {
 				x1f0ba5 xcb7e23 xe742cd xfd9177 x0efeb5 x2d2b9a x2fb1a9 x48efd3
 				x4de6d8 x57a279 x65cd76 x69bf88 x793a86 x8d0001 x911e83 xbfec14
@@ -704,7 +704,7 @@ STATES = {
 
 	s:STATE_NUNAVUT = {
 		set_owner_of_provinces = {
-			country = c:INV
+			country = c:usfp_INV
 			provinces = {
 				xae7346 x4b20fd x95d73d x62ef0d x62d961 x16a502 xb681bf x4b3b73 xbf6be7 x26eed7
 				x8eb4d8 x4bff28 x920e6c x979a52 x807fb7 x7c565a xfcd854 x5b3469 x6015f9 x8eb5e0
@@ -838,7 +838,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:CPW
+			country = c:usfp_CPW
 			provinces = {
 				x4159a8 x937cda xd68439 x926422 x7ca2cc x246ba0 xc02038 x691878 xeb9059 x0905c3
 				xacd40b x0f4e06 x299979 xf03696 x4a1d5d x13a3f7 x9b110f x35ee2b x9285c7 x8deb1f
@@ -899,7 +899,7 @@ STATES = {
 
 	s:STATE_YUKON_TERRITORY = {
 		set_owner_of_provinces = {
-			country = c:GWC
+			country = c:usfp_GWC
 			provinces = {
 				x400644 x2c272d x4f1d47 xc4080a xcb038a xaf1462 x8b29ac x2d5321 xcb16ec x096d1f
 				x2754df x1a6735 x365975 xa43b5f x6a4cd7 x47676b xff4334 xa86f61 x898427 x6286e4

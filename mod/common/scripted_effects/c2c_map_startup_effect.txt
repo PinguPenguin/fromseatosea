@@ -39,7 +39,7 @@
 	# USFP compatible BC coastal ownership
 	s:STATE_BRITISH_COLUMBIA = {
 		set_owner_of_provinces = {
-			country = c:DKL
+			country = c:usfp_DKL
 			provinces = { x064FE6 x06BB33 }
 		}
 	}
@@ -69,7 +69,7 @@
 	}
 	s:STATE_UPPER_BC = {
 		region_state:HBC = {
-			set_state_owner = c:DNZ
+			set_state_owner = c:usfp_DNZ
 		}
 	}
 	# Preserve USFP's Newfoundland colony after c2c splits Labrador away.
