@@ -1105,22 +1105,118 @@
 		}
 	}
 
-	s:STATE_BC_INTERIOR = {
+	s:STATE_LABRADOR = {
 		change_resource_potential = {
 			type = building_usfp_fur_trapper
-			amount = 1
+			amount = 3
 		}
 	}
-	s:STATE_UPPER_BC = {
+	s:STATE_QUEBEC_SAGUENAY = {
 		change_resource_potential = {
 			type = building_usfp_fur_trapper
-			amount = 1
+			amount = 3
+		}
+	}
+	s:STATE_NOUVEAU_QUEBEC = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 5
+		}
+	}
+	s:STATE_ALGOMA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 4
+		}
+	}
+	s:STATE_NORTHWEST_ONTARIO = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 5
+		}
+	}
+	s:STATE_MANITOBA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 4
 		}
 	}
 	s:STATE_KEEWATIN = {
 		change_resource_potential = {
 			type = building_usfp_fur_trapper
-			amount = 1
+			amount = 6
+		}
+	}
+	s:STATE_NORTHWEST_TERRITORIES = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 5
+		}
+	}
+	s:STATE_NUNAVUT = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_YUKON_TERRITORY = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_SASKATCHEWAN = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_NORTH_SASKATCHEWAN = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 4
+		}
+	}
+	s:STATE_ALBERTA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_EDMONTON = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 3
+		}
+	}
+	s:STATE_ATHABASCA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 6
+		}
+	}
+	s:STATE_BRITISH_COLUMBIA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_VANCOUVER_ISLAND = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_BC_INTERIOR = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 4
+		}
+	}
+	s:STATE_UPPER_BC = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 6
 		}
 	}
 

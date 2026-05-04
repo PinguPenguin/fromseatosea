@@ -3,7 +3,7 @@
     subsistence_building = "building_subsistence_fishing_village"
     provinces = { "xf01c37" "x8ed253" "xc91fd7" "x70a0ce" "x71a015" "x8e553e" "x484a09" "xde0fd5" "x20cf66" "xee2fff" "x493cd4" "x70c040" "x082153" "xd090a6" "x740012" "x62fc6a" "x4d9eee" "x5a0ca8" "x326f36" "x66dfe7" "xbb0f05" "x7040c0" }
     prime_land = { "x70c040" }
-    traits = { "state_trait_grand_banks_fisheries" }
+    traits = { "state_trait_grand_banks_fisheries" "state_trait_pei_soils" }
     city = "xee2fff"
     port = "xf01c37"
     farm = "x70c040"
