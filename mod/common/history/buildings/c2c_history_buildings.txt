@@ -1,11 +1,5 @@
 ﻿BUILDINGS = {
 
-	s:STATE_ALBERTA = {
-		region_state:HBC = {
-			remove_building = building_logging_camp
-		}
-	}
-
 	s:STATE_ALGOMA = {
 		region_state:HBC = {
 			create_building = {
@@ -119,8 +113,6 @@
 	}
 
 	s:STATE_EDMONTON = {
-		region_state:BLF = {
-		}
 		region_state:HBC = {
 			create_building = {
 				building = "building_logging_camp"
@@ -138,8 +130,6 @@
 	}
 
 	s:STATE_KEEWATIN = {
-		region_state:IRC = {
-		}
 		region_state:HBC = {
 		}
 	}
@@ -341,11 +331,31 @@
 				}
 			}
 		}
-		region_state:NVS = {
-			remove_building = building_trade_center
-			remove_building = building_fishing_wharf
-			remove_building = building_barrack
-			remove_building = building_port
+		region_state:PEI = {
+			create_building = {
+				building = "building_wheat_farm"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_wheat_farm"
+						country = "c:PEI"
+						levels = 1
+						region = "STATE_NEW_BRUNSWICK"
+					}
+				}
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_livestock_ranch"
+						country = "c:PEI"
+						levels = 1
+						region = "STATE_NEW_BRUNSWICK"
+					}
+				}
+			}
 		}
 	}
 
@@ -458,13 +468,13 @@
 	}
 
 	s:STATE_NORTHWEST_TERRITORIES = {
-		region_state:HBC = {
+		region_state:usfp_INV = {
 			create_building = {
 				building = "building_logging_camp"
 				reserves = 1
 				add_ownership = {
 					country = {
-						country = "c:HBC"
+						country = "c:usfp_INV"
 						levels = 1
 					}
 				}
@@ -606,9 +616,6 @@
 	}
 
 	s:STATE_ONTARIO = {
-		region_state:HBC = {
-			remove_building = building_logging_camp
-		}
 		region_state:ONT = {
 			remove_building = building_wheat_farm
 			create_building = {
@@ -925,7 +932,6 @@
 				}
 			}
 			remove_building = building_shipyard
-			remove_building = building_military_shipyard
 			remove_building = building_port
 		}
 	}
@@ -945,18 +951,6 @@
 			}
 			create_building = {
 				building = "building_shipyard"
-				reserves = 1
-				add_ownership = {
-					building = {
-						type = "building_financial_district"
-						country = "c:QUE"
-						levels = 1
-						region = "STATE_QUEBEC"
-					}
-				}
-			}
-			create_building = {
-				building = "building_military_shipyard"
 				reserves = 1
 				add_ownership = {
 					building = {
@@ -1111,8 +1105,118 @@
 		}
 	}
 
+	s:STATE_LABRADOR = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 3
+		}
+	}
+	s:STATE_QUEBEC_SAGUENAY = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 3
+		}
+	}
+	s:STATE_NOUVEAU_QUEBEC = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 5
+		}
+	}
+	s:STATE_ALGOMA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 4
+		}
+	}
+	s:STATE_NORTHWEST_ONTARIO = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 5
+		}
+	}
+	s:STATE_MANITOBA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 4
+		}
+	}
+	s:STATE_KEEWATIN = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 6
+		}
+	}
+	s:STATE_NORTHWEST_TERRITORIES = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 5
+		}
+	}
+	s:STATE_NUNAVUT = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_YUKON_TERRITORY = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_SASKATCHEWAN = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_NORTH_SASKATCHEWAN = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 4
+		}
+	}
+	s:STATE_ALBERTA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_EDMONTON = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 3
+		}
+	}
+	s:STATE_ATHABASCA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 6
+		}
+	}
+	s:STATE_BRITISH_COLUMBIA = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
 	s:STATE_VANCOUVER_ISLAND = {
-		region_state:ORG = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 2
+		}
+	}
+	s:STATE_BC_INTERIOR = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 4
+		}
+	}
+	s:STATE_UPPER_BC = {
+		change_resource_potential = {
+			type = building_usfp_fur_trapper
+			amount = 6
 		}
 	}
 

@@ -1,0 +1,10 @@
+﻿CHARACTERS = {
+	c:PEI ?= {
+		create_character = {
+			template = PEI_george_wright
+			on_created = {
+				set_variable = { name = colonial_governor_term value = 1 }
+			}
+		}
+	}
+}

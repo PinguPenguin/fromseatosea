@@ -1,1 +1,30 @@
-#* binary
+# Default text behavior: keep text files LF in the working tree.
+* text=auto eol=lf
+
+# Victoria 3 / Clausewitz text files.
+*.txt   text eol=lf
+*.yml   text eol=lf
+*.json  text eol=lf
+*.gui   text eol=lf
+*.gfx   text eol=lf
+*.asset text eol=lf
+*.csv   text eol=lf
+*.mod   text eol=lf
+
+# Project text files.
+*.md    text eol=lf
+*.py    text eol=lf
+*.sh    text eol=lf
+*.kml   text eol=lf
+*.keep  text eol=lf
+
+# Windows helper scripts.
+*.bat   text eol=crlf
+
+# Binary/game assets.
+*.png    binary
+*.dds    binary
+*.xcf    binary
+*.kmz    binary
+*.splnet binary
+*.zip    binary

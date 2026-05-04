@@ -1,0 +1,12 @@
+﻿1. Most Canadian colonies in 1836 would have used the Union Jack, not their in-game flags.
+    This comes from vanilla and is kept for gameplay. The existing colonial flags are not historical 1836 flags; most are PDX's placeholders, and PEI's is from c2c.
+
+2. Several state and country names are anachronistically modern (i.e. Quebec, Ontario, etc.) - This is so you can actually read the map, lol
+
+3. Some hubs are past the timeframe of Vic3 (Happy Valley, Matagami, Thompson, etc.).
+    These are an abstraction, since we need a single "point" to model resource extraction (like mining in N Manitoba). None of these are too egregious; if you insist, you can headcanon it as your excellent stewardship of Canada making it surpass real life timelines. :)
+    Other hubs that were founded later can also be found (i.e. Calgary), but aren't as bad.
+
+4. Many port hubs aren't where the actual largest port is (Halifax/Sydney, Vancouver/New Westminster, etc.)
+    I would love to make St. John's a thriving city-port, but unfortunately, the engine only allows me to set one hub per type.
+    This current situation is me compromising, since Vancouver being a major city is more important than it being a port, I would say.

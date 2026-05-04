@@ -1,0 +1,10 @@
+﻿REPLACE_OR_CREATE:PEI = {
+	color = { 199 62 72 }
+
+	country_type = colonial
+
+	tier = principality
+
+	cultures = { anglo_canadian }
+	capital = STATE_NEW_BRUNSWICK
+}

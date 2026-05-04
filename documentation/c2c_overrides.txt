@@ -1,7 +1,7 @@
-Compared against Victoria 3 vanilla at:
+﻿Compared against Victoria 3 vanilla at:
 C:\Program Files (x86)\Steam\steamapps\common\Victoria 3\game
 
-Supported mod version target in metadata: 1.12.*
+Supported mod version target in metadata: 1.13.*
 
 Only confirmed vanilla collisions are listed below. Purely new files and purely new
 definitions are omitted.
@@ -47,6 +47,9 @@ map_data/provinces.png
 
 Vanilla definitions overridden from uniquely named files
 
+common/country_creation/c2c_releasable_countries.txt
+NBS
+
 common/history/states/c2c_history_states_override.txt
 STATE_ALBERTA
 STATE_BRITISH_COLUMBIA
@@ -69,7 +72,7 @@ STATE_NORTHWEST_TERRITORIES
 STATE_ONTARIO
 STATE_QUEBEC
 
-common/history/pops/c2c_history_pops.txt
+common/history/pops/zz_c2c_history_pops.txt
 STATE_ALBERTA
 STATE_BRITISH_COLUMBIA
 STATE_MANITOBA
@@ -115,19 +118,19 @@ STATE_SASKATCHEWAN
 map_data/state_regions/05_STATE_YUKON_TERRITORY.txt
 STATE_YUKON_TERRITORY
 
-map_data/state_regions/99_STATE_HUDSON_BAY.txt
-STATE_HUDSON_BAY # overrides the vanilla sea region entry from map_data/state_regions/99_seas.txt
 
 Vanilla definitions extended or injected rather than directly overwritten
 
 common/on_actions/c2c_on_actions.txt
 on_game_started # appends startup ownership cleanup for the split Canadian states
 
+common/scripted_effects/c2c_map_startup_effect.txt
+INJECT:c2c_map_startup_effect # startup ownership cleanup for split Canadian states
+
 common/strategic_regions/zz_c2c_strategic_regions.txt
 INJECT:region_canada
-INJECT:region_new_england
+INJECT:region_atlantic_coast
 INJECT:region_pacific_coast
-INJECT:region_great_plains
 
 Confirmed vanilla localization key replacements
 

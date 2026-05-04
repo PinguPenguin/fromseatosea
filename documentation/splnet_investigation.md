@@ -27,7 +27,7 @@ The body then breaks into three record tables:
 3. Metadata table
    Contains a spline-linked ID plus two additional integer fields. The exact semantics are still unclear, but the records can still be preserved and merged by raw chunk.
 
-`script/analyze_splnet.py` now parses these tables well enough to summarize and diff `.splnet` files.
+`script/analysis/analyze_splnet.py` now parses these tables well enough to summarize and diff `.splnet` files.
 
 ## What changed in this mod vs vanilla
 
@@ -96,11 +96,11 @@ Your current Canada changes are already close to this pattern, which is why a me
 Summary:
 
 ```powershell
-python script/analyze_splnet.py summary mod/gfx/map/spline_network/spline_network.splnet
+python script/analysis/analyze_splnet.py summary mod/gfx/map/spline_network/spline_network.splnet
 ```
 
 Diff against vanilla:
 
 ```powershell
-python script/analyze_splnet.py diff "C:/Program Files (x86)/Steam/steamapps/common/Victoria 3/game/gfx/map/spline_network/spline_network.splnet" mod/gfx/map/spline_network/spline_network.splnet
+python script/analysis/analyze_splnet.py diff "C:/Program Files (x86)/Steam/steamapps/common/Victoria 3/game/gfx/map/spline_network/spline_network.splnet" mod/gfx/map/spline_network/spline_network.splnet
 ```

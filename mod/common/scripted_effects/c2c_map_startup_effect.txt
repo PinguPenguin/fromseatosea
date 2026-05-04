@@ -1,0 +1,91 @@
+﻿c2c_map_startup_effect = {
+	set_global_variable = {
+		name = c2c_is_loaded
+		value = yes
+	}
+	s:STATE_ONTARIO = {
+		set_owner_of_provinces = {
+			country = c:ONT
+			provinces = {
+				xE6C706
+			}
+		}
+	}
+	s:STATE_BRITISH_COLUMBIA = {
+		set_owner_of_provinces = {
+			country = c:ORG
+			provinces = {
+				x064FE6 x06BB33
+			}
+		}
+	}
+	s:STATE_NEW_BRUNSWICK = {
+		region_state:NVS = {
+			set_state_owner = c:NBS
+		}
+		set_owner_of_provinces = {
+			country = c:PEI
+			provinces = {
+				x70C040
+			}
+		}
+		set_owner_of_provinces = {
+			country = c:NBS
+			provinces = {
+				x082153
+			}
+		}
+	}
+	# USFP compatible BC coastal ownership
+	s:STATE_BRITISH_COLUMBIA = {
+		set_owner_of_provinces = {
+			country = c:usfp_DKL
+			provinces = { x064FE6 x06BB33 }
+		}
+	}
+	# Final split state owner cleanup
+	s:STATE_ALBERTA = {
+		region_state:HBC = {
+			set_state_owner = c:BLF
+		}
+	}
+	s:STATE_SASKATCHEWAN = {
+		region_state:HBC = {
+			set_state_owner = c:IRC
+		}
+	}
+	s:STATE_ONTARIO = {
+		region_state:HBC = {
+			set_state_owner = c:ONT
+		}
+	}
+	s:STATE_BRITISH_COLUMBIA = {
+		region_state:HBC = {
+			set_state_owner = c:ORG
+		}
+		region_state:ATB = {
+			set_state_owner = c:ORG
+		}
+	}
+	s:STATE_UPPER_BC = {
+		region_state:HBC = {
+			set_state_owner = c:usfp_DNZ
+		}
+	}
+	# Preserve USFP's Newfoundland colony after c2c splits Labrador away.
+	if = {
+		limit = {
+			exists = c:NEW
+		}
+		s:STATE_NEWFOUNDLAND = {
+			every_scope_state = {
+				set_state_owner = c:NEW
+			}
+		}
+		s:STATE_LABRADOR = {
+			every_scope_state = {
+				set_state_owner = c:NEW
+			}
+		}
+	}
+}
