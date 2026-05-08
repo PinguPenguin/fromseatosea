@@ -8,3 +8,14 @@
 	cultures = { anglo_canadian }
 	capital = STATE_NEW_BRUNSWICK
 }
+
+REPLACE_OR_CREATE:NVS = {
+	color = { 148 205 135 }
+
+	country_type = colonial
+
+	tier = principality
+
+	cultures = { anglo_canadian }
+	capital = STATE_NOVA_SCOTIA
+}

@@ -47,6 +47,9 @@ map_data/provinces.png
 
 Vanilla definitions overridden from uniquely named files
 
+common/country_definitions/c2c_countries.txt
+NVS
+
 common/country_creation/c2c_releasable_countries.txt
 NBS
 
@@ -126,6 +129,14 @@ on_game_started # appends startup ownership cleanup for the split Canadian state
 
 common/scripted_effects/c2c_map_startup_effect.txt
 INJECT:c2c_map_startup_effect # startup ownership cleanup for split Canadian states
+
+common/geographic_regions/zz_c2c_usfp_geographic_regions.txt
+INJECT:geographic_region_american_bison_range
+INJECT:geographic_region_greater_canada
+INJECT:geographic_region_canada_old
+INJECT:geographic_region_new_england_old
+INJECT:geographic_region_pacific_coast_old
+INJECT:geographic_region_great_plains_old
 
 common/strategic_regions/zz_c2c_strategic_regions.txt
 INJECT:region_canada

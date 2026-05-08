@@ -4,3 +4,47 @@
 		STATE_EDMONTON
 	}
 }
+
+INJECT:geographic_region_greater_canada = {
+	state_regions = {
+		STATE_BC_INTERIOR
+		STATE_UPPER_BC
+		STATE_VANCOUVER_ISLAND
+		STATE_NOVA_SCOTIA
+	}
+}
+
+INJECT:geographic_region_canada_old = {
+	state_regions = {
+		STATE_LABRADOR
+		STATE_QUEBEC_SAGUENAY
+		STATE_SAINT_LAURENT
+		STATE_NOUVEAU_QUEBEC
+		STATE_ONTARIO_PENINSULA
+		STATE_ALGOMA
+		STATE_NORTHWEST_ONTARIO
+		STATE_KEEWATIN
+		STATE_NORTH_SASKATCHEWAN
+		STATE_ATHABASCA
+	}
+}
+
+INJECT:geographic_region_new_england_old = {
+	state_regions = {
+		STATE_NOVA_SCOTIA
+	}
+}
+
+INJECT:geographic_region_pacific_coast_old = {
+	state_regions = {
+		STATE_BC_INTERIOR
+		STATE_UPPER_BC
+		STATE_VANCOUVER_ISLAND
+	}
+}
+
+INJECT:geographic_region_great_plains_old = {
+	state_regions = {
+		STATE_EDMONTON
+	}
+}
