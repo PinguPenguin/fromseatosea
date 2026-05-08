@@ -10,7 +10,9 @@
 		is_at_war = no
 		has_technology_researched = nationalism
 		NOT = { has_modifier = canada_test_modifier }
-		NOT = { c:NEW = THIS }
+		hidden_trigger = {
+			NOT = { c:NEW = THIS }
+		}
 		trigger_if = {
 			limit = {
 				capital = {
@@ -31,7 +33,9 @@
 						}
 						is_subject = yes
 						NOT = { THIS = ROOT }
-						NOT = { c:NEW = THIS }
+						hidden_trigger = {
+							NOT = { c:NEW = THIS }
+						}
 						top_overlord = {
 							THIS = root.top_overlord
 						}
@@ -49,7 +53,9 @@
 					}
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
-					NOT = { c:NEW = THIS }
+					hidden_trigger = {
+						NOT = { c:NEW = THIS }
+					}
 					count >= 2
 				}
 			}
