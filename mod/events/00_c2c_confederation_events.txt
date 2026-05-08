@@ -1,5 +1,165 @@
 ﻿namespace = can_aus
 
+# Canadian colony absorbs a poorer neighbor
+can_aus.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.1.t
+	desc = can_aus.1.d
+	flavor = can_aus.1.f
+
+	event_image = {
+		video = "ep1_transfer_of_authority"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+		NOT = { c:NEW = THIS }
+	}
+
+	immediate = {
+		random_neighbouring_state = {
+			limit = {
+				owner = {
+					is_ai = yes
+					relations:root >= relations_threshold:amicable
+					capital = {
+						is_in_geographic_region = geographic_region_greater_canada
+					}
+					is_subject = yes
+					NOT = { THIS = ROOT }
+					NOT = { c:NEW = THIS }
+					top_overlord = {
+						THIS = root.top_overlord
+					}
+					this.gdp < root.gdp
+				}
+			}
+			owner = { save_scope_as = canada_annex_scope }
+		}
+		top_overlord = {
+			save_scope_as = canada_overlord_country
+			ruler = {
+				save_scope_as = canada_overlord_ruler
+			}
+		}
+	}
+
+	option = {
+		name = can_aus.1.a
+		default_option = yes
+		hidden_effect = {
+			every_state_in_canada = {
+				limit = {
+					has_claim_by = scope:canada_annex_scope
+				}
+				state_region = {
+					remove_claim = scope:canada_annex_scope
+					add_claim = ROOT
+				}
+			}
+		}
+		annex_with_incorporation = scope:canada_annex_scope
+	}
+}
+
+# Britain mashes 2 Canadians together
+can_aus.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = can_aus.2.t
+	desc = can_aus.2.d
+	flavor = can_aus.1.f
+
+	event_image = {
+		video = "ep1_power_blocs"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	trigger = {
+	}
+
+	immediate = {
+		random_subject_or_below = {
+			limit = {
+				capital = {
+					is_in_geographic_region = geographic_region_greater_canada
+				}
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+				NOT = { c:NEW = THIS }
+			}
+			save_scope_as = canada_scope_1
+		}
+		random_subject_or_below = {
+			limit = {
+				capital = {
+					is_in_geographic_region = geographic_region_greater_canada
+				}
+				relations:root >= relations_threshold:amicable
+				is_ai = yes
+				NOT = { c:NEW = THIS }
+				NOT = {
+					scope:canada_scope_1 = THIS
+				}
+			}
+			save_scope_as = canada_scope_2
+		}
+	}
+
+	option = {
+		name = can_aus.2.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+			}
+			hidden_effect = {
+				every_state_in_canada = {
+					limit = {
+						has_claim_by = scope:canada_scope_2
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_2
+						add_claim = scope:canada_scope_1
+					}
+				}
+			}
+			scope:canada_scope_1 = {
+				annex_with_incorporation = scope:canada_scope_2
+			}
+		}
+		else = {
+			hidden_effect = {
+				every_state_in_canada = {
+					limit = {
+						has_claim_by = scope:canada_scope_1
+					}
+					state_region = {
+						remove_claim = scope:canada_scope_1
+						add_claim = scope:canada_scope_2
+					}
+				}
+			}
+			scope:canada_scope_2 = {
+				annex_with_incorporation = scope:canada_scope_1
+			}
+		}
+	}
+}
+
 can_aus.6 = {
 	type = country_event
 	placement = ROOT

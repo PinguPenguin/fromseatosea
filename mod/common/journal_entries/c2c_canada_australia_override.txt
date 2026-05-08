@@ -4,6 +4,7 @@
 	group = je_group_historical_content
 
 	is_shown_when_inactive = {
+		NOT = { c:NEW = THIS }
 		OR = {
 			country_has_primary_culture = cu:anglo_canadian
 			country_has_primary_culture = cu:franco_canadian
@@ -12,6 +13,7 @@
 	}
 
 	is_shown_in_lobby = {
+		NOT = { c:NEW = THIS }
 		OR = {
 			country_has_primary_culture = cu:anglo_canadian
 			country_has_primary_culture = cu:franco_canadian
@@ -20,6 +22,7 @@
 
 	possible = {
 		has_technology_researched = nationalism
+		NOT = { c:NEW = THIS }
 	}
 
 	scripted_button = je_canada_unite_can_button
@@ -66,7 +69,10 @@
 	}
 
 	invalid = {
-		is_subject = no
+		OR = {
+			is_subject = no
+			c:NEW = THIS
+		}
 	}
 
 	weight = 100
@@ -81,6 +87,7 @@ REPLACE:je_canada_gbr = {
 
 	is_shown_in_lobby = {
 		any_subject_or_below = {
+			NOT = { c:NEW = THIS }
 			OR = {
 				country_has_primary_culture = cu:anglo_canadian
 				country_has_primary_culture = cu:franco_canadian
@@ -97,6 +104,7 @@ REPLACE:je_canada_gbr = {
 
 	is_shown_when_inactive = {
 		any_subject_or_below = {
+			NOT = { c:NEW = THIS }
 			OR = {
 				country_has_primary_culture = cu:anglo_canadian
 				country_has_primary_culture = cu:franco_canadian

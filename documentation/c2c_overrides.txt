@@ -53,6 +53,9 @@ NVS
 common/country_creation/c2c_releasable_countries.txt
 NBS
 
+common/scripted_buttons/zz_c2c_canada_australia_buttons.txt
+je_canada_unite_can_button
+
 common/history/states/c2c_history_states_override.txt
 STATE_ALBERTA
 STATE_BRITISH_COLUMBIA
