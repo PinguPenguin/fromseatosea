@@ -1,0 +1,69 @@
+﻿# Imperial Oil
+company_c2c_imperial_oil = {
+	icon = "gfx/interface/icons/company_icons/historical_company_icons/c2c_imperial_oil.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_oil_drills.dds"
+
+	flavored_company = yes
+
+	preferred_headquarters = { STATE_ONTARIO_PENINSULA }
+
+	building_types = {
+		building_oil_rig
+	}
+
+	extension_building_types = {
+		building_chemical_plant
+	}
+
+	potential = {
+		has_interest_marker_in_region = sr:region_canada
+	}
+
+	attainable = {
+		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
+			s:STATE_ONTARIO_PENINSULA = {
+				any_scope_state = {
+					owner = root
+				}
+			}
+		}
+	}
+
+	possible = {
+		has_technology_researched = pumpjacks
+		any_scope_state = {
+			state_region = s:STATE_ONTARIO_PENINSULA
+			is_incorporated = yes
+			any_scope_building = {
+				is_building_type = building_oil_rig
+				level >= 5
+			}
+		}
+	}
+
+	prosperity_modifier = {
+		building_group_bg_oil_extraction_throughput_add = 0.1
+	}
+
+	ai_will_do = {
+		has_technology_researched = pumpjacks
+		any_scope_state = {
+			state_region = s:STATE_ONTARIO_PENINSULA
+			is_incorporated = yes
+		}
+	}
+
+	ai_construction_targets = {
+		building_oil_rig = {
+			level = 5
+			state_trigger = {
+				state_region = s:STATE_ONTARIO_PENINSULA
+				is_incorporated = yes
+			}
+		}
+	}
+
+	ai_weight = {
+		value = 3 # Higher base value for flavored companies
+	}
+}

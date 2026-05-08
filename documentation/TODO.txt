@@ -1,21 +1,13 @@
 ----Immediate (bugfixes)----
-- Fix NWT not being able to be colonized
-- Add coastal fjords to BC
 
 ----Short-term----
--Complete state modding framework
-    - Make new states (COMPLETE)
-    - Make splines/hubs/ports (COMPLETE)
-    - Loc for new cities (COMPLETE)
 
-----Mid-term (MUST BE COMPLETED FOR FIRST RELEASE)----
--Investigate adding Hudson's Bay Sea Node/ports (COMPLETE)
--Add state populations/resources/buildings (COMPLETE)
--Fix existing JEs/events to work with new states
+
+----Mid-term----
 
 
 ----Long-term----
--Add state modifiers
+-Add state modifiers (partially complete)
 -Implement new companies
     -Canadian Pacific (Railways, ports, shipyards, trade centres)
         - Canada Steamship lines(?) 
