@@ -20,9 +20,8 @@
     -Canada Packers (Food, Meat)
     -Dominion Textile (Clothing, synthetics?, cotton?)
     -Imperial Oil (Oil)
+    -Davie Shipbuilding
 -Tweak Canada-Britain subject relationship (remove financial tax)
-
--Create new indgenous decentralized tags, improve nation-building (tied to conf)
 
 -Add flavour JEs
     -Confederation
