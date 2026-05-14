@@ -1,0 +1,64 @@
+﻿namespace = usfp_a_house_divided
+
+usfp_a_house_divided.21 = {
+	type = country_event
+	placement = scope:underground_railroad_state
+
+	title = usfp_a_house_divided.21.t
+	desc = usfp_a_house_divided.21.d
+	flavor = usfp_a_house_divided.21.f
+	dlc = dlc_usfp
+	event_image = {
+		video = "southamerica_slaves_night"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/invention_icons/railways.dds"
+
+	duration = 3
+
+	immediate = {
+		c:USA = {
+			save_scope_as = usa_scope
+		}
+		random_scope_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_RIO_GRANDE
+					state_region = s:STATE_ONTARIO
+					state_region = s:STATE_ONTARIO_PENINSULA
+					state_region = s:STATE_QUEBEC
+					state_region = s:STATE_SAINT_LAURENT
+					state_region = s:STATE_NEW_BRUNSWICK
+					state_region = s:STATE_NOVA_SCOTIA
+					is_in_geographic_region = geographic_region_caribbean_old
+				}
+			}
+			save_scope_as = underground_railroad_state
+		}
+	}
+
+	option = {
+		name = usfp_a_house_divided.21.a
+		default_option = yes
+		if = {
+			limit = {
+				any_scope_state = {
+					OR = {
+						is_in_geographic_region = geographic_region_caribbean_old
+						is_in_geographic_region = geographic_region_mexico_old
+					}
+				}
+			}
+			custom_tooltip = {
+				text = usfp_a_house_divided.21.a.tt2
+			}
+		} else = {
+			custom_tooltip = {
+				text = usfp_a_house_divided.21.a.tt
+			}
+		}
+
+	}
+}

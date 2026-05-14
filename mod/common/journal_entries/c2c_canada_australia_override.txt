@@ -55,6 +55,9 @@
 
 	on_complete = {
 		trigger_event = { id = can_aus.5 }
+		change_tag = CAN
+		add_primary_culture = cu:anglo_canadian
+		add_primary_culture = cu:franco_canadian
 		hidden_effect = {
 			if = {
 				limit = {

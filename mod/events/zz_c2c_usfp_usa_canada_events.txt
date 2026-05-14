@@ -1,0 +1,229 @@
+﻿namespace = usfp_usa_canada
+
+usfp_usa_canada.1 = {
+	type = country_event
+	placement = scope:ontario_scope
+	event_image = {
+		video = "votp_gunboat_diplomacy"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	title = usfp_usa_canada.1.t
+	desc = usfp_usa_canada.1.d
+	flavor = usfp_usa_canada.1.f
+	dlc = dlc_usfp
+	duration = 3
+	cooldown = { days = never_fire_again_modifier_time }
+	trigger = {
+		has_state_in_state_region = STATE_ONTARIO_PENINSULA
+		overlord = c:GBR
+		any_neighbouring_state = {
+			owner = c:USA
+		}
+		any_political_movement = {
+			OR = {
+				is_political_movement_type = movement_radical
+				is_political_movement_type = movement_liberal
+			}
+			political_movement_radicalism > 0.50
+		}
+		is_at_war = no
+		c:USA = {
+			is_at_war = no
+		}
+		game_date > 1837.10.1
+		NOT = {
+			has_global_variable = caroline_affair_happened
+		}
+	}
+
+	immediate = {
+		set_global_variable = caroline_affair_happened
+		random_scope_state = {
+			limit = {
+				state_region = s:STATE_ONTARIO_PENINSULA
+			}
+			save_scope_as = ontario_scope
+		}
+		random_political_movement = {
+			limit = {
+				OR = {
+					is_political_movement_type = movement_radical
+					is_political_movement_type = movement_liberal
+				}
+				political_movement_radicalism > 0.50
+			}
+			save_scope_as = radical_movement
+		}
+		save_scope_as = canadian_country_scope
+		c:GBR = {
+			save_scope_as = britain_scope
+		}
+		c:USA = {
+			save_scope_as = usa_scope
+		}
+		s:STATE_NEW_YORK.region_state:USA = {
+			save_scope_as = new_york_scope
+		}
+	}
+
+	option = {
+		name = usfp_usa_canada.1.a
+		default_option = yes
+		add_liberty_desire = -10
+		custom_tooltip = {
+			text = caroline_will_be_intercepted
+		}
+		c:USA = {
+			trigger_event = {
+				id = usfp_usa_canada.2
+				days = 14
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = usfp_usa_canada.1.b
+		add_liberty_desire = 10
+		scope:ontario_scope = {
+			add_radicals_in_state = {
+				value = medium_radicals
+			}
+		}
+		scope:radical_movement = {
+			add_modifier = {
+				name = usfp_cross_border_smugglers_modifier
+				years = 5
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+usfp_usa_canada.4 = {
+	type = country_event
+	placement = scope:ontario_scope
+	event_image = {
+		video = "ep1_redcoats"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	title = usfp_usa_canada.4.t
+	desc = usfp_usa_canada.4.d
+	flavor = usfp_usa_canada.4.f
+	dlc = dlc_usfp
+	duration = 3
+
+	trigger = {
+		exists = c:USA
+		exists = c:GBR
+		NOT = {
+			exists = c:IRE
+		}
+		has_state_in_state_region = STATE_ONTARIO_PENINSULA
+		overlord = c:GBR
+		c:USA = {
+			has_state_in_state_region = STATE_NEW_YORK
+			OR = {
+				has_technology_researched = enlistment_offices
+				has_technology_researched = pan-nationalism
+			}
+		}
+		s:STATE_NEW_YORK.region_state:USA = {
+			culture_percent_state = {
+				target = cu:irish
+				value > 0
+			}
+		}
+		c:GBR = {
+			any_political_movement = {
+				culture ?= cu:irish
+			}
+		}
+		NOT = {
+			has_global_variable = fenian_raids
+		}
+	}
+
+	immediate = {
+		set_global_variable = fenian_raids
+		random_scope_state = {
+			limit = {
+				state_region = s:STATE_ONTARIO_PENINSULA
+			}
+			save_scope_as = ontario_scope
+		}
+		c:GBR = {
+			random_political_movement = {
+				limit = {
+					culture ?= cu:irish
+				}
+				save_scope_as = irish_movement
+			}
+		}
+		save_scope_as = canadian_country_scope
+		c:GBR = {
+			save_scope_as = britain_scope
+		}
+		c:USA = {
+			save_scope_as = usa_scope
+		}
+		s:STATE_NEW_YORK.region_state:USA = {
+			save_scope_as = fenian_state
+		}
+	}
+
+	option = {
+		name = usfp_usa_canada.4.a
+		default_option = yes
+		custom_tooltip = fenians_defeated
+		every_country = {
+			limit = {
+				country_has_primary_culture = cu:anglo_canadian
+				NOT = {
+					this = root
+				}
+			}
+			change_relations = {
+				country = root
+				value = 20
+			}
+		}
+		scope:ontario_scope = {
+			add_modifier = {
+				name = usfp_canadian_volunteers_modifier
+				years = 10
+			}
+			add_loyalists_in_state = {
+				value = large_radicals
+				culture = cu:irish
+				religion = rel:protestant
+			}
+			add_radicals_in_state = {
+				value = large_radicals
+				culture = cu:irish
+				religion = rel:catholic
+			}
+		}
+		c:USA = {
+			trigger_event = {
+				id = usfp_usa_canada.5
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}

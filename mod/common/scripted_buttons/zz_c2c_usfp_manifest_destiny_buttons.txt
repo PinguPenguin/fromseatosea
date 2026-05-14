@@ -1,0 +1,274 @@
+﻿REPLACE:usfp_claim_canada_button = {
+	name = "usfp_claim_canada_button"
+	desc = "usfp_claim_canada_button_desc"
+
+	visible = {
+		OR = {
+			usfp_manifest_destiny_greater_or_equal_trigger = { value = 9 }
+			AND = {
+				usfp_manifest_destiny_greater_or_equal_trigger = { value = 8 }
+				has_state_in_state_region = STATE_GREENLAND
+			}
+		}
+		NAND = {
+			has_state_in_state_region = STATE_YUKON_TERRITORY
+			has_state_in_state_region = STATE_BRITISH_COLUMBIA
+			has_state_in_state_region = STATE_BC_INTERIOR
+			has_state_in_state_region = STATE_UPPER_BC
+			has_state_in_state_region = STATE_VANCOUVER_ISLAND
+			has_state_in_state_region = STATE_ALBERTA
+			has_state_in_state_region = STATE_EDMONTON
+			has_state_in_state_region = STATE_ATHABASCA
+			has_state_in_state_region = STATE_SASKATCHEWAN
+			has_state_in_state_region = STATE_NORTH_SASKATCHEWAN
+			has_state_in_state_region = STATE_MANITOBA
+			has_state_in_state_region = STATE_NORTHWEST_TERRITORIES
+			has_state_in_state_region = STATE_NUNAVUT
+			has_state_in_state_region = STATE_KEEWATIN
+			has_state_in_state_region = STATE_ONTARIO
+			has_state_in_state_region = STATE_ONTARIO_PENINSULA
+			has_state_in_state_region = STATE_ALGOMA
+			has_state_in_state_region = STATE_NORTHWEST_ONTARIO
+			has_state_in_state_region = STATE_QUEBEC
+			has_state_in_state_region = STATE_SAINT_LAURENT
+			has_state_in_state_region = STATE_QUEBEC_SAGUENAY
+			has_state_in_state_region = STATE_NOUVEAU_QUEBEC
+			has_state_in_state_region = STATE_NEW_BRUNSWICK
+			has_state_in_state_region = STATE_NOVA_SCOTIA
+			has_state_in_state_region = STATE_NEWFOUNDLAND
+			has_state_in_state_region = STATE_LABRADOR
+		}
+		NOT = {
+			c:CAN ?= {
+				is_subject_of = root
+			}
+		}
+		NOT = {
+			has_variable = claimed_canada
+		}
+	}
+
+	possible = {
+		OR = {
+			usfp_manifest_destiny_greater_or_equal_trigger = { value = 10 }
+			AND = {
+				usfp_manifest_destiny_greater_or_equal_trigger = { value = 9 }
+				has_state_in_state_region = STATE_GREENLAND
+			}
+		}
+		ruler = {
+			usfp_manifest_destiny_pro_expansion_trigger = yes
+		}
+		OR = {
+			c:GBR ?= {
+				any_subject_or_below = {
+					is_in_geographic_region = geographic_region_north_america
+				}
+				relations:root <= relations_threshold:poor
+			}
+			c:CAN ?= {
+				is_subject = no
+				relations:root <= relations_threshold:poor
+			}
+		}
+		is_diplomatic_play_committed_participant = no
+		is_at_war = no
+	}
+
+	effect = {
+		set_variable = claimed_canada
+		s:STATE_YUKON_TERRITORY = {
+			add_claim = root
+		}
+		s:STATE_BRITISH_COLUMBIA = {
+			add_claim = root
+		}
+		s:STATE_BC_INTERIOR = {
+			add_claim = root
+		}
+		s:STATE_UPPER_BC = {
+			add_claim = root
+		}
+		s:STATE_VANCOUVER_ISLAND = {
+			add_claim = root
+		}
+		s:STATE_ALBERTA = {
+			add_claim = root
+		}
+		s:STATE_EDMONTON = {
+			add_claim = root
+		}
+		s:STATE_ATHABASCA = {
+			add_claim = root
+		}
+		s:STATE_SASKATCHEWAN = {
+			add_claim = root
+		}
+		s:STATE_NORTH_SASKATCHEWAN = {
+			add_claim = root
+		}
+		s:STATE_MANITOBA = {
+			add_claim = root
+		}
+		s:STATE_NORTHWEST_TERRITORIES = {
+			add_claim = root
+		}
+		s:STATE_NUNAVUT = {
+			add_claim = root
+		}
+		s:STATE_KEEWATIN = {
+			add_claim = root
+		}
+		s:STATE_ONTARIO = {
+			add_claim = root
+		}
+		s:STATE_ONTARIO_PENINSULA = {
+			add_claim = root
+		}
+		s:STATE_ALGOMA = {
+			add_claim = root
+		}
+		s:STATE_NORTHWEST_ONTARIO = {
+			add_claim = root
+		}
+		s:STATE_QUEBEC = {
+			add_claim = root
+		}
+		s:STATE_SAINT_LAURENT = {
+			add_claim = root
+		}
+		s:STATE_QUEBEC_SAGUENAY = {
+			add_claim = root
+		}
+		s:STATE_NOUVEAU_QUEBEC = {
+			add_claim = root
+		}
+		s:STATE_NEW_BRUNSWICK = {
+			add_claim = root
+		}
+		s:STATE_NOVA_SCOTIA = {
+			add_claim = root
+		}
+		s:STATE_NEWFOUNDLAND = {
+			add_claim = root
+		}
+		s:STATE_LABRADOR = {
+			add_claim = root
+		}
+		s:STATE_ONTARIO = {
+			random_scope_state = {
+				limit = {
+					owner = {
+						NOT = {
+							is_country_type = decentralized
+						}
+					}
+				}
+				root = {
+					if = {
+						limit = {
+							has_state_in_state_region = STATE_GREENLAND
+						}
+						create_incident = {
+							country = prev.owner
+							value = 10
+						}
+					} else = {
+						create_incident = {
+							country = prev.owner
+							value = 20
+						}
+					}
+				}
+			}
+		}
+	}
+	ai_chance = {
+		value = 5
+		if = {
+			limit =  {
+				ruler = {
+					usfp_manifest_destiny_pro_expansion_trigger = yes
+				}
+			}
+			add = 100
+		}
+	}
+}
+
+REPLACE:usfp_demand_bc_button = {
+	name = "usfp_demand_bc_button"
+	desc = "usfp_demand_bc_button_desc"
+
+	visible = {
+		exists = c:GBR
+		NAND = {
+			has_claim = s:STATE_BRITISH_COLUMBIA
+			has_claim = s:STATE_BC_INTERIOR
+			has_claim = s:STATE_UPPER_BC
+			has_claim = s:STATE_VANCOUVER_ISLAND
+		}
+		OR = {
+			s:STATE_BRITISH_COLUMBIA = {
+				any_scope_state = {
+					owner = {
+						NOT = { is_country_type = decentralized }
+						OR = {
+							is_subject_of = c:GBR
+							c:GBR = this
+						}
+					}
+				}
+			}
+			s:STATE_BC_INTERIOR = {
+				any_scope_state = {
+					owner = {
+						NOT = { is_country_type = decentralized }
+						OR = {
+							is_subject_of = c:GBR
+							c:GBR = this
+						}
+					}
+				}
+			}
+			s:STATE_UPPER_BC = {
+				any_scope_state = {
+					owner = {
+						NOT = { is_country_type = decentralized }
+						OR = {
+							is_subject_of = c:GBR
+							c:GBR = this
+						}
+					}
+				}
+			}
+			s:STATE_VANCOUVER_ISLAND = {
+				any_scope_state = {
+					owner = {
+						NOT = { is_country_type = decentralized }
+						OR = {
+							is_subject_of = c:GBR
+							c:GBR = this
+						}
+					}
+				}
+			}
+		}
+		has_variable = manifest_destiny_var
+	}
+
+	possible = {
+		usfp_manifest_destiny_greater_or_equal_trigger = { value = 6 }
+		ruler = { usfp_manifest_destiny_pro_expansion_trigger = yes }
+	}
+
+	effect = {
+		s:STATE_BRITISH_COLUMBIA = { add_claim = root }
+		s:STATE_BC_INTERIOR = { add_claim = root }
+		s:STATE_UPPER_BC = { add_claim = root }
+		s:STATE_VANCOUVER_ISLAND = { add_claim = root }
+		change_relations = { country = c:GBR value = -10 }
+	}
+
+	ai_chance = { value = 25 }
+}

@@ -1,0 +1,16 @@
+﻿INJECT:usfp_owns_all_canada = {
+	owns_entire_state_region = STATE_ONTARIO_PENINSULA
+	owns_entire_state_region = STATE_ALGOMA
+	owns_entire_state_region = STATE_NORTHWEST_ONTARIO
+	owns_entire_state_region = STATE_NOVA_SCOTIA
+	owns_entire_state_region = STATE_SAINT_LAURENT
+	owns_entire_state_region = STATE_QUEBEC_SAGUENAY
+	owns_entire_state_region = STATE_NOUVEAU_QUEBEC
+	owns_entire_state_region = STATE_EDMONTON
+	owns_entire_state_region = STATE_ATHABASCA
+	owns_entire_state_region = STATE_BC_INTERIOR
+	owns_entire_state_region = STATE_UPPER_BC
+	owns_entire_state_region = STATE_VANCOUVER_ISLAND
+	owns_entire_state_region = STATE_NORTH_SASKATCHEWAN
+	owns_entire_state_region = STATE_KEEWATIN
+}

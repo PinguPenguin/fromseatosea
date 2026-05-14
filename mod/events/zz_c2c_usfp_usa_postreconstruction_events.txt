@@ -1,0 +1,200 @@
+﻿namespace = usfp_usa_postreconstruction
+
+usfp_usa_postreconstruction.15 = {
+	type = country_event
+	placement = scope:great_return_target_1
+	duration = 3
+	cooldown = { days = never_fire_again_modifier_time }
+
+	title = usfp_usa_postreconstruction.15.t
+	desc = usfp_usa_postreconstruction.15.d
+	flavor = usfp_usa_postreconstruction.15.f
+
+	dlc = dlc_usfp
+	event_image = {
+		video = "unspecific_steam_ship"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	trigger = {
+		has_global_variable = usfp_reconstruction_outcome_radical
+		OR = {
+			s:STATE_ONTARIO = {
+				any_scope_state = {
+					any_scope_pop = {
+						culture = cu:afro_american
+					}
+				}
+			}
+			s:STATE_ONTARIO_PENINSULA = {
+				any_scope_state = {
+					any_scope_pop = {
+						culture = cu:afro_american
+					}
+				}
+			}
+			s:STATE_QUEBEC = {
+				any_scope_state = {
+					any_scope_pop = {
+						culture = cu:afro_american
+					}
+				}
+			}
+			s:STATE_SAINT_LAURENT = {
+				any_scope_state = {
+					any_scope_pop = {
+						culture = cu:afro_american
+					}
+				}
+			}
+			s:STATE_NEW_BRUNSWICK = {
+				any_scope_state = {
+					any_scope_pop = {
+						culture = cu:afro_american
+					}
+				}
+			}
+			s:STATE_NOVA_SCOTIA = {
+				any_scope_state = {
+					any_scope_pop = {
+						culture = cu:afro_american
+					}
+				}
+			}
+		}
+		usfp_is_afro_american_discriminated = no
+		any_scope_state = {
+			count >= 3
+			state_region = {
+				is_homeland = cu:afro_american
+			}
+			state_is_eligible_as_mass_migration_target = yes
+		}
+	}
+
+	immediate = {
+		random_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_ONTARIO
+					state_region = s:STATE_ONTARIO_PENINSULA
+					state_region = s:STATE_QUEBEC
+					state_region = s:STATE_SAINT_LAURENT
+					state_region = s:STATE_NEW_BRUNSWICK
+					state_region = s:STATE_NOVA_SCOTIA
+				}
+				any_scope_pop = {
+					culture = cu:afro_american
+				}
+			}
+			save_scope_as = great_return_source_1
+		}
+		random_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_ONTARIO
+					state_region = s:STATE_ONTARIO_PENINSULA
+					state_region = s:STATE_QUEBEC
+					state_region = s:STATE_SAINT_LAURENT
+					state_region = s:STATE_NEW_BRUNSWICK
+					state_region = s:STATE_NOVA_SCOTIA
+				}
+				any_scope_pop = {
+					culture = cu:afro_american
+				}
+			}
+			save_scope_as = great_return_source_2
+		}
+		ordered_scope_state = {
+			position = 0
+			limit = {
+				state_region = {
+					is_homeland = cu:afro_american
+				}
+				state_is_eligible_as_mass_migration_target = yes
+			}
+			order_by = total_urbanization
+			save_scope_as = great_return_target_1
+		}
+		ordered_scope_state = {
+			position = 1
+			limit = {
+				state_region = {
+					is_homeland = cu:afro_american
+				}
+				state_is_eligible_as_mass_migration_target = yes
+			}
+			order_by = total_urbanization
+			save_scope_as = great_return_target_2
+		}
+		random_scope_state = {
+			limit = {
+				state_region = {
+					is_homeland = cu:afro_american
+				}
+				state_is_eligible_as_mass_migration_target = yes
+				NOR = {
+					this = scope:great_return_target_1
+					this = scope:great_return_target_2
+				}
+			}
+			save_scope_as = great_return_target_3
+		}
+	}
+
+	option = {
+		name = usfp_usa_postreconstruction.15.a
+		default_option = yes
+		scope:great_return_target_1 = {
+			create_mass_migration = {
+				origin = scope:great_return_source_1.owner
+				culture = cu:afro_american
+			}
+			add_loyalists_in_state = {
+				value = medium_radicals
+				culture = cu:afro_american
+			}
+		}
+		scope:great_return_target_2 = {
+			create_mass_migration = {
+				origin = scope:great_return_source_2.owner
+				culture = cu:afro_american
+			}
+			add_loyalists_in_state = {
+				value = medium_radicals
+				culture = cu:afro_american
+			}
+		}
+		ai_chance = {
+			base = 25
+		}
+	}
+
+	option = {
+		name = usfp_usa_postreconstruction.15.b
+		scope:great_return_target_1 = {
+			create_mass_migration = {
+				origin = scope:great_return_source_1.owner
+				culture = cu:afro_american
+			}
+			add_loyalists_in_state = {
+				value = medium_radicals
+				culture = cu:afro_american
+			}
+		}
+		scope:great_return_target_3 = {
+			create_mass_migration = {
+				origin = scope:great_return_source_2.owner
+				culture = cu:afro_american
+			}
+			add_loyalists_in_state = {
+				value = medium_radicals
+				culture = cu:afro_american
+			}
+		}
+		ai_chance = {
+			base = 25
+		}
+	}
+}
