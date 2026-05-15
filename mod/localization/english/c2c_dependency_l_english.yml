@@ -1,0 +1,11 @@
+﻿l_english:
+ c2c_dependency.1.t: "C2C Dependency Missing"
+ c2c_dependency.1.d: "From Sea to Sea has detected an incorrect dependency setup. Canadian map setup and compatibility behavior may break in this save."
+ c2c_dependency.1.f: ""Enable the Community State Framework, Community Mod Framework, and Hail, Columbia!, then place them before From Sea to Sea in the load order.""
+ c2c_dependency.1.a: "Fix the load order."
+ c2c_dependency.1.b: "Community State Framework was not detected."
+ c2c_dependency.1.c: "Hail, Columbia! was not detected."
+ c2c_dependency.1.e: "Community Mod Framework was not detected."
+ c2c_csf_is_missing: "The #bold Community State Framework#! compatibility hook was not detected"
+ c2c_usfp_is_missing: "The #bold Hail, Columbia!#! compatibility hook was not detected"
+ c2c_cmf_is_missing: "The #bold Community Mod Framework#! compatibility hook was not detected"

@@ -1,0 +1,5 @@
+﻿prestige_good_c2c_pacific_cedar = {
+	base_good = hardwood
+	prestige_bonus = 0.1
+	texture = "gfx/interface/icons/goods_icons/prestige_goods/rosewood_prestige.dds"
+}

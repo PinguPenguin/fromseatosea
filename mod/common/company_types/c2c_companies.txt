@@ -42,7 +42,9 @@ company_c2c_imperial_oil = {
 	}
 
 	prosperity_modifier = {
-		building_group_bg_oil_extraction_throughput_add = 0.1
+		country_minting_mult = 0.05
+		country_production_tech_spread_mult = 0.05
+		state_trade_capacity_mult = 0.05
 	}
 
 	ai_will_do = {
@@ -79,12 +81,12 @@ company_c2c_canadian_pacific = {
 
 	building_types = {
 		building_railway
+		building_port
+		building_trade_center
 	}
 
 	extension_building_types = {
-		building_port
 		building_shipyard
-		building_trade_center
 	}
 
 	potential = {
@@ -113,9 +115,9 @@ company_c2c_canadian_pacific = {
 	}
 
 	prosperity_modifier = {
-		building_railway_throughput_add = 0.1
-		building_port_throughput_add = 0.05
-		building_trade_center_throughput_add = 0.05
+		state_colony_growth_speed_mult = 0.1
+		state_migration_pull_mult = 0.1
+		state_trade_capacity_mult = 0.1
 	}
 
 	ai_will_do = {
@@ -199,8 +201,9 @@ company_c2c_grand_trunk_railway = {
 	}
 
 	prosperity_modifier = {
-		building_railway_throughput_add = 0.05
-		state_infrastructure_mult = 0.05
+		state_infrastructure_from_population_add = 1
+		state_infrastructure_from_population_max_add = 15
+		state_trade_advantage_mult = 0.1
 	}
 
 	ai_will_do = {
@@ -289,8 +292,9 @@ company_c2c_northern_electric = {
 	}
 
 	prosperity_modifier = {
-		building_electrics_industry_throughput_add = 0.1
-		country_weekly_innovation_mult = 0.05
+		country_weekly_innovation_mult = 0.1
+		country_weekly_innovation_max_add = 10
+		country_production_tech_research_speed_mult = 0.05
 	}
 
 	ai_will_do = {
@@ -339,6 +343,10 @@ company_c2c_canadian_western_lumber = {
 		building_furniture_manufactory
 	}
 
+	possible_prestige_goods = {
+		prestige_good_c2c_pacific_cedar
+	}
+
 	potential = {
 		has_interest_marker_in_region = sr:region_pacific_coast
 	}
@@ -365,8 +373,9 @@ company_c2c_canadian_western_lumber = {
 	}
 
 	prosperity_modifier = {
-		building_group_bg_logging_throughput_add = 0.1
-		building_furniture_manufactory_throughput_add = 0.05
+		state_construction_mult = 0.1
+		state_trade_capacity_mult = 0.1
+		building_group_bg_logging_standard_of_living_add = 0.5
 	}
 
 	ai_will_do = {
@@ -452,9 +461,9 @@ company_c2c_dominion_coal_and_steel = {
 	}
 
 	prosperity_modifier = {
-		building_steel_mill_throughput_add = 0.1
-		building_coal_mine_throughput_add = 0.05
-		building_iron_mine_throughput_add = 0.05
+		state_construction_mult = 0.05
+		country_military_goods_cost_mult = -0.05
+		interest_group_ig_industrialists_pol_str_mult = 0.1
 	}
 
 	ai_will_do = {
@@ -549,9 +558,9 @@ company_c2c_abitibi_power_and_paper = {
 	}
 
 	prosperity_modifier = {
-		building_paper_mill_throughput_add = 0.1
-		building_group_bg_logging_throughput_add = 0.05
-		building_power_plant_throughput_add = 0.05
+		country_bureaucracy_mult = 0.1
+		state_infrastructure_from_population_add = 2
+		state_infrastructure_from_population_max_add = 10
 	}
 
 	ai_will_do = {
@@ -654,9 +663,9 @@ company_c2c_noranda_mines = {
 	}
 
 	prosperity_modifier = {
-		building_lead_mine_throughput_add = 0.1
-		building_gold_mine_throughput_add = 0.05
-		building_iron_mine_throughput_add = 0.05
+		country_minting_mult = 0.05
+		country_production_tech_spread_mult = 0.05
+		building_group_bg_mining_standard_of_living_add = 0.5
 	}
 
 	ai_will_do = {
@@ -767,8 +776,9 @@ company_c2c_canada_packers = {
 	}
 
 	prosperity_modifier = {
-		building_food_industry_throughput_add = 0.1
-		building_livestock_ranch_throughput_add = 0.05
+		state_birth_rate_mult = 0.05
+		state_mortality_mult = -0.03
+		state_trade_capacity_mult = 0.05
 	}
 
 	ai_will_do = {
@@ -862,9 +872,9 @@ company_c2c_jd_irving = {
 	}
 
 	prosperity_modifier = {
-		building_group_bg_logging_throughput_add = 0.1
-		building_paper_mill_throughput_add = 0.05
-		building_shipyard_throughput_add = 0.05
+		country_ship_group_supply_ships_construction_efficiency_add = 0.1
+		state_infrastructure_from_population_max_add = 10
+		state_trade_capacity_mult = 0.1
 	}
 
 	ai_will_do = {
@@ -948,8 +958,9 @@ company_c2c_davie_shipbuilding = {
 	}
 
 	prosperity_modifier = {
-		building_shipyard_throughput_add = 0.1
-		building_port_throughput_add = 0.05
+		country_ship_group_supply_ships_construction_efficiency_add = 0.15
+		ship_hull_damage_mult = 0.025
+		state_trade_capacity_mult = 0.05
 	}
 
 	ai_will_do = {
@@ -1041,9 +1052,9 @@ company_c2c_canadian_explosives = {
 	}
 
 	prosperity_modifier = {
-		country_military_goods_cost_mult = -0.05
-		building_chemical_plant_throughput_add = 0.05
-		building_munition_plant_throughput_add = 0.05
+		country_military_goods_cost_mult = -0.1
+		country_military_tech_spread_mult = 0.05
+		unit_offense_mult = 0.05
 	}
 
 	ai_will_do = {
@@ -1138,8 +1149,9 @@ company_c2c_dominion_textile = {
 	}
 
 	prosperity_modifier = {
-		building_textile_mill_throughput_add = 0.1
-		state_radicals_from_political_movements_mult = -0.05
+		building_group_bg_manufacturing_laborers_standard_of_living_add = 0.5
+		interest_group_ig_trade_unions_pol_str_mult = 0.1
+		state_migration_pull_mult = 0.05
 	}
 
 	ai_will_do = {
@@ -1221,8 +1233,9 @@ company_c2c_hw_cooey = {
 	}
 
 	prosperity_modifier = {
-		building_arms_industry_throughput_add = 0.1
-		building_tooling_workshop_throughput_add = 0.05
+		country_military_goods_cost_mult = -0.05
+		country_military_tech_spread_mult = 0.05
+		unit_army_offense_mult = 0.05
 	}
 
 	ai_will_do = {

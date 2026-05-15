@@ -1,13 +1,21 @@
 {
     "name": "[TESTING] From Sea to Sea",
     "id": "com.github.PinguPenguin.fromseatosea",
-    "version": "2.0.1",
+    "version": "2.1.0",
     "game_id": "victoria3",
     "picture": "thumbnail.png",
     "supported_game_version": "1.13.*",
     "short_description": "A Canada-focused mod that aims to make playing in Canada more fun and rewarding.",
     "tags": [],
-    "relationships": [],
+    "relationships": [
+        {
+            "rel_type": "dependency",
+            "id": "com.github.Victoria-3-Modding-Co-op.Community-State-Framework",
+            "display_name": "Community State Framework",
+            "resource_type": "mod",
+            "version": ""
+        }
+    ],
     "game_custom_data": {
         "multiplayer_synchronized": true
     }

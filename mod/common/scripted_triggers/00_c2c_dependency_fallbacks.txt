@@ -1,0 +1,11 @@
+﻿csf_is_active_trigger = {
+	always = no
+}
+
+is_usfp_active = {
+	always = no
+}
+
+community_framework_is_active = {
+	always = no
+}

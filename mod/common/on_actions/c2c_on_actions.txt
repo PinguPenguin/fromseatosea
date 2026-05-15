@@ -1,10 +1,40 @@
 ﻿on_game_started = {
-    on_actions = {
-        on_c2c_start
-    }
+	on_actions = {
+		on_c2c_start
+	}
 }
+
+on_game_started_after_lobby = {
+	on_actions = {
+		c2c_mod_detector
+	}
+}
+
 on_c2c_start = {
-    effect = {
-        c2c_map_startup_effect = yes
-    }
+	effect = {
+		c2c_map_startup_effect = yes
+	}
+}
+
+c2c_mod_detector = {
+	effect = {
+		if = {
+			limit = {
+				OR = {
+					csf_is_active_trigger = no
+					is_usfp_active = no
+					community_framework_is_active = no
+				}
+			}
+			every_country = {
+				limit = {
+					is_player = yes
+				}
+				trigger_event = {
+					id = c2c_dependency.1
+					popup = yes
+				}
+			}
+		}
+	}
 }

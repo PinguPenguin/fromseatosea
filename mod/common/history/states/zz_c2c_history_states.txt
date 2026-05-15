@@ -259,7 +259,7 @@ STATES = {
 			country = c:HBC
 			provinces = {
 				x403994 x9ebd23 xae2d58 xf6ce39 xa8c5e8 x6ca726 xbdd238 x42ddae x5d7a14 x5eacb8
-				x578996 xa18606 x90faea x1fd5f8 xaebfff x49ad61 x16db09 x969229 xe9f39b x171782
+				x578996 xa18606 x90faea x1fd5f8 xaebfff x49ad61 x16db09 x969229 xe9f39b x171782 x903279
 				xfc4326 xda3337 xdb8797 x4b096d xd2ce4c xd1db51 x317fb3 xd5540c xc8d6e6 x0708ad
 				xe2fa8e x0db925 xf738d5 x83adcb x8d15cb x790e5b x6e31a1 x677647 x96c2fb
 			}
@@ -277,7 +277,7 @@ STATES = {
 				xd03bf3 x6a902f xb54962 x2b78b9 x6ffe7e x853b98 x4164f7 x297066 x280a1d x383ea0
 				x4a04b2 x76a0e6 x79dc59 xd5f515 x5b8a5f x399ca7 xf3d744 x78a3ba x2e6c75 x6893b6
 				xed6465 xacd62e x824210 xab2c76 x1176c6 x5d9879 xcfbce8 x61cd70 xad5354 x2dd641
-				xae0541 xfc4f0d xdce271 x903279 xb4468d xeb4bdb xad7d1f x00cb48 x6cbb4f xcf1990
+				xae0541 xfc4f0d xdce271 xb4468d xeb4bdb xad7d1f x00cb48 x6cbb4f xcf1990
 				x36b818 x0d2f27 x00f376 xfe02ce xab9db4 x388c4e x7ab82c x1b4c6d x0d7566 x93bd4c
 				x560e55 x208af2 x31a991 xd17651 xf45c86 xd841d9 x2bc058 x06958b x6bcc92 xff8a91
 				x406000 x355aca xa2f8dd x411a9b xe756c1 x6e90ea x2f570d x4c823a xa70030 xe961e9
