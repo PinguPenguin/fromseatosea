@@ -3,3 +3,6 @@
  PEI_ADJ:0 "Prince Edward Islander"
  PEI_FLAVOR_TEXT:0 "The colony of Prince Edward Island sits apart in the Gulf of Saint Lawrence, tied to Atlantic Canada by farms and shipping. Will Prince Edward Island chart its own course?"
  NVS_FLAVOR_TEXT:0 "The colony of Nova Scotia anchors Britain's Atlantic presence, with Halifax linking the Maritimes to the wider empire. Will Nova Scotia lead a united Canada?"
+ VAN:0 "Vancouver Island"
+ VAN_ADJ:0 "Vancouver Islander"
+ VAN_FLAVOR_TEXT:0 "The colony of Vancouver Island anchors Britain's presence on the Pacific coast, balancing imperial ambitions, fur trade interests, and the peoples of the Salish Sea. Will Vancouver Island remain an outpost, or become the seed of a western British North America?"

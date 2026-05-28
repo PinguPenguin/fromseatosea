@@ -5,29 +5,31 @@
 
 	is_shown_when_inactive = {
 		hidden_trigger = {
-			NOT = { c:NEW = THIS }
+			NOT = { c:NEW ?= THIS }
 		}
 		OR = {
 			country_has_primary_culture = cu:anglo_canadian
 			country_has_primary_culture = cu:franco_canadian
+			country_has_primary_culture = cu:acadian
 		}
 		is_subject = yes
 	}
 
 	is_shown_in_lobby = {
 		hidden_trigger = {
-			NOT = { c:NEW = THIS }
+			NOT = { c:NEW ?= THIS }
 		}
 		OR = {
 			country_has_primary_culture = cu:anglo_canadian
 			country_has_primary_culture = cu:franco_canadian
+			country_has_primary_culture = cu:acadian
 		}
 	}
 
 	possible = {
 		has_technology_researched = nationalism
 		hidden_trigger = {
-			NOT = { c:NEW = THIS }
+			NOT = { c:NEW ?= THIS }
 		}
 	}
 
@@ -58,6 +60,7 @@
 		change_tag = CAN
 		add_primary_culture = cu:anglo_canadian
 		add_primary_culture = cu:franco_canadian
+		add_primary_culture = cu:acadian
 		hidden_effect = {
 			if = {
 				limit = {
@@ -81,7 +84,7 @@
 		OR = {
 			is_subject = no
 			hidden_trigger = {
-				c:NEW = THIS
+				c:NEW ?= THIS
 			}
 		}
 	}
@@ -99,11 +102,12 @@ REPLACE:je_canada_gbr = {
 	is_shown_in_lobby = {
 		any_subject_or_below = {
 			hidden_trigger = {
-				NOT = { c:NEW = THIS }
+				NOT = { c:NEW ?= THIS }
 			}
 			OR = {
 				country_has_primary_culture = cu:anglo_canadian
 				country_has_primary_culture = cu:franco_canadian
+				country_has_primary_culture = cu:acadian
 			}
 			count >= 2
 		}
@@ -111,6 +115,7 @@ REPLACE:je_canada_gbr = {
 			OR = {
 				country_has_primary_culture = cu:anglo_canadian
 				country_has_primary_culture = cu:franco_canadian
+				country_has_primary_culture = cu:acadian
 			}
 		}
 	}
@@ -118,11 +123,12 @@ REPLACE:je_canada_gbr = {
 	is_shown_when_inactive = {
 		any_subject_or_below = {
 			hidden_trigger = {
-				NOT = { c:NEW = THIS }
+				NOT = { c:NEW ?= THIS }
 			}
 			OR = {
 				country_has_primary_culture = cu:anglo_canadian
 				country_has_primary_culture = cu:franco_canadian
+				country_has_primary_culture = cu:acadian
 			}
 			count >= 2
 		}
@@ -130,6 +136,7 @@ REPLACE:je_canada_gbr = {
 			OR = {
 				country_has_primary_culture = cu:anglo_canadian
 				country_has_primary_culture = cu:franco_canadian
+				country_has_primary_culture = cu:acadian
 			}
 		}
 	}

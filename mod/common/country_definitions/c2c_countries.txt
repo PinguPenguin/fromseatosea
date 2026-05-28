@@ -5,7 +5,7 @@
 
 	tier = principality
 
-	cultures = { anglo_canadian }
+	cultures = { anglo_canadian acadian }
 	capital = STATE_NEW_BRUNSWICK
 }
 
@@ -16,6 +16,28 @@ REPLACE_OR_CREATE:NVS = {
 
 	tier = principality
 
-	cultures = { anglo_canadian }
+	cultures = { anglo_canadian acadian }
 	capital = STATE_NOVA_SCOTIA
+}
+
+REPLACE_OR_CREATE:NBS = {
+	color = { 235 196 128 }
+
+	country_type = colonial
+
+	tier = principality
+
+	cultures = { anglo_canadian franco_canadian acadian }
+	capital = STATE_NEW_BRUNSWICK
+}
+
+REPLACE_OR_CREATE:VAN = {
+	color = { 42 112 146 }
+
+	country_type = colonial
+
+	tier = principality
+
+	cultures = { anglo_canadian british }
+	capital = STATE_VANCOUVER_ISLAND
 }

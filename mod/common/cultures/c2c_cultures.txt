@@ -1,0 +1,68 @@
+﻿acadian = {
+	color = rgb{ 51 116 151 }
+	religion = catholic
+	heritage = heritage_north_american_settler
+	language = language_francophone
+
+	obsessions = {
+		liquor #ouais osti
+	}
+
+	traditions = { }
+	male_common_first_names = {
+		Amand Amede Anselme Antoine Augustin
+		Basile Benjamin
+		Charles Cyprien
+		Edouard Elie Etienne
+		Firmin Francois Frederic
+		Honore
+		Isidore
+		Jacques Jean Jean-Baptiste Joseph
+		Lazare Louis
+		Magloire Marcel Moise
+		Olivier Onesime
+		Pascal Paul Pierre Placide
+		Simon
+		Theophile
+		Urbain
+	}
+	female_common_first_names = {
+		Adelaide Adele Agathe Anastasie Angelique Anne Apolline
+		Celeste
+		Delphine Domitille
+		Eleonore Elisabeth Emilie Euphemie Evangeline
+		Genevieve
+		Henriette
+		Isabelle
+		Julie
+		Madeleine Marguerite Marie Mathilde Modeste
+		Pelagie
+		Rosalie
+		Scholastique Sophie
+		Ursule
+		Virginie
+	}
+	noble_last_names = {
+		Bourgeois d_Entremont de_La_Tour LeBorgne
+		LeBlanc Robichaud Saint-Castin
+	}
+	common_last_names = {
+		Allain Arsenault Aucoin
+		Babineau Bastarache Belliveau Bernard Boudreau Bourque Breau Brun
+		Chiasson Comeau Cormier
+		Daigle Doiron Doucet Dugas Dupuis
+		Forest
+		Gallant Gaudet Gautreau Girouard
+		Hebert
+		Landry LeBlanc Leger
+		Maillet Martin Melanson Michaud
+		Poirier
+		Richard Robichaud
+		Savoie Surette
+		Theriault
+	}
+	graphics = european
+	ethnicities = {
+		1 = caucasian
+	}
+}

@@ -562,7 +562,7 @@ STATES = {
 			}
 		}
 		set_owner_of_provinces = {
-			country = c:usfp_SAL
+			country = c:VAN
 			provinces = {
 				xe9ac75 xc9a9ab
 			}
@@ -570,6 +570,7 @@ STATES = {
 		add_homeland = cu:anglo_canadian
 		add_homeland = cu:salish
 		add_claim = c:ORG
+		add_claim = c:VAN
 	}
 
 	s:STATE_LABRADOR = {
@@ -614,6 +615,7 @@ STATES = {
 				"xfd27c5" "x76f0e9" "xcb411e" "x7b5364" "x50b299"
 			}
 		}
+		add_homeland = cu:acadian
 		add_homeland = cu:franco_canadian
 		add_homeland = cu:iroquoian
 	}
@@ -628,6 +630,7 @@ STATES = {
 			}
 		}
 		add_homeland = cu:anglo_canadian
+		add_homeland = cu:acadian
 		add_homeland = cu:franco_canadian
 	}
 
@@ -860,6 +863,7 @@ STATES = {
 				x082153
 			}
 		}
+		add_homeland = cu:acadian
 	}
 
 	s:STATE_ONTARIO = {

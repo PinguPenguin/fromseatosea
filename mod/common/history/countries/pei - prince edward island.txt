@@ -25,7 +25,7 @@
 		c:GBR = {
 			create_diplomatic_pact = {
 				country = c:PEI
-				type = colony
+				type = c2c_responsible_colony
 			}
 		}
 

@@ -5,3 +5,21 @@
 		allow_overlord_canton = yes
 	}
 }
+
+VAN = { # Vancouver Island
+	flag_definition = {
+		coa = VAN
+		subject_canton = VAN
+		coa_with_overlord_canton = VAN_subject
+		allow_overlord_canton = yes
+		priority = 1
+	}
+	flag_definition = {
+		coa = VAN_subject_GBR
+		allow_overlord_canton = yes
+		priority = 50
+		trigger = {
+			coa_def_british_ensign_trigger = yes
+		}
+	}
+}

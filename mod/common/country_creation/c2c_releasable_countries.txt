@@ -1,6 +1,83 @@
-﻿REPLACE_OR_CREATE:PEI = {
+﻿REPLACE_OR_CREATE:QUE = {
+	states = {
+		STATE_QUEBEC
+		STATE_SAINT_LAURENT
+		STATE_QUEBEC_SAGUENAY
+		STATE_NOUVEAU_QUEBEC
+	}
+
+	ai_will_do = { always = no }
+}
+
+REPLACE_OR_CREATE:ONT = {
+	states = {
+		STATE_ONTARIO
+		STATE_ONTARIO_PENINSULA
+		STATE_ALGOMA
+		STATE_NORTHWEST_ONTARIO
+	}
+
+	ai_will_do = { always = no }
+}
+
+REPLACE_OR_CREATE:NBS = {
+	states = {
+		STATE_NEW_BRUNSWICK
+	}
+
+	ai_will_do = { always = no }
+}
+
+REPLACE_OR_CREATE:NVS = {
+	states = {
+		STATE_NOVA_SCOTIA
+	}
+
+	ai_will_do = { always = no }
+}
+
+REPLACE_OR_CREATE:PEI = {
 	provinces = {
 		x70C040
+	}
+
+	ai_will_do = { always = no }
+}
+
+REPLACE_OR_CREATE:NEW = {
+	states = {
+		STATE_NEWFOUNDLAND
+		STATE_LABRADOR
+	}
+
+	ai_will_do = { always = no }
+}
+
+REPLACE_OR_CREATE:NNV = {
+	states = {
+		STATE_NUNAVUT
+	}
+
+	ai_will_do = { always = no }
+}
+
+REPLACE_OR_CREATE:ORG = {
+	states = {
+		STATE_OREGON
+		STATE_WASHINGTON
+		STATE_IDAHO
+		STATE_BRITISH_COLUMBIA
+		STATE_BC_INTERIOR
+		STATE_UPPER_BC
+		STATE_VANCOUVER_ISLAND
+	}
+
+	ai_will_do = { always = no }
+}
+
+REPLACE_OR_CREATE:VAN = {
+	states = {
+		STATE_VANCOUVER_ISLAND
 	}
 
 	ai_will_do = { always = no }

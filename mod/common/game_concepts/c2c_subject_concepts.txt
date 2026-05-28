@@ -1,0 +1,7 @@
+﻿concept_c2c_responsible_colony = {
+	texture = "gfx/interface/icons/lens_toolbar_icons/colony.dds"
+}
+
+concept_c2c_self_governing_dominion = {
+	texture = "gfx/interface/icons/lens_toolbar_icons/dominion.dds"
+}

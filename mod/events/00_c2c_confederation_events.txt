@@ -195,9 +195,10 @@ can_aus.5 = {
 		}
 		if = {
 			limit = {
-				NOT = { is_subject_type = subject_type_dominion }
+				is_subject = yes
+				NOT = { is_subject_type = subject_type_c2c_self_governing_dominion }
 			}
-			change_subject_type = subject_type_dominion
+			change_subject_type = subject_type_c2c_self_governing_dominion
 		}
 		if = {
 			limit = {
@@ -415,6 +416,7 @@ can_aus.6 = {
 				OR = {
 					country_has_primary_culture = cu:anglo_canadian
 					country_has_primary_culture = cu:franco_canadian
+					country_has_primary_culture = cu:acadian
 				}
 				any_scope_state = {
 					OR = {

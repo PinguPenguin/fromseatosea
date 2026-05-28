@@ -154,3 +154,37 @@ PEI_subject = {
 		instance = { scale = { 0.5 0.5 } offset = { 0.5 0.25 } }
 	}
 }
+
+VAN = { # Vancouver Island
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	textured_emblem = {
+		texture = "te_coa_vancouver_island.dds"
+		instance = { scale = { 1.0 1.0 } position = { 0.48 0.5 } }
+	}
+}
+
+VAN_subject = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+
+	textured_emblem = {
+		texture = "te_coa_vancouver_island.dds"
+		instance = { scale = { 0.5 0.5 } position = { 0.75 0.5 } }
+	}
+}
+
+VAN_subject_GBR = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	sub = {
+		parent = "sub_GBR_uk"
+		instance = { scale = { 0.5 0.5 } }
+	}
+	textured_emblem = {
+		texture = "te_coa_vancouver_island.dds"
+		instance = { scale = { 0.5 0.5 } position = { 0.75 0.5 } }
+	}
+}

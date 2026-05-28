@@ -3,6 +3,60 @@
 		name = c2c_is_loaded
 		value = yes
 	}
+	c:ONT ?= {
+		if = {
+			limit = {
+				is_subject_of = c:GBR
+				is_subject_type = subject_type_colony
+			}
+			change_subject_type = subject_type_c2c_responsible_colony
+		}
+	}
+	c:QUE ?= {
+		if = {
+			limit = {
+				is_subject_of = c:GBR
+				is_subject_type = subject_type_colony
+			}
+			change_subject_type = subject_type_c2c_responsible_colony
+		}
+	}
+	c:NBS ?= {
+		if = {
+			limit = {
+				is_subject_of = c:GBR
+				is_subject_type = subject_type_colony
+			}
+			change_subject_type = subject_type_c2c_responsible_colony
+		}
+	}
+	c:NVS ?= {
+		if = {
+			limit = {
+				is_subject_of = c:GBR
+				is_subject_type = subject_type_colony
+			}
+			change_subject_type = subject_type_c2c_responsible_colony
+		}
+	}
+	c:PEI ?= {
+		if = {
+			limit = {
+				is_subject_of = c:GBR
+				is_subject_type = subject_type_colony
+			}
+			change_subject_type = subject_type_c2c_responsible_colony
+		}
+	}
+	c:NEW ?= {
+		if = {
+			limit = {
+				is_subject_of = c:GBR
+				is_subject_type = subject_type_colony
+			}
+			change_subject_type = subject_type_c2c_responsible_colony
+		}
+	}
 	s:STATE_ONTARIO = {
 		set_owner_of_provinces = {
 			country = c:ONT
@@ -86,6 +140,102 @@
 			every_scope_state = {
 				set_state_owner = c:NEW
 			}
+		}
+	}
+	# Keep northern, western, and other frontier Canadian state regions unincorporated at game start.
+	s:STATE_ALBERTA = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_ALGOMA = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_ATHABASCA = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_BC_INTERIOR = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_BRITISH_COLUMBIA = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_EDMONTON = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_KEEWATIN = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_LABRADOR = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_MANITOBA = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_NEWFOUNDLAND = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_NORTH_SASKATCHEWAN = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_NORTHWEST_ONTARIO = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_NORTHWEST_TERRITORIES = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_NOUVEAU_QUEBEC = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_NUNAVUT = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_SASKATCHEWAN = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_UPPER_BC = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_VANCOUVER_ISLAND = {
+		every_scope_state = {
+			set_state_type = unincorporated
+		}
+	}
+	s:STATE_YUKON_TERRITORY = {
+		every_scope_state = {
+			set_state_type = unincorporated
 		}
 	}
 }
