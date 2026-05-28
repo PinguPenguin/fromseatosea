@@ -1260,11 +1260,25 @@
 				move_pop = s:STATE_NORTHWEST_ONTARIO.region_state:usfp_SWC
 			}
 		}
+		region_state:CTF = {
+			create_pop = {
+				culture = algonquian
+				religion = animist
+				size = 1000
+			}
+		}
 		region_state:usfp_OJI = {
 			create_pop = {
 				culture = cree
 				religion = animist
 				size = 9583
+			}
+		}
+		region_state:usfp_SWC = {
+			create_pop = {
+				culture = cree
+				religion = animist
+				size = 2668
 			}
 		}
 	}
@@ -1456,16 +1470,6 @@
 				culture = anglo_canadian
 				religion = protestant
 				size = 1000
-			}
-		}
-	}
-
-	s:STATE_NORTHWEST_ONTARIO = {
-		region_state:usfp_SWC = {
-			create_pop = {
-				culture = cree
-				religion = animist
-				size = 2668
 			}
 		}
 	}
