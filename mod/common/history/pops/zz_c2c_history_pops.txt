@@ -1443,6 +1443,13 @@
 				size = 1900
 			}
 		}
+		region_state:usfp_IPQ = {
+			create_pop = {
+				culture = inuit
+				religion = animist
+				size = 1000
+			}
+		}
 		region_state:usfp_SVY = {
 			create_pop = {
 				culture = athabaskan

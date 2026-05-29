@@ -90,7 +90,6 @@
 			}
 		}
 	}
-	# USFP compatible BC coastal ownership
 	s:STATE_BRITISH_COLUMBIA = {
 		set_owner_of_provinces = {
 			country = c:usfp_DKL
@@ -126,7 +125,6 @@
 			set_state_owner = c:usfp_DNZ
 		}
 	}
-	# Preserve USFP's Newfoundland colony after c2c splits Labrador away.
 	if = {
 		limit = {
 			exists = c:NEW
@@ -142,99 +140,80 @@
 			}
 		}
 	}
-	# Keep northern, western, and other frontier Canadian state regions unincorporated at game start.
-	s:STATE_ALBERTA = {
-		every_scope_state = {
+	# believe it or not, the HBC didn't actually have an albertan provincial govt in 1836
+	s:STATE_ALGOMA = {
+		region_state:ONT ?= {
 			set_state_type = unincorporated
 		}
-	}
-	s:STATE_ALGOMA = {
-		every_scope_state = {
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_ATHABASCA = {
-		every_scope_state = {
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_BC_INTERIOR = {
-		every_scope_state = {
+		region_state:ORG ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_BRITISH_COLUMBIA = {
-		every_scope_state = {
+		region_state:ORG ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_EDMONTON = {
-		every_scope_state = {
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_KEEWATIN = {
-		every_scope_state = {
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_LABRADOR = {
-		every_scope_state = {
-			set_state_type = unincorporated
-		}
-	}
-	s:STATE_MANITOBA = {
-		every_scope_state = {
-			set_state_type = unincorporated
-		}
-	}
-	s:STATE_NEWFOUNDLAND = {
-		every_scope_state = {
+		region_state:NEW ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_NORTH_SASKATCHEWAN = {
-		every_scope_state = {
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_NORTHWEST_ONTARIO = {
-		every_scope_state = {
+		region_state:ONT ?= {
+			set_state_type = unincorporated
+		}
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_NORTHWEST_TERRITORIES = {
-		every_scope_state = {
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_NOUVEAU_QUEBEC = {
-		every_scope_state = {
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_NUNAVUT = {
-		every_scope_state = {
-			set_state_type = unincorporated
-		}
-	}
-	s:STATE_SASKATCHEWAN = {
-		every_scope_state = {
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_UPPER_BC = {
-		every_scope_state = {
-			set_state_type = unincorporated
-		}
-	}
-	s:STATE_VANCOUVER_ISLAND = {
-		every_scope_state = {
+		region_state:ORG ?= {
 			set_state_type = unincorporated
 		}
 	}
 	s:STATE_YUKON_TERRITORY = {
-		every_scope_state = {
+		region_state:HBC ?= {
 			set_state_type = unincorporated
 		}
 	}

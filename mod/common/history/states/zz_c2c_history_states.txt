@@ -662,24 +662,30 @@ STATES = {
 				x3d5d3b xbde9ac xc32dda x26baae xce825b xf8a3cd x322dcd xeff801 x5b081a x3f9742
 				x71b746 x284fa4 x2cde25 xe17be0 x6c4d59 x37becf xd622ef xe39786 xae42bf x346f8b
 				x944ed5 x300508 x2e476a xd98990 xe2534c xcd0400 x374b03 x45bab8 xf94b3b x2b0624
-				x0778b2 x0637fb x728576 x9ce8e1 xca438c x4633f8 x98dbc4 xd31f1a x9551a7 xf413ee
+				x0778b2 x0637fb x728576 x9ce8e1 xca438c x4633f8 x98dbc4 x9551a7 xf413ee
 				x437735 xee94f4 xfd5f4e x23b825 x9c9a5d x4ed783 x9cd32d xb65ba2 x4e367b xaf7cb2
-				xd12a5f x12e5f5 xc97fec xabf0ce xbb13c7 x1f18df x2e8f6d xab74b6 x76d135 xff626a
+				xd12a5f x12e5f5 xabf0ce xbb13c7 x1f18df x2e8f6d xab74b6 x76d135 xff626a
 				xc4f5fa xeae7a4 x5d56d4 x68fda2 x2c889f x9e0d5a xc7bf91 x7b1623 xe2f068 x7e6d65
-				x6a28af x44e031 x6922ac x78e933 x0cdb57 x14b03b x56b8db xb77efd x7ec254 xd5f340
+				x6a28af x44e031 x6922ac x78e933 x0cdb57 x56b8db xb77efd x7ec254 xd5f340
 				x3551db x69005d xf62875 x61214d xeb4fcc x01a277 x1d0697 x9d5806 x4e674c x892ccb
 				x2846aa xe96c69 x86b2e1 x7d04c6 x539071 x0e93dd x94b00d xa1eef9 x834e92 x78a1d2
-				x46eb7a x93c603 xbbac52 x51425f x2eb016 x1ea7d1 x3c8e27 x3b4b71 x0a0c7f x002ca6
+				x46eb7a x93c603 xbbac52 x51425f x1ea7d1 x3c8e27 x3b4b71 x0a0c7f x002ca6
 				x7ddb19 xbcc9cd x1685de x1008de xdbf36a x6c152e x0d8449 x902933 x37c3ee x6bcdd9
 				xa4cd12 xddbf87 x3eac51 xa2bd8b xfbbc8f x1eb7ee x6c8f89 x577f99 x75bda6 xac3896
-				x66275b x931981 x7693fd x256215 x10e7aa xdef7f2 x831e58 x26a0ba x00cb4f x594725
+				x66275b x931981 x7693fd x256215 x10e7aa x831e58 x26a0ba x00cb4f x594725
 				xb9fec1 x863e68 xe28092 x8e1e7d x554954 x8d5662 x961200 x94b15e x1cafea x3d3129
 				x27a629 xdccd87 x0dadef x7ce85c x03ecd8 xd9502d x53fd19 x0e2429 x1c5610 x893884
 				x073e62 x504a1a xc3063a xa03f62 x667df1 xd57951 x901cee x9915bd x60f1ad x83fda7
 				x2a151b xf62bd3 x4a8634 xc2a5fc x7b181d x333ac9 xfdeb78 xf07f7b x3def01 x510116
-				x768b2e x0ae4d2 xada6d6 x27d464 xf8f212 x558f00 xf73cfd xefc0f2 x15fc1a x272f40
+				x768b2e x0ae4d2 xada6d6 x27d464 xf8f212 x558f00 xf73cfd xefc0f2 x272f40
 				x738112 x30d503 x8216b9 xb94393 xbf2bc1 x00e694 xf35cb4 x8a5fba x573633 xabcc23
 				x4f2c11 xd32034 xc0304f xc5b395 x96bb46 xd067d6 xc80fdb xfea4fb x58e3cc
+			}
+		}
+		set_owner_of_provinces = {
+			country = c:usfp_IPQ
+			provinces = {
+				xdef7f2 xd31f1a x2eb016 x14b03b x15fc1a xc97fec
 			}
 		}
 		set_owner_of_provinces = {
@@ -691,7 +697,7 @@ STATES = {
 		set_owner_of_provinces = {
 			country = c:usfp_STU
 			provinces = {
-				x9567d6
+				x9567d6 xed8ed2
 			}
 		}
 		set_owner_of_provinces = {
@@ -902,6 +908,13 @@ STATES = {
 	}
 
 	s:STATE_YUKON_TERRITORY = {
+		set_owner_of_provinces = {
+			country = c:usfp_IPQ
+			provinces = {
+				xe6c75b x3d5dcb x3482e0 x714a14 x2ecdc8 x980ab5 x87c331 x1df568
+				x919662 x6368b4 x57b8a2 x0bea6e xb11131 xde167c x07684f
+			}
+		}
 		set_owner_of_provinces = {
 			country = c:usfp_GWC
 			provinces = {
