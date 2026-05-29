@@ -916,9 +916,26 @@
 	}
 
 	s:STATE_YUKON_TERRITORY = {
+		region_state:usfp_GWC = {
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 1000
+			}
+		}
 		region_state:usfp_TTC = {
 			kill_population_percent_in_state = {
 				percent = 1
+			}
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 1600
+			}
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 1000
 			}
 		}
 		region_state:usfp_TLT = {
@@ -939,6 +956,18 @@
 				culture = anglo_canadian
 				religion = protestant
 				size = 1136
+			}
+			create_pop = {
+				culture = athabaskan
+				religion = animist
+				size = 1200
+			}
+		}
+		region_state:usfp_IPQ = {
+			create_pop = {
+				culture = inuit
+				religion = animist
+				size = 1500
 			}
 		}
 	}
@@ -1423,37 +1452,6 @@
 		}
 	}
 
-	s:STATE_YUKON_TERRITORY = {
-		region_state:usfp_GWC = {
-			create_pop = {
-				culture = athabaskan
-				religion = animist
-				size = 1000
-			}
-		}
-		region_state:usfp_TLT = {
-			create_pop = {
-				culture = athabaskan
-				religion = animist
-				size = 1200
-			}
-		}
-		region_state:usfp_TTC = {
-			create_pop = {
-				culture = athabaskan
-				religion = animist
-				size = 1600
-			}
-		}
-		region_state:usfp_IPQ = {
-			create_pop = {
-				culture = inuit
-				religion = animist
-				size = 1500
-			}
-		}
-	}
-
 	s:STATE_BC_INTERIOR = {
 		region_state:usfp_SYX = {
 			create_pop = {
@@ -1493,14 +1491,4 @@
 			}
 		}
 	}
-	s:STATE_YUKON_TERRITORY = {
-		region_state:usfp_TTC = {
-			create_pop = {
-				culture = athabaskan
-				religion = animist
-				size = 1000
-			}
-		}
-	}
-
 }
