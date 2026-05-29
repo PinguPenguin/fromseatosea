@@ -13,8 +13,7 @@
     capped_resources = {
         building_iron_mine = 35
         building_logging_camp = 30
-        building_coal_mine = 5
-        building_sulfur_mine = 20
+        building_sulfur_mine = 18
     }
     resource = {
         type = "building_oil_rig"

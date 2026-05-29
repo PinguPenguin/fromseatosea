@@ -10,14 +10,12 @@
     arable_land = 90
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_tobacco_plantation" }
     capped_resources = {
-        building_coal_mine = 4
-        building_iron_mine = 45
-        building_lead_mine = 6
+        building_iron_mine = 35
         building_logging_camp = 26
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 8
+        undiscovered_amount = 4
     }
 }

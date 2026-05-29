@@ -13,12 +13,11 @@
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
         building_coal_mine = 18
-        building_iron_mine = 8
         building_logging_camp = 24
         building_fishing_wharf = 16
         building_whaling_station = 2
-        building_lead_mine = 60
-        building_sulfur_mine = 6
+        building_lead_mine = 34
+        building_sulfur_mine = 8
     }
     resource = {
         type = "building_gold_field"

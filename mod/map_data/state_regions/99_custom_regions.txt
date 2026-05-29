@@ -14,11 +14,11 @@ STATE_LABRADOR = {
     arable_land = 10
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
-        building_iron_mine = 100
+        building_iron_mine = 75
         building_logging_camp = 18
         building_fishing_wharf = 8
         building_whaling_station = 8
-        building_lead_mine = 12
+        building_lead_mine = 8
     }
     resource = {
         type = "building_oil_rig"
@@ -40,11 +40,11 @@ STATE_QUEBEC_SAGUENAY = {
     arable_land = 70
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
-        building_iron_mine = 70
+        building_iron_mine = 55
         building_logging_camp = 45
         building_fishing_wharf = 10
         building_whaling_station = 6
-        building_lead_mine = 8
+        building_lead_mine = 6
     }
 }
 
@@ -62,7 +62,7 @@ STATE_SAINT_LAURENT = {
     arable_land = 70
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_tobacco_plantation" "building_vineyard" }
     capped_resources = {
-        building_iron_mine = 10
+        building_iron_mine = 8
         building_logging_camp = 24
         building_fishing_wharf = 12
         building_whaling_station = 2
@@ -84,14 +84,14 @@ STATE_NOUVEAU_QUEBEC = {
     arable_land = 10
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
-        building_iron_mine = 55
+        building_iron_mine = 45
         building_logging_camp = 14
         building_lead_mine = 4
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 8
+        undiscovered_amount = 4
     }
 }
 
@@ -109,9 +109,8 @@ STATE_NOVA_SCOTIA = {
     arable_land = 30
     arable_resources = { "building_livestock_ranch" "building_wheat_farm" }
     capped_resources = {
-        building_coal_mine = 60
-        building_iron_mine = 20
-        building_lead_mine = 10
+        building_coal_mine = 65
+        building_iron_mine = 10
         building_logging_camp = 15
         building_fishing_wharf = 18
         building_whaling_station = 3
@@ -119,7 +118,7 @@ STATE_NOVA_SCOTIA = {
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 4
+        undiscovered_amount = 2
     }
 }
 
@@ -136,9 +135,9 @@ STATE_ONTARIO_PENINSULA = {
     arable_land = 170
     arable_resources = { "building_wheat_farm" "building_tobacco_plantation" "building_vineyard" "building_livestock_ranch" }
     capped_resources = {
-        building_iron_mine = 10
+        building_iron_mine = 8
         building_logging_camp = 26
-        building_sulfur_mine = 28
+        building_sulfur_mine = 25
     }
     resource = {
         type = "building_oil_rig"
@@ -161,12 +160,11 @@ STATE_ALGOMA = {
     arable_land = 15
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 12
-        building_iron_mine = 80
+        building_iron_mine = 75
         building_logging_camp = 30
         building_fishing_wharf = 2
-        building_lead_mine = 12
-        building_sulfur_mine = 20
+        building_lead_mine = 8
+        building_sulfur_mine = 24
     }
     resource = {
         type = "building_oil_rig"
@@ -175,7 +173,7 @@ STATE_ALGOMA = {
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 12
+        undiscovered_amount = 4
     }
 }
 
@@ -196,9 +194,7 @@ STATE_NORTHWEST_ONTARIO = {
     capped_resources = {
         building_iron_mine = 45
         building_logging_camp = 20
-        building_lead_mine = 8
-        building_coal_mine = 8
-        building_sulfur_mine = 14
+        building_lead_mine = 5
     }
     resource = {
         type = "building_oil_rig"
@@ -207,7 +203,7 @@ STATE_NORTHWEST_ONTARIO = {
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 6
+        undiscovered_amount = 3
     }
 }
 
@@ -228,12 +224,11 @@ STATE_KEEWATIN = {
         building_iron_mine = 18
         building_logging_camp = 15
         building_fishing_wharf = 3
-        building_lead_mine = 4
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 4
+        undiscovered_amount = 2
     }
 }
 
@@ -250,7 +245,6 @@ STATE_NORTH_SASKATCHEWAN = {
     arable_resources = { "building_livestock_ranch" "building_wheat_farm" }
     capped_resources = {
         building_coal_mine = 20
-        building_iron_mine = 20
         building_logging_camp = 38
         building_sulfur_mine = 6
     }
@@ -272,8 +266,7 @@ STATE_EDMONTON = {
     arable_land = 100
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 30
-        building_iron_mine = 8
+        building_coal_mine = 35
         building_logging_camp = 28
         building_sulfur_mine = 8
     }
@@ -295,8 +288,7 @@ STATE_ATHABASCA = {
     arable_land = 30
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 20
-        building_iron_mine = 6
+        building_coal_mine = 25
         building_sulfur_mine = 20
         building_logging_camp = 45
     }
@@ -318,17 +310,17 @@ STATE_BC_INTERIOR = {
     arable_land = 40
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_vineyard" }
     capped_resources = {
-        building_iron_mine = 8
+        building_iron_mine = 5
         building_fishing_wharf = 2
-        building_coal_mine = 60
-        building_lead_mine = 12
-        building_sulfur_mine = 8
+        building_coal_mine = 70
+        building_lead_mine = 18
+        building_sulfur_mine = 5
         building_logging_camp = 25
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 6
+        undiscovered_amount = 4
     }
 }
 
@@ -346,17 +338,15 @@ STATE_UPPER_BC = {
     arable_land = 15
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
-        building_iron_mine = 18
         building_logging_camp = 40
         building_fishing_wharf = 2
-        building_coal_mine = 24
-        building_lead_mine = 15
-        building_sulfur_mine = 8
+        building_coal_mine = 35
+        building_lead_mine = 18
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 12
+        undiscovered_amount = 6
     }
 }
 
@@ -374,8 +364,7 @@ STATE_VANCOUVER_ISLAND = {
     arable_land = 50
     arable_resources = { "building_wheat_farm" "building_vineyard" "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 30
-        building_iron_mine = 6
+        building_coal_mine = 35
         building_logging_camp = 35
         building_fishing_wharf = 18
         building_whaling_station = 6
