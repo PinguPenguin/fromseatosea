@@ -100,3 +100,25 @@ state_trait_pei_soils = {
 		building_group_bg_agriculture_throughput_add = 0.1
 	}
 }
+
+state_trait_c2c_northern_canadian_terrain_surveyed = {
+	icon = "gfx/interface/icons/state_trait_icons/cold_climate.dds"
+	modifier = {
+		building_group_bg_agriculture_throughput_add = -0.18
+		state_construction_mult = -0.12
+		state_infrastructure_mult = -0.20
+		state_migration_pull_mult = -0.50
+	}
+}
+
+state_trait_c2c_northern_canadian_terrain_corridors = {
+	icon = "gfx/interface/icons/state_trait_icons/cold_climate.dds"
+	modifier = {
+		building_group_bg_agriculture_throughput_add = -0.15
+		building_group_bg_logging_throughput_add = 0.05
+		building_group_bg_mining_throughput_add = 0.05
+		state_construction_mult = -0.05
+		state_infrastructure_mult = -0.10
+		state_migration_pull_mult = -0.25
+	}
+}

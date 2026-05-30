@@ -1,0 +1,34 @@
+﻿GLOBAL = {
+	s:STATE_MANITOBA = {
+		every_scope_state = {
+			add_modifier = {
+				name = c2c_prairie_unopened
+				months = -1
+			}
+		}
+	}
+	s:STATE_SASKATCHEWAN = {
+		every_scope_state = {
+			add_modifier = {
+				name = c2c_prairie_unopened
+				months = -1
+			}
+		}
+	}
+	s:STATE_ALBERTA = {
+		every_scope_state = {
+			add_modifier = {
+				name = c2c_prairie_unopened
+				months = -1
+			}
+		}
+	}
+	s:STATE_EDMONTON = {
+		every_scope_state = {
+			add_modifier = {
+				name = c2c_prairie_unopened
+				months = -1
+			}
+		}
+	}
+}

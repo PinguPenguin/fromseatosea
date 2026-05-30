@@ -1,0 +1,119 @@
+﻿je_c2c_settling_the_prairie = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		c2c_is_canadian_colonial_frontier_country = yes
+		any_scope_state = {
+			c2c_is_prairie_frontier_state = yes
+		}
+	}
+
+	possible = {
+		c2c_is_canadian_colonial_frontier_country = yes
+		any_scope_state = {
+			c2c_is_prairie_frontier_state = yes
+		}
+	}
+
+	scripted_button = c2c_survey_prairie_button
+	scripted_button = c2c_settle_prairie_button
+
+	complete = {
+		custom_tooltip = {
+			text = c2c_settling_the_prairie_complete_tt
+			NOT = {
+				any_scope_state = {
+					c2c_is_prairie_frontier_state = yes
+					NOT = {
+						c2c_has_settled_prairie_state = yes
+					}
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		add_modifier = {
+			name = c2c_prairie_settlement_policy
+			days = very_long_modifier_time
+		}
+		trigger_event = { id = c2c_frontier.5 popup = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c2c_is_canadian_colonial_frontier_country = yes }
+			NOT = {
+				any_scope_state = {
+					c2c_is_prairie_frontier_state = yes
+				}
+			}
+		}
+	}
+
+	weight = 80
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_c2c_the_canadian_north = {
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		c2c_is_canadian_colonial_frontier_country = yes
+		any_scope_state = {
+			c2c_is_canadian_north_state = yes
+		}
+	}
+
+	possible = {
+		c2c_is_canadian_colonial_frontier_country = yes
+		any_scope_state = {
+			c2c_is_canadian_north_state = yes
+		}
+	}
+
+	scripted_button = c2c_survey_north_button
+	scripted_button = c2c_build_north_corridors_button
+
+	complete = {
+		custom_tooltip = {
+			text = c2c_the_canadian_north_complete_tt
+			NOT = {
+				any_scope_state = {
+					c2c_is_canadian_north_state = yes
+					NOT = {
+						c2c_has_developed_north_state = yes
+					}
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		add_modifier = {
+			name = c2c_northern_development_policy
+			days = very_long_modifier_time
+		}
+		trigger_event = { id = c2c_frontier.6 popup = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c2c_is_canadian_colonial_frontier_country = yes }
+			NOT = {
+				any_scope_state = {
+					c2c_is_canadian_north_state = yes
+				}
+			}
+		}
+	}
+
+	weight = 70
+
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

@@ -1,0 +1,330 @@
+﻿namespace = c2c_frontier
+
+c2c_frontier.1 = {
+	type = country_event
+	placement = scope:c2c_prairie_state_scope
+
+	duration = 3
+
+	title = c2c_frontier.1.t
+	desc = c2c_frontier.1.d
+	flavor = c2c_frontier.1.f
+
+	event_image = {
+		video = "africa_prosperous_farm"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c2c_is_canadian_colonial_frontier_country = yes
+		has_journal_entry = je_c2c_settling_the_prairie
+		any_scope_state = {
+			c2c_can_survey_prairie_state = yes
+		}
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				c2c_can_survey_prairie_state = yes
+			}
+			save_scope_as = c2c_prairie_state_scope
+		}
+	}
+
+	option = {
+		name = c2c_frontier.1.a
+		default_option = yes
+		scope:c2c_prairie_state_scope = {
+			remove_modifier = c2c_prairie_unopened
+			add_modifier = {
+				name = c2c_prairie_surveyed
+				months = -1
+			}
+			add_modifier = {
+				name = c2c_frontier_development_disruption
+				days = short_modifier_time
+			}
+			if = {
+				limit = {
+					is_split_state = no
+				}
+				state_region = {
+					add_arable_land = 5
+				}
+			}
+		}
+	}
+
+	option = {
+		name = c2c_frontier.1.b
+		scope:c2c_prairie_state_scope = {
+			remove_modifier = c2c_prairie_unopened
+			add_modifier = {
+				name = c2c_prairie_surveyed
+				months = -1
+			}
+			add_modifier = {
+				name = c2c_treaty_survey_relief
+				days = normal_modifier_time
+			}
+		}
+	}
+}
+
+c2c_frontier.2 = {
+	type = country_event
+	placement = scope:c2c_prairie_state_scope
+
+	duration = 3
+
+	title = c2c_frontier.2.t
+	desc = c2c_frontier.2.d
+	flavor = c2c_frontier.2.f
+
+	event_image = {
+		video = "unspecific_trains"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c2c_is_canadian_colonial_frontier_country = yes
+		has_journal_entry = je_c2c_settling_the_prairie
+		any_scope_state = {
+			c2c_can_settle_prairie_state = yes
+		}
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				c2c_can_settle_prairie_state = yes
+			}
+			save_scope_as = c2c_prairie_state_scope
+		}
+	}
+
+	option = {
+		name = c2c_frontier.2.a
+		default_option = yes
+		scope:c2c_prairie_state_scope = {
+			remove_modifier = c2c_prairie_surveyed
+			add_modifier = {
+				name = c2c_prairie_settled
+				months = -1
+			}
+			if = {
+				limit = {
+					is_split_state = no
+				}
+				state_region = {
+					add_arable_land = 10
+				}
+			}
+		}
+	}
+}
+
+c2c_frontier.3 = {
+	type = country_event
+	placement = scope:c2c_north_state_scope
+
+	duration = 3
+
+	title = c2c_frontier.3.t
+	desc = c2c_frontier.3.d
+	flavor = c2c_frontier.3.f
+
+	event_image = {
+		video = "africa_construction_colony"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c2c_is_canadian_colonial_frontier_country = yes
+		has_journal_entry = je_c2c_the_canadian_north
+		any_scope_state = {
+			c2c_can_survey_north_state = yes
+		}
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				c2c_can_survey_north_state = yes
+			}
+			save_scope_as = c2c_north_state_scope
+		}
+	}
+
+	option = {
+		name = c2c_frontier.3.a
+		default_option = yes
+		scope:c2c_north_state_scope = {
+			if = {
+				limit = {
+					has_state_trait = state_trait_northern_canadian_terrain
+				}
+				state_region = {
+					remove_state_trait = state_trait_northern_canadian_terrain
+					add_state_trait = state_trait_c2c_northern_canadian_terrain_surveyed
+				}
+			}
+			else = {
+				add_modifier = {
+					name = c2c_northern_resource_surveyed
+					months = -1
+				}
+			}
+			add_modifier = {
+				name = c2c_northern_expedited_surveys
+				days = normal_modifier_time
+			}
+			add_modifier = {
+				name = c2c_frontier_development_disruption
+				days = short_modifier_time
+			}
+		}
+	}
+
+	option = {
+		name = c2c_frontier.3.b
+		add_modifier = {
+			name = c2c_northern_provisions_budget
+			days = normal_modifier_time
+		}
+		scope:c2c_north_state_scope = {
+			if = {
+				limit = {
+					has_state_trait = state_trait_northern_canadian_terrain
+				}
+				state_region = {
+					remove_state_trait = state_trait_northern_canadian_terrain
+					add_state_trait = state_trait_c2c_northern_canadian_terrain_surveyed
+				}
+			}
+			else = {
+				add_modifier = {
+					name = c2c_northern_resource_surveyed
+					months = -1
+				}
+			}
+			add_modifier = {
+				name = c2c_treaty_survey_relief
+				days = normal_modifier_time
+			}
+		}
+	}
+}
+
+c2c_frontier.4 = {
+	type = country_event
+	placement = scope:c2c_north_state_scope
+
+	duration = 3
+
+	title = c2c_frontier.4.t
+	desc = c2c_frontier.4.d
+	flavor = c2c_frontier.4.f
+
+	event_image = {
+		video = "unspecific_trains"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	trigger = {
+		c2c_is_canadian_colonial_frontier_country = yes
+		has_journal_entry = je_c2c_the_canadian_north
+		any_scope_state = {
+			c2c_can_build_north_corridors_state = yes
+		}
+	}
+
+	immediate = {
+		random_scope_state = {
+			limit = {
+				c2c_can_build_north_corridors_state = yes
+			}
+			save_scope_as = c2c_north_state_scope
+		}
+	}
+
+	option = {
+		name = c2c_frontier.4.a
+		default_option = yes
+		scope:c2c_north_state_scope = {
+			if = {
+				limit = {
+					has_state_trait = state_trait_c2c_northern_canadian_terrain_surveyed
+				}
+				state_region = {
+					remove_state_trait = state_trait_c2c_northern_canadian_terrain_surveyed
+					add_state_trait = state_trait_c2c_northern_canadian_terrain_corridors
+				}
+			}
+			else = {
+				remove_modifier = c2c_northern_resource_surveyed
+				add_modifier = {
+					name = c2c_northern_resource_corridors
+					months = -1
+				}
+			}
+		}
+	}
+}
+
+c2c_frontier.5 = {
+	type = country_event
+	duration = 3
+
+	title = c2c_frontier.5.t
+	desc = c2c_frontier.5.d
+	flavor = c2c_frontier.5.f
+
+	event_image = {
+		video = "africa_prosperous_farm"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = c2c_frontier.5.a
+		default_option = yes
+	}
+}
+
+c2c_frontier.6 = {
+	type = country_event
+	duration = 3
+
+	title = c2c_frontier.6.t
+	desc = c2c_frontier.6.d
+	flavor = c2c_frontier.6.f
+
+	event_image = {
+		video = "unspecific_trains"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	option = {
+		name = c2c_frontier.6.a
+		default_option = yes
+	}
+}

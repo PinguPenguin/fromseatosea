@@ -1,0 +1,154 @@
+﻿c2c_is_canadian_colonial_frontier_country = {
+	OR = {
+		is_country_type = colonial
+		this = c:HBC
+	}
+}
+
+c2c_is_prairie_frontier_state = {
+	OR = {
+		state_region = s:STATE_MANITOBA
+		state_region = s:STATE_SASKATCHEWAN
+		state_region = s:STATE_ALBERTA
+		state_region = s:STATE_EDMONTON
+	}
+}
+
+c2c_is_canadian_north_state = {
+	OR = {
+		state_region = s:STATE_LABRADOR
+		state_region = s:STATE_QUEBEC_SAGUENAY
+		state_region = s:STATE_NOUVEAU_QUEBEC
+		state_region = s:STATE_ALGOMA
+		state_region = s:STATE_NORTHWEST_ONTARIO
+		state_region = s:STATE_KEEWATIN
+		state_region = s:STATE_NORTH_SASKATCHEWAN
+		state_region = s:STATE_ATHABASCA
+		state_region = s:STATE_BC_INTERIOR
+		state_region = s:STATE_UPPER_BC
+		state_region = s:STATE_NORTHWEST_TERRITORIES
+		state_region = s:STATE_NUNAVUT
+		state_region = s:STATE_YUKON_TERRITORY
+	}
+}
+
+c2c_has_settled_prairie_state = {
+	has_modifier = c2c_prairie_settled
+}
+
+c2c_has_developed_north_state = {
+	OR = {
+		has_state_trait = state_trait_c2c_northern_canadian_terrain_corridors
+		has_modifier = c2c_northern_resource_corridors
+	}
+}
+
+c2c_can_survey_prairie_state = {
+	c2c_is_prairie_frontier_state = yes
+	has_modifier = c2c_prairie_unopened
+}
+
+c2c_can_settle_prairie_state = {
+	c2c_is_prairie_frontier_state = yes
+	has_modifier = c2c_prairie_surveyed
+	any_scope_building = {
+		is_building_type = building_railway
+	}
+	OR = {
+		any_scope_building = {
+			is_building_type = building_wheat_farm
+			level >= 5
+		}
+		any_scope_building = {
+			is_building_type = building_livestock_ranch
+			level >= 5
+		}
+		any_scope_building = {
+			is_building_type = building_urban_center
+			level >= 2
+		}
+	}
+}
+
+c2c_can_survey_north_state = {
+	c2c_is_canadian_north_state = yes
+	NOR = {
+		has_state_trait = state_trait_c2c_northern_canadian_terrain_surveyed
+		has_state_trait = state_trait_c2c_northern_canadian_terrain_corridors
+		has_modifier = c2c_northern_resource_surveyed
+		has_modifier = c2c_northern_resource_corridors
+	}
+	OR = {
+		has_state_trait = state_trait_northern_canadian_terrain
+		any_scope_building = {
+			is_building_type = building_logging_camp
+		}
+		any_scope_building = {
+			is_building_type = building_iron_mine
+		}
+		any_scope_building = {
+			is_building_type = building_coal_mine
+		}
+		any_scope_building = {
+			is_building_type = building_lead_mine
+		}
+		any_scope_building = {
+			is_building_type = building_sulfur_mine
+		}
+		any_scope_building = {
+			is_building_type = building_gold_mine
+		}
+		any_scope_building = {
+			is_building_type = building_gold_field
+		}
+		any_scope_building = {
+			is_building_type = building_urban_center
+			level >= 1
+		}
+	}
+}
+
+c2c_can_build_north_corridors_state = {
+	c2c_is_canadian_north_state = yes
+	OR = {
+		has_state_trait = state_trait_c2c_northern_canadian_terrain_surveyed
+		has_modifier = c2c_northern_resource_surveyed
+	}
+	any_scope_building = {
+		is_building_type = building_railway
+	}
+	OR = {
+		any_scope_building = {
+			is_building_type = building_logging_camp
+			level >= 5
+		}
+		any_scope_building = {
+			is_building_type = building_iron_mine
+			level >= 5
+		}
+		any_scope_building = {
+			is_building_type = building_coal_mine
+			level >= 5
+		}
+		any_scope_building = {
+			is_building_type = building_lead_mine
+			level >= 5
+		}
+		any_scope_building = {
+			is_building_type = building_sulfur_mine
+			level >= 5
+		}
+		any_scope_building = {
+			is_building_type = building_gold_mine
+			level >= 3
+		}
+		any_scope_building = {
+			is_building_type = building_gold_field
+			level >= 3
+		}
+		any_scope_building = {
+			is_building_type = building_urban_center
+			level >= 2
+		}
+	}
+}
