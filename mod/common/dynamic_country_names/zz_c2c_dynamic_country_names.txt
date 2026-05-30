@@ -1,0 +1,55 @@
+﻿REPLACE_OR_CREATE:ONT = { # Ontario
+	dynamic_country_name = {
+		name = dyn_c_upper_canada
+		adjective = dyn_c_upper_canada_adj
+
+		is_main_tag_only = yes
+		priority = 0
+
+		trigger = {
+			exists = c:GBR
+			c:GBR ?= {
+				OR = {
+					has_diplomatic_pact = {
+						who = c:ONT
+						type = colony
+						is_initiator = yes
+					}
+					has_diplomatic_pact = {
+						who = c:ONT
+						type = c2c_responsible_colony
+						is_initiator = yes
+					}
+				}
+			}
+		}
+	}
+}
+
+REPLACE_OR_CREATE:QUE = { # Quebec
+	dynamic_country_name = {
+		name = dyn_c_lower_canada
+		adjective = dyn_c_lower_canada_adj
+
+		is_main_tag_only = yes
+		priority = 0
+
+		trigger = {
+			exists = c:GBR
+			c:GBR ?= {
+				OR = {
+					has_diplomatic_pact = {
+						who = c:QUE
+						type = colony
+						is_initiator = yes
+					}
+					has_diplomatic_pact = {
+						who = c:QUE
+						type = c2c_responsible_colony
+						is_initiator = yes
+					}
+				}
+			}
+		}
+	}
+}

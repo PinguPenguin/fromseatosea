@@ -1,0 +1,34 @@
+﻿REPLACE:coa_def_lesser_subject_trigger = {
+	NOT = { has_game_rule = no_subject_flags }
+	OR = {
+		NOT = { exists = scope:actor }
+		AND = {
+			exists = scope:actor
+			scope:actor ?= {
+				OR = {
+					is_subject_type = subject_type_colony
+					is_subject_type = subject_type_c2c_responsible_colony
+					is_subject_type = subject_type_puppet
+					is_subject_type = subject_type_vassal
+				}
+			}
+		}
+	}
+}
+
+REPLACE:can_impose_law_default = {
+	scope:target_country = {
+		is_subject_of = root
+		OR = {
+			is_subject_type = subject_type_chartered_company
+			is_subject_type = subject_type_colony
+			is_subject_type = subject_type_c2c_responsible_colony
+			is_subject_type = subject_type_puppet
+			is_subject_type = subject_type_dominion
+			is_subject_type = subject_type_c2c_self_governing_dominion
+			is_subject_type = subject_type_personal_union
+			is_subject_type = subject_type_vassal
+			is_subject_type = subject_type_crown_land
+		}
+	}
+}

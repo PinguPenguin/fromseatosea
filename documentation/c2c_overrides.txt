@@ -56,6 +56,23 @@ NBS
 common/scripted_buttons/zz_c2c_canada_australia_buttons.txt
 je_canada_unite_can_button
 
+common/dynamic_country_names/zz_c2c_dynamic_country_names.txt
+ONT
+QUE
+
+common/government_types/zz_c2c_colonial_administrations.txt
+gov_crown_colony
+gov_dominion_dictatorial
+gov_dominion_elected
+gov_colonial_administration_fallback
+
+common/law_groups/zz_c2c_subject_law_groups.txt
+lawgroup_governance_principles
+
+common/scripted_triggers/zz_c2c_subject_type_compat_triggers.txt
+coa_def_lesser_subject_trigger
+can_impose_law_default
+
 common/history/states/c2c_history_states_override.txt
 STATE_ALBERTA
 STATE_BRITISH_COLUMBIA
