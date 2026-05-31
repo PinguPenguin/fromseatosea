@@ -57,6 +57,15 @@
 			change_subject_type = subject_type_c2c_responsible_colony
 		}
 	}
+	c:VAN ?= {
+		if = {
+			limit = {
+				is_subject_of = c:GBR
+				is_subject_type = subject_type_colony
+			}
+			change_subject_type = subject_type_c2c_responsible_colony
+		}
+	}
 	s:STATE_ONTARIO = {
 		set_owner_of_provinces = {
 			country = c:ONT

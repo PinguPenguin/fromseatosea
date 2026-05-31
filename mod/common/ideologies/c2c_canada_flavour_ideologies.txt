@@ -1,0 +1,172 @@
+﻿ideology_c2c_colonial_moralist = {
+	icon = "gfx/interface/icons/ideology_icons/moralist.dds"
+
+	lawgroup_distribution_of_power = {
+		law_landed_voting = strongly_approve
+		law_oligarchy = approve
+		law_autocracy = neutral
+		law_wealth_voting = neutral
+		law_census_voting = disapprove
+		law_universal_suffrage = strongly_disapprove
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = strongly_approve
+		law_freedom_of_conscience = neutral
+		law_total_separation = strongly_disapprove
+		law_state_atheism = strongly_disapprove
+	}
+}
+
+ideology_c2c_reformer_can = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_reformer.dds"
+
+	character_ideology = yes
+
+	lawgroup_citizenship = {
+		law_multicultural = disapprove
+		law_ethnostate = disapprove
+		law_national_supremacy = disapprove
+		law_subjecthood = disapprove
+		law_racial_segregation = neutral
+		law_cultural_exclusion = approve
+	}
+
+	lawgroup_governance_principles = {
+		law_parliamentary_republic = strongly_approve
+		law_presidential_republic = approve
+		law_corporate_state = neutral
+		law_monarchy = neutral
+		law_theocracy = neutral
+		law_council_republic = disapprove
+		law_c2c_responsible_colonial_administration = approve
+	}
+
+	lawgroup_migration = {
+		law_closed_borders = approve
+		law_migration_controls = strongly_approve
+		law_no_migration_controls = disapprove
+	}
+
+	lawgroup_free_speech = {
+		law_outlawed_dissent = strongly_disapprove
+		law_censorship = disapprove
+		law_right_of_assembly = approve
+		law_protected_speech = strongly_approve
+	}
+
+	lawgroup_bureaucracy = {
+		law_elected_bureaucrats = approve
+		law_appointed_bureaucrats = neutral
+		law_hereditary_bureaucrats = disapprove
+	}
+
+	country_trigger = {
+		OR = {
+			c:ONT ?= THIS
+			c:QUE ?= THIS
+			c:NBS ?= THIS
+			c:NVS ?= THIS
+			c:PEI ?= THIS
+			c:NEW ?= THIS
+			c:VAN ?= THIS
+			c:CAN ?= THIS
+		}
+		has_technology_researched = nationalism
+	}
+
+	interest_group_leader_trigger = {
+	}
+
+	non_interest_group_leader_trigger = {
+		NAND = {
+			has_role = agitator
+			owner = {
+				has_law_or_variant = law_type:law_cultural_exclusion
+				has_law_or_variant = law_type:law_parliamentary_republic
+			}
+		}
+	}
+}
+
+ideology_c2c_clear_grit = {
+	icon = "gfx/interface/icons/ideology_icons/agrarian.dds"
+
+	lawgroup_church_and_state = {
+		law_total_separation = strongly_approve
+		law_freedom_of_conscience = neutral
+		law_state_religion = strongly_disapprove
+		law_state_atheism = strongly_disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_free_trade = approve
+		law_mercantilism = neutral
+		law_protectionism = disapprove
+		law_isolationism = strongly_disapprove
+	}
+
+	lawgroup_land_reform = {
+		law_homesteading = strongly_approve
+		law_commercialized_agriculture = neutral
+		law_collectivized_agriculture = disapprove
+		law_tenant_farmers = disapprove
+		law_serfdom = strongly_disapprove
+	}
+
+	lawgroup_distribution_of_power = {
+		law_universal_suffrage = strongly_approve
+		law_census_voting = approve
+		law_landed_voting = disapprove
+		law_oligarchy = strongly_disapprove
+		law_autocracy = strongly_disapprove
+	}
+
+	country_trigger = {
+		OR = {
+			c:CAN ?= THIS
+			c:ONT ?= THIS
+		}
+	}
+}
+
+ideology_c2c_patriote = {
+	icon = "gfx/interface/icons/ideology_icons/patriotic.dds"
+
+	lawgroup_citizenship = {
+		law_cultural_exclusion = approve
+		law_racial_segregation = neutral
+		law_subjecthood = neutral
+		law_multicultural = disapprove
+		law_national_supremacy = disapprove
+		law_ethnostate = strongly_disapprove
+	}
+
+	lawgroup_governance_principles = {
+		law_presidential_republic = strongly_approve
+		law_parliamentary_republic = approve
+		law_monarchy = strongly_disapprove
+		law_c2c_responsible_colonial_administration = neutral
+	}
+
+	lawgroup_policing = {
+		law_no_police = neutral
+		law_dedicated_police = neutral
+		law_local_police = disapprove
+		law_militarized_police = strongly_disapprove
+	}
+
+	lawgroup_internal_security = {
+		law_guaranteed_liberties = approve
+		law_national_guard = neutral
+		law_no_home_affairs = neutral
+		law_secret_police = strongly_disapprove
+	}
+
+	lawgroup_free_speech = {
+		law_protected_speech = strongly_approve
+		law_right_of_assembly = approve
+		law_censorship = disapprove
+		law_outlawed_dissent = strongly_disapprove
+	}
+}

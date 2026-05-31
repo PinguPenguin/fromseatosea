@@ -1,0 +1,38 @@
+﻿COUNTRIES = {
+	c:ONT ?= {
+		active_law:lawgroup_distribution_of_power ?= {
+			add_amendment = {
+				type = amendment_c2c_appointed_executive
+				sponsor = PREV.ig:ig_landowners
+			}
+		}
+
+		active_law:lawgroup_land_reform ?= {
+			add_amendment = {
+				type = amendment_c2c_clergy_reserves
+				sponsor = PREV.ig:ig_devout
+			}
+		}
+
+		add_journal_entry = { type = je_c2c_responsible_government }
+		add_journal_entry = { type = je_c2c_family_compact }
+
+		ig:ig_rural_folk ?= {
+			remove_ideology = ideology_agrarian
+			add_ideology = ideology_c2c_clear_grit
+		}
+
+		ig:ig_devout ?= {
+			add_ideology = ideology_c2c_colonial_moralist
+		}
+	}
+
+	c:QUE ?= {
+		add_journal_entry = { type = je_c2c_responsible_government }
+		add_journal_entry = { type = je_c2c_chateau_clique }
+
+		ig:ig_intelligentsia ?= {
+			add_ideology = ideology_c2c_patriote
+		}
+	}
+}

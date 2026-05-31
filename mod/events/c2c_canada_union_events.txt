@@ -1,0 +1,88 @@
+﻿namespace = c2c_canada_union
+
+c2c_canada_union.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_canada_union.1.t
+	desc = c2c_canada_union.1.d
+	flavor = c2c_canada_union.1.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "votp_monarch_holding_court"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	duration = 3
+
+	trigger = {
+		OR = {
+			c:ONT ?= ROOT
+			c:QUE ?= ROOT
+		}
+		exists = c:ONT
+		exists = c:QUE
+	}
+
+	immediate = {
+		c:ONT = {
+			set_variable = c2c_union_act_decreed
+		}
+	}
+
+	option = {
+		name = c2c_canada_union.1.a
+		default_option = yes
+		c:ONT ?= {
+			annex_with_incorporation = c:QUE
+			add_modifier = {
+				name = c2c_act_of_union_assimilation_modifier
+				years = 20
+			}
+			random_scope_state = {
+				limit = {
+					state_region = s:STATE_ONTARIO_PENINSULA
+				}
+				add_modifier = {
+					name = c2c_welland_canals_modifier
+					years = 10
+				}
+			}
+		}
+		if = {
+			limit = {
+				c:QUE ?= ROOT
+			}
+			play_as = c:ONT
+		}
+	}
+
+	option = {
+		name = c2c_canada_union.1.b
+		c:ONT ?= {
+			annex_with_incorporation = c:QUE
+			add_primary_culture = cu:franco_canadian
+			add_modifier = {
+				name = c2c_act_of_union_pluralism_modifier
+				years = 20
+			}
+			top_overlord = {
+				change_relations = {
+					country = c:ONT
+					value = -25
+				}
+			}
+		}
+		if = {
+			limit = {
+				c:QUE ?= ROOT
+			}
+			play_as = c:ONT
+		}
+	}
+}

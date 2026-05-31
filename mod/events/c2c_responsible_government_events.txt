@@ -1,0 +1,479 @@
+﻿namespace = c2c_responsible_gov
+
+c2c_responsible_gov.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_responsible_gov.1.t
+	desc = c2c_responsible_gov.1.d
+	flavor = c2c_responsible_gov.1.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		is_subject = yes
+	}
+
+	immediate = {
+		every_interest_group_in_government = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_c2c_patriote
+					has_ideology = ideology:ideology_sovereignist
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_sovereignist_leader
+							has_ideology = ideology:ideology_c2c_reformer_can
+						}
+					}
+				}
+			}
+			add_modifier = {
+				name = c2c_political_victory_modifier
+				years = 10
+			}
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.1.a
+		default_option = yes
+		active_law:lawgroup_distribution_of_power ?= {
+			every_scope_amendment = {
+				remove_amendment = yes
+			}
+		}
+		set_variable = c2c_responsible_government_var
+		if = {
+			limit = {
+				OR = {
+					is_subject_type = subject_type_colony
+					is_subject_type = subject_type_c2c_responsible_colony
+				}
+			}
+			change_subject_type = subject_type_c2c_responsible_colony
+		}
+		activate_law = law_type:law_c2c_responsible_colonial_administration
+		add_loyalists = { value = 0.25 }
+		add_modifier = {
+			name = c2c_responsible_government_granted
+			years = 5
+			is_decaying = yes
+		}
+	}
+}
+
+c2c_responsible_gov.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_responsible_gov.2.t
+	desc = c2c_responsible_gov.2.d
+	flavor = c2c_responsible_gov.2.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		is_subject = yes
+	}
+
+	immediate = {
+		random_scope_character = {
+			limit = {
+				OR = {
+					has_ideology = ideology:ideology_reformer
+					has_ideology = ideology:ideology_c2c_reformer_can
+				}
+			}
+			save_scope_as = reformer_character
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.2.a
+		default_option = yes
+		scope:reformer_character ?= {
+			add_modifier = {
+				name = c2c_reformer_encouraged
+				years = 5
+				is_decaying = yes
+			}
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.2.b
+		scope:reformer_character ?= {
+			add_modifier = {
+				name = c2c_reformer_discouraged
+				years = 5
+				is_decaying = yes
+			}
+		}
+	}
+
+	after = {
+		c:GBR ?= {
+			trigger_event = { id = c2c_responsible_gov.3 popup = yes }
+		}
+	}
+}
+
+c2c_responsible_gov.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_responsible_gov.3.t
+	desc = c2c_responsible_gov.3.d
+	flavor = c2c_responsible_gov.3.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		c:GBR ?= ROOT
+		any_country = {
+			has_variable = c2c_lobby_colonial_office_user
+		}
+	}
+
+	immediate = {
+		random_country = {
+			limit = {
+				has_variable = c2c_lobby_colonial_office_user
+			}
+			save_scope_as = colony_scope
+		}
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+			}
+			save_scope_as = colonial_office
+			leader = {
+				save_scope_as = colonial_office_leader
+			}
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.3.a
+		default_option = yes
+		scope:colony_scope ?= {
+			post_notification = c2c_colonial_office_meeting_refused
+			add_liberty_desire = 15
+		}
+		ai_chance = {
+			base = 75
+			modifier = {
+				trigger = {
+					any_interest_group = {
+						is_in_government = yes
+						OR = {
+							is_interest_group_type = ig_landowners
+							is_interest_group_type = ig_armed_forces
+						}
+					}
+				}
+				add = 25
+			}
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.3.b
+		scope:colony_scope ?= {
+			post_notification = c2c_colonial_office_meeting_accepted
+		}
+		change_relations = {
+			country = scope:colony_scope
+			value = 15
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				trigger = {
+					any_interest_group = {
+						is_in_government = yes
+						is_interest_group_type = ig_intelligentsia
+					}
+				}
+				add = 50
+			}
+		}
+	}
+
+	after = {
+		hidden_effect = {
+			if = {
+				limit = {
+					exists = global_var:c2c_union_act_support
+				}
+				change_global_variable = {
+					name = c2c_union_act_support
+					add = 15
+				}
+			}
+			else = {
+				set_global_variable = {
+					name = c2c_union_act_support
+					value = 15
+				}
+			}
+			scope:colony_scope ?= {
+				remove_variable = c2c_lobby_colonial_office_user
+			}
+		}
+	}
+}
+
+c2c_responsible_gov.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_responsible_gov.4.t
+	desc = c2c_responsible_gov.4.d
+	flavor = c2c_responsible_gov.4.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		is_subject = yes
+	}
+
+	immediate = {
+		random_interest_group = {
+			limit = {
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_reformer
+						has_ideology = ideology:ideology_c2c_reformer_can
+					}
+				}
+			}
+			save_scope_as = reform_ig
+		}
+		random_interest_group = {
+			limit = {
+				leader = { has_ideology = ideology:ideology_radical }
+			}
+			save_scope_as = radical_ig
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.4.a
+		default_option = yes
+		scope:reform_ig ?= {
+			add_modifier = {
+				name = c2c_resolutions_drafter
+				is_decaying = yes
+				years = 5
+			}
+		}
+		c:GBR ?= {
+			trigger_event = { id = c2c_responsible_gov.5 popup = yes }
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.4.b
+		scope:radical_ig ?= {
+			add_modifier = {
+				name = c2c_resolutions_drafter
+				is_decaying = yes
+				years = 5
+			}
+		}
+		c:GBR ?= {
+			trigger_event = { id = c2c_responsible_gov.6 popup = yes }
+		}
+	}
+
+	after = {
+		hidden_effect = {
+			if = {
+				limit = {
+					exists = global_var:c2c_union_act_support
+				}
+				change_global_variable = {
+					name = c2c_union_act_support
+					add = 25
+				}
+			}
+			else = {
+				set_global_variable = {
+					name = c2c_union_act_support
+					value = 25
+				}
+			}
+		}
+	}
+}
+
+c2c_responsible_gov.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_responsible_gov.5.t
+	desc = c2c_responsible_gov.5.d
+	flavor = c2c_responsible_gov.5.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	duration = 3
+
+	trigger = {
+		c:GBR ?= ROOT
+		any_country = {
+			has_variable = c2c_draft_resolutions_user
+		}
+	}
+
+	immediate = {
+		random_country = {
+			limit = {
+				has_variable = c2c_draft_resolutions_user
+			}
+			save_scope_as = colony_scope
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.5.a
+		default_option = yes
+		change_relations = {
+			country = scope:colony_scope
+			value = -10
+		}
+		scope:colony_scope ?= {
+			add_liberty_desire = 5
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.5.b
+		change_relations = {
+			country = scope:colony_scope
+			value = 10
+		}
+		scope:colony_scope ?= {
+			add_liberty_desire = -5
+		}
+	}
+
+	after = {
+		scope:colony_scope ?= {
+			remove_variable = c2c_draft_resolutions_user
+		}
+	}
+}
+
+c2c_responsible_gov.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_responsible_gov.6.t
+	desc = c2c_responsible_gov.6.d
+	flavor = c2c_responsible_gov.6.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	duration = 3
+
+	trigger = {
+		c:GBR ?= ROOT
+		any_country = {
+			has_variable = c2c_draft_resolutions_user
+		}
+	}
+
+	immediate = {
+		random_country = {
+			limit = {
+				has_variable = c2c_draft_resolutions_user
+			}
+			save_scope_as = colony_scope
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.6.a
+		default_option = yes
+		change_relations = {
+			country = scope:colony_scope
+			value = -25
+		}
+		scope:colony_scope ?= {
+			add_liberty_desire = 10
+		}
+	}
+
+	option = {
+		name = c2c_responsible_gov.6.b
+		scope:colony_scope ?= {
+			add_liberty_desire = -10
+			add_loyalists = { value = 0.10 }
+		}
+	}
+
+	after = {
+		scope:colony_scope ?= {
+			remove_variable = c2c_draft_resolutions_user
+		}
+	}
+}

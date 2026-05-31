@@ -37,6 +37,11 @@ The dataset documentation cites, among other sources:
 Modified and adapted for use in this mod.
 
 
+MOD CONTENT
+
+Canada Flavour Mod, an unreleased work-in-progress by Thomas, was used as the source for adapted Canadian flavor content including responsible government, Family Compact, rebellion, Act of Union, and colonial character material.
+
+
 ACKNOWLEDGEMENTS
 
 While C2C directly uses "Hail, Columbia!" by CaelReader as a dependency, it was also a huge reference for modding in the first place. 

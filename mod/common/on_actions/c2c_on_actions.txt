@@ -38,3 +38,12 @@ c2c_mod_detector = {
 		}
 	}
 }
+
+on_monthly_pulse_country = {
+	random_events = {
+		500 = 0
+		2 = c2c_no_confidence.1
+		1 = c2c_characters.1
+		1 = c2c_characters.2
+	}
+}

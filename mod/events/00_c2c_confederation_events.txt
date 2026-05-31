@@ -1,172 +1,189 @@
-﻿namespace = can_aus
+﻿namespace = c2c_confederation
 
-# Canadian colony absorbs a poorer neighbor
-can_aus.1 = {
+c2c_confederation.1 = {
 	type = country_event
 	placement = ROOT
 
-	title = can_aus.1.t
-	desc = can_aus.1.d
-	flavor = can_aus.1.f
+	title = c2c_confederation.1.t
+	desc = c2c_confederation.1.d
+	flavor = c2c_confederation.1.f
 
 	event_image = {
-		video = "ep1_transfer_of_authority"
+		video = "southamerica_aristocrats"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
 
 	duration = 3
 
 	trigger = {
-		NOT = { c:NEW = THIS }
+		c2c_is_confederation_partner = yes
+		global_var:c2c_confederation_interest >= 100
 	}
 
 	immediate = {
-		random_neighbouring_state = {
-			limit = {
-				owner = {
-					is_ai = yes
-					relations:root >= relations_threshold:amicable
-					capital = {
-						is_in_geographic_region = geographic_region_greater_canada
-					}
-					is_subject = yes
-					NOT = { THIS = ROOT }
-					NOT = { c:NEW = THIS }
-					top_overlord = {
-						THIS = root.top_overlord
-					}
-					this.gdp < root.gdp
-				}
-			}
-			owner = { save_scope_as = canada_annex_scope }
-		}
-		top_overlord = {
-			save_scope_as = canada_overlord_country
-			ruler = {
-				save_scope_as = canada_overlord_ruler
-			}
+		c2c_confederation_clear_initiator_flags = yes
+		set_variable = {
+			name = c2c_confederation_initiator
+			days = 365
 		}
 	}
 
 	option = {
-		name = can_aus.1.a
+		name = c2c_confederation.1.a
 		default_option = yes
-		hidden_effect = {
-			every_state_in_canada = {
-				limit = {
-					has_claim_by = scope:canada_annex_scope
-				}
-				state_region = {
-					remove_claim = scope:canada_annex_scope
-					add_claim = ROOT
+		every_country = {
+			limit = {
+				c2c_is_confederation_partner = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
 				}
 			}
+			trigger_event = {
+				id = c2c_confederation.2
+				days = 30
+				popup = yes
+			}
 		}
-		annex_with_incorporation = scope:canada_annex_scope
+		trigger_event = {
+			id = c2c_confederation.3
+			days = 90
+			popup = yes
+		}
 	}
 }
 
-# Britain mashes 2 Canadians together
-can_aus.2 = {
+c2c_confederation.2 = {
 	type = country_event
 	placement = ROOT
 
-	title = can_aus.2.t
-	desc = can_aus.2.d
-	flavor = can_aus.1.f
+	title = c2c_confederation.2.t
+	desc = c2c_confederation.2.d
+	flavor = c2c_confederation.2.f
 
 	event_image = {
-		video = "ep1_power_blocs"
+		video = "southamerica_aristocrats"
 	}
 
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 
-	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
 
 	duration = 3
 
 	trigger = {
+		c2c_is_confederation_partner = yes
 	}
 
 	immediate = {
-		random_subject_or_below = {
+		random_country = {
 			limit = {
-				capital = {
-					is_in_geographic_region = geographic_region_greater_canada
-				}
-				relations:root >= relations_threshold:amicable
-				is_ai = yes
-				NOT = { c:NEW = THIS }
+				has_variable = c2c_confederation_initiator
 			}
-			save_scope_as = canada_scope_1
-		}
-		random_subject_or_below = {
-			limit = {
-				capital = {
-					is_in_geographic_region = geographic_region_greater_canada
-				}
-				relations:root >= relations_threshold:amicable
-				is_ai = yes
-				NOT = { c:NEW = THIS }
-				NOT = {
-					scope:canada_scope_1 = THIS
-				}
-			}
-			save_scope_as = canada_scope_2
+			save_scope_as = c2c_initiator_scope
 		}
 	}
 
 	option = {
-		name = can_aus.2.a
+		name = c2c_confederation.2.a
 		default_option = yes
+		ai_chance = {
+			base = 25
+			modifier = {
+				trigger = {
+					exists = scope:c2c_initiator_scope
+					relations:scope:c2c_initiator_scope >= relations_threshold:amicable
+				}
+				add = 35
+			}
+			modifier = {
+				trigger = {
+					exists = scope:c2c_initiator_scope
+					this.gdp < scope:c2c_initiator_scope.gdp
+				}
+				add = 25
+			}
+			modifier = {
+				trigger = {
+					exists = scope:c2c_initiator_scope
+					top_overlord = {
+						THIS = scope:c2c_initiator_scope.top_overlord
+					}
+				}
+				add = 15
+			}
+		}
 		if = {
 			limit = {
-				scope:canada_scope_1.gdp > scope:canada_scope_2.gdp
+				exists = scope:c2c_initiator_scope
+			}
+			if = {
+				limit = { is_player = yes }
+				play_as = scope:c2c_initiator_scope
+			}
+			every_scope_character = {
+				limit = { is_historical = yes }
+				transfer_character = scope:c2c_initiator_scope
 			}
 			hidden_effect = {
 				every_state_in_canada = {
 					limit = {
-						has_claim_by = scope:canada_scope_2
+						has_claim_by = ROOT
 					}
 					state_region = {
-						remove_claim = scope:canada_scope_2
-						add_claim = scope:canada_scope_1
+						remove_claim = ROOT
+						add_claim = scope:c2c_initiator_scope
 					}
 				}
 			}
-			scope:canada_scope_1 = {
-				annex_with_incorporation = scope:canada_scope_2
+			scope:c2c_initiator_scope = {
+				annex_with_incorporation = ROOT
 			}
 		}
-		else = {
-			hidden_effect = {
-				every_state_in_canada = {
-					limit = {
-						has_claim_by = scope:canada_scope_1
-					}
-					state_region = {
-						remove_claim = scope:canada_scope_1
-						add_claim = scope:canada_scope_2
-					}
-				}
+	}
+
+	option = {
+		name = c2c_confederation.2.b
+		ai_chance = {
+			base = 75
+		}
+		if = {
+			limit = {
+				exists = scope:c2c_initiator_scope
 			}
-			scope:canada_scope_2 = {
-				annex_with_incorporation = scope:canada_scope_1
+			change_relations = {
+				country = scope:c2c_initiator_scope
+				value = -10
+			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = {
+				exists = scope:c2c_initiator_scope
+			}
+			scope:c2c_initiator_scope = {
+				trigger_event = {
+					id = c2c_confederation.3
+					days = 1
+					popup = no
+				}
 			}
 		}
 	}
 }
 
-can_aus.5 = {
+c2c_confederation.3 = {
 	type = country_event
 	placement = ROOT
 
-	title = can_aus.5.t
-	desc = can_aus.5.d
-	flavor = can_aus.5.f
+	title = c2c_confederation.3.t
+	desc = c2c_confederation.3.d
+	flavor = c2c_confederation.3.f
 
 	event_image = {
 		video = "unspecific_signed_contract"
@@ -179,20 +196,24 @@ can_aus.5 = {
 	duration = 3
 
 	trigger = {
-	}
-
-	immediate = {
-		top_overlord = {
-			save_scope_as = canada_overlord_country
-		}
+		has_variable = c2c_confederation_initiator
+		NOT = { has_variable = c2c_confederation_proclaimed }
 	}
 
 	option = {
-		name = can_aus.5.a
+		name = c2c_confederation.3.a
+		default_option = yes
+		set_variable = {
+			name = c2c_confederation_proclaimed
+		}
 		add_modifier = {
 			name = can_unified_canada
 			days = normal_modifier_time
 		}
+		change_tag = CAN
+		add_primary_culture = cu:anglo_canadian
+		add_primary_culture = cu:franco_canadian
+		add_primary_culture = cu:acadian
 		if = {
 			limit = {
 				is_subject = yes
@@ -200,257 +221,11 @@ can_aus.5 = {
 			}
 			change_subject_type = subject_type_c2c_self_governing_dominion
 		}
-		if = {
-			limit = {
-				any_scope_state = {
-					OR = {
-						state_region = s:STATE_BRITISH_COLUMBIA
-						state_region = s:STATE_VANCOUVER_ISLAND
-					}
-				}
-			}
-			s:STATE_BRITISH_COLUMBIA = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_BC_INTERIOR = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_UPPER_BC = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_VANCOUVER_ISLAND = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
+		activate_law = law_type:law_parliamentary_republic
+		call_election = {
+			months = 3
 		}
-		if = {
-			limit = {
-				any_scope_state = {
-					OR = {
-						state_region = s:STATE_ONTARIO
-						state_region = s:STATE_ONTARIO_PENINSULA
-					}
-				}
-			}
-			s:STATE_ONTARIO = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_ONTARIO_PENINSULA = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_ALGOMA = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_NORTHWEST_ONTARIO = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-		}
-		if = {
-			limit = {
-				any_scope_state = {
-					OR = {
-						state_region = s:STATE_QUEBEC
-						state_region = s:STATE_SAINT_LAURENT
-					}
-				}
-			}
-			s:STATE_QUEBEC = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_SAINT_LAURENT = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_QUEBEC_SAGUENAY = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_NOUVEAU_QUEBEC = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-		}
-		s:STATE_NUNAVUT = {
-			every_scope_state = {
-				limit = { owner = { is_country_type = decentralized } }
-				set_state_owner = root
-			}
-		}
-		s:STATE_NORTHWEST_TERRITORIES = {
-			every_scope_state = {
-				limit = { owner = { is_country_type = decentralized } }
-				set_state_owner = root
-			}
-		}
-		s:STATE_YUKON_TERRITORY = {
-			every_scope_state = {
-				limit = { owner = { is_country_type = decentralized } }
-				set_state_owner = root
-			}
-		}
-		if = {
-			limit = {
-				any_scope_state = {
-					state_region = s:STATE_SASKATCHEWAN
-				}
-			}
-			s:STATE_SASKATCHEWAN = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_NORTH_SASKATCHEWAN = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-		}
-		if = {
-			limit = {
-				any_scope_state = {
-					OR = {
-						state_region = s:STATE_ALBERTA
-						state_region = s:STATE_EDMONTON
-					}
-				}
-			}
-			s:STATE_ALBERTA = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_EDMONTON = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_ATHABASCA = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-		}
-		if = {
-			limit = {
-				any_scope_state = {
-					state_region = s:STATE_MANITOBA
-				}
-			}
-			s:STATE_MANITOBA = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-			s:STATE_KEEWATIN = {
-				every_scope_state = {
-					limit = { owner = { is_country_type = decentralized } }
-					set_state_owner = root
-				}
-			}
-		}
-	}
-}
-
-can_aus.6 = {
-	type = country_event
-	placement = ROOT
-
-	title = can_aus.5.t
-	desc = can_aus.6.d
-	flavor = can_aus.5.f
-
-	event_image = {
-		video = "unspecific_signed_contract"
-	}
-
-	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
-
-	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
-
-	duration = 3
-
-	trigger = {
-	}
-
-	immediate = {
-		random_subject_or_below = {
-			limit = {
-				OR = {
-					country_has_primary_culture = cu:anglo_canadian
-					country_has_primary_culture = cu:franco_canadian
-					country_has_primary_culture = cu:acadian
-				}
-				any_scope_state = {
-					OR = {
-						state_region = s:STATE_NEWFOUNDLAND
-						state_region = s:STATE_LABRADOR
-						state_region = s:STATE_NOVA_SCOTIA
-						state_region = s:STATE_NEW_BRUNSWICK
-						state_region = s:STATE_SAINT_LAURENT
-						state_region = s:STATE_QUEBEC_SAGUENAY
-						state_region = s:STATE_NOUVEAU_QUEBEC
-						state_region = s:STATE_ONTARIO_PENINSULA
-						state_region = s:STATE_ALGOMA
-						state_region = s:STATE_NORTHWEST_ONTARIO
-						state_region = s:STATE_MANITOBA
-						state_region = s:STATE_SASKATCHEWAN
-						state_region = s:STATE_ALBERTA
-						state_region = s:STATE_BC_INTERIOR
-						state_region = s:STATE_BRITISH_COLUMBIA
-						state_region = s:STATE_YUKON_TERRITORY
-						state_region = s:STATE_NORTHWEST_TERRITORIES
-						state_region = s:STATE_NUNAVUT
-					}
-					count >= 15
-				}
-			}
-			save_scope_as = canada_country
-		}
-	}
-
-	option = {
-		name = can_aus.5.a
-		add_modifier = {
-			name = gbr_unified_canada
-			days = normal_modifier_time
-		}
+		c2c_confederation_absorb_decentralized_canada_effect = yes
+		c2c_confederation_ottawa_hub_effect = yes
 	}
 }

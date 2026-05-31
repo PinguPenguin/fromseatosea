@@ -1,0 +1,69 @@
+﻿namespace = c2c_no_confidence
+
+c2c_no_confidence.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_no_confidence.1.t
+	desc = c2c_no_confidence.1.d
+	flavor = c2c_no_confidence.1.f
+
+	duration = 3
+
+	cooldown = { years = 10 }
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	trigger = {
+		capital = {
+			is_in_geographic_region = geographic_region_greater_canada
+		}
+		OR = {
+			country_has_primary_culture = cu:anglo_canadian
+			country_has_primary_culture = cu:franco_canadian
+			country_has_primary_culture = cu:acadian
+		}
+		OR = {
+			has_law = law_type:law_presidential_republic
+			has_law = law_type:law_parliamentary_republic
+		}
+		government_legitimacy < 50
+		enacting_any_law = yes
+		enactment_setback_count > 1
+	}
+
+	immediate = {
+		random_interest_group = {
+			limit = {
+				has_party = yes
+				is_in_government = yes
+			}
+			party = {
+				save_scope_as = c2c_ruling_party
+			}
+		}
+		cancel_enactment = yes
+	}
+
+	option = {
+		name = c2c_no_confidence.1.a
+		default_option = yes
+		call_election = {
+			months = 3
+		}
+		if = {
+			limit = {
+				exists = scope:c2c_ruling_party
+			}
+			scope:c2c_ruling_party = {
+				add_momentum = momentum_medium_decrease
+			}
+		}
+	}
+}

@@ -1,0 +1,141 @@
+﻿CHARACTERS = {
+	c:ONT ?= {
+		create_character = {
+			first_name = "John"
+			last_name = "Robinson"
+			historical = yes
+			culture = cu:anglo_canadian
+			age = 45
+			dna = dna_c2c_john_robinson
+			interest_group = ig_landowners
+			ideology = ideology_traditionalist
+			traits = {
+				ambitious
+			}
+		}
+
+		create_character = {
+			first_name = "Thomas_David"
+			last_name = "Morrison"
+			historical = yes
+			culture = cu:anglo_canadian
+			age = 43
+			interest_group = ig_petty_bourgeoisie
+			ideology = ideology_c2c_reformer_can
+		}
+
+		create_character = {
+			first_name = "Anthony"
+			last_name = "Van_Egmond"
+			historical = yes
+			culture = cu:dutch
+			age = 61
+			ig_leader = yes
+			interest_group = ig_rural_folk
+			ideology = ideology_c2c_reformer_can
+		}
+
+		create_character = {
+			first_name = "Egerton"
+			last_name = "Ryerson"
+			historical = yes
+			culture = cu:anglo_canadian
+			is_agitator = yes
+			age = 33
+			interest_group = ig_devout
+			ideology = ideology_utilitarian_leader
+		}
+
+		create_character = {
+			first_name = "Allan"
+			last_name = "MacNab"
+			historical = yes
+			culture = cu:anglo_canadian
+			age = 38
+			interest_group = ig_industrialists
+			role = character_role_magnate
+			holding_type = building_financial_district
+			home_region = STATE_ONTARIO_PENINSULA
+		}
+
+		create_character = {
+			first_name = "John"
+			last_name = "Strachan"
+			historical = yes
+			culture = cu:british
+			age = 58
+			dna = dna_c2c_john_strachan
+			ig_leader = yes
+			interest_group = ig_devout
+			ideology = ideology_c2c_colonial_moralist
+			traits = {
+				persistent
+			}
+		}
+	}
+
+	c:QUE ?= {
+		create_character = {
+			first_name = "Wolfred"
+			last_name = "Nelson"
+			historical = yes
+			culture = cu:anglo_canadian
+			age = 45
+			ig_leader = yes
+			interest_group = ig_intelligentsia
+			ideology = ideology_radical
+			traits = {
+				brave
+			}
+		}
+
+		create_character = {
+			first_name = "Peter"
+			last_name = "McGill"
+			historical = yes
+			culture = cu:anglo_canadian
+			age = 47
+			ig_leader = yes
+			interest_group = ig_industrialists
+			ideology = ideology_protectionist
+			traits = {
+				tactful
+			}
+		}
+	}
+
+	c:NVS ?= {
+		create_character = {
+			first_name = "Joseph"
+			last_name = "Howe"
+			historical = yes
+			culture = cu:anglo_canadian
+			age = 32
+			ig_leader = yes
+			interest_group = ig_intelligentsia
+			ideology = ideology_sovereignist_leader
+		}
+
+		create_character = {
+			first_name = "James"
+			last_name = "Johnston"
+			historical = yes
+			culture = cu:anglo_canadian
+			age = 44
+			ig_leader = yes
+			interest_group = ig_landowners
+			ideology = ideology_moderate
+		}
+
+		create_character = {
+			first_name = "James"
+			last_name = "Uniacke"
+			historical = yes
+			culture = cu:anglo_canadian
+			age = 37
+			ig_leader = yes
+			interest_group = ig_industrialists
+			ideology = ideology_moderate
+		}
+	}
+}

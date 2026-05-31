@@ -1,0 +1,137 @@
+﻿namespace = c2c_conferences
+
+c2c_conferences.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_conferences.1.t
+	desc = c2c_conferences.1.d
+	flavor = c2c_conferences.1.f
+
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		c2c_is_confederation_partner = yes
+	}
+
+	immediate = {
+		c2c_confederation_clear_initiator_flags = yes
+		set_variable = {
+			name = c2c_conference_initiator
+			days = 180
+		}
+	}
+
+	option = {
+		name = c2c_conferences.1.a
+		default_option = yes
+		c2c_confederation_hold_conference_effect = yes
+		every_country = {
+			limit = {
+				c2c_is_confederation_partner = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+			}
+			change_relations = {
+				country = root
+				value = 5
+			}
+			trigger_event = {
+				id = c2c_conferences.2
+				days = 15
+				popup = yes
+			}
+		}
+	}
+
+	option = {
+		name = c2c_conferences.1.b
+		ai_chance = {
+			base = 20
+		}
+		c2c_confederation_add_conference_interest_for_scope = yes
+	}
+}
+
+c2c_conferences.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_conferences.2.t
+	desc = c2c_conferences.2.d
+	flavor = c2c_conferences.2.f
+
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		c2c_is_confederation_partner = yes
+	}
+
+	immediate = {
+		random_country = {
+			limit = {
+				has_variable = c2c_conference_initiator
+			}
+			save_scope_as = c2c_conference_host
+		}
+	}
+
+	option = {
+		name = c2c_conferences.2.a
+		default_option = yes
+		ai_chance = {
+			base = 35
+			modifier = {
+				trigger = {
+					exists = scope:c2c_conference_host
+					relations:scope:c2c_conference_host >= relations_threshold:amicable
+				}
+				add = 35
+			}
+		}
+		c2c_confederation_add_conference_interest_for_scope = yes
+		if = {
+			limit = {
+				exists = scope:c2c_conference_host
+			}
+			change_relations = {
+				country = scope:c2c_conference_host
+				value = 10
+			}
+		}
+	}
+
+	option = {
+		name = c2c_conferences.2.b
+		ai_chance = {
+			base = 65
+		}
+		if = {
+			limit = {
+				exists = scope:c2c_conference_host
+			}
+			change_relations = {
+				country = scope:c2c_conference_host
+				value = -10
+			}
+		}
+	}
+}

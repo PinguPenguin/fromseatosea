@@ -11,23 +11,11 @@ Direct same-path overwrites
 common/journal_entries/00_canada_australia.txt
 je_canada_can
 je_canada_gbr
-je_australia_aus
-je_australia_gbr
 
 common/journal_entries/00_major_railroads.txt
 je_trans_siberian_railway
 je_trans_continental_railway
 je_canada_pacific_railway
-
-events/canada_australia_events.txt
-can_aus.1
-can_aus.2
-can_aus.3
-can_aus.4
-can_aus.5
-can_aus.6
-can_aus.7
-can_aus.8
 
 events/major_railways.txt
 major_railways.1
@@ -55,6 +43,10 @@ NBS
 
 common/scripted_buttons/zz_c2c_canada_australia_buttons.txt
 je_canada_unite_can_button
+
+common/parties/zz_c2c_canada_flavour_parties.txt
+conservative_party
+liberal_party
 
 common/dynamic_country_names/zz_c2c_dynamic_country_names.txt
 ONT

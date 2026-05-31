@@ -1,0 +1,144 @@
+﻿amendment_c2c_appointed_executive = {
+	parent = law_oligarchy
+
+	allowed_laws = {
+		law_wealth_voting
+		law_landed_voting
+	}
+
+	modifier = {
+		country_legitimacy_headofstate_add = 10
+		country_voting_power_base_add = -5
+		country_aristocrats_pol_str_mult = 0.25
+		country_capitalists_pol_str_mult = 0.15
+		country_authority_add = 50
+	}
+
+	possible = {
+		country_has_primary_culture = cu:anglo_canadian
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_landowners
+			is_interest_group_type = ig_industrialists
+		}
+	}
+
+	ai_will_revoke = {
+		NOT = {
+			any_interest_group = {
+				is_in_government = yes
+				OR = {
+					is_interest_group_type = ig_landowners
+					is_interest_group_type = ig_industrialists
+				}
+			}
+		}
+	}
+
+	can_repeal = {
+		legitimacy >= legitimacy_to_repeal_amendment
+	}
+
+	amendment_activism_multiplier = 0.75
+}
+
+amendment_c2c_clergy_reserves = {
+	parent = law_tenant_farmers
+
+	allowed_laws = {
+		law_homesteading
+	}
+
+	modifier = {
+		country_clergymen_pol_str_mult = 0.15
+		building_clergymen_shares_add = 2
+	}
+
+	possible = {
+		country_has_primary_culture = cu:anglo_canadian
+	}
+
+	would_sponsor = {
+		is_interest_group_type = ig_devout
+	}
+
+	ai_will_revoke = {
+		NOT = {
+			any_interest_group = {
+				is_in_government = yes
+				OR = {
+					is_interest_group_type = ig_devout
+					is_interest_group_type = ig_landowners
+				}
+			}
+		}
+	}
+}
+
+amendment_c2c_patronage_appointments = {
+	parent = law_hereditary_bureaucrats
+
+	allowed_laws = {
+		law_appointed_bureaucrats
+	}
+
+	modifier = {
+		state_bureaucracy_population_base_cost_factor_mult = -0.25
+		country_aristocrats_pol_str_mult = 0.10
+		country_industrialists_pol_str_mult = 0.05
+	}
+
+	possible = {
+		country_has_primary_culture = cu:anglo_canadian
+	}
+
+	would_sponsor = {
+		is_interest_group_type = ig_landowners
+	}
+
+	ai_will_revoke = {
+		NOT = {
+			any_interest_group = {
+				is_in_government = yes
+				is_interest_group_type = ig_landowners
+			}
+		}
+	}
+}
+
+amendment_c2c_meritocratic_appointments = {
+	parent = law_elected_bureaucrats
+
+	allowed_laws = {
+		law_appointed_bureaucrats
+	}
+
+	modifier = {
+		country_bureaucracy_investment_cost_factor_mult = -0.10
+	}
+
+	possible = {
+		country_has_primary_culture = cu:anglo_canadian
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_petty_bourgeoisie
+			is_interest_group_type = ig_intelligentsia
+		}
+	}
+
+	ai_will_revoke = {
+		NOT = {
+			any_interest_group = {
+				is_in_government = yes
+				OR = {
+					is_interest_group_type = ig_petty_bourgeoisie
+					is_interest_group_type = ig_intelligentsia
+				}
+			}
+		}
+	}
+}

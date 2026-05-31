@@ -1,0 +1,397 @@
+﻿je_c2c_responsible_government = {
+	group = je_group_historical_content
+	should_be_pinned_by_default_uninvolved_or_context = yes
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	is_shown_in_lobby = {
+		is_subject = yes
+		OR = {
+			country_has_primary_culture = cu:anglo_canadian
+			country_has_primary_culture = cu:franco_canadian
+			country_has_primary_culture = cu:acadian
+		}
+	}
+
+	is_shown_when_inactive = {
+		is_subject = yes
+		OR = {
+			country_has_primary_culture = cu:anglo_canadian
+			country_has_primary_culture = cu:franco_canadian
+			country_has_primary_culture = cu:acadian
+		}
+		NOT = { has_variable = c2c_responsible_government_var }
+	}
+
+	possible = {
+		is_subject = yes
+		OR = {
+			is_subject_type = subject_type_c2c_responsible_colony
+			is_subject_type = subject_type_colony
+		}
+	}
+
+	modifiers_while_active = { c2c_canada_colonial_rule_modifier }
+
+	immediate = {
+		set_variable = {
+			name = c2c_sovereignist_in_gov_timer
+			value = 0
+		}
+	}
+
+	scripted_button = je_c2c_responsible_government_button_lobby
+	scripted_button = je_c2c_responsible_government_button_resolution
+
+	complete = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		top_overlord = {
+			relations:root >= relations_threshold:amicable
+		}
+		liberty_desire >= 50
+		custom_tooltip = {
+			text = c2c_sovereignist_in_gov_tt
+			var:c2c_sovereignist_in_gov_timer >= 6
+		}
+		any_interest_group_in_government = {
+			OR = {
+				has_ideology = ideology:ideology_sovereignist
+				has_ideology = ideology:ideology_c2c_patriote
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_sovereignist_leader
+						has_ideology = ideology:ideology_reformer
+						has_ideology = ideology:ideology_c2c_reformer_can
+					}
+				}
+			}
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = c2c_responsible_gov.1 popup = yes }
+		hidden_effect = {
+			set_variable = c2c_responsible_government_var
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					any_interest_group_in_government = {
+						OR = {
+							has_ideology = ideology:ideology_sovereignist
+							has_ideology = ideology:ideology_c2c_patriote
+							leader = {
+								OR = {
+									has_ideology = ideology:ideology_sovereignist_leader
+									has_ideology = ideology:ideology_reformer
+									has_ideology = ideology:ideology_c2c_reformer_can
+								}
+							}
+						}
+					}
+				}
+				change_variable = {
+					name = c2c_sovereignist_in_gov_timer
+					add = 1
+				}
+			}
+			else = {
+				set_variable = {
+					name = c2c_sovereignist_in_gov_timer
+					value = 0
+				}
+			}
+		}
+	}
+
+	weight = 100
+}
+
+je_c2c_family_compact = {
+	group = je_group_historical_content
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+	scripted_progress_bar = c2c_cement_conservatism_bar
+	custom_completion_header = je_c2c_family_compact_complete_header
+	custom_failure_header = je_c2c_family_compact_failure_header
+
+	is_shown_when_inactive = {
+		c:ONT ?= THIS
+		NOT = { has_variable = c2c_family_compact_resolved }
+	}
+
+	possible = {
+		c:ONT ?= THIS
+		NOT = { has_variable = c2c_family_compact_resolved }
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = je_c2c_family_compact_progress_bar_complete_tt
+			scope:journal_entry = {
+				"scripted_bar_progress(c2c_cement_conservatism_bar)" >= 100
+			}
+		}
+		government_legitimacy > 50
+		has_ruling_interest_group = ig_devout
+		has_ruling_interest_group = ig_landowners
+	}
+
+	on_complete = {
+		trigger_event = { id = c2c_family_compact.1 popup = yes }
+		set_variable = c2c_family_compact_resolved
+		add_modifier = {
+			name = c2c_family_compact_cemented_modifier
+			is_decaying = yes
+			years = 5
+		}
+	}
+
+	fail = {
+		NOT = { has_ruling_interest_group = ig_devout }
+		NOT = { has_ruling_interest_group = ig_landowners }
+		ig:ig_devout = { ig_clout < 0.2 }
+		ig:ig_landowners = { ig_clout < 0.2 }
+	}
+
+	on_fail = {
+		trigger_event = { id = c2c_family_compact.2 popup = yes }
+		set_variable = c2c_family_compact_resolved
+	}
+}
+
+je_c2c_chateau_clique = {
+	group = je_group_historical_content
+	icon = "gfx/interface/icons/generic_icons/in_government_icon.dds"
+	custom_completion_header = je_c2c_chateau_clique_complete_header
+	custom_failure_header = je_c2c_chateau_clique_failure_header
+
+	is_shown_when_inactive = {
+		c:QUE ?= THIS
+		NOT = { has_variable = c2c_chateau_clique_resolved }
+	}
+
+	possible = {
+		c:QUE ?= THIS
+		NOT = { has_variable = c2c_chateau_clique_resolved }
+	}
+
+	immediate = {
+		set_variable = {
+			name = c2c_chateau_clique_timer
+			value = 0
+		}
+		set_variable = {
+			name = c2c_no_english_igs
+			value = 0
+		}
+	}
+
+	complete = {
+		government_legitimacy > 50
+		has_ruling_interest_group = ig_industrialists
+		has_ruling_interest_group = ig_landowners
+		custom_tooltip = {
+			text = c2c_chateau_clique_timer_tt
+			var:c2c_chateau_clique_timer >= 120
+		}
+	}
+
+	on_complete = {
+		trigger_event = { id = c2c_chateau_clique.1 popup = yes }
+		set_variable = c2c_chateau_clique_resolved
+		add_modifier = {
+			name = c2c_chateau_clique_cemented_modifier
+			is_decaying = yes
+			years = 5
+		}
+	}
+
+	fail = {
+		custom_tooltip = {
+			text = c2c_no_english_igs_tt
+			var:c2c_no_english_igs >= 12
+		}
+		custom_tooltip = {
+			text = c2c_no_english_igs_current_tt
+			NOT = {
+				any_interest_group = {
+					leader = {
+						OR = {
+							has_culture = cu:anglo_canadian
+							has_culture = cu:british
+						}
+					}
+				}
+			}
+		}
+		NOT = { has_ruling_interest_group = ig_industrialists }
+		NOT = { has_ruling_interest_group = ig_landowners }
+		ig:ig_industrialists ?= { ig_clout < 0.2 }
+		ig:ig_landowners ?= { ig_clout < 0.2 }
+	}
+
+	on_fail = {
+		trigger_event = { id = c2c_chateau_clique.2 popup = yes }
+		set_variable = c2c_chateau_clique_resolved
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					NOT = {
+						any_interest_group = {
+							leader = {
+								OR = {
+									has_culture = cu:anglo_canadian
+									has_culture = cu:british
+								}
+							}
+						}
+					}
+				}
+				change_variable = {
+					name = c2c_no_english_igs
+					add = 1
+				}
+				set_variable = {
+					name = c2c_chateau_clique_timer
+					value = 0
+				}
+			}
+			else = {
+				change_variable = {
+					name = c2c_chateau_clique_timer
+					add = 1
+				}
+				set_variable = {
+					name = c2c_no_english_igs
+					value = 0
+				}
+			}
+		}
+	}
+}
+
+je_c2c_representation_by_pop = {
+	group = je_group_historical_content
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+
+	is_shown_when_inactive = {
+		OR = {
+			c:ONT ?= THIS
+			c:CAN ?= THIS
+		}
+		NOT = { has_variable = c2c_representation_by_pop_resolved }
+	}
+
+	possible = {
+		has_variable = c2c_union_act_decreed
+		any_scope_state = {
+			is_incorporated = yes
+			OR = {
+				state_region = s:STATE_QUEBEC
+				state_region = s:STATE_SAINT_LAURENT
+				state_region = s:STATE_QUEBEC_SAGUENAY
+				state_region = s:STATE_NOUVEAU_QUEBEC
+			}
+		}
+	}
+
+	complete = {
+		OR = {
+			has_law_or_variant = law_type:law_census_voting
+			has_law_or_variant = law_type:law_universal_suffrage
+		}
+	}
+
+	on_complete = {
+		set_variable = c2c_representation_by_pop_resolved
+		add_modifier = {
+			name = c2c_representation_by_pop_modifier
+			is_decaying = yes
+			years = 5
+		}
+	}
+
+	invalid = {
+		NOT = {
+			OR = {
+				c:ONT ?= THIS
+				c:CAN ?= THIS
+			}
+		}
+	}
+}
+
+je_c2c_canada_rebellion = {
+	group = je_group_historical_content
+	should_be_pinned_by_default = yes
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+	custom_completion_header = je_c2c_canada_rebellion_complete_header
+	custom_failure_header = je_c2c_canada_rebellion_failure_header
+
+	is_shown_when_inactive = {
+		is_subject = yes
+		OR = {
+			country_has_primary_culture = cu:anglo_canadian
+			country_has_primary_culture = cu:franco_canadian
+		}
+		NOT = { has_variable = c2c_canada_rebellion_happened }
+	}
+
+	possible = {
+		is_subject = yes
+		NOT = { has_variable = c2c_canada_rebellion_happened }
+		OR = {
+			country_has_primary_culture = cu:anglo_canadian
+			country_has_primary_culture = cu:franco_canadian
+		}
+		any_political_movement = {
+			is_political_movement_type = movement_radical
+			political_movement_radicalism >= 0.25
+		}
+	}
+
+	complete = {
+		has_revolution = no
+		any_political_movement = {
+			is_political_movement_type = movement_radical
+			political_movement_radicalism <= 0.25
+			political_movement_support <= 0.10
+		}
+	}
+
+	on_complete = {
+		set_variable = c2c_canada_rebellion_happened
+		add_loyalists = { value = 0.10 }
+	}
+
+	fail = {
+		OR = {
+			any_political_movement = {
+				is_political_movement_type = movement_radical
+				political_movement_radicalism >= 0.75
+			}
+			has_revolution = yes
+		}
+	}
+
+	on_fail = {
+		trigger_event = { id = c2c_rebellion.1 popup = yes }
+		set_variable = c2c_canada_rebellion_happened
+		set_variable = c2c_ongoing_canada_rebellion
+	}
+
+	on_monthly_pulse = {
+		random_events = {
+			100 = 0
+			10 = c2c_rebellion.3
+			10 = c2c_rebellion.4
+			10 = c2c_rebellion.5
+		}
+	}
+}

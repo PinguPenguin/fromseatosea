@@ -1,0 +1,24 @@
+﻿c2c_is_confederation_candidate = {
+	is_subject = yes
+	OR = {
+		is_subject_type = subject_type_colony
+		is_subject_type = subject_type_c2c_responsible_colony
+	}
+	capital = {
+		is_in_geographic_region = geographic_region_greater_canada
+	}
+	OR = {
+		country_has_primary_culture = cu:anglo_canadian
+		country_has_primary_culture = cu:franco_canadian
+		country_has_primary_culture = cu:acadian
+	}
+	hidden_trigger = {
+		NOT = { c:NEW ?= THIS }
+		NOT = { c:CAN ?= THIS }
+	}
+}
+
+c2c_is_confederation_partner = {
+	c2c_is_confederation_candidate = yes
+	has_journal_entry = je_canada_can
+}

@@ -1,0 +1,43 @@
+﻿c2c_union_act_decision = {
+	is_shown = {
+		c:GBR ?= ROOT
+		exists = c:ONT
+		exists = c:QUE
+		c:ONT = { is_subject_of = ROOT }
+		c:QUE = { is_subject_of = ROOT }
+		NOT = { has_global_variable = c2c_act_of_union_enacted }
+	}
+
+	possible = {
+		government_legitimacy > 30
+		custom_tooltip = {
+			text = c2c_union_act_support_tt
+			global_var:c2c_union_act_support >= 200
+		}
+		c:ONT = {
+			is_subject_of = ROOT
+			OR = {
+				is_subject_type = subject_type_c2c_responsible_colony
+				is_subject_type = subject_type_colony
+			}
+		}
+		c:QUE = {
+			is_subject_of = ROOT
+			OR = {
+				is_subject_type = subject_type_c2c_responsible_colony
+				is_subject_type = subject_type_colony
+			}
+		}
+	}
+
+	when_taken = {
+		set_global_variable = c2c_act_of_union_enacted
+		c:ONT = {
+			trigger_event = { id = c2c_canada_union.1 popup = yes }
+		}
+	}
+
+	ai_chance = {
+		value = 5
+	}
+}

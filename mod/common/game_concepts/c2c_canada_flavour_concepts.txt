@@ -1,0 +1,7 @@
+﻿concept_c2c_responsible_government = {
+	texture = "gfx/interface/icons/event_icons/event_scales.dds"
+}
+
+concept_c2c_family_compact = {
+	texture = "gfx/interface/icons/event_icons/event_portrait.dds"
+}

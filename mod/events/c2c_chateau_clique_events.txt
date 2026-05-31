@@ -1,0 +1,57 @@
+﻿namespace = c2c_chateau_clique
+
+c2c_chateau_clique.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_chateau_clique.1.t
+	desc = c2c_chateau_clique.1.d
+	flavor = c2c_chateau_clique.1.f
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_c2c_chateau_clique
+	}
+
+	option = {
+		name = c2c_chateau_clique.1.a
+		default_option = yes
+	}
+}
+
+c2c_chateau_clique.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_chateau_clique.2.t
+	desc = c2c_chateau_clique.2.d
+	flavor = c2c_chateau_clique.2.f
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+		has_journal_entry = je_c2c_chateau_clique
+	}
+
+	option = {
+		name = c2c_chateau_clique.2.a
+		default_option = yes
+	}
+}

@@ -1,0 +1,167 @@
+﻿namespace = c2c_characters
+
+c2c_characters.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_characters.1.t
+	desc = c2c_characters.1.d
+	flavor = c2c_characters.1.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:c2c_george_brown
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+		OR = {
+			c:ONT ?= ROOT
+			c:CAN ?= ROOT
+		}
+		game_date >= 1843.1.1
+		NOT = { has_variable = c2c_george_brown_event_happened }
+		country_has_building_type_levels = {
+			target = bt:building_paper_mills
+			value >= 1
+		}
+	}
+
+	immediate = {
+		set_variable = c2c_george_brown_event_happened
+		if = {
+			limit = {
+				NOT = {
+					any_character = {
+						has_template = c2c_george_brown_character_template
+					}
+				}
+			}
+			create_character = {
+				template = c2c_george_brown_character_template
+				save_scope_as = c2c_george_brown
+			}
+		}
+		else = {
+			random_character = {
+				limit = {
+					has_template = c2c_george_brown_character_template
+				}
+				save_scope_as = c2c_george_brown
+			}
+			scope:c2c_george_brown = {
+				transfer_character = ROOT
+			}
+		}
+	}
+
+	option = {
+		name = c2c_characters.1.a
+		default_option = yes
+		scope:c2c_george_brown = {
+			set_as_interest_group_leader = yes
+			add_trait = basic_political_operator
+			remove_trait = literary
+			add_trait = inspirational_orator
+		}
+	}
+
+	option = {
+		name = c2c_characters.1.b
+		scope:c2c_george_brown = {
+			add_trait = charismatic
+		}
+	}
+}
+
+c2c_characters.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_characters.2.t
+	desc = c2c_characters.2.d
+	flavor = c2c_characters.2.f
+
+	gui_window = event_window_1char_tabloid
+	left_icon = scope:c2c_lord_durham
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	on_opened_soundeffect = "event:/SFX/Events/misc/1Character_Banner"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+		is_subject = yes
+		OR = {
+			c:ONT ?= ROOT
+			c:QUE ?= ROOT
+		}
+		top_overlord = {
+			c:GBR ?= THIS
+		}
+		game_date >= 1838.1.1
+		NOT = { has_variable = c2c_lord_durham_event_happened }
+		NOT = { has_variable = c2c_responsible_government_var }
+	}
+
+	immediate = {
+		set_variable = c2c_lord_durham_event_happened
+		random_scope_character = {
+			limit = { is_ruler = yes }
+			save_scope_as = c2c_current_ruler
+		}
+		if = {
+			limit = {
+				NOT = {
+					any_character = {
+						has_template = c2c_lord_durham_character_template
+					}
+				}
+			}
+			create_character = {
+				template = c2c_lord_durham_character_template
+				save_scope_as = c2c_lord_durham
+			}
+		}
+		else = {
+			random_character = {
+				limit = {
+					has_template = c2c_lord_durham_character_template
+				}
+				save_scope_as = c2c_lord_durham
+			}
+			scope:c2c_lord_durham = {
+				transfer_character = ROOT
+			}
+		}
+	}
+
+	option = {
+		name = c2c_characters.2.a
+		default_option = yes
+		custom_tooltip = {
+			text = c2c_governor_arrives_tt
+			scope:c2c_lord_durham = {
+				set_character_as_ruler = yes
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:c2c_current_ruler
+				exists = c:GBR
+			}
+			custom_tooltip = {
+				text = c2c_governor_returns_tt
+				scope:c2c_current_ruler = {
+					transfer_character = c:GBR
+				}
+			}
+		}
+	}
+}

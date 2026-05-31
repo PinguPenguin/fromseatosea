@@ -3,88 +3,86 @@
 	desc = "je_canada_unite_can_button_desc"
 
 	visible = {
+		always = no
+	}
+
+	possible = {
+		always = no
+	}
+
+	effect = {
+	}
+}
+
+je_c2c_confederation_button_conference = {
+	name = "je_c2c_confederation_button_conference"
+	desc = "je_c2c_confederation_button_conference_desc"
+
+	visible = {
 		always = yes
 	}
 
 	possible = {
 		is_at_war = no
 		has_technology_researched = nationalism
-		NOT = { has_modifier = canada_test_modifier }
-		hidden_trigger = {
-			NOT = { c:NEW = THIS }
+		custom_tooltip = {
+			text = c2c_confederation_conference_possible_tt
+			global_var:c2c_confederation_interest >= 20
 		}
-		trigger_if = {
-			limit = {
-				capital = {
-					is_in_geographic_region = geographic_region_greater_canada
-				}
-			}
-			top_overlord ?= {
-				relations:root >= relations_threshold:amicable
-			}
-			custom_tooltip = {
-				text = unite_canada_je_can_tt
-				any_neighbouring_state = {
-					owner = {
-						is_ai = yes
-						relations:root >= relations_threshold:amicable
-						capital = {
-							is_in_geographic_region = geographic_region_greater_canada
-						}
-						is_subject = yes
-						NOT = { THIS = ROOT }
-						hidden_trigger = {
-							NOT = { c:NEW = THIS }
-						}
-						top_overlord = {
-							THIS = root.top_overlord
-						}
-						this.gdp < root.gdp
-					}
-				}
-			}
-		}
-		trigger_else = {
-			custom_tooltip = {
-				text = gbr_can_relations_tt
-				any_subject_or_below = {
-					capital = {
-						is_in_geographic_region = geographic_region_greater_canada
-					}
-					is_ai = yes
-					relations:root >= relations_threshold:amicable
-					hidden_trigger = {
-						NOT = { c:NEW = THIS }
-					}
-					count >= 2
-				}
+		custom_tooltip = {
+			text = c2c_confederation_has_partner_tt
+			any_country = {
+				c2c_is_confederation_partner = yes
+				NOT = { THIS = ROOT }
 			}
 		}
 	}
 
-	cooldown = { days = short_modifier_time }
+	cooldown = { days = normal_modifier_time }
 
 	effect = {
-		custom_tooltip = unite_canada_tt
+		trigger_event = { id = c2c_conferences.1 popup = yes }
+	}
+
+	ai_chance = {
+		value = 25
 		if = {
 			limit = {
-				capital = {
-					is_in_geographic_region = geographic_region_greater_canada
-				}
+				has_technology_researched = pan-nationalism
 			}
-			hidden_effect = {
-				trigger_event = { id = can_aus.1 popup = yes }
+			add = 25
+		}
+	}
+}
+
+je_c2c_confederation_button_confederation = {
+	name = "je_c2c_confederation_button_confederation"
+	desc = "je_c2c_confederation_button_confederation_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		is_at_war = no
+		has_technology_researched = nationalism
+		custom_tooltip = {
+			text = c2c_confederation_progress_complete_tt
+			global_var:c2c_confederation_interest >= 100
+		}
+		custom_tooltip = {
+			text = c2c_confederation_has_partner_tt
+			any_country = {
+				c2c_is_confederation_partner = yes
+				NOT = { THIS = ROOT }
 			}
 		}
-		else = {
-			hidden_effect = {
-				trigger_event = { id = can_aus.2 popup = yes }
-			}
-		}
-		add_modifier = {
-			name = canada_test_modifier
-			days = short_modifier_time
-		}
+	}
+
+	cooldown = { days = normal_modifier_time }
+
+	effect = {
+		trigger_event = { id = c2c_confederation.1 popup = yes }
 	}
 
 	ai_chance = {

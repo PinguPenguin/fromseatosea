@@ -1,0 +1,31 @@
+﻿c2c_george_brown_character_template = {
+	first_name = "George"
+	last_name = "Brown"
+	historical = yes
+	culture = cu:anglo_canadian
+	religion = rel:protestant
+	birth_date = 1818.11.29
+	interest_group = ig_intelligentsia
+	ideology = ideology_c2c_reformer_can
+	home_region = STATE_ONTARIO_PENINSULA
+	traits = {
+		literary
+		charismatic
+	}
+}
+
+c2c_lord_durham_character_template = {
+	first_name = "John_George"
+	last_name = "Lambton"
+	historical = yes
+	culture = cu:british
+	religion = rel:protestant
+	birth_date = 1792.4.12
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+	home_region = STATE_MIDLANDS
+	traits = {
+		ambitious
+		basic_political_operator
+	}
+}

@@ -1,0 +1,299 @@
+﻿namespace = c2c_rebellion
+
+c2c_rebellion.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_rebellion.1.t
+	desc = c2c_rebellion.1.d
+	flavor = c2c_rebellion.1.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "ip3_officer_inspecting_peasant_conscripts"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	duration = 3
+
+	trigger = {
+		is_subject = yes
+	}
+
+	immediate = {
+		top_overlord = {
+			change_relations = {
+				country = ROOT
+				value = -15
+			}
+		}
+		random_political_movement = {
+			limit = {
+				owner = ROOT
+				is_political_movement_type = movement_radical
+			}
+			save_scope_as = radical_movement
+		}
+		random_interest_group = {
+			limit = {
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_reformer
+						has_ideology = ideology:ideology_c2c_reformer_can
+					}
+				}
+			}
+			save_scope_as = reformer_ig
+		}
+	}
+
+	option = {
+		name = c2c_rebellion.1.a
+		default_option = yes
+	}
+
+	option = {
+		name = c2c_rebellion.1.b
+		add_modifier = {
+			name = c2c_rebellion_strong_momentum
+			years = 2
+		}
+	}
+
+	option = {
+		name = c2c_rebellion.1.c
+		trigger = {
+			scope:radical_movement ?= {
+				is_being_suppressed = yes
+				political_movement_support < 0.15
+			}
+		}
+		scope:radical_movement ?= {
+			remove_modifier = c2c_reformer_movement_fury
+		}
+		trigger_event = {
+			id = c2c_rebellion.2
+			popup = yes
+		}
+	}
+}
+
+c2c_rebellion.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_rebellion.2.t
+	desc = c2c_rebellion.2.d
+	flavor = c2c_rebellion.2.f
+
+	cooldown = { days = normal_modifier_time }
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		is_subject = yes
+	}
+
+	immediate = {
+		random_interest_group = {
+			limit = {
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_reformer
+						has_ideology = ideology:ideology_c2c_reformer_can
+					}
+				}
+			}
+			save_scope_as = reformer_ig
+		}
+	}
+
+	option = {
+		name = c2c_rebellion.2.a
+		default_option = yes
+		random_political_movement = {
+			limit = {
+				is_political_movement_type = movement_radical
+			}
+			add_modifier = {
+				name = c2c_rebellion_intercepted_modifier
+				years = 5
+			}
+		}
+		scope:reformer_ig ?= {
+			add_modifier = {
+				name = c2c_reformer_encouraged
+				years = 5
+			}
+		}
+	}
+}
+
+c2c_rebellion.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_rebellion.3.t
+	desc = c2c_rebellion.3.d
+	flavor = c2c_rebellion.3.f
+
+	cooldown = { days = normal_modifier_time }
+
+	event_image = {
+		video = "asia_farmers_market"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		is_subject = yes
+	}
+
+	immediate = {
+		random_scope_character = {
+			limit = {
+				has_ideology = ideology:ideology_radical
+				popularity > 50
+			}
+			save_scope_as = popular_radical_char
+		}
+	}
+
+	option = {
+		name = c2c_rebellion.3.a
+		default_option = yes
+		add_radicals = {
+			value = 0.1
+			pop_type = farmers
+		}
+	}
+
+	option = {
+		name = c2c_rebellion.3.b
+		add_loyalists = {
+			pop_type = farmers
+			value = 0.05
+		}
+	}
+}
+
+c2c_rebellion.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_rebellion.4.t
+	desc = c2c_rebellion.4.d
+	flavor = c2c_rebellion.4.f
+
+	cooldown = { days = normal_modifier_time }
+
+	event_image = {
+		video = "europenorthamerica_capitalists_meeting"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	trigger = {
+		is_subject = yes
+	}
+
+	option = {
+		name = c2c_rebellion.4.a
+		default_option = yes
+		add_radicals = {
+			value = 0.05
+			interest_group = ig:ig_petty_bourgeoisie
+		}
+		random = {
+			chance = 10
+			ig:ig_petty_bourgeoisie = {
+				leader = {
+					set_ideology = ideology:ideology_radical
+				}
+			}
+		}
+	}
+
+	option = {
+		name = c2c_rebellion.4.b
+		add_loyalists = {
+			interest_group = ig:ig_petty_bourgeoisie
+			value = 0.10
+		}
+	}
+}
+
+c2c_rebellion.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_rebellion.5.t
+	desc = c2c_rebellion.5.d
+	flavor = c2c_rebellion.5.f
+
+	cooldown = { days = long_modifier_time }
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 1
+
+	trigger = {
+		any_scope_character = {
+			is_ruler = yes
+			has_trait = arrogant
+		}
+		NOT = { has_modifier = c2c_failed_supply_bill_modifier }
+	}
+
+	option = {
+		name = c2c_rebellion.5.a
+		default_option = yes
+		add_radicals = {
+			value = 0.05
+			strata = upper
+		}
+	}
+
+	option = {
+		name = c2c_rebellion.5.b
+		add_radicals = {
+			value = 0.05
+		}
+		add_modifier = {
+			name = c2c_failed_supply_bill_modifier
+			years = 1
+		}
+	}
+
+	after = {
+		call_election = {
+			months = 6
+		}
+	}
+}

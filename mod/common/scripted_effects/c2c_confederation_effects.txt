@@ -1,0 +1,370 @@
+﻿c2c_confederation_initialize_interest = {
+	if = {
+		limit = { NOT = { exists = global_var:c2c_confederation_interest } }
+		set_global_variable = { name = c2c_confederation_interest value = 0 }
+	}
+	if = {
+		limit = { NOT = { exists = global_var:c2c_ont_confederation_interest } }
+		set_global_variable = { name = c2c_ont_confederation_interest value = 0 }
+	}
+	if = {
+		limit = { NOT = { exists = global_var:c2c_que_confederation_interest } }
+		set_global_variable = { name = c2c_que_confederation_interest value = 0 }
+	}
+	if = {
+		limit = { NOT = { exists = global_var:c2c_nbs_confederation_interest } }
+		set_global_variable = { name = c2c_nbs_confederation_interest value = 0 }
+	}
+	if = {
+		limit = { NOT = { exists = global_var:c2c_nvs_confederation_interest } }
+		set_global_variable = { name = c2c_nvs_confederation_interest value = 0 }
+	}
+	if = {
+		limit = { NOT = { exists = global_var:c2c_pei_confederation_interest } }
+		set_global_variable = { name = c2c_pei_confederation_interest value = 0 }
+	}
+	if = {
+		limit = { NOT = { exists = global_var:c2c_van_confederation_interest } }
+		set_global_variable = { name = c2c_van_confederation_interest value = 0 }
+	}
+}
+
+c2c_confederation_add_scope_interest = {
+	if = {
+		limit = { c:ONT ?= THIS }
+		change_global_variable = { name = c2c_ont_confederation_interest add = 1 }
+	}
+	if = {
+		limit = { c:QUE ?= THIS }
+		change_global_variable = { name = c2c_que_confederation_interest add = 1 }
+	}
+	if = {
+		limit = { c:NBS ?= THIS }
+		change_global_variable = { name = c2c_nbs_confederation_interest add = 1 }
+	}
+	if = {
+		limit = { c:NVS ?= THIS }
+		change_global_variable = { name = c2c_nvs_confederation_interest add = 1 }
+	}
+	if = {
+		limit = { c:PEI ?= THIS }
+		change_global_variable = { name = c2c_pei_confederation_interest add = 1 }
+	}
+	if = {
+		limit = { c:VAN ?= THIS }
+		change_global_variable = { name = c2c_van_confederation_interest add = 1 }
+	}
+}
+
+c2c_confederation_add_interest_for_scope = {
+	c2c_confederation_initialize_interest = yes
+
+	change_global_variable = { name = c2c_confederation_interest add = 1 }
+	c2c_confederation_add_scope_interest = yes
+
+	if = {
+		limit = {
+			has_technology_researched = pan-nationalism
+		}
+		change_global_variable = { name = c2c_confederation_interest add = 1 }
+		c2c_confederation_add_scope_interest = yes
+	}
+
+	if = {
+		limit = {
+			any_country = {
+				c2c_is_confederation_partner = yes
+				NOT = { THIS = ROOT }
+				top_overlord = {
+					THIS = root.top_overlord
+				}
+				relations:root >= relations_threshold:amicable
+			}
+		}
+		change_global_variable = { name = c2c_confederation_interest add = 1 }
+		c2c_confederation_add_scope_interest = yes
+	}
+
+	if = {
+		limit = {
+			any_country = {
+				c2c_is_confederation_partner = yes
+				NOT = { THIS = ROOT }
+				this.gdp > root.gdp
+			}
+		}
+		change_global_variable = { name = c2c_confederation_interest add = 1 }
+		c2c_confederation_add_scope_interest = yes
+	}
+
+	if = {
+		limit = {
+			exists = c:USA
+			c:USA = { infamy >= 25 }
+		}
+		change_global_variable = { name = c2c_confederation_interest add = 1 }
+		c2c_confederation_add_scope_interest = yes
+	}
+}
+
+c2c_confederation_add_conference_interest_for_scope = {
+	c2c_confederation_initialize_interest = yes
+
+	change_global_variable = { name = c2c_confederation_interest add = 5 }
+
+	if = {
+		limit = { c:ONT ?= THIS }
+		change_global_variable = { name = c2c_ont_confederation_interest add = 5 }
+	}
+	if = {
+		limit = { c:QUE ?= THIS }
+		change_global_variable = { name = c2c_que_confederation_interest add = 5 }
+	}
+	if = {
+		limit = { c:NBS ?= THIS }
+		change_global_variable = { name = c2c_nbs_confederation_interest add = 5 }
+	}
+	if = {
+		limit = { c:NVS ?= THIS }
+		change_global_variable = { name = c2c_nvs_confederation_interest add = 5 }
+	}
+	if = {
+		limit = { c:PEI ?= THIS }
+		change_global_variable = { name = c2c_pei_confederation_interest add = 5 }
+	}
+	if = {
+		limit = { c:VAN ?= THIS }
+		change_global_variable = { name = c2c_van_confederation_interest add = 5 }
+	}
+}
+
+c2c_confederation_hold_conference_effect = {
+	every_country = {
+		limit = {
+			c2c_is_confederation_partner = yes
+		}
+		c2c_confederation_add_conference_interest_for_scope = yes
+	}
+}
+
+c2c_confederation_clear_initiator_flags = {
+	every_country = {
+		limit = {
+			has_variable = c2c_confederation_initiator
+		}
+		remove_variable = c2c_confederation_initiator
+	}
+	every_country = {
+		limit = {
+			has_variable = c2c_conference_initiator
+		}
+		remove_variable = c2c_conference_initiator
+	}
+}
+
+c2c_confederation_ottawa_hub_effect = {
+	if = {
+		limit = {
+			any_scope_state = {
+				state_region = s:STATE_ONTARIO
+			}
+		}
+		s:STATE_ONTARIO = {
+			random_scope_state = {
+				set_hub_name = {
+					type = city
+					name = HUB_NAME_STATE_ONTARIO_city_ottawa
+				}
+			}
+		}
+	}
+}
+
+c2c_confederation_absorb_decentralized_canada_effect = {
+	if = {
+		limit = {
+			any_scope_state = {
+				OR = {
+					state_region = s:STATE_BRITISH_COLUMBIA
+					state_region = s:STATE_VANCOUVER_ISLAND
+				}
+			}
+		}
+		s:STATE_BRITISH_COLUMBIA = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_BC_INTERIOR = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_UPPER_BC = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_VANCOUVER_ISLAND = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_scope_state = {
+				OR = {
+					state_region = s:STATE_ONTARIO
+					state_region = s:STATE_ONTARIO_PENINSULA
+				}
+			}
+		}
+		s:STATE_ONTARIO = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_ONTARIO_PENINSULA = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_ALGOMA = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_NORTHWEST_ONTARIO = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_scope_state = {
+				OR = {
+					state_region = s:STATE_QUEBEC
+					state_region = s:STATE_SAINT_LAURENT
+				}
+			}
+		}
+		s:STATE_QUEBEC = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_SAINT_LAURENT = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_QUEBEC_SAGUENAY = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_NOUVEAU_QUEBEC = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+	}
+	s:STATE_NUNAVUT = {
+		every_scope_state = {
+			limit = { owner = { is_country_type = decentralized } }
+			set_state_owner = root
+		}
+	}
+	s:STATE_NORTHWEST_TERRITORIES = {
+		every_scope_state = {
+			limit = { owner = { is_country_type = decentralized } }
+			set_state_owner = root
+		}
+	}
+	s:STATE_YUKON_TERRITORY = {
+		every_scope_state = {
+			limit = { owner = { is_country_type = decentralized } }
+			set_state_owner = root
+		}
+	}
+	if = {
+		limit = {
+			any_scope_state = {
+				state_region = s:STATE_SASKATCHEWAN
+			}
+		}
+		s:STATE_SASKATCHEWAN = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_NORTH_SASKATCHEWAN = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_scope_state = {
+				OR = {
+					state_region = s:STATE_ALBERTA
+					state_region = s:STATE_EDMONTON
+				}
+			}
+		}
+		s:STATE_ALBERTA = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_EDMONTON = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_ATHABASCA = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+	}
+	if = {
+		limit = {
+			any_scope_state = {
+				state_region = s:STATE_MANITOBA
+			}
+		}
+		s:STATE_MANITOBA = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+		s:STATE_KEEWATIN = {
+			every_scope_state = {
+				limit = { owner = { is_country_type = decentralized } }
+				set_state_owner = root
+			}
+		}
+	}
+}

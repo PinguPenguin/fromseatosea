@@ -1,0 +1,152 @@
+﻿namespace = c2c_family_compact
+
+c2c_family_compact.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_family_compact.1.t
+	desc = c2c_family_compact.1.d
+	flavor = c2c_family_compact.1.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "unspecific_signed_contract"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	duration = 3
+
+	trigger = {
+		c:ONT ?= ROOT
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				NOT = { has_modifier = c2c_family_compact_cemented_modifier }
+			}
+			add_modifier = {
+				name = c2c_family_compact_cemented_modifier
+				is_decaying = yes
+				years = 10
+			}
+		}
+		top_overlord = {
+			change_relations = {
+				country = ROOT
+				value = 15
+			}
+		}
+		if = {
+			limit = {
+				exists = global_var:c2c_union_act_support
+			}
+			change_global_variable = {
+				name = c2c_union_act_support
+				add = 200
+			}
+		}
+		else = {
+			set_global_variable = {
+				name = c2c_union_act_support
+				value = 200
+			}
+		}
+	}
+
+	option = {
+		name = c2c_family_compact.1.a
+		default_option = yes
+	}
+}
+
+c2c_family_compact.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_family_compact.2.t
+	desc = c2c_family_compact.2.d
+	flavor = c2c_family_compact.2.f
+
+	cooldown = { years = 99 }
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	duration = 3
+
+	trigger = {
+		c:ONT ?= ROOT
+	}
+
+	immediate = {
+		remove_modifier = c2c_family_compact_cemented_modifier
+	}
+
+	option = {
+		name = c2c_family_compact.2.a
+		default_option = yes
+		ig:ig_landowners ?= {
+			remove_ideology = ideology_paternalistic
+			add_ideology = ideology_magnatial
+			set_interest_group_name = ig_loyalist_tories
+		}
+	}
+}
+
+c2c_family_compact.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = c2c_family_compact.3.t
+	desc = c2c_family_compact.3.d
+	flavor = c2c_family_compact.3.f
+
+	cooldown = { years = 5 }
+
+	event_image = {
+		video = "southamerica_factory_opening"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/FloatyText/notification_ft_foreign_investment_received"
+
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+
+	duration = 3
+
+	trigger = {
+		c:ONT ?= ROOT
+		any_scope_state = {
+			state_region = s:STATE_ONTARIO_PENINSULA
+		}
+	}
+
+	option = {
+		name = c2c_family_compact.3.a
+		default_option = yes
+		random_scope_state = {
+			limit = {
+				state_region = s:STATE_ONTARIO_PENINSULA
+			}
+			add_modifier = {
+				name = c2c_welland_canals_modifier
+				years = 10
+			}
+		}
+		ig:ig_industrialists ?= {
+			add_modifier = {
+				name = c2c_reformer_encouraged
+				years = 5
+			}
+		}
+	}
+}

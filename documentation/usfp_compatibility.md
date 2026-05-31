@@ -23,13 +23,12 @@ This pass treats `Hail, Columbia!` as a dependency that loads before c2c.
 
 - Journal entries:
   c2c `c2c_canada_australia_override.txt` and USFP `usfp_canada.txt` both replace `je_canada_can` and `je_canada_gbr`.
-  Because c2c loads later, it currently discards USFP's `calc_true_if >= 7` confederation logic and the `change_tag = CAN` effect.
-  Proposed merge: rebuild USFP's completion/effect logic against c2c's split-state list.
+  Because c2c loads later, it now deliberately replaces the vanilla/USFP formation path with the CFM-derived conference and confederation invitation flow.
+  C2C's replacement preserves split-state cleanup and uses `subject_type_c2c_self_governing_dominion` after Confederation.
 
 - Confederation events:
-  c2c still triggers USFP `can_aus.5`, while c2c overrides `can_aus.6`.
-  `can_aus.5` still works against vanilla-style regions like `STATE_BRITISH_COLUMBIA`, `STATE_ONTARIO`, `STATE_QUEBEC`, `STATE_SASKATCHEWAN`, and `STATE_ALBERTA`, so it likely misses some USFP tags once c2c's split states are in play.
-  Proposed merge: add a c2c-side override for `can_aus.5`.
+  C2C no longer triggers the vanilla/USFP `can_aus.*` formation events from its Canada journal entry.
+  The CFM-derived `c2c_confederation.*` events handle invitations, annexation, `change_tag = CAN`, C2C subject type conversion, and split-state decentralized owner cleanup.
 
 - Pop history:
   c2c `zz_c2c_history_pops.txt` overlaps USFP `usfp_history_native_pops.txt` in `STATE_ALBERTA`, `STATE_BRITISH_COLUMBIA`, `STATE_MANITOBA`, `STATE_NORTHWEST_TERRITORIES`, `STATE_NUNAVUT`, `STATE_ONTARIO`, `STATE_QUEBEC`, and `STATE_SASKATCHEWAN`.

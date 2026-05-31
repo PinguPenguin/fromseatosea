@@ -1,196 +1,125 @@
 ﻿REPLACE:je_canada_can = {
-	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
 
 	group = je_group_historical_content
+	should_be_pinned_by_default = yes
+	should_be_pinned_by_default_uninvolved_or_context = yes
+
+	progressbar = yes
+
+	scripted_button = je_c2c_confederation_button_conference
+	scripted_button = je_c2c_confederation_button_confederation
 
 	is_shown_when_inactive = {
-		hidden_trigger = {
-			NOT = { c:NEW ?= THIS }
-		}
-		OR = {
-			country_has_primary_culture = cu:anglo_canadian
-			country_has_primary_culture = cu:franco_canadian
-			country_has_primary_culture = cu:acadian
-		}
-		is_subject = yes
+		c2c_is_confederation_candidate = yes
 	}
 
 	is_shown_in_lobby = {
-		hidden_trigger = {
-			NOT = { c:NEW ?= THIS }
+		is_subject = yes
+		capital = {
+			is_in_geographic_region = geographic_region_greater_canada
 		}
 		OR = {
 			country_has_primary_culture = cu:anglo_canadian
 			country_has_primary_culture = cu:franco_canadian
 			country_has_primary_culture = cu:acadian
+		}
+		hidden_trigger = {
+			NOT = { c:NEW ?= THIS }
+			NOT = { c:CAN ?= THIS }
 		}
 	}
 
 	possible = {
 		has_technology_researched = nationalism
-		hidden_trigger = {
-			NOT = { c:NEW ?= THIS }
+		custom_tooltip = {
+			text = c2c_confederation_candidate_count_tt
+			any_country = {
+				c2c_is_confederation_candidate = yes
+				count > 2
+			}
 		}
 	}
 
-	scripted_button = je_canada_unite_can_button
+	immediate = {
+		c2c_confederation_initialize_interest = yes
+	}
 
 	complete = {
-		owns_entire_state_region = STATE_ONTARIO
-		owns_entire_state_region = STATE_ONTARIO_PENINSULA
-		owns_entire_state_region = STATE_ALGOMA
-		owns_entire_state_region = STATE_NORTHWEST_ONTARIO
-		owns_entire_state_region = STATE_NEW_BRUNSWICK
-		owns_entire_state_region = STATE_NOVA_SCOTIA
-		owns_entire_state_region = STATE_QUEBEC
-		owns_entire_state_region = STATE_SAINT_LAURENT
-		owns_entire_state_region = STATE_QUEBEC_SAGUENAY
-		owns_entire_state_region = STATE_NOUVEAU_QUEBEC
-		owns_entire_state_region = STATE_ALBERTA
-		owns_entire_state_region = STATE_EDMONTON
-		owns_entire_state_region = STATE_BRITISH_COLUMBIA
-		owns_entire_state_region = STATE_BC_INTERIOR
-		owns_entire_state_region = STATE_VANCOUVER_ISLAND
-		owns_entire_state_region = STATE_SASKATCHEWAN
-		owns_entire_state_region = STATE_MANITOBA
+		custom_tooltip = {
+			text = c2c_confederation_progress_complete_tt
+			global_var:c2c_confederation_interest >= 100
+		}
+		custom_tooltip = {
+			text = c2c_confederation_all_colonies_absorbed_tt
+			NOT = {
+				any_country = {
+					c2c_is_confederation_partner = yes
+					NOT = { THIS = ROOT }
+				}
+			}
+		}
 	}
 
 	on_complete = {
-		trigger_event = { id = can_aus.5 }
-		change_tag = CAN
-		add_primary_culture = cu:anglo_canadian
-		add_primary_culture = cu:franco_canadian
-		add_primary_culture = cu:acadian
-		hidden_effect = {
-			if = {
-				limit = {
-					any_scope_state = {
-						state_region = s:STATE_ONTARIO
-					}
-				}
-			}
-			s:STATE_ONTARIO = {
-				random_scope_state = {
-			        set_hub_name = {
-			            type = city
-			            name = HUB_NAME_STATE_ONTARIO_city_ottawa
-			        }
-				}
-			}
+		set_variable = {
+			name = c2c_confederation_initiator
+			days = 365
 		}
+		trigger_event = { id = c2c_confederation.3 popup = yes }
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			c2c_confederation_add_interest_for_scope = yes
+		}
+	}
+
+	current_value = {
+		add = global_var:c2c_confederation_interest
+	}
+
+	goal_add_value = {
+		value = 100
 	}
 
 	invalid = {
 		OR = {
 			is_subject = no
 			hidden_trigger = {
-				c:NEW ?= THIS
+				OR = {
+					c:NEW ?= THIS
+					c:CAN ?= THIS
+				}
 			}
 		}
 	}
 
 	weight = 100
-
-	should_be_pinned_by_default_uninvolved_or_context = yes
 }
 
+# CFM makes confederation a colonial initiative. Disable the old overlord-side
+# Canada journal entry so Britain does not run the vanilla/USFP merge path.
 REPLACE:je_canada_gbr = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
 	group = je_group_historical_content
 
 	is_shown_in_lobby = {
-		any_subject_or_below = {
-			hidden_trigger = {
-				NOT = { c:NEW ?= THIS }
-			}
-			OR = {
-				country_has_primary_culture = cu:anglo_canadian
-				country_has_primary_culture = cu:franco_canadian
-				country_has_primary_culture = cu:acadian
-			}
-			count >= 2
-		}
-		NOT = {
-			OR = {
-				country_has_primary_culture = cu:anglo_canadian
-				country_has_primary_culture = cu:franco_canadian
-				country_has_primary_culture = cu:acadian
-			}
-		}
+		always = no
 	}
 
 	is_shown_when_inactive = {
-		any_subject_or_below = {
-			hidden_trigger = {
-				NOT = { c:NEW ?= THIS }
-			}
-			OR = {
-				country_has_primary_culture = cu:anglo_canadian
-				country_has_primary_culture = cu:franco_canadian
-				country_has_primary_culture = cu:acadian
-			}
-			count >= 2
-		}
-		NOT = {
-			OR = {
-				country_has_primary_culture = cu:anglo_canadian
-				country_has_primary_culture = cu:franco_canadian
-				country_has_primary_culture = cu:acadian
-			}
-		}
+		always = no
 	}
 
 	possible = {
-		has_technology_researched = nationalism
+		always = no
 	}
-
-	scripted_button = je_canada_unite_can_button
 
 	complete = {
-		owns_entire_state_region = STATE_ONTARIO
-		owns_entire_state_region = STATE_ONTARIO_PENINSULA
-		owns_entire_state_region = STATE_ALGOMA
-		owns_entire_state_region = STATE_NORTHWEST_ONTARIO
-		owns_entire_state_region = STATE_NEW_BRUNSWICK
-		owns_entire_state_region = STATE_NOVA_SCOTIA
-		owns_entire_state_region = STATE_QUEBEC
-		owns_entire_state_region = STATE_SAINT_LAURENT
-		owns_entire_state_region = STATE_QUEBEC_SAGUENAY
-		owns_entire_state_region = STATE_NOUVEAU_QUEBEC
-		owns_entire_state_region = STATE_ALBERTA
-		owns_entire_state_region = STATE_EDMONTON
-		owns_entire_state_region = STATE_BRITISH_COLUMBIA
-		owns_entire_state_region = STATE_BC_INTERIOR
-		owns_entire_state_region = STATE_VANCOUVER_ISLAND
-		owns_entire_state_region = STATE_SASKATCHEWAN
-		owns_entire_state_region = STATE_MANITOBA
+		always = no
 	}
 
-	on_complete = {
-		trigger_event = { id = can_aus.6 }
-		hidden_effect = {
-			if = {
-				limit = {
-					any_subject_or_below = {
-						any_scope_state = {
-							state_region = s:STATE_ONTARIO
-						}
-					}
-				}
-			}
-			s:STATE_ONTARIO = {
-				random_scope_state = {
-			        set_hub_name = {
-			            type = city
-			            name = HUB_NAME_STATE_ONTARIO_city_ottawa
-			        }
-				}
-			}
-		}
-	}
-
-	weight = 100
-
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	weight = 0
 }
