@@ -89,6 +89,10 @@ company_c2c_canadian_pacific = {
 		building_shipyard
 	}
 
+	possible_prestige_goods = {
+		prestige_good_c2c_empress_liners
+	}
+
 	potential = {
 		has_interest_marker_in_region = sr:region_canada
 	}
@@ -261,6 +265,10 @@ company_c2c_northern_electric = {
 		building_power_plant
 	}
 
+	possible_prestige_goods = {
+		prestige_good_c2c_northern_electric_telephones
+	}
+
 	potential = {
 		has_interest_marker_in_region = sr:region_canada
 	}
@@ -329,7 +337,7 @@ company_c2c_northern_electric = {
 # Canadian Western Lumber Co.
 company_c2c_canadian_western_lumber = {
 	icon = "gfx/interface/icons/company_icons/historical_company_icons/c2c_canadian_western_lumber.dds"
-	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_farm_corn.dds"
+	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_plantation.dds"
 
 	flavored_company = yes
 
@@ -344,7 +352,7 @@ company_c2c_canadian_western_lumber = {
 	}
 
 	possible_prestige_goods = {
-		prestige_good_c2c_pacific_cedar
+		prestige_good_c2c_bc_douglas_fir
 	}
 
 	potential = {
@@ -400,9 +408,9 @@ company_c2c_canadian_western_lumber = {
 	}
 }
 
-# Dominion Coal and Steel Corporation
-company_c2c_dominion_coal_and_steel = {
-	icon = "gfx/interface/icons/company_icons/historical_company_icons/c2c_dominion_coal_and_steel.dds"
+# Dominion Steel and Coal Corporation
+company_c2c_dominion_steel_and_coal = {
+	icon = "gfx/interface/icons/company_icons/historical_company_icons/c2c_dominion_steel_and_coal.dds"
 	background = "gfx/interface/icons/company_icons/company_backgrounds/comp_illu_manufacturing_heavy.dds"
 
 	flavored_company = yes
@@ -516,14 +524,7 @@ company_c2c_abitibi_power_and_paper = {
 	}
 
 	possible_prestige_goods = {
-		prestige_good_generic_paper
-	}
-
-	prestige_goods_trigger = {
-		custom_tooltip = {
-			text = je_prestige_goods_paper_complete_tt
-			has_variable = prestige_good_generic_paper_var
-		}
+		prestige_good_c2c_laurentian_newsprint
 	}
 
 	potential = {
@@ -614,7 +615,7 @@ company_c2c_noranda_mines = {
 
 	flavored_company = yes
 
-	preferred_headquarters = { STATE_NOUVEAU_QUEBEC }
+	preferred_headquarters = { STATE_QUEBEC }
 
 	building_types = {
 		building_lead_mine
@@ -634,6 +635,7 @@ company_c2c_noranda_mines = {
 		hidden_trigger = { # Hide attainable if it's always fulfilled by possible
 			any_scope_state = {
 				OR = {
+					state_region = s:STATE_QUEBEC
 					state_region = s:STATE_NOUVEAU_QUEBEC
 					state_region = s:STATE_QUEBEC_SAGUENAY
 					state_region = s:STATE_ALGOMA
@@ -646,6 +648,7 @@ company_c2c_noranda_mines = {
 		has_technology_researched = dynamite
 		any_scope_state = {
 			OR = {
+				state_region = s:STATE_QUEBEC
 				state_region = s:STATE_NOUVEAU_QUEBEC
 				state_region = s:STATE_QUEBEC_SAGUENAY
 				state_region = s:STATE_ALGOMA
@@ -663,8 +666,8 @@ company_c2c_noranda_mines = {
 	}
 
 	prosperity_modifier = {
-		country_minting_mult = 0.05
-		country_production_tech_spread_mult = 0.05
+		country_gold_reserve_limit_mult = 0.1
+		state_colony_growth_creation_factor = 0.1
 		building_group_bg_mining_standard_of_living_add = 0.5
 	}
 
@@ -672,6 +675,7 @@ company_c2c_noranda_mines = {
 		has_technology_researched = dynamite
 		any_scope_state = {
 			OR = {
+				state_region = s:STATE_QUEBEC
 				state_region = s:STATE_NOUVEAU_QUEBEC
 				state_region = s:STATE_QUEBEC_SAGUENAY
 				state_region = s:STATE_ALGOMA
@@ -685,6 +689,7 @@ company_c2c_noranda_mines = {
 			level = 5
 			state_trigger = {
 				OR = {
+					state_region = s:STATE_QUEBEC
 					state_region = s:STATE_NOUVEAU_QUEBEC
 					state_region = s:STATE_QUEBEC_SAGUENAY
 					state_region = s:STATE_ALGOMA
@@ -696,6 +701,7 @@ company_c2c_noranda_mines = {
 			level = 5
 			state_trigger = {
 				OR = {
+					state_region = s:STATE_QUEBEC
 					state_region = s:STATE_NOUVEAU_QUEBEC
 					state_region = s:STATE_QUEBEC_SAGUENAY
 					state_region = s:STATE_ALGOMA
@@ -729,14 +735,7 @@ company_c2c_canada_packers = {
 	}
 
 	possible_prestige_goods = {
-		prestige_good_generic_meat
-	}
-
-	prestige_goods_trigger = {
-		custom_tooltip = {
-			text = je_prestige_goods_meat_complete_tt
-			has_variable = prestige_good_generic_meat_var
-		}
+		prestige_good_c2c_peameal_bacon
 	}
 
 	potential = {
@@ -930,6 +929,10 @@ company_c2c_davie_shipbuilding = {
 	extension_building_types = {
 		building_steel_mill
 		building_tooling_workshop
+	}
+
+	possible_prestige_goods = {
+		prestige_good_c2c_levis_clippers
 	}
 
 	potential = {

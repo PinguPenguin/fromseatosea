@@ -9,7 +9,7 @@
 				is_subject_of = c:GBR
 				is_subject_type = subject_type_colony
 			}
-			change_subject_type = subject_type_c2c_responsible_colony
+			change_subject_type = subject_type_c2c_self_governing_colony
 		}
 	}
 	c:QUE ?= {
@@ -18,7 +18,7 @@
 				is_subject_of = c:GBR
 				is_subject_type = subject_type_colony
 			}
-			change_subject_type = subject_type_c2c_responsible_colony
+			change_subject_type = subject_type_c2c_self_governing_colony
 		}
 	}
 	c:NBS ?= {
@@ -27,7 +27,7 @@
 				is_subject_of = c:GBR
 				is_subject_type = subject_type_colony
 			}
-			change_subject_type = subject_type_c2c_responsible_colony
+			change_subject_type = subject_type_c2c_self_governing_colony
 		}
 	}
 	c:NVS ?= {
@@ -36,7 +36,7 @@
 				is_subject_of = c:GBR
 				is_subject_type = subject_type_colony
 			}
-			change_subject_type = subject_type_c2c_responsible_colony
+			change_subject_type = subject_type_c2c_self_governing_colony
 		}
 	}
 	c:PEI ?= {
@@ -45,7 +45,7 @@
 				is_subject_of = c:GBR
 				is_subject_type = subject_type_colony
 			}
-			change_subject_type = subject_type_c2c_responsible_colony
+			change_subject_type = subject_type_c2c_self_governing_colony
 		}
 	}
 	c:NEW ?= {
@@ -54,7 +54,7 @@
 				is_subject_of = c:GBR
 				is_subject_type = subject_type_colony
 			}
-			change_subject_type = subject_type_c2c_responsible_colony
+			change_subject_type = subject_type_c2c_self_governing_colony
 		}
 	}
 	s:STATE_ONTARIO = {

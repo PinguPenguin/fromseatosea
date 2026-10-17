@@ -1,4 +1,4 @@
-﻿c2c_responsible_colony = {
+﻿c2c_self_governing_colony = {
 	groups = {
 		general
 	}
@@ -22,7 +22,7 @@
 		relations_progress_per_day = 1
 		relations_improvement_max = 50
 
-		subject_type = subject_type_c2c_responsible_colony
+		subject_type = subject_type_c2c_self_governing_colony
 
 		second_modifier = {
 			country_law_enactment_imposition_success_add = 0.1

@@ -1,6 +1,6 @@
 ﻿# Same path as Hail, Columbia!'s Newfoundland history, so c2c's version
 # replaces it when both mods are loaded. c2c_map_startup_effect turns the
-# colony pact into a c2c responsible colony and hands NEW its states.
+# colony pact into a c2c self-governing colony and hands NEW its states.
 COUNTRIES = {
 	c:NEW ?= {
 		effect_starting_technology_tier_2_tech = yes

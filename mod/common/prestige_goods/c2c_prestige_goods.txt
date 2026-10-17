@@ -1,5 +1,53 @@
-﻿prestige_good_c2c_pacific_cedar = {
-	base_good = hardwood
+﻿prestige_good_c2c_northern_electric_telephones = {
+	possible = {
+		has_dlc_feature = mp1_content
+	}
+	base_good = telephones
 	prestige_bonus = 0.1
-	texture = "gfx/interface/icons/goods_icons/prestige_goods/rosewood_prestige.dds"
+	texture = "gfx/interface/icons/goods_icons/prestige_goods/ericsson_apparatus_prestige.dds"
+}
+
+prestige_good_c2c_empress_liners = {
+	possible = {
+		has_dlc_feature = mp1_content
+	}
+	base_good = merchant_marine
+	prestige_bonus = 0.1
+	texture = "gfx/interface/icons/goods_icons/prestige_goods/white_star_liners_prestige.dds"
+}
+
+prestige_good_c2c_peameal_bacon = {
+	possible = {
+		has_dlc_feature = mp1_content
+	}
+	base_good = meat
+	prestige_bonus = 0.1
+	texture = "gfx/interface/icons/goods_icons/prestige_goods/acorn_fed_pork_prestige.dds"
+}
+
+prestige_good_c2c_laurentian_newsprint = {
+	possible = {
+		has_dlc_feature = mp1_content
+	}
+	base_good = paper
+	prestige_bonus = 0.1
+	texture = "gfx/interface/icons/goods_icons/prestige_goods/washi_paper_prestige.dds"
+}
+
+prestige_good_c2c_bc_douglas_fir = {
+	possible = {
+		has_dlc_feature = mp1_content
+	}
+	base_good = wood
+	prestige_bonus = 0.1
+	texture = "gfx/interface/icons/goods_icons/prestige_goods/burmese_teak_prestige.dds"
+}
+
+prestige_good_c2c_levis_clippers = {
+	possible = {
+		has_dlc_feature = mp1_content
+	}
+	base_good = clippers
+	prestige_bonus = 0.1
+	texture = "gfx/interface/icons/goods_icons/prestige_goods/clyde_built_liners_prestige.dds"
 }

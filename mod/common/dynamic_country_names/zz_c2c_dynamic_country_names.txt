@@ -17,7 +17,7 @@
 					}
 					has_diplomatic_pact = {
 						who = c:ONT
-						type = c2c_responsible_colony
+						type = c2c_self_governing_colony
 						is_initiator = yes
 					}
 				}
@@ -45,7 +45,7 @@ REPLACE_OR_CREATE:QUE = { # Quebec
 					}
 					has_diplomatic_pact = {
 						who = c:QUE
-						type = c2c_responsible_colony
+						type = c2c_self_governing_colony
 						is_initiator = yes
 					}
 				}

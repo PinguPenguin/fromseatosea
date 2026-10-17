@@ -14,7 +14,7 @@
 		}
 		OR = {
 			is_subject_type = subject_type_colony
-			is_subject_type = subject_type_c2c_responsible_colony
+			is_subject_type = subject_type_c2c_self_governing_colony
 		}
 		is_country_type = colonial
 		top_overlord = { NOT = { is_country_type = colonial } }

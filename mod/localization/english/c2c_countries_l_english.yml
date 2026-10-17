@@ -1,8 +1,8 @@
 ﻿l_english:
  PEI:0 "Prince Edward Island"
- PEI_ADJ:0 "Prince Edward Islander"
- PEI_FLAVOR_TEXT:0 "The colony of Prince Edward Island sits apart in the Gulf of Saint Lawrence, tied to Atlantic Canada by farms and shipping. Will Prince Edward Island chart its own course?"
- NVS_FLAVOR_TEXT:0 "The colony of Nova Scotia anchors Britain's Atlantic presence, with Halifax linking the Maritimes to the wider empire. Will Nova Scotia lead a united Canada?"
+ PEI_ADJ:0 "Prince Edward Island"
+ PEI_FLAVOR_TEXT:0 "Nearly all of Prince Edward Island belongs to absentee landlords in Britain, who won its townships in a lottery in 1767. The island's tenant farmers want those estates broken up and the land given to the people who work it. Will the land question be settled in London or in Charlottetown?"
+ NVS_FLAVOR_TEXT:0 "Halifax is the Royal Navy's base in North America, and Nova Scotian timber, fish and ships carry the colony's trade across the Atlantic. At home, reformers in the Assembly are challenging the appointed council that has long governed the colony, and demanding a government answerable to the people's representatives."
  VAN:0 "Vancouver Island"
- VAN_ADJ:0 "Vancouver Islander"
- VAN_FLAVOR_TEXT:0 "The colony of Vancouver Island anchors Britain's presence on the Pacific coast, balancing imperial ambitions, fur trade interests, and the peoples of the Salish Sea. Will Vancouver Island remain an outpost, or become the seed of a western British North America?"
+ VAN_ADJ:0 "Vancouver Island"
+ VAN_FLAVOR_TEXT:0 "Vancouver Island is Hudson's Bay Company country, home to a handful of fur-trading posts and almost no settlers. With Britain and the United States both claiming the Oregon Country, the island may become Britain's last foothold on the Pacific."

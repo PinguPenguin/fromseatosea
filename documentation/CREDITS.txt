@@ -39,9 +39,16 @@ Modified and adapted for use in this mod.
 
 ACKNOWLEDGEMENTS
 
-C2C was built alongside "Hail, Columbia!" by CaelReader and used it as a dependency until version 2.2.1. C2C's Canadian native nations keep the
-province layout, nation list and pop splits that Hail, Columbia! established for Canada. Hail, Columbia! was also a huge reference for modding in the first place. 
+C2C was built alongside "Hail, Columbia!" by CaelReader and used it as a dependency until version 2.2.1. Hail, Columbia! was also a huge reference for modding in the first place.
 I learned much about how modding works in Vic3 by referencing its files; a massive thank you for making such a great mod.
+
+Content C2C keeps from or adapts from Hail, Columbia!:
+- Canadian native nations (the c2c_* tags): the nation list, names, cultures, province layout and pop splits that Hail, Columbia! established
+  for Canada, and its northern one-province startup handoffs (now in c2c_map_startup_effect). C2C's coats of arms and map colours for them are new.
+- Newfoundland country history ("NEW - Newfoundland.txt"), adapted from Hail, Columbia!'s file at the same path.
+- State traits: "Canadian Boreal Forests" (state_trait_c2c_boreal_forests, same effects as Hail, Columbia!'s state_trait_canadian_boreal_forests)
+  and "Burrard Inlet" (state_trait_c2c_burrard_inlet, adapted from state_trait_burrard_inlet).
+- The Pacific Frontier modifier on Vancouver Island (c2c_pacific_frontier_modifier), based on usfp_canadian_colonization_modifier.
 
 Finally, thank you to the Victoria 3 Modding Co-op, the Victoria 3 wiki, and all those who helped me in creating and refining C2C.
 None of this would be possible without their guides, tools, and help.
