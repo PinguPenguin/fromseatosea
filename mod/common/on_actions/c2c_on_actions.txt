@@ -21,9 +21,8 @@ c2c_mod_detector = {
 		if = {
 			limit = {
 				OR = {
-					csf_is_active_trigger = no
-					is_usfp_active = no
 					community_framework_is_active = no
+					csf_is_active_trigger = yes
 				}
 			}
 			every_country = {

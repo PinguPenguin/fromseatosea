@@ -1,0 +1,4 @@
+﻿c2c_pacific_frontier_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	state_colony_growth_creation_factor = 0.10
+}

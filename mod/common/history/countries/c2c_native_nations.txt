@@ -1,0 +1,86 @@
+﻿COUNTRIES = {
+	c:c2c_ALG ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_ATK ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_CPW ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_DGB ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_DKL ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_DNZ ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_ECR ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_GVT ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_GWC ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_HDA ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_INK ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_INN ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_INV ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_IPQ ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_KTN ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_LLT ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_OJI ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_SAL ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_STU ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_SVY ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_SWC ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_SWP ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_SYX ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_TLT ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_TSI ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_TTC ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_WCR ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_WKS ?= {
+		c2c_native_startup_effect = yes
+	}
+}

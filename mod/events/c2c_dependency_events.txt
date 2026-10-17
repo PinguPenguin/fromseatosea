@@ -19,9 +19,8 @@ c2c_dependency.1 = {
 
 	trigger = {
 		OR = {
-			csf_is_active_trigger = no
-			is_usfp_active = no
 			community_framework_is_active = no
+			csf_is_active_trigger = yes
 		}
 	}
 
@@ -31,34 +30,23 @@ c2c_dependency.1 = {
 	}
 
 	option = {
-		name = c2c_dependency.1.b
-		highlighted_option = yes
-		trigger = {
-			custom_tooltip = {
-				text = c2c_csf_is_missing
-				csf_is_active_trigger = no
-			}
-		}
-	}
-
-	option = {
-		name = c2c_dependency.1.c
-		highlighted_option = yes
-		trigger = {
-			custom_tooltip = {
-				text = c2c_usfp_is_missing
-				is_usfp_active = no
-			}
-		}
-	}
-
-	option = {
 		name = c2c_dependency.1.e
 		highlighted_option = yes
 		trigger = {
 			custom_tooltip = {
 				text = c2c_cmf_is_missing
 				community_framework_is_active = no
+			}
+		}
+	}
+
+	option = {
+		name = c2c_dependency.1.b
+		highlighted_option = yes
+		trigger = {
+			custom_tooltip = {
+				text = c2c_csf_is_loaded
+				csf_is_active_trigger = yes
 			}
 		}
 	}

@@ -12,3 +12,5 @@
  state_trait_ottawa_valley_white_pine:0 "Ottawa Valley White Pine"
  state_trait_port_of_montreal:0 "Port of Montreal"
  state_trait_pei_soils:0 "PEI Soils"
+ c2c_pacific_frontier_modifier:0 "Pacific Frontier"
+ c2c_pacific_frontier_modifier_desc:0 "Settlers, traders and Hudson's Bay Company men are pushing British claims along the Pacific coast."

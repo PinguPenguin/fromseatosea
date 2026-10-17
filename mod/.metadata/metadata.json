@@ -10,8 +10,8 @@
     "relationships": [
         {
             "rel_type": "dependency",
-            "id": "com.github.Victoria-3-Modding-Co-op.Community-State-Framework",
-            "display_name": "Community State Framework",
+            "id": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+            "display_name": "Community Mod Framework",
             "resource_type": "mod",
             "version": ""
         }

@@ -1,11 +1,4 @@
-﻿INJECT:geographic_region_american_bison_range = {
-	state_regions = {
-		STATE_MANITOBA
-		STATE_EDMONTON
-	}
-}
-
-INJECT:geographic_region_greater_canada = {
+﻿INJECT:geographic_region_greater_canada = {
 	state_regions = {
 		STATE_BC_INTERIOR
 		STATE_UPPER_BC

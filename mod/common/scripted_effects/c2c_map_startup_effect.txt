@@ -92,7 +92,7 @@
 	}
 	s:STATE_BRITISH_COLUMBIA = {
 		set_owner_of_provinces = {
-			country = c:usfp_DKL
+			country = c:c2c_DKL
 			provinces = { x064FE6 x06BB33 }
 		}
 	}
@@ -122,7 +122,33 @@
 	}
 	s:STATE_UPPER_BC = {
 		region_state:HBC = {
-			set_state_owner = c:usfp_DNZ
+			set_state_owner = c:c2c_DNZ
+		}
+		set_owner_of_provinces = {
+			country = c:c2c_TSI
+			provinces = { xA6B63F }
+		}
+	}
+	# Northern one-province shells, handed to the native nations as USFP's
+	# startup cleanup used to do
+	s:STATE_NORTHWEST_TERRITORIES = {
+		region_state:HBC ?= {
+			set_state_owner = c:c2c_INV
+		}
+	}
+	s:STATE_NUNAVUT = {
+		region_state:HBC ?= {
+			set_state_owner = c:c2c_INV
+		}
+	}
+	s:STATE_YUKON_TERRITORY = {
+		set_owner_of_provinces = {
+			country = c:c2c_TLT
+			provinces = { xB3CC99 }
+		}
+		set_owner_of_provinces = {
+			country = c:c2c_TTC
+			provinces = { x788E5F }
 		}
 	}
 	if = {

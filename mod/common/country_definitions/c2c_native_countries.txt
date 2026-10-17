@@ -1,0 +1,310 @@
+﻿# Canadian native nations. These replace the usfp_* tags c2c used while
+# Hail, Columbia! was a dependency.
+
+c2c_ALG = { # Algonquin
+	color = { 150 92 48 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { algonquian }
+	capital = STATE_NOUVEAU_QUEBEC
+}
+
+c2c_ATK = { # Nitaskinan
+	color = { 176 120 64 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_QUEBEC_SAGUENAY
+}
+
+c2c_CPW = { # Chipewyan
+	color = { 128 96 70 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_NORTHWEST_TERRITORIES
+}
+
+c2c_DGB = { # Dogrib
+	color = { 112 132 88 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_NORTHWEST_TERRITORIES
+}
+
+c2c_DKL = { # Dakelh
+	color = { 96 120 140 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_UPPER_BC
+}
+
+c2c_DNZ = { # Dane-zaa
+	color = { 140 112 40 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_UPPER_BC
+}
+
+c2c_ECR = { # Eastern Cree
+	color = { 164 72 56 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_NOUVEAU_QUEBEC
+}
+
+c2c_GVT = { # Gros Ventre
+	color = { 184 140 88 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { siouan }
+	capital = STATE_SASKATCHEWAN
+}
+
+c2c_GWC = { # Gwich'in
+	color = { 84 108 128 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_YUKON_TERRITORY
+}
+
+c2c_HDA = { # Haida Gwaii
+	color = { 60 96 120 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_UPPER_BC
+}
+
+c2c_INK = { # Nunavik
+	color = { 176 196 212 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { inuit }
+	capital = STATE_NOUVEAU_QUEBEC
+}
+
+c2c_INN = { # Innu
+	color = { 124 84 60 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_NOUVEAU_QUEBEC
+}
+
+c2c_INV = { # Inuit Nunangat
+	color = { 200 212 220 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { inuit }
+	capital = STATE_NUNAVUT
+}
+
+c2c_IPQ = { # Iñupiat Nunaat
+	color = { 152 176 196 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { inuit }
+	capital = STATE_YUKON_TERRITORY
+}
+
+c2c_KTN = { # Kutenai
+	color = { 100 140 92 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BC_INTERIOR
+}
+
+c2c_LLT = { # St'at'imc
+	color = { 72 120 104 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+c2c_OJI = { # Oji-Cree
+	color = { 156 104 76 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_NORTHWEST_ONTARIO
+}
+
+c2c_SAL = { # Salish
+	color = { 52 112 116 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+c2c_STU = { # Sahtu
+	color = { 104 92 120 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_NORTHWEST_TERRITORIES
+}
+
+c2c_SVY = { # Dene
+	color = { 136 124 84 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_NORTHWEST_TERRITORIES
+}
+
+c2c_SWC = { # Homeguard Cree
+	color = { 188 96 72 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_NORTHWEST_ONTARIO
+}
+
+c2c_SWP = { # Shuswap
+	color = { 88 128 76 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BC_INTERIOR
+}
+
+c2c_SYX = { # Syilx
+	color = { 120 148 80 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}
+
+c2c_TLT = { # Tahltan
+	color = { 148 84 96 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_UPPER_BC
+}
+
+c2c_TSI = { # Tsimshian
+	color = { 76 84 132 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_UPPER_BC
+}
+
+c2c_TTC = { # Tutchone
+	color = { 116 104 72 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { athabaskan }
+	capital = STATE_YUKON_TERRITORY
+}
+
+c2c_WCR = { # Woodland Cree
+	color = { 140 64 48 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { cree }
+	capital = STATE_KEEWATIN
+}
+
+c2c_WKS = { # Wakashan
+	color = { 44 92 140 }
+
+	country_type = decentralized
+
+	tier = principality
+
+	cultures = { salish }
+	capital = STATE_BRITISH_COLUMBIA
+}

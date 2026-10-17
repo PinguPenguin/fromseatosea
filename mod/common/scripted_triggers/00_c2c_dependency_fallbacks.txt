@@ -1,11 +1,13 @@
-﻿csf_is_active_trigger = {
+﻿# Fallbacks for detection triggers that other mods define. The real
+# definitions use REPLACE_OR_CREATE in files that sort after this one.
+
+# Community State Framework. c2c no longer depends on CSF and conflicts with it
+# (both define the non-Canadian North American states); used to warn the player.
+csf_is_active_trigger = {
 	always = no
 }
 
-is_usfp_active = {
-	always = no
-}
-
+# Community Mod Framework
 community_framework_is_active = {
 	always = no
 }

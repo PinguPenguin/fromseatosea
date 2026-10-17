@@ -1,0 +1,7 @@
+﻿# Shared start-of-game setup for c2c native nations, following vanilla's
+# decentralized North American nations (e.g. irc - iron confederacy.txt).
+c2c_native_startup_effect = {
+	effect_starting_technology_tier_6_tech = yes
+	effect_starting_politics_traditional = yes
+	effect_native_conscription_10 = yes
+}

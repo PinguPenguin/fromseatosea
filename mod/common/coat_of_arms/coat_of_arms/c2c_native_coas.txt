@@ -1,0 +1,337 @@
+﻿# Coats of arms for c2c's Canadian native nations
+
+c2c_ALG = { # Algonquin
+	pattern = "pattern_solid.tga"
+	color1 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_beaver.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_ATK = { # Nitaskinan
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_thunderbird.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_CPW = { # Chipewyan
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+
+	colored_emblem = {
+		texture = "ce_native_american_pattern_diamond.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_DGB = { # Dogrib
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_native_american_pattern_diamond.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_DKL = { # Dakelh
+	pattern = "pattern_solid.tga"
+	color1 = "teal"
+
+	colored_emblem = {
+		texture = "ce_sun.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_DNZ = { # Dane-zaa
+	pattern = "pattern_solid.tga"
+	color1 = "yellow_dark"
+
+	colored_emblem = {
+		texture = "ce_sun.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_ECR = { # Eastern Cree
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_thunderbird.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_GVT = { # Gros Ventre
+	pattern = "pattern_solid.tga"
+	color1 = "tan"
+
+	colored_emblem = {
+		texture = "ce_buffalo.dds"
+		color1 = "brown"
+		color2 = "brown"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_GWC = { # Gwich'in
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+
+	colored_emblem = {
+		texture = "ce_native_american_pattern_diamond.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_HDA = { # Haida Gwaii
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+
+	colored_emblem = {
+		texture = "ce_eagle_head.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_INK = { # Nunavik
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_star_08.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_INN = { # Innu
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	colored_emblem = {
+		texture = "ce_thunderbird.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_INV = { # Inuit Nunangat
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_star_08.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_IPQ = { # Iñupiat Nunaat
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+
+	colored_emblem = {
+		texture = "ce_moon_face.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_KTN = { # Kutenai
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_LLT = { # St'at'imc
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_OJI = { # Oji-Cree
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+
+	colored_emblem = {
+		texture = "ce_thunderbird.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_SAL = { # Salish
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+
+	colored_emblem = {
+		texture = "ce_fish_oudh.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_STU = { # Sahtu
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+
+	colored_emblem = {
+		texture = "ce_native_american_pattern_diamond.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_SVY = { # Dene
+	pattern = "pattern_solid.tga"
+	color1 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_sun.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_SWC = { # Homeguard Cree
+	pattern = "pattern_solid.tga"
+	color1 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_thunderbird.dds"
+		color1 = "red_dark"
+		color2 = "red_dark"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_SWP = { # Shuswap
+	pattern = "pattern_solid.tga"
+	color1 = "yellow_dark"
+
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "blue"
+		color2 = "blue"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_SYX = { # Syilx
+	pattern = "pattern_solid.tga"
+	color1 = "orange"
+
+	colored_emblem = {
+		texture = "ce_sun.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_TLT = { # Tahltan
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+
+	colored_emblem = {
+		texture = "ce_native_american_pattern_diamond.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_TSI = { # Tsimshian
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+
+	colored_emblem = {
+		texture = "ce_eagle_head.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_TTC = { # Tutchone
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_native_american_pattern_diamond.dds"
+		color1 = "brown"
+		color2 = "brown"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_WCR = { # Woodland Cree
+	pattern = "pattern_solid.tga"
+	color1 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_thunderbird.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
+
+c2c_WKS = { # Wakashan
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+
+	colored_emblem = {
+		texture = "ce_fish_oudh.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { scale = { 0.8 0.8 } position = { 0.5 0.5 } }
+	}
+}
