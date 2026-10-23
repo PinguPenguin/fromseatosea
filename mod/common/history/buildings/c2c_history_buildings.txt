@@ -268,6 +268,35 @@
 		}
 	}
 
+	s:STATE_PRINCE_EDWARD_ISLAND = {
+		region_state:PEI = {
+			create_building = {
+				building = "building_wheat_farm"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_wheat_farm"
+						country = "c:PEI"
+						levels = 1
+						region = "STATE_PRINCE_EDWARD_ISLAND"
+					}
+				}
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_livestock_ranch"
+						country = "c:PEI"
+						levels = 1
+						region = "STATE_PRINCE_EDWARD_ISLAND"
+					}
+				}
+			}
+		}
+	}
+
 	s:STATE_NEW_BRUNSWICK = {
 		region_state:NBS = {
 			remove_building = building_lead_mine
@@ -375,32 +404,6 @@
 					building = {
 						type = "building_livestock_ranch"
 						country = "c:NBS"
-						levels = 1
-						region = "STATE_NEW_BRUNSWICK"
-					}
-				}
-			}
-		}
-		region_state:PEI = {
-			create_building = {
-				building = "building_wheat_farm"
-				reserves = 1
-				add_ownership = {
-					building = {
-						type = "building_wheat_farm"
-						country = "c:PEI"
-						levels = 1
-						region = "STATE_NEW_BRUNSWICK"
-					}
-				}
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				reserves = 1
-				add_ownership = {
-					building = {
-						type = "building_livestock_ranch"
-						country = "c:PEI"
 						levels = 1
 						region = "STATE_NEW_BRUNSWICK"
 					}
@@ -543,6 +546,21 @@
 					}
 				}
 				reserves = 1
+			}
+		}
+		# vanilla's HBC logging camp for Abitibi (common/history/buildings/05_north_america.txt, STATE_QUEBEC)
+		region_state:HBC = {
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					company = {
+						type = company_hbc
+						country = "c:GBR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_saw_mills" "pm_no_equipment" "pm_road_carts" "pm_hardwood" }
 			}
 		}
 	}

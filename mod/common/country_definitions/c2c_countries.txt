@@ -6,7 +6,7 @@
 	tier = principality
 
 	cultures = { anglo_canadian acadian }
-	capital = STATE_NEW_BRUNSWICK
+	capital = STATE_PRINCE_EDWARD_ISLAND
 }
 
 REPLACE_OR_CREATE:NVS = {

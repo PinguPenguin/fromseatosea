@@ -3,7 +3,7 @@
 }
 
 INJECT:region_atlantic_coast = {
-	states = { STATE_NOVA_SCOTIA }
+	states = { STATE_NOVA_SCOTIA  STATE_PRINCE_EDWARD_ISLAND }
 }
 
 INJECT:region_pacific_coast = {

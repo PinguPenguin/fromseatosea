@@ -424,6 +424,7 @@ can_aus.6 = {
 						state_region = s:STATE_LABRADOR
 						state_region = s:STATE_NOVA_SCOTIA
 						state_region = s:STATE_NEW_BRUNSWICK
+						state_region = s:STATE_PRINCE_EDWARD_ISLAND
 						state_region = s:STATE_SAINT_LAURENT
 						state_region = s:STATE_QUEBEC_SAGUENAY
 						state_region = s:STATE_NOUVEAU_QUEBEC

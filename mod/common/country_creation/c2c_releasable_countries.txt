@@ -37,8 +37,8 @@ REPLACE_OR_CREATE:NVS = {
 }
 
 REPLACE_OR_CREATE:PEI = {
-	provinces = {
-		x70C040
+	states = {
+		STATE_PRINCE_EDWARD_ISLAND
 	}
 
 	ai_will_do = { always = no }

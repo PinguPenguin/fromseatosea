@@ -4,6 +4,7 @@
 		STATE_UPPER_BC
 		STATE_VANCOUVER_ISLAND
 		STATE_NOVA_SCOTIA
+		STATE_PRINCE_EDWARD_ISLAND
 	}
 }
 
@@ -24,6 +25,7 @@ INJECT:geographic_region_canada_old = {
 
 INJECT:geographic_region_new_england_old = {
 	state_regions = {
+		STATE_PRINCE_EDWARD_ISLAND
 		STATE_NOVA_SCOTIA
 	}
 }

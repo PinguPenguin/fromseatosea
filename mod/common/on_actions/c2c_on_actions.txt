@@ -4,6 +4,12 @@
 	}
 }
 
+on_yearly_pulse = {
+	on_actions = {
+		c2c_hub_name_pulse
+	}
+}
+
 on_game_started_after_lobby = {
 	on_actions = {
 		c2c_mod_detector
@@ -35,5 +41,11 @@ c2c_mod_detector = {
 				}
 			}
 		}
+	}
+}
+
+c2c_hub_name_pulse = {
+	effect = {
+		c2c_update_hub_names = yes
 	}
 }

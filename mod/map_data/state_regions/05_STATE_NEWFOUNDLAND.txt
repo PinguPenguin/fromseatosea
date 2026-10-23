@@ -6,8 +6,8 @@
     city = "xd1d79f"
     port = "x48f357"
     farm = "x0c0ccc"
-    mine = "xde7be8"
-    wood = "x8d790b"
+    mine = "x24ad62"
+    wood = "xde7d17"
     arable_land = 20
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
