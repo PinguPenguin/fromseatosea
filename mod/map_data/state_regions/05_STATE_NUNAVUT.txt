@@ -16,6 +16,7 @@
         building_logging_camp = 4
         building_fishing_wharf = 12
         building_whaling_station = 10
+        building_copper_mine = 4
     }
     resource = {
         type = "building_gold_field"
@@ -23,4 +24,6 @@
         undiscovered_amount = 2
     }
     naval_exit_id = 3044
+    min_cold_effect = 0.19
+    max_cold_effect = 1.00
 }

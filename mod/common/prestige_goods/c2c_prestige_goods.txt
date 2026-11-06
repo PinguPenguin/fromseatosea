@@ -16,15 +16,6 @@ prestige_good_c2c_empress_liners = {
 	texture = "gfx/interface/icons/goods_icons/prestige_goods/white_star_liners_prestige.dds"
 }
 
-prestige_good_c2c_peameal_bacon = {
-	possible = {
-		has_dlc_feature = mp1_content
-	}
-	base_good = meat
-	prestige_bonus = 0.1
-	texture = "gfx/interface/icons/goods_icons/prestige_goods/acorn_fed_pork_prestige.dds"
-}
-
 prestige_good_c2c_laurentian_newsprint = {
 	possible = {
 		has_dlc_feature = mp1_content

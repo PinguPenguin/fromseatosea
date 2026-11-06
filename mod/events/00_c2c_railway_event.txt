@@ -59,4 +59,8 @@ major_railways.3 = {
 			}
 		}
 	}
+
+	after = {
+		je_canada_pacific_railway_cleanup = yes
+	}
 }

@@ -484,16 +484,6 @@
 				reserves = 1
 			}
 			create_building = {
-				building = "building_sulfur_mine"
-				add_ownership = {
-					country = {
-						country = "c:HBC"
-						levels = 1
-					}
-				}
-				reserves = 1
-			}
-			create_building = {
 				building = "building_logging_camp"
 				reserves = 1
 				add_ownership = {
@@ -522,16 +512,6 @@
 
 	s:STATE_NORTHWEST_TERRITORIES = {
 		region_state:c2c_INV = {
-			create_building = {
-				building = "building_logging_camp"
-				reserves = 1
-				add_ownership = {
-					country = {
-						country = "c:c2c_INV"
-						levels = 1
-					}
-				}
-			}
 		}
 	}
 
@@ -1158,16 +1138,6 @@
 			}
 		}
 		region_state:HBC = {
-			create_building = {
-				building = "building_logging_camp"
-				reserves = 1
-				add_ownership = {
-					country = {
-						country = "c:HBC"
-						levels = 1
-					}
-				}
-			}
 		}
 		region_state:ORG = {
 		}

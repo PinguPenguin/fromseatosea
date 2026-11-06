@@ -11,7 +11,7 @@
 		has_technology_researched = nationalism
 		NOT = { has_modifier = canada_test_modifier }
 		hidden_trigger = {
-			NOT = { c:NEW = THIS }
+			NOT = { c:NEW ?= THIS }
 		}
 		trigger_if = {
 			limit = {
@@ -34,7 +34,7 @@
 						is_subject = yes
 						NOT = { THIS = ROOT }
 						hidden_trigger = {
-							NOT = { c:NEW = THIS }
+							NOT = { c:NEW ?= THIS }
 						}
 						top_overlord = {
 							THIS = root.top_overlord
@@ -54,7 +54,7 @@
 					is_ai = yes
 					relations:root >= relations_threshold:amicable
 					hidden_trigger = {
-						NOT = { c:NEW = THIS }
+						NOT = { c:NEW ?= THIS }
 					}
 					count >= 2
 				}
@@ -88,7 +88,7 @@
 	}
 
 	ai_chance = {
-		value = 0
+		value = 10
 		if = {
 			limit = {
 				has_technology_researched = pan-nationalism

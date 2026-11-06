@@ -1,18 +1,72 @@
-﻿REPLACE:je_canada_can = {
+﻿# Confederation, on vanilla 1.15's global je_canada (common/journal_entries/00_canada_australia.txt).
+# Kept from c2c's former je_canada_can and je_canada_gbr: Newfoundland stays out, the colony that unites
+# becomes CAN with all three Canadian primary cultures, and victory needs entire state regions.
+# Dropped from vanilla: the "only one country remains" check, which could count HBC and native nations.
+# The state list here must match REPLACE:geographic_region_canadian_confederation, which names it in the tooltip.
+REPLACE:je_canada = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
-	group = je_group_historical_content
+	group = je_group_global_international_situations
 
-	is_shown_when_inactive = {
+	activation_description = {
+		always = yes
+	}
+
+	should_be_involved = {
 		hidden_trigger = {
 			NOT = { c:NEW ?= THIS }
 		}
 		OR = {
-			country_has_primary_culture = cu:anglo_canadian
-			country_has_primary_culture = cu:franco_canadian
-			country_has_primary_culture = cu:acadian
+			# The Canadian colonies
+			AND = {
+				capital = {
+					is_in_geographic_region = geographic_region_greater_canada
+				}
+				is_subject = yes
+				country_is_colonial_or_company = yes
+			}
+			# Their overlord
+			AND = {
+				NOT = {
+					capital = {
+						is_in_geographic_region = geographic_region_greater_canada
+					}
+				}
+				any_subject_or_below = {
+					hidden_trigger = {
+						NOT = { c:NEW ?= THIS }
+					}
+					capital = {
+						is_in_geographic_region = geographic_region_greater_canada
+					}
+					country_is_colonial_or_company = yes
+					count >= 2
+				}
+			}
 		}
-		is_subject = yes
+	}
+
+	should_show_when_not_involved = {
+		hidden_trigger = {
+			NOT = { c:NEW ?= THIS }
+		}
+		OR = {
+			AND = {
+				capital = {
+					is_in_geographic_region = geographic_region_greater_canada
+				}
+				country_is_colonial_or_company = yes
+			}
+			any_subject_or_below = {
+				hidden_trigger = {
+					NOT = { c:NEW ?= THIS }
+				}
+				capital = {
+					is_in_geographic_region = geographic_region_greater_canada
+				}
+				country_is_colonial_or_company = yes
+			}
+		}
 	}
 
 	is_shown_in_lobby = {
@@ -20,171 +74,174 @@
 			NOT = { c:NEW ?= THIS }
 		}
 		OR = {
-			country_has_primary_culture = cu:anglo_canadian
-			country_has_primary_culture = cu:franco_canadian
-			country_has_primary_culture = cu:acadian
+			AND = {
+				OR = {
+					country_has_primary_culture = cu:anglo_canadian
+					country_has_primary_culture = cu:franco_canadian
+					country_has_primary_culture = cu:acadian
+				}
+				is_in_geographic_region = geographic_region_greater_canada
+			}
+			AND = {
+				NOT = {
+					capital = {
+						is_in_geographic_region = geographic_region_greater_canada
+					}
+				}
+				any_subject_or_below = {
+					hidden_trigger = {
+						NOT = { c:NEW ?= THIS }
+					}
+					capital = {
+						is_in_geographic_region = geographic_region_greater_canada
+					}
+					count >= 2
+				}
+			}
 		}
 	}
 
-	possible = {
-		has_technology_researched = nationalism
-		hidden_trigger = {
-			NOT = { c:NEW ?= THIS }
-		}
-	}
-
-	scripted_button = je_canada_unite_can_button
-
-	complete = {
-		owns_entire_state_region = STATE_ONTARIO
-		owns_entire_state_region = STATE_ONTARIO_PENINSULA
-		owns_entire_state_region = STATE_ALGOMA
-		owns_entire_state_region = STATE_NORTHWEST_ONTARIO
-		owns_entire_state_region = STATE_NEW_BRUNSWICK
-		owns_entire_state_region = STATE_NOVA_SCOTIA
-		owns_entire_state_region = STATE_QUEBEC
-		owns_entire_state_region = STATE_SAINT_LAURENT
-		owns_entire_state_region = STATE_QUEBEC_SAGUENAY
-		owns_entire_state_region = STATE_NOUVEAU_QUEBEC
-		owns_entire_state_region = STATE_ALBERTA
-		owns_entire_state_region = STATE_EDMONTON
-		owns_entire_state_region = STATE_BRITISH_COLUMBIA
-		owns_entire_state_region = STATE_BC_INTERIOR
-		owns_entire_state_region = STATE_VANCOUVER_ISLAND
-		owns_entire_state_region = STATE_SASKATCHEWAN
-		owns_entire_state_region = STATE_MANITOBA
-	}
-
-	on_complete = {
-		trigger_event = { id = can_aus.5 }
-		change_tag = CAN
-		add_primary_culture = cu:anglo_canadian
-		add_primary_culture = cu:franco_canadian
-		add_primary_culture = cu:acadian
-		hidden_effect = {
-			if = {
-				limit = {
-					any_scope_state = {
-						state_region = s:STATE_ONTARIO
+	is_shown_when_inactive = {
+		any_country_in_greater_canada = {
+			hidden_trigger = {
+				NOT = { c:NEW ?= THIS }
+			}
+			is_subject = yes
+			country_is_colonial_or_company = yes
+			OR = {
+				# Meant to let a colony that owns everything confederate with no neighbours left.
+				# In a 2026-11-06 debug test it still didn't fire when set up that way; cause unknown.
+				c2c_owns_confederation_states = yes
+				overlord = {
+					any_subject_or_below = {
+						hidden_trigger = {
+							NOT = { c:NEW ?= THIS }
+						}
+						capital = {
+							is_in_geographic_region = geographic_region_greater_canada
+						}
+						count >= 2
 					}
 				}
 			}
-			s:STATE_ONTARIO = {
-				random_scope_state = {
-			        set_hub_name = {
-			            type = city
-			            name = HUB_NAME_STATE_ONTARIO_city_ottawa
-			        }
+		}
+	}
+
+	possible = {
+		any_country_in_greater_canada = {
+			hidden_trigger = {
+				NOT = { c:NEW ?= THIS }
+			}
+			is_subject = yes
+			country_is_colonial_or_company = yes
+			OR = {
+				has_technology_researched = nationalism
+				overlord = {
+					has_technology_researched = nationalism
 				}
 			}
 		}
 	}
 
-	invalid = {
-		OR = {
-			is_subject = no
-			hidden_trigger = {
-				c:NEW ?= THIS
-			}
-		}
-	}
-
-	weight = 100
-
-	should_be_pinned_by_default_uninvolved_or_context = yes
-}
-
-REPLACE:je_canada_gbr = {
-	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
-
-	group = je_group_historical_content
-
-	is_shown_in_lobby = {
-		any_subject_or_below = {
-			hidden_trigger = {
-				NOT = { c:NEW ?= THIS }
-			}
-			OR = {
-				country_has_primary_culture = cu:anglo_canadian
-				country_has_primary_culture = cu:franco_canadian
-				country_has_primary_culture = cu:acadian
-			}
-			count >= 2
-		}
-		NOT = {
-			OR = {
-				country_has_primary_culture = cu:anglo_canadian
-				country_has_primary_culture = cu:franco_canadian
-				country_has_primary_culture = cu:acadian
-			}
-		}
-	}
-
-	is_shown_when_inactive = {
-		any_subject_or_below = {
-			hidden_trigger = {
-				NOT = { c:NEW ?= THIS }
-			}
-			OR = {
-				country_has_primary_culture = cu:anglo_canadian
-				country_has_primary_culture = cu:franco_canadian
-				country_has_primary_culture = cu:acadian
-			}
-			count >= 2
-		}
-		NOT = {
-			OR = {
-				country_has_primary_culture = cu:anglo_canadian
-				country_has_primary_culture = cu:franco_canadian
-				country_has_primary_culture = cu:acadian
-			}
-		}
-	}
-
-	possible = {
-		has_technology_researched = nationalism
-	}
-
 	scripted_button = je_canada_unite_can_button
 
-	complete = {
-		owns_entire_state_region = STATE_ONTARIO
-		owns_entire_state_region = STATE_ONTARIO_PENINSULA
-		owns_entire_state_region = STATE_ALGOMA
-		owns_entire_state_region = STATE_NORTHWEST_ONTARIO
-		owns_entire_state_region = STATE_NEW_BRUNSWICK
-		owns_entire_state_region = STATE_NOVA_SCOTIA
-		owns_entire_state_region = STATE_QUEBEC
-		owns_entire_state_region = STATE_SAINT_LAURENT
-		owns_entire_state_region = STATE_QUEBEC_SAGUENAY
-		owns_entire_state_region = STATE_NOUVEAU_QUEBEC
-		owns_entire_state_region = STATE_ALBERTA
-		owns_entire_state_region = STATE_EDMONTON
-		owns_entire_state_region = STATE_BRITISH_COLUMBIA
-		owns_entire_state_region = STATE_BC_INTERIOR
-		owns_entire_state_region = STATE_VANCOUVER_ISLAND
-		owns_entire_state_region = STATE_SASKATCHEWAN
-		owns_entire_state_region = STATE_MANITOBA
-	}
-
-	on_complete = {
-		trigger_event = { id = can_aus.6 }
-		hidden_effect = {
-			if = {
-				limit = {
-					any_subject_or_below = {
-						any_scope_state = {
-							state_region = s:STATE_ONTARIO
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		color = "gold_positive"
+		conclusion_desc = je_standard_completion_conclusion_desc
+		trigger = {
+			any_country_in_greater_canada = {
+				hidden_trigger = {
+					NOT = { c:NEW ?= THIS }
+				}
+				is_subject = yes
+				custom_tooltip = {
+					text = owns_all_confederate_canada_tt
+					c2c_owns_confederation_states = yes
+				}
+			}
+		}
+		effect = {
+			hidden_effect = {
+				s:STATE_ONTARIO ?= {
+					random_scope_state = {
+						set_hub_name = {
+							type = city
+							name = HUB_NAME_STATE_ONTARIO_city_ottawa
 						}
 					}
 				}
 			}
-			s:STATE_ONTARIO = {
-				random_scope_state = {
-			        set_hub_name = {
-			            type = city
-			            name = HUB_NAME_STATE_ONTARIO_city_ottawa
-			        }
+			je_canada_cleanup = yes
+		}
+		effect_all_involved = {
+			show_as_tooltip = {
+				trigger_event = { id = can_aus.5 }
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						capital = {
+							is_in_geographic_region = geographic_region_greater_canada
+						}
+						is_subject = yes
+						c2c_owns_confederation_states = yes
+					}
+					trigger_event = { id = can_aus.5 }
+					change_tag = CAN
+					add_primary_culture = cu:anglo_canadian
+					add_primary_culture = cu:franco_canadian
+					add_primary_culture = cu:acadian
+				}
+				else_if = {
+					limit = {
+						NOT = {
+							capital = {
+								is_in_geographic_region = geographic_region_greater_canada
+							}
+						}
+					}
+					trigger_event = { id = can_aus.6 }
+				}
+			}
+		}
+	}
+
+	outcome = {
+		flags = { hidden invalid_outcome }
+		conclusion_desc = je_standard_failure_conclusion_desc
+		trigger = {
+			NOT = {
+				any_country_in_greater_canada = {
+					hidden_trigger = {
+						NOT = { c:NEW ?= THIS }
+					}
+					is_subject = yes
+					country_is_colonial_or_company = yes
+				}
+			}
+		}
+		effect = {
+			je_canada_cleanup = yes
+		}
+	}
+
+	on_weekly_pulse = {
+		effect = {
+			# Pull in any Canadian colony that qualifies after the situation has activated.
+			every_country_in_greater_canada = {
+				limit = {
+					NOT = { c:NEW ?= THIS }
+					has_journal_entry = je_canada
+					is_subject = yes
+					country_is_colonial_or_company = yes
+					NOT = {
+						is_involved_in_journal_entry = je_canada
+					}
+				}
+				je:je_canada ?= {
+					add_involved_country = prev
 				}
 			}
 		}
@@ -192,5 +249,8 @@ REPLACE:je_canada_gbr = {
 
 	weight = 100
 
-	should_be_pinned_by_default_uninvolved_or_context = yes
+	should_be_pinned_by_default_uninvolved_or_context = no
+	should_be_pinned_by_default_involved = yes
+
+	can_revolution_inherit = yes
 }

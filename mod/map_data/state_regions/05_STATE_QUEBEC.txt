@@ -18,4 +18,6 @@
         depleted_type = "building_gold_mine"
         undiscovered_amount = 1
     }
+    min_cold_effect = 0.02
+    max_cold_effect = 0.58
 }

@@ -20,7 +20,7 @@ can_aus.1 = {
 	duration = 3
 
 	trigger = {
-		NOT = { c:NEW = THIS }
+		NOT = { c:NEW ?= THIS }
 	}
 
 	immediate = {
@@ -34,7 +34,7 @@ can_aus.1 = {
 					}
 					is_subject = yes
 					NOT = { THIS = ROOT }
-					NOT = { c:NEW = THIS }
+					NOT = { c:NEW ?= THIS }
 					top_overlord = {
 						THIS = root.top_overlord
 					}
@@ -47,8 +47,13 @@ can_aus.1 = {
 			save_scope_as = canada_overlord_country
 			ruler = {
 				save_scope_as = canada_overlord_ruler
+				set_temporary_event_immortality = { DURATION = 3 }
 			}
 		}
+	}
+
+	after = {
+		revoke_temporary_event_immortality = { CHARACTER = scope:canada_overlord_ruler }
 	}
 
 	option = {
@@ -99,7 +104,7 @@ can_aus.2 = {
 				}
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
-				NOT = { c:NEW = THIS }
+				NOT = { c:NEW ?= THIS }
 			}
 			save_scope_as = canada_scope_1
 		}
@@ -110,7 +115,7 @@ can_aus.2 = {
 				}
 				relations:root >= relations_threshold:amicable
 				is_ai = yes
-				NOT = { c:NEW = THIS }
+				NOT = { c:NEW ?= THIS }
 				NOT = {
 					scope:canada_scope_1 = THIS
 				}

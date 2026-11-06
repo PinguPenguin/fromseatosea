@@ -43,3 +43,29 @@ INJECT:geographic_region_great_plains_old = {
 		STATE_EDMONTON
 	}
 }
+
+# Named by Confederation's tooltip. Must match c2c_owns_confederation_states.
+REPLACE:geographic_region_canadian_confederation = {
+	short_key = "canadian_confederation"
+
+	state_regions = {
+		STATE_ONTARIO
+		STATE_ONTARIO_PENINSULA
+		STATE_ALGOMA
+		STATE_NORTHWEST_ONTARIO
+		STATE_NEW_BRUNSWICK
+		STATE_NOVA_SCOTIA
+		STATE_PRINCE_EDWARD_ISLAND
+		STATE_QUEBEC
+		STATE_SAINT_LAURENT
+		STATE_QUEBEC_SAGUENAY
+		STATE_NOUVEAU_QUEBEC
+		STATE_ALBERTA
+		STATE_EDMONTON
+		STATE_BRITISH_COLUMBIA
+		STATE_BC_INTERIOR
+		STATE_VANCOUVER_ISLAND
+		STATE_SASKATCHEWAN
+		STATE_MANITOBA
+	}
+}

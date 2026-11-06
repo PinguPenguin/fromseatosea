@@ -618,6 +618,7 @@ company_c2c_noranda_mines = {
 	preferred_headquarters = { STATE_QUEBEC }
 
 	building_types = {
+		building_copper_mine
 		building_lead_mine
 		building_gold_mine
 		building_iron_mine
@@ -656,6 +657,7 @@ company_c2c_noranda_mines = {
 			is_incorporated = yes
 			any_scope_building = {
 				OR = {
+					is_building_type = building_copper_mine
 					is_building_type = building_lead_mine
 					is_building_type = building_gold_mine
 					is_building_type = building_iron_mine
@@ -685,6 +687,18 @@ company_c2c_noranda_mines = {
 	}
 
 	ai_construction_targets = {
+		building_copper_mine = {
+			level = 5
+			state_trigger = {
+				OR = {
+					state_region = s:STATE_QUEBEC
+					state_region = s:STATE_NOUVEAU_QUEBEC
+					state_region = s:STATE_QUEBEC_SAGUENAY
+					state_region = s:STATE_ALGOMA
+				}
+				is_incorporated = yes
+			}
+		}
 		building_lead_mine = {
 			level = 5
 			state_trigger = {
@@ -732,10 +746,6 @@ company_c2c_canada_packers = {
 
 	extension_building_types = {
 		building_wheat_farm
-	}
-
-	possible_prestige_goods = {
-		prestige_good_c2c_peameal_bacon
 	}
 
 	potential = {

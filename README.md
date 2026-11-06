@@ -19,7 +19,7 @@ This repository was generated with the Victoria 3 Modding Co-op's [Mod Template 
 - Adding any new IGs, goods, buildings, or units (c2c's companies do get their own prestige goods)
 
 ## Requirements
-- Victoria 3 1.13
+- Victoria 3 1.15
 - [Community Mod Framework](https://github.com/Victoria-3-Modding-Co-op/Community-Mod-Framework), loaded before c2c
 
 c2c is **not** compatible with Community State Framework or with other mods that change the North American map:

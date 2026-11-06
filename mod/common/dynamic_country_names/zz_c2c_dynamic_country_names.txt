@@ -11,12 +11,12 @@
 			c:GBR ?= {
 				OR = {
 					has_diplomatic_pact = {
-						who = c:ONT
+						who = scope:actor
 						type = colony
 						is_initiator = yes
 					}
 					has_diplomatic_pact = {
-						who = c:ONT
+						who = scope:actor
 						type = c2c_self_governing_colony
 						is_initiator = yes
 					}
@@ -39,12 +39,12 @@ REPLACE_OR_CREATE:QUE = { # Quebec
 			c:GBR ?= {
 				OR = {
 					has_diplomatic_pact = {
-						who = c:QUE
+						who = scope:actor
 						type = colony
 						is_initiator = yes
 					}
 					has_diplomatic_pact = {
-						who = c:QUE
+						who = scope:actor
 						type = c2c_self_governing_colony
 						is_initiator = yes
 					}

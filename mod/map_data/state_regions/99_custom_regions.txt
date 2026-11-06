@@ -24,6 +24,8 @@ STATE_LABRADOR = {
         type = "building_oil_rig"
         undiscovered_amount = 8
     }
+    min_cold_effect = 0.03
+    max_cold_effect = 0.76
 }
 
 STATE_QUEBEC_SAGUENAY = {
@@ -46,6 +48,8 @@ STATE_QUEBEC_SAGUENAY = {
         building_whaling_station = 6
         building_lead_mine = 6
     }
+    min_cold_effect = 0.02
+    max_cold_effect = 0.66
 }
 
 STATE_SAINT_LAURENT = {
@@ -66,7 +70,14 @@ STATE_SAINT_LAURENT = {
         building_logging_camp = 24
         building_fishing_wharf = 12
         building_whaling_station = 2
+        building_copper_mine = 4
     }
+    blockade_locator = {
+        position = { 2482 0 2663 }
+        yaw = -141
+    }
+    min_cold_effect = 0.02
+    max_cold_effect = 0.56
 }
 
 STATE_NOUVEAU_QUEBEC = {
@@ -87,12 +98,15 @@ STATE_NOUVEAU_QUEBEC = {
         building_iron_mine = 45
         building_logging_camp = 20
         building_lead_mine = 4
+        building_copper_mine = 8
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
         undiscovered_amount = 7
     }
+    min_cold_effect = 0.03
+    max_cold_effect = 0.80
 }
 
 STATE_NOVA_SCOTIA = {
@@ -120,6 +134,8 @@ STATE_NOVA_SCOTIA = {
         depleted_type = "building_gold_mine"
         undiscovered_amount = 2
     }
+    min_cold_effect = 0.02
+    max_cold_effect = 0.45
 }
 
 STATE_ONTARIO_PENINSULA = {
@@ -143,6 +159,8 @@ STATE_ONTARIO_PENINSULA = {
         type = "building_oil_rig"
         undiscovered_amount = 45
     }
+    min_cold_effect = 0.02
+    max_cold_effect = 0.43
 }
 
 STATE_ALGOMA = {
@@ -165,6 +183,7 @@ STATE_ALGOMA = {
         building_fishing_wharf = 2
         building_lead_mine = 8
         building_sulfur_mine = 24
+        building_copper_mine = 14
     }
     resource = {
         type = "building_oil_rig"
@@ -175,6 +194,8 @@ STATE_ALGOMA = {
         depleted_type = "building_gold_mine"
         undiscovered_amount = 4
     }
+    min_cold_effect = 0.02
+    max_cold_effect = 0.64
 }
 
 STATE_NORTHWEST_ONTARIO = {
@@ -205,6 +226,8 @@ STATE_NORTHWEST_ONTARIO = {
         depleted_type = "building_gold_mine"
         undiscovered_amount = 3
     }
+    min_cold_effect = 0.03
+    max_cold_effect = 0.70
 }
 
 STATE_KEEWATIN = {
@@ -224,12 +247,15 @@ STATE_KEEWATIN = {
         building_iron_mine = 18
         building_logging_camp = 15
         building_fishing_wharf = 3
+        building_copper_mine = 4
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
         undiscovered_amount = 2
     }
+    min_cold_effect = 0.06
+    max_cold_effect = 0.88
 }
 
 STATE_NORTH_SASKATCHEWAN = {
@@ -252,6 +278,8 @@ STATE_NORTH_SASKATCHEWAN = {
         type = "building_oil_rig"
         undiscovered_amount = 10
     }
+    min_cold_effect = 0.06
+    max_cold_effect = 0.76
 }
 
 STATE_EDMONTON = {
@@ -274,6 +302,8 @@ STATE_EDMONTON = {
         type = "building_oil_rig"
         undiscovered_amount = 80
     }
+    min_cold_effect = 0.04
+    max_cold_effect = 0.68
 }
 
 STATE_ATHABASCA = {
@@ -296,6 +326,8 @@ STATE_ATHABASCA = {
         type = "building_oil_rig"
         undiscovered_amount = 100
     }
+    min_cold_effect = 0.06
+    max_cold_effect = 0.76
 }
 
 STATE_BC_INTERIOR = {
@@ -322,6 +354,8 @@ STATE_BC_INTERIOR = {
         depleted_type = "building_gold_mine"
         undiscovered_amount = 4
     }
+    min_cold_effect = 0.02
+    max_cold_effect = 0.55
 }
 
 STATE_UPPER_BC = {
@@ -342,12 +376,15 @@ STATE_UPPER_BC = {
         building_fishing_wharf = 2
         building_coal_mine = 35
         building_lead_mine = 18
+        building_copper_mine = 6
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
         undiscovered_amount = 6
     }
+    min_cold_effect = 0.02
+    max_cold_effect = 0.60
 }
 
 STATE_VANCOUVER_ISLAND = {
@@ -374,6 +411,8 @@ STATE_VANCOUVER_ISLAND = {
         depleted_type = "building_gold_mine"
         undiscovered_amount = 2
     }
+    min_cold_effect = 0.00
+    max_cold_effect = 0.36
 }
 
 STATE_PRINCE_EDWARD_ISLAND = {
@@ -394,4 +433,6 @@ STATE_PRINCE_EDWARD_ISLAND = {
         building_fishing_wharf = 6
     }
     naval_exit_id = 3045
+    min_cold_effect = 0.02
+    max_cold_effect = 0.51
 }

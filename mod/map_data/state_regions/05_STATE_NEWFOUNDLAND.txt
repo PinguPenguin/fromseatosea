@@ -16,10 +16,13 @@
         building_fishing_wharf = 25
         building_whaling_station = 8
         building_lead_mine = 8
+        building_copper_mine = 4
     }
     resource = {
         type = "building_oil_rig"
         undiscovered_amount = 12
     }
     naval_exit_id = 3045
+    min_cold_effect = 0.02
+    max_cold_effect = 0.52
 }

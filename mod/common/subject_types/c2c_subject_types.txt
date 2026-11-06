@@ -11,6 +11,8 @@
 	overlord_must_be_same_country_type = no
 	use_for_release_country = no
 	gives_prestige_to_overlord = yes
+	forced_into_overlord_revolution = yes
+	re_establish_war_goal = make_dominion
 
 	diplomatic_action = c2c_self_governing_colony
 
@@ -65,6 +67,7 @@ subject_type_c2c_self_governing_dominion = {
 	use_for_release_country = no
 	gives_prestige_to_overlord = yes
 	can_target_with_transfer_wargoal = no
+	re_establish_war_goal = make_dominion
 
 	diplomatic_action = c2c_self_governing_dominion
 

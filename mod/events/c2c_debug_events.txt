@@ -80,19 +80,100 @@ c2c_debug.2 = {
 		s:STATE_VANCOUVER_ISLAND = { every_scope_state = { set_state_owner = root add_to_temporary_list = c2c_debug_hub_states } }
 		s:STATE_YUKON_TERRITORY = { every_scope_state = { set_state_owner = root add_to_temporary_list = c2c_debug_hub_states } }
 
+		# Railways are locked behind the railways tech, which no Canadian tag has in 1836.
+		if = {
+			limit = { NOT = { has_technology_researched = railways } }
+			add_technology_researched = railways
+		}
+
 		every_in_list = {
 			list = c2c_debug_hub_states
-			create_building = { building = building_port level = 1 }
-			create_building = { building = building_fishing_wharf level = 1 }
-			create_building = { building = building_logging_camp level = 1 }
+			create_building = { building = building_railway level = 1 }
+			# Ports only in states with a port hub. c2c's map files define these 15.
+			if = {
+				limit = {
+					OR = {
+						state_region = s:STATE_ALGOMA
+						state_region = s:STATE_BRITISH_COLUMBIA
+						state_region = s:STATE_KEEWATIN
+						state_region = s:STATE_LABRADOR
+						state_region = s:STATE_NEWFOUNDLAND
+						state_region = s:STATE_NEW_BRUNSWICK
+						state_region = s:STATE_NORTHWEST_ONTARIO
+						state_region = s:STATE_NOUVEAU_QUEBEC
+						state_region = s:STATE_NOVA_SCOTIA
+						state_region = s:STATE_NUNAVUT
+						state_region = s:STATE_PRINCE_EDWARD_ISLAND
+						state_region = s:STATE_QUEBEC_SAGUENAY
+						state_region = s:STATE_SAINT_LAURENT
+						state_region = s:STATE_UPPER_BC
+						state_region = s:STATE_VANCOUVER_ISLAND
+					}
+				}
+				create_building = { building = building_port level = 1 }
+			}
 			create_building = { building = building_tooling_workshop level = 1 }
-			create_building = { building = building_coal_mine level = 1 }
-			create_building = { building = building_iron_mine level = 1 }
-			create_building = { building = building_lead_mine level = 1 }
-			create_building = { building = building_sulfur_mine level = 1 }
-			create_building = { building = building_gold_mine level = 1 }
-			create_building = { building = building_wheat_farm level = 1 }
-			create_building = { building = building_livestock_ranch level = 1 }
+			# Resource buildings, only where the state has the resource.
+			if = {
+				limit = { has_potential_resource = building_livestock_ranch }
+				create_building = { building = building_livestock_ranch level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_tobacco_plantation }
+				create_building = { building = building_tobacco_plantation level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_vineyard }
+				create_building = { building = building_vineyard level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_wheat_farm }
+				create_building = { building = building_wheat_farm level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_coal_mine }
+				create_building = { building = building_coal_mine level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_copper_mine }
+				create_building = { building = building_copper_mine level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_fishing_wharf }
+				create_building = { building = building_fishing_wharf level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_iron_mine }
+				create_building = { building = building_iron_mine level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_lead_mine }
+				create_building = { building = building_lead_mine level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_logging_camp }
+				create_building = { building = building_logging_camp level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_sulfur_mine }
+				create_building = { building = building_sulfur_mine level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_whaling_station }
+				create_building = { building = building_whaling_station level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_gold_field }
+				create_building = { building = building_gold_field level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_oil_rig }
+				create_building = { building = building_oil_rig level = 1 }
+			}
+			if = {
+				limit = { has_potential_resource = building_gold_mine }
+				create_building = { building = building_gold_mine level = 1 }
+			}
 		}
 	}
 }

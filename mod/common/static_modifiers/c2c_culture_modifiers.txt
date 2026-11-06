@@ -1,0 +1,32 @@
+﻿# Static modifiers the game expects for c2c's acadian culture, matching vanilla's franco_canadian ones.
+
+acadian_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_acadian_standard_of_living_add = 1
+}
+
+acadian_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_acadian_standard_of_living_add = 1
+}
+
+acadian_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_acadian_cultural_acceptance_add = 1
+}
+
+acadian_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_acadian_cultural_acceptance_add = 1
+}
+
+acadian_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_acadian_add = 1
+}
+
+acadian_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_acadian_add = 1
+}
+

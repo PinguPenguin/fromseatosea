@@ -3,6 +3,10 @@
 
 	group = je_group_historical_content
 
+	activation_description = {
+		always = yes
+	}
+
 	is_shown_when_inactive = {
 		NOT = { has_global_variable = canada_pacific_done }
 		OR = {
@@ -67,48 +71,53 @@
 		}
 	}
 
-	complete = {
-		any_scope_state = {
-			state_region = s:STATE_QUEBEC
-			has_building = building_railway
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		color = "gold_positive"
+		conclusion_desc = je_standard_completion_conclusion_desc
+		trigger = {
+			any_scope_state = {
+				state_region = s:STATE_QUEBEC
+				has_building = building_railway
+			}
+			any_scope_state = {
+				state_region = s:STATE_ONTARIO_PENINSULA
+				has_building = building_railway
+			}
+			any_scope_state = {
+				state_region = s:STATE_ALGOMA
+				has_building = building_railway
+			}
+			any_scope_state = {
+				state_region = s:STATE_NORTHWEST_ONTARIO
+				has_building = building_railway
+			}
+			any_scope_state = {
+				state_region = s:STATE_MANITOBA
+				has_building = building_railway
+			}
+			any_scope_state = {
+				state_region = s:STATE_SASKATCHEWAN
+				has_building = building_railway
+			}
+			any_scope_state = {
+				state_region = s:STATE_ALBERTA
+				has_building = building_railway
+			}
+			any_scope_state = {
+				state_region = s:STATE_BC_INTERIOR
+				has_building = building_railway
+			}
+			any_scope_state = {
+				state_region = s:STATE_BRITISH_COLUMBIA
+				has_building = building_railway
+			}
 		}
-		any_scope_state = {
-			state_region = s:STATE_ONTARIO_PENINSULA
-			has_building = building_railway
+		effect = {
+			set_global_variable = canada_pacific_done
+			trigger_event = { id = major_railways.3 }
 		}
-		any_scope_state = {
-			state_region = s:STATE_ALGOMA
-			has_building = building_railway
-		}
-		any_scope_state = {
-			state_region = s:STATE_NORTHWEST_ONTARIO
-			has_building = building_railway
-		}
-		any_scope_state = {
-			state_region = s:STATE_MANITOBA
-			has_building = building_railway
-		}
-		any_scope_state = {
-			state_region = s:STATE_SASKATCHEWAN
-			has_building = building_railway
-		}
-		any_scope_state = {
-			state_region = s:STATE_ALBERTA
-			has_building = building_railway
-		}
-		any_scope_state = {
-			state_region = s:STATE_BC_INTERIOR
-			has_building = building_railway
-		}
-		any_scope_state = {
-			state_region = s:STATE_BRITISH_COLUMBIA
-			has_building = building_railway
-		}
-	}
-
-	on_complete = {
-		set_global_variable = canada_pacific_done
-		trigger_event = { id = major_railways.3 }
 	}
 
 	weight = 50
