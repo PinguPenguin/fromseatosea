@@ -1,6 +1,5 @@
-﻿# Same path as Hail, Columbia!'s Newfoundland history, so c2c's version
-# replaces it when both mods are loaded. c2c_map_startup_effect turns the
-# colony pact into a c2c self-governing colony and hands NEW its states.
+﻿# Newfoundland starts on the same laws as vanilla's Nova Scotia and New Brunswick, as a
+# self-governing colony like Prince Edward Island. It has had an elected assembly since 1832.
 COUNTRIES = {
 	c:NEW ?= {
 		effect_starting_technology_tier_2_tech = yes
@@ -17,6 +16,7 @@ COUNTRIES = {
 		activate_law = law_type:law_mercantilism
 		activate_law = law_type:law_interventionism
 		activate_law = law_type:law_homesteading
+		activate_law = law_type:law_anti_strike_laws
 
 		ig:ig_landowners ?= {
 			add_ruling_interest_group = yes
@@ -28,7 +28,7 @@ COUNTRIES = {
 		c:GBR = {
 			create_diplomatic_pact = {
 				country = c:NEW
-				type = colony
+				type = c2c_self_governing_colony
 			}
 		}
 

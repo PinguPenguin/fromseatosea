@@ -123,8 +123,7 @@
 			provinces = { xA6B63F }
 		}
 	}
-	# Northern one-province shells, handed to the native nations as USFP's
-	# startup cleanup used to do
+	# Adapted from HC's startup!
 	s:STATE_NORTHWEST_TERRITORIES = {
 		region_state:HBC ?= {
 			set_state_owner = c:c2c_INV

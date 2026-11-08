@@ -1,5 +1,5 @@
-﻿# Canadian native nations. These replace the usfp_* tags c2c used while
-# Hail, Columbia! was a dependency.
+﻿# Canadian native tags, adapted from Hail, Columbia!
+# (usfp_ tags renamed to c2c_). See documentation/CREDITS.txt.
 
 c2c_ALG = { # Algonquin
 	color = { 150 92 48 }

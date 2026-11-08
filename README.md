@@ -26,8 +26,7 @@ c2c is **not** compatible with Community State Framework or with other mods that
 it ships its own state regions, provinces, hubs and railways. The mod warns you at game start if CMF is missing
 or CSF is loaded.
 
-Hail, Columbia! is no longer required. c2c has its own Canadian native nations, and a separate compatibility
-patch for playing both together is in progress.
+[Hail, Columbia!](https://github.com/CaelReader/Hail--Columbia-) is no longer required. c2c's North America map are derived from Hail, Columbia.
 
 ## Getting Started
 **I recommend using [GitHub Desktop](https://desktop.github.com) to download**;

@@ -2,8 +2,7 @@
 
 This mod incorporates, adapts, or was informed by the following resources, datasets, and tools.
 
-
-ARTWORK AND HERALDRY
+ARTWORK
 
 Escutcheon of Prince Edward Island.svg
 Source: Lieutenant Governor of Prince Edward Island, via Wikimedia Commons.
@@ -20,7 +19,7 @@ Source page: https://commons.wikimedia.org/wiki/File:Flag_map_of_Canada_(1868%E2
 Modified and adapted for use in this mod.
 
 
-HISTORICAL DATA
+DATA
 
 Railway placement and construction-date references are based in part on the Historical Canadian Railroads / Historical_Railways_1836_1922_05Dec09.shp dataset, created by the Cartography office, Geography Department, and made available via MDL Data / GEORIA / Borealis.
 
@@ -42,13 +41,11 @@ ACKNOWLEDGEMENTS
 C2C was built alongside "Hail, Columbia!" by CaelReader and used it as a dependency until version 2.2.1. Hail, Columbia! was also a huge reference for modding in the first place.
 I learned much about how modding works in Vic3 by referencing its files; a massive thank you for making such a great mod.
 
-Content C2C keeps from or adapts from Hail, Columbia!:
-- Canadian native nations (the c2c_* tags): the nation list, names, cultures, province layout and pop splits that Hail, Columbia! established
-  for Canada, and its northern one-province startup handoffs (now in c2c_map_startup_effect). C2C's coats of arms and map colours for them are new.
-- Newfoundland country history ("NEW - Newfoundland.txt"), adapted from Hail, Columbia!'s file at the same path.
-- State traits: "Canadian Boreal Forests" (state_trait_c2c_boreal_forests, same effects as Hail, Columbia!'s state_trait_canadian_boreal_forests)
-  and "Burrard Inlet" (state_trait_c2c_burrard_inlet, adapted from state_trait_burrard_inlet).
-- The Pacific Frontier modifier on Vancouver Island (c2c_pacific_frontier_modifier), based on usfp_canadian_colonization_modifier.
+C2C no longer requires Hail, Columbia!, but uses parts of it with CaelReader's permission.
+Hail, Columbia! on GitHub: https://github.com/CaelReader/Hail--Columbia-
+
+Content C2C keeps from or adapts from Hail, Columbia! (usfp_ names renamed to c2c_):
+- Canadian native nations (c2c_* tags) and history
 
 Finally, thank you to the Victoria 3 Modding Co-op, the Victoria 3 wiki, and all those who helped me in creating and refining C2C.
 None of this would be possible without their guides, tools, and help.
