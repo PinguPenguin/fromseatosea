@@ -134,7 +134,6 @@
 	c:c2c_CSW ?= {
 		c2c_native_startup_effect = yes
 	}
-	# Cherokee: a vanilla tag with no vanilla history, landed at start by c2c (from Hail, Columbia!).
 	c:CHE ?= {
 		c2c_native_startup_effect = yes
 	}

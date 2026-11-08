@@ -1365,8 +1365,7 @@
 				size = 2000
 			}
 		}
-		# vanilla's HBC pops for Abitibi (common/history/pops/05_north_america.txt, STATE_QUEBEC region_state:HBC);
-		# Abitibi now sits in Nouveau-Quebec, so they are created here, after the native move_pop pass above
+		# Vanilla's HBC pops for Abitibi, now in Nouveau-Quebec
 		region_state:HBC = {
 			create_pop = {
 				culture = inuit

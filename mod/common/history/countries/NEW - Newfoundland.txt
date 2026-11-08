@@ -1,6 +1,4 @@
-﻿# Newfoundland starts on the same laws as vanilla's Nova Scotia and New Brunswick, as a
-# self-governing colony like Prince Edward Island. It has had an elected assembly since 1832.
-COUNTRIES = {
+﻿COUNTRIES = {
 	c:NEW ?= {
 		effect_starting_technology_tier_2_tech = yes
 

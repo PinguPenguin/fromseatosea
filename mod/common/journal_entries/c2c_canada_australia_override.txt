@@ -1,8 +1,4 @@
-﻿# Confederation, on vanilla 1.15's global je_canada (common/journal_entries/00_canada_australia.txt).
-# Kept from c2c's former je_canada_can and je_canada_gbr: Newfoundland stays out, the colony that unites
-# becomes CAN with all three Canadian primary cultures, and victory needs entire state regions.
-# Dropped from vanilla: the "only one country remains" check, which could count HBC and native nations.
-# The state list here must match REPLACE:geographic_region_canadian_confederation, which names it in the tooltip.
+﻿# Confederation: c2c's version of vanilla's je_canada.
 REPLACE:je_canada = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 
@@ -109,8 +105,6 @@ REPLACE:je_canada = {
 			is_subject = yes
 			country_is_colonial_or_company = yes
 			OR = {
-				# Meant to let a colony that owns everything confederate with no neighbours left.
-				# In a 2026-11-06 debug test it still didn't fire when set up that way; cause unknown.
 				c2c_owns_confederation_states = yes
 				overlord = {
 					any_subject_or_below = {
@@ -229,7 +223,6 @@ REPLACE:je_canada = {
 
 	on_weekly_pulse = {
 		effect = {
-			# Pull in any Canadian colony that qualifies after the situation has activated.
 			every_country_in_greater_canada = {
 				limit = {
 					NOT = { c:NEW ?= THIS }

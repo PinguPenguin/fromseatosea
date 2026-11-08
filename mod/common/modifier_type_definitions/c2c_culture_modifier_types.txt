@@ -1,4 +1,4 @@
-﻿# Modifier types the game expects for c2c's acadian culture.
+﻿# Acadian culture modifier types
 
 state_acadian_standard_of_living_add={
 	decimals=1

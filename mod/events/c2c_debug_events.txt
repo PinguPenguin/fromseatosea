@@ -6,7 +6,6 @@ c2c_debug.1 = {
 	orphan = yes
 
 	immediate = {
-		# Explicitly cover vanilla Canadian state regions and the c2c split regions.
 		s:STATE_NEWFOUNDLAND = { every_scope_state = { set_state_owner = root } }
 		s:STATE_LABRADOR = { every_scope_state = { set_state_owner = root } }
 		s:STATE_NOVA_SCOTIA = { every_scope_state = { set_state_owner = root } }
@@ -47,7 +46,6 @@ c2c_debug.2 = {
 	orphan = yes
 
 	immediate = {
-		# Same as c2c_debug.1, then one level of each hub-relevant building in every Canadian state.
 		s:STATE_NEWFOUNDLAND = { every_scope_state = { set_state_owner = root add_to_temporary_list = c2c_debug_hub_states } }
 		s:STATE_LABRADOR = { every_scope_state = { set_state_owner = root add_to_temporary_list = c2c_debug_hub_states } }
 		s:STATE_NOVA_SCOTIA = { every_scope_state = { set_state_owner = root add_to_temporary_list = c2c_debug_hub_states } }
@@ -80,7 +78,6 @@ c2c_debug.2 = {
 		s:STATE_VANCOUVER_ISLAND = { every_scope_state = { set_state_owner = root add_to_temporary_list = c2c_debug_hub_states } }
 		s:STATE_YUKON_TERRITORY = { every_scope_state = { set_state_owner = root add_to_temporary_list = c2c_debug_hub_states } }
 
-		# Railways are locked behind the railways tech, which no Canadian tag has in 1836.
 		if = {
 			limit = { NOT = { has_technology_researched = railways } }
 			add_technology_researched = railways
@@ -89,7 +86,7 @@ c2c_debug.2 = {
 		every_in_list = {
 			list = c2c_debug_hub_states
 			create_building = { building = building_railway level = 1 }
-			# Ports only in states with a port hub. c2c's map files define these 15.
+			# Ports only in states with a port hub.
 			if = {
 				limit = {
 					OR = {
@@ -113,7 +110,6 @@ c2c_debug.2 = {
 				create_building = { building = building_port level = 1 }
 			}
 			create_building = { building = building_tooling_workshop level = 1 }
-			# Resource buildings, only where the state has the resource.
 			if = {
 				limit = { has_potential_resource = building_livestock_ranch }
 				create_building = { building = building_livestock_ranch level = 1 }

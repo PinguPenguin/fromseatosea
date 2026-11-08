@@ -2,7 +2,7 @@
 
   # State name overrides from vanilla
  STATE_BRITISH_COLUMBIA:1 "Fraser Valley"
- # Vanilla renames this state via set_state_name (Oregon JE event, dynamic state names); keep the split-state name
+ # Vanilla renames this via set_state_name; keep the split-state name
  STATE_BRITISH_COLUMBIA_british:0 "Fraser Valley"
  STATE_ALBERTA:0 "Southern Alberta"
  STATE_SASKATCHEWAN:0 "Southern Saskatchewan"

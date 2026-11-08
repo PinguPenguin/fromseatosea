@@ -1,4 +1,4 @@
-﻿# Static modifiers the game expects for c2c's acadian culture, matching vanilla's franco_canadian ones.
+﻿# Acadian culture modifiers, matching vanilla's franco_canadian ones
 
 acadian_standard_of_living_modifier_positive = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"

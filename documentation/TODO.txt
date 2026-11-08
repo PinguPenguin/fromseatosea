@@ -1,4 +1,5 @@
 ----Immediate (bugfixes)----
+-je_canada: c2c_owns_confederation_states should let a colony that owns every confederation state confederate with no neighbours left, but in a 2026-11-06 debug test it didn't fire (cause unknown)
 
 ----Short-term----
 

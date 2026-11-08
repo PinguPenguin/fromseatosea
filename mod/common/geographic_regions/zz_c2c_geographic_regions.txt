@@ -44,7 +44,6 @@ INJECT:geographic_region_great_plains_old = {
 	}
 }
 
-# Named by Confederation's tooltip. Must match c2c_owns_confederation_states.
 REPLACE:geographic_region_canadian_confederation = {
 	short_key = "canadian_confederation"
 

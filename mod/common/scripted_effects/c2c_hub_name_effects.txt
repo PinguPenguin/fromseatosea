@@ -1,8 +1,6 @@
-﻿# Hub renames from 1836 names to later ones. Hubs can't move or change type after game start, so each
-# hub sits where the later town grew and starts under the name of the period post or settlement nearby.
-# Runs from on_yearly_pulse (c2c_on_actions.txt); a global variable keeps each rename from repeating.
+﻿# Hub renames from 1836 names to later ones, run from on_yearly_pulse
 c2c_update_hub_names = {
-	# Port Simpson -> Prince Rupert, when a railway reaches the state
+	# Port Simpson -> Prince Rupert
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_upper_bc_port }
@@ -25,7 +23,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Fort George -> Prince George, when a railway reaches the state
+	# Fort George -> Prince George
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_upper_bc_city }
@@ -48,7 +46,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Fort Edmonton -> Edmonton, when a railway reaches the state
+	# Fort Edmonton -> Edmonton
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_edmonton_city }
@@ -71,7 +69,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Dunvegan -> Grande Prairie, when the state has a railway, from 1910.1.1
+	# Dunvegan -> Grande Prairie
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_edmonton_farm }
@@ -95,7 +93,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Fort Victoria -> Victoria, from 1862.1.1
+	# Fort Victoria -> Victoria
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_vancouver_island_city }
@@ -119,7 +117,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Brandon House -> Brandon, when a railway reaches the state
+	# Brandon House -> Brandon
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_manitoba_farm }
@@ -142,7 +140,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Fort Carlton -> Saskatoon, when a railway reaches the state
+	# Fort Carlton -> Saskatoon
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_saskatchewan_farm }
@@ -165,7 +163,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Fort Qu'Appelle -> Regina, when a railway reaches the state
+	# Fort Qu'Appelle -> Regina
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_saskatchewan_city }
@@ -188,7 +186,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Rocky Mountain House -> Red Deer, when a railway reaches the state
+	# Rocky Mountain House -> Red Deer
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_alberta_wood }
@@ -211,7 +209,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Fort Norman -> Norman Wells, when the state has a building_oil_rig
+	# Fort Norman -> Norman Wells
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_northwest_territories_mine }
@@ -234,7 +232,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Okanagan Mission -> Kelowna, when a railway reaches the state
+	# Okanagan Mission -> Kelowna
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_bc_interior_farm }
@@ -257,7 +255,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Burrard Inlet -> Vancouver, when a railway reaches the state
+	# Burrard Inlet -> Vancouver
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_british_columbia_city }
@@ -280,7 +278,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# Fort Langley -> New Westminster, from 1859.1.1
+	# Fort Langley -> New Westminster
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_british_columbia_port }
@@ -305,7 +303,7 @@ c2c_update_hub_names = {
 		}
 	}
 
-	# DRAFT: The Bend -> Moncton, from 1855 (incorporation)
+	# DRAFT: The Bend -> Moncton
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_new_brunswick_farm }
@@ -324,7 +322,7 @@ c2c_update_hub_names = {
 			value = yes
 		}
 	}
-	# DRAFT: Fort Churchill -> Churchill, when a railway reaches the state
+	# DRAFT: Fort Churchill -> Churchill
 	if = {
 		limit = {
 			NOT = { has_global_variable = c2c_hub_renamed_keewatin_port }

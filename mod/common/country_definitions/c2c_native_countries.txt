@@ -309,7 +309,7 @@ c2c_WKS = { # Wakashan
 	capital = STATE_BRITISH_COLUMBIA
 }
 
-# Non-Canadian tags, adapted from Hail, Columbia! with their colours (2026-11-08)
+# Non-Canadian tags, adapted from Hail, Columbia! with their colours
 
 c2c_AHT = { # Atna Nenn'
 	color = { 78 20 37 }
@@ -506,7 +506,6 @@ c2c_CSW = { # Chickasaw
 }
 
 # Vanilla native tags with Hail, Columbia!'s map colours and capitals (HC's 1836 layout).
-# Everything else is vanilla's (1.15).
 
 REPLACE_OR_CREATE:SML = { # Seminole
 	color = { 136 48 47 }

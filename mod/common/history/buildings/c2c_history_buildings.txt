@@ -528,7 +528,7 @@
 				reserves = 1
 			}
 		}
-		# vanilla's HBC logging camp for Abitibi (common/history/buildings/05_north_america.txt, STATE_QUEBEC)
+		# Vanilla's HBC logging camp for Abitibi
 		region_state:HBC = {
 			create_building = {
 				building = "building_logging_camp"

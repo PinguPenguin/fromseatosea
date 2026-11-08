@@ -1,6 +1,4 @@
-﻿# Adapted from Hail, Columbia! (CaelReader), with permission, usfp_ renamed to c2c_.
-# Non-Canadian North American start setup. See documentation/CREDITS.txt and
-# documentation/hail_columbia_content.md. Canadian states are set up in zz_c2c_history_states.txt.
+﻿# Non-Canadian North American start setup, adapted from Hail, Columbia! (CaelReader), with permission.
 STATES = {
 	s:STATE_OHIO = {
 		add_homeland = cu:algonquian

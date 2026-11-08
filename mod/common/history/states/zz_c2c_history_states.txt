@@ -1,5 +1,4 @@
-﻿# c2c consolidated Canadian state history
-STATES = {
+﻿STATES = {
 	s:STATE_ALBERTA = {
 		set_owner_of_provinces = {
 			country = c:HBC

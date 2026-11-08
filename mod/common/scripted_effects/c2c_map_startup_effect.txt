@@ -237,10 +237,7 @@
 		}
 	}
 
-	# Non-Canadian North American start cleanup, adapted from Hail, Columbia!'s
-	# usfp_map_startup_effect (usfp_ renamed to c2c_). History can't move the last
-	# province of a state, so these whole-state handoffs run here. HC's native
-	# consolidation game rules and arctic subsistence modifier are not ported.
+	# Non-Canadian North American start cleanup, adapted from Hail, Columbia!
 	s:STATE_MINNESOTA = {
 		if = {
 			limit = {
@@ -293,7 +290,6 @@
 		}
 	}
 
-	# Alaska: HC moves most of vanilla's Deg Xitan pops to the new Athabaskan and Inuit tags.
 	s:STATE_ALASKA = {
 		region_state:ATB ?= {
 			kill_population_percent_in_state = {

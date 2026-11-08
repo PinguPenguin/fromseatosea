@@ -336,7 +336,7 @@ c2c_WKS = { # Wakashan
 	}
 }
 
-# Non-Canadian tags, adapted from Hail, Columbia! (2026-11-08)
+# Non-Canadian tags, adapted from Hail, Columbia!
 
 c2c_AHT = { # Atna Nenn'
 	pattern = "pattern_solid.tga"
