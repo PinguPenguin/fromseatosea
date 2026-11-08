@@ -1,0 +1,811 @@
+﻿# Adapted from Hail, Columbia! (CaelReader), with permission, usfp_ renamed to c2c_.
+# Non-Canadian North American start setup. See documentation/CREDITS.txt and
+# documentation/hail_columbia_content.md. Canadian states are set up in zz_c2c_history_pops.txt.
+POPS = {
+	s:STATE_MISSISSIPPI = {
+		#Chickasaw
+		region_state:c2c_CSW = {
+			create_pop = {
+				culture = muskogean # Chickasaw
+				size = 4906
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = afro_american
+				size = 1131
+			}
+		}
+		region_state:USA = {
+			create_pop = {
+				culture = muskogean # Choctaw remainers (MBCI forefathers)
+				size = 5500
+			}
+		}
+	}
+
+	s:STATE_GEORGIA = {
+		#Cherokee
+		region_state:CHE = {
+			create_pop = {
+				culture = cherokee
+				size = 8946 # 1835 Cherokee Census "Henderson Roll"
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = afro_american
+				size = 1008
+			}
+		}
+		region_state:USA = {
+			kill_population_percent_in_state = { #reduce redundancy with CHE state region
+				percent = 0.95
+				culture = cu:cherokee
+			}
+		}
+
+		region_state:USA = {
+			create_pop = {
+				culture = muskogean
+				size = 500 # small Seminole settlement on Floyds Island in the Okefenokee swamp, burned down 1838
+			}
+		}
+	}
+
+	s:STATE_ALABAMA = {
+		region_state:CHE = {
+			create_pop = {
+				culture = cherokee
+				size = 1424 # 1835 Cherokee Census "Henderson Roll"
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = afro_american
+				size = 168
+			}
+		}
+		region_state:USA = {
+			kill_population_percent_in_state = { #reduce redundancy with CHE state region
+				percent = 0.95
+				culture = cu:cherokee
+			}
+		}
+	}
+
+	s:STATE_TENNESSEE = {
+		region_state:CHE = {
+			create_pop = {
+				culture = cherokee
+				size = 2528 # 1835 Cherokee Census "Henderson Roll"
+			}
+			create_pop = {
+				pop_type = slaves
+				culture = afro_american
+				size = 280
+			}
+		}
+		region_state:USA = {
+			kill_population_percent_in_state = { #reduce redundancy with CHE state region
+				percent = 0.95
+				culture = cu:cherokee
+			}
+		}
+	}
+
+	s:STATE_SOUTH_CAROLINA = {
+		region_state:USA = {
+			kill_population_percent_in_state = { #reduce redundancy
+				percent = 0.95
+				culture = cu:cherokee
+			}
+		}
+
+		region_state:USA = {
+			create_pop = {
+				culture = muskogean
+				size = 450 # remnant eastern siouan people (too distantantly related to plains to call siouan) such as Catawba 
+			}
+		}
+	}
+
+	s:STATE_ARKANSAS = {
+		region_state:USA = {
+			kill_population_percent_in_state = { #never this many Old Settlers
+				percent = 0.95
+				culture = cu:cherokee
+			}
+		}
+	}
+
+	s:STATE_MISSOURI = {
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 2200  #Sauk & Fox before final removal, plus the Prairie Band of Potowatomie in transition west
+			}
+		}
+
+		#Ioway
+		if = {
+			limit = {
+				c:c2c_IWY = {
+					has_state_in_state_region = STATE_MISSOURI
+				}
+			 }
+			region_state:c2c_IWY = {
+				create_pop = {
+					culture = siouan
+					size = 800 #post-smallpox decline
+				}
+			}
+		}
+	}
+
+	s:STATE_MICHIGAN = {
+		#Council of Three Fires
+		if = {
+			limit = { 
+				always = yes
+			}
+			region_state:CTF = {
+				every_scope_pop = {
+					limit = {
+						OR = {
+							culture = cu:yankee
+							culture = cu:irish
+						}
+					}
+					move_pop = s:STATE_MICHIGAN.region_state:USA
+				}
+			}
+			region_state:USA = {
+				every_scope_pop = {
+					limit = {
+						OR = {
+							culture = cu:algonquian
+							culture = cu:siouan
+						}
+					}
+					move_pop = s:STATE_MICHIGAN.region_state:CTF
+				}
+			}
+		}
+	}
+
+	s:STATE_WISCONSIN = {
+		if = {
+			limit = {
+				c:USA = {
+					has_state_in_state_region = STATE_WISCONSIN
+				}
+				exists = c:CTF
+			 }
+			region_state:USA = {
+				every_scope_pop = {
+					limit = {
+						culture = cu:algonquian
+					}
+					move_pop = s:STATE_WISCONSIN.region_state:CTF
+				}
+			}
+			region_state:CTF = {
+				every_scope_pop = {
+					limit = {
+						OR = {
+							culture = cu:yankee
+						}
+					}
+					move_pop = s:STATE_WISCONSIN.region_state:USA
+				}
+			}
+		}
+	}
+
+	s:STATE_IOWA = {
+		region_state:USA = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:dakota
+				}
+				move_pop = s:STATE_IOWA.region_state:LKT
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:algonquian
+				}
+				move_pop = s:STATE_IOWA.region_state:c2c_IWY
+			}
+		}
+		region_state:c2c_IWY = {
+			kill_population_percent_in_state = { #lot of Sauk & Fox here. Not 12k though
+				percent = 0.66
+				culture = cu:algonquian
+			}
+		}
+
+		region_state:LKT = {
+			create_pop = {
+				culture = dakota
+				size = 3000 #rebalanced from Montana
+			}
+		}
+	}
+
+	s:STATE_KANSAS = {
+		#Cheyenne-Arapaho
+		region_state:ARP = {
+			create_pop = {
+				culture = algonquian
+				size = 500 #filler
+			}
+		}
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 3976 #Lenape, Miami, Illini (Peoria etc), Kickapoo, Shawnee, etc. LOT of Midwestern tribes removed to Kansas, then part of Indian Territory prior to the Kansas/Nebraska Act, before final removal to Oklahoma. number estimated using 1825 McKenney and 1837 McCoy estimates and other sources.
+			}
+		}
+	}
+
+	s:STATE_NEBRASKA = {
+		region_state:ARP = {
+			create_pop = {
+				culture = algonquian
+				size = 500 #filler
+			}
+		}
+	}
+
+	s:STATE_COLORADO = {
+		region_state:ARP = {
+			every_scope_pop = {
+				change_pop_culture = {
+					target = cu:algonquian
+					value = 1.0
+				}
+			}
+		}
+
+		#Comanche
+		region_state:COM = {
+			create_pop = {
+				culture = siouan
+				size = 1000 #filler
+			}
+		}
+
+		region_state:BNN = {
+			create_pop = {
+				culture = paiute
+				size = 2000
+			}
+		}
+	}
+
+	s:STATE_WYOMING = {
+		region_state:ARP = {
+			every_scope_pop = {
+				change_pop_culture = {
+					target = cu:algonquian
+					value = 1.0
+				}
+			}
+		}
+
+		#Blackfoot
+		region_state:BLF = {
+			kill_population_percent_in_state = {
+				percent = 0.2 #rebalanced
+			}
+			every_scope_pop = {
+				change_pop_culture = {
+					target = cu:siouan
+					value = 1
+				}
+			}
+		}
+	}
+
+	s:STATE_MONTANA = {
+		#Great Sioux Nation
+		region_state:LKT = {
+			kill_population_percent_in_state = {
+				percent = 0.5 #rebalancing
+			}
+		}
+
+		#Arikara-Mandan-Hidasta
+		region_state:c2c_ARK = {
+			create_pop = {
+				culture = siouan
+				size = 1500
+			}
+			create_pop = {
+				culture = caddoan
+				size = 1500
+			}
+		}
+
+		#Iron Confederacy
+		region_state:IRC = {
+			create_pop = {
+				culture = siouan
+				size = 2000 #filler
+			}
+		}
+	}
+
+	c:LKT = {
+		every_scope_state = {
+			kill_population_percent_in_state = {
+				percent = 0.5 #vanilla gives the Sioux like 110k population, around 60k seems more correct
+			}
+		}
+	}
+
+	s:STATE_IDAHO = {
+		#Flathead
+		region_state:SLS = {
+			create_pop = {
+				culture = salish
+				size = 500 #filler
+			}
+		}
+
+		region_state:BLF = {
+			create_pop = {
+				culture = siouan
+				size = 1000
+			}
+		}
+
+		#Shoshone
+		region_state:BNN = {
+			kill_population_percent_in_state = {
+				percent = 0.5 #rebalancing to other states
+			}
+		}
+
+		region_state:ORG = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:paiute
+				}
+				move_pop = s:STATE_IDAHO.region_state:c2c_PIU
+			}
+		}
+	}
+
+	s:STATE_NORTH_DAKOTA = {
+		region_state:c2c_ARK = {
+			create_pop = {
+				culture = siouan
+				size = 1500
+			}
+			create_pop = {
+				culture = caddoan
+				size = 1500
+			}
+		}
+	}
+
+	s:STATE_OKLAHOMA = {
+		region_state:SEQ = {
+			create_pop = {
+				culture = muskogean
+				size = 11000
+			}
+			create_pop = {
+				culture = algonquian
+				size = 4235 #(Absentee) Shawnee, Lenape, Kickapoo. Texas was often more attractive than Oklahoma. Most were removed by Texas in 1839 following their war with the Cherokee & Delaware allies
+			}
+			create_pop = {
+				culture = iroquoian
+				size = 551 #Seneca portion of the Lewistown Band removed to Oklahoma, 1825 McKenney estimate figures from Ohio
+			}
+			kill_population_percent_in_state = { #too many Old Settlers portrayed
+				percent = 0.90
+				culture = cu:cherokee
+			}
+		}
+		# 	region_state:COM = {
+		# 		kill_population_percent_in_state = {
+		# 			percent = 1
+		# 		}
+		# 		create_pop = {
+		# 			culture = comanche
+		# 			size = 12000
+		# 		}
+		# 	}
+	}
+
+	s:STATE_TEXAS = {
+		# s:STATE_NEW_MEXICO = {
+		# 	region_state:COM = {
+		# 		kill_population_percent_in_state = {
+		# 			percent = 1
+		# 		}
+		# 		create_pop = {
+		# 			culture = comanche
+		# 			size = 3000
+		# 		}
+		# 	}
+		# }
+		# s:STATE_OKLAHOMA = {
+		# 	region_state:COM = {
+		# 		kill_population_percent_in_state = {
+		# 			percent = 1
+		# 		}
+		# 		create_pop = {
+		# 			culture = comanche
+		# 			size = 5000
+		# 		}
+		# 	}
+		# }
+		# s:STATE_KANSAS = {
+		# 	region_state:COM = {
+		# 		kill_population_percent_in_state = {
+		# 			percent = 1
+		# 		}
+		# 		create_pop = {
+		# 			culture = comanche
+		# 			size = 4250
+		# 		}
+		# 	}
+		# }
+		# s:STATE_COLORADO = {
+		# 	region_state:COM = {
+		# 		kill_population_percent_in_state = {
+		# 			percent = 1
+		# 		}
+		# 		create_pop = {
+		# 			culture = comanche
+		# 			size = 2750
+		# 		}
+		# 	}
+		# }
+		#Apache
+		region_state:APC = {
+			create_pop = {
+				culture = apache
+				size = 1000 #filler
+			}
+		}
+
+		region_state:TEX = {
+			create_pop = {
+				culture = apache
+				size = 1000 #Lipan. Number is a guess
+			}
+			create_pop = {
+				culture = algonquian
+				size = 4235 #(Absentee) Shawnee, Lenape, Kickapoo. Texas was often more attractive than Oklahoma. Most were removed by Texas in 1839 following their war with the Cherokee & Delaware allies
+			}
+			create_pop = {
+				culture = muskogean
+				size = 2250 #Alabamas, Coushattas, & some Choctaws. Mostly in the Big Thicket area
+			}
+			create_pop = {
+				culture = cherokee
+				size = 800 #Chief "the Bowl" Diwali's band along with their Lenape allies, forced out in 1839
+			}
+		}
+		region_state:MEX = {
+			create_pop = {
+				culture = apache
+				size = 2000 #Lipan & Mescalero. Number is a guess
+			}
+		}
+	}
+
+	s:STATE_CHIHUAHUA = {
+		region_state:MEX = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:apache
+				}
+				move_pop = s:STATE_CHIHUAHUA.region_state:APC
+			}
+		}
+	}
+
+	s:STATE_UTAH = {
+		region_state:BNN = {
+			create_pop = {
+				culture = paiute
+				size = 8000
+			}
+		}
+	}
+
+	s:STATE_ARIZONA = {
+		#Southern Paiute
+		region_state:NVJ = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:paiute
+				}
+				move_pop = s:STATE_ARIZONA.region_state:c2c_SPI
+			}
+		}
+	}
+
+	s:STATE_NEVADA = {
+		region_state:c2c_SPI = {
+			create_pop = {
+				culture = paiute
+				size = 4000 #rebalanced from Northern Paiute
+			}
+		}
+
+		#Northern Paiute
+		region_state:c2c_PIU = {
+			kill_population_percent_in_state = {
+				percent = 0.2 #rebalanced to other states
+			}
+		}
+	}
+
+	s:STATE_CALIFORNIA = {
+		region_state:c2c_SPI = {
+			create_pop = {
+				culture = paiute
+				size = 500 #filler
+			}
+		}
+
+		region_state:c2c_PIU = {
+			create_pop = {
+				culture = paiute
+				size = 1000
+			}
+		}
+
+		#California
+		#Arbitrarily Redistributing ~50k Hokans from the MEX state
+		region_state:MEX = {
+			kill_population_percent_in_state = {
+				percent = 0.9
+				culture = cu:hokan
+			}
+		}
+		region_state:c2c_YOK = {
+			create_pop = {
+				culture = hokan
+				size = 30000
+			}
+		}
+		region_state:c2c_YUR = {
+			create_pop = {
+				culture = hokan
+				size = 5000
+			}
+		}
+		region_state:c2c_HOK = {
+			create_pop = {
+				culture = hokan
+				size = 5000
+			}
+		}
+		region_state:c2c_MDC = {
+			create_pop = {
+				culture = hokan
+				size = 1000
+			}
+		}
+		region_state:c2c_SRN = {
+			create_pop = {
+				culture = hokan
+				size = 9000
+			}
+		}
+	}
+
+	s:STATE_OREGON = {
+		region_state:ORG = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:paiute
+				}
+				move_pop = s:STATE_OREGON.region_state:c2c_PIU
+			}
+		}
+
+		#Klamath
+		region_state:ORG = {
+			kill_population_percent_in_state = {
+				percent = 0.5 #rebalanced to Klamath
+				culture = cu:salish 
+			}
+		}
+		region_state:c2c_KLA = {
+			create_pop = {
+				culture = salish
+				size = 4000
+			}
+		}
+
+		#Sahaptin
+		region_state:ORG = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:nez_perce
+				}
+				move_pop = s:STATE_OREGON.region_state:c2c_SHP
+			}
+		}
+	}
+
+	s:STATE_WASHINGTON = {
+		region_state:ORG = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:nez_perce
+				}
+				move_pop = s:STATE_WASHINGTON.region_state:c2c_SHP
+			}
+		}
+
+		#Washington
+		region_state:ORG = {
+			kill_population_percent_in_state = {
+				percent = 0.8 #rebalanced to native tags
+				culture = cu:salish
+			}
+		}
+		region_state:c2c_YKM = {
+			create_pop = {
+				culture = salish
+				size = 1000
+			}
+		}
+		region_state:c2c_SAL = {
+			create_pop = {
+				culture = salish
+				size = 5000
+			}
+		}
+		region_state:c2c_SYX = {
+			create_pop = {
+				culture = salish
+				size = 2000
+			}
+		}
+	}
+
+	s:STATE_GREENLAND = {
+		#Greenland
+		region_state:DEN = {
+			every_scope_pop = {
+				limit = {
+					culture = cu:inuit
+				}
+				move_partial_pop = {
+					state = s:STATE_GREENLAND.region_state:c2c_KAL
+					population_ratio = 0.5
+				}
+			}
+		}
+	}
+
+	s:STATE_NORTH_CAROLINA = {
+		region_state:USA = {
+			create_pop = {
+				culture = muskogean
+				size = 300 # remnant eastern siouan people (too distantantly related to plains to call siouan) such as Saponi/Occaneechi 
+			}
+		}
+	}
+
+	s:STATE_CONNECTICUT = {
+		#Northeast & Mid Atlantic
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 360 # remnant eastern eastern algonquian people such as Mohegan, Pequot, etc. McKenney 1825 estimate minus 10%
+			}
+		}
+	}
+
+	s:STATE_MASSACHUSETTS = {
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 675 # remnant eastern eastern algonquian people such as Wampanoag, Massachussett, etc. McKenney 1825 estimate minus 10%
+			}
+		}
+	}
+
+	s:STATE_RHODE_ISLAND = {
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 378 # remnant eastern eastern algonquian people such as Narragansett. McKenney 1825 estimate minus 10%
+			}
+		}
+	}
+
+	s:STATE_MAINE = {
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 860 # remnant eastern eastern algonquian people such as Penobscot & other Abenaki. McKenney 1825 estimate minus 10%
+			}
+		}
+	}
+
+	s:STATE_MARYLAND = {
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 100 # remnant eastern eastern algonquian people such as Nanticoke. This is a guess
+			}
+		}
+	}
+
+	s:STATE_VIRGINIA = {
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 450 # remnant eastern eastern algonquian people such as Mattaponi, Chickahominy, etc. Some sources + guesses
+			}
+		}
+	}
+
+	s:STATE_LOUISIANA = {
+		#Mississippi River
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 169 # Shawnee, Lenape, and Piankeshaws in 1825 McKenney estimate, minus 10%
+			}
+			create_pop = {
+				culture = muskogean
+				size = 650 # assorted including Coushattas and Choctaws in 1825 McKenney estimate, plus more for Houmas
+			}
+			create_pop = {
+				culture = caddoan
+				size = 491 # assorted including Natchitoches and Addees and Caddo proper in 1825 McKenney estimate, minus 10%
+			}
+		}
+	}
+
+	s:STATE_NEW_MEXICO = {
+		region_state:MEX = {
+			create_pop = {
+				culture = apache
+				size = 1500 #Mescalero. Number is a guess
+			}
+		}
+	}
+
+	s:STATE_OHIO = {
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 457 # Odawa, small bands removed in the 40s after a 1831 treaty
+			}
+			create_pop = {
+				culture = iroquoian
+				size = 512 # Wyandots, removed in the 40s
+			}
+		}
+	}
+
+	s:STATE_INDIANA = {
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 1825 # several Miami bands and the Yellow River band of Potowatomie not yet removed
+			}
+		}
+	}
+
+	s:STATE_ILLINOIS = {
+		region_state:USA = {
+			create_pop = {
+				culture = algonquian
+				size = 450 #some Potowatomie not yet removed
+			}
+		}
+	}
+}

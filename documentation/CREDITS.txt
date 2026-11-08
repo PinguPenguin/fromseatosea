@@ -53,6 +53,10 @@ Hail, Columbia! on GitHub: https://github.com/CaelReader/Hail--Columbia-
 
 Content C2C keeps from or adapts from Hail, Columbia! (usfp_ names renamed to c2c_):
 - Canadian native nations (c2c_* tags) and history
+- The 1836 native layout outside Canada (USA, Mexico, Alaska, Greenland): 17 more native tags with their colours and
+  coats of arms (including 9 emblem textures, renamed ce_c2c_*), province ownership, homelands, claims, native pops,
+  the Aroostook (Maine) split and the game-start state handoffs, plus HC's map colours and capitals for SML, CHE,
+  BNN, SLS and ATB. Extra native pop figures in it were gathered by Argendauss for Hail, Columbia!.
 
 Finally, thank you to the Victoria 3 Modding Co-op, the Victoria 3 wiki, and all those who helped me in creating and refining C2C.
 None of this would be possible without their guides, tools, and help.

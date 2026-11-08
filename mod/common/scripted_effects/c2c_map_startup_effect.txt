@@ -236,4 +236,100 @@
 			set_state_type = unincorporated
 		}
 	}
+
+	# Non-Canadian North American start cleanup, adapted from Hail, Columbia!'s
+	# usfp_map_startup_effect (usfp_ renamed to c2c_). History can't move the last
+	# province of a state, so these whole-state handoffs run here. HC's native
+	# consolidation game rules and arctic subsistence modifier are not ported.
+	s:STATE_MINNESOTA = {
+		if = {
+			limit = {
+				c:USA = {
+					has_state_in_state_region = STATE_MINNESOTA
+				}
+				exists = c:CTF
+			}
+			region_state:USA = {
+				set_state_owner = c:CTF
+			}
+		}
+	}
+	s:STATE_NORTH_DAKOTA = {
+		region_state:USA ?= {
+			set_state_owner = c:IRC
+		}
+	}
+	s:STATE_SOUTH_DAKOTA = {
+		region_state:USA ?= {
+			set_state_owner = c:LKT
+		}
+	}
+	s:STATE_NEBRASKA = {
+		region_state:USA ?= {
+			set_state_owner = c:PWN
+		}
+	}
+	s:STATE_MONTANA = {
+		region_state:USA ?= {
+			set_state_owner = c:c2c_GVT
+		}
+	}
+	s:STATE_UTAH = {
+		region_state:MEX ?= {
+			set_state_owner = c:c2c_SPI
+		}
+	}
+	s:STATE_NEVADA = {
+		region_state:MEX ?= {
+			set_state_owner = c:c2c_PIU
+		}
+	}
+	s:STATE_WYOMING = {
+		region_state:USA ?= {
+			set_state_owner = c:ABS
+		}
+		region_state:SLS ?= {
+			set_state_owner = c:BLF
+		}
+	}
+
+	# Alaska: HC moves most of vanilla's Deg Xitan pops to the new Athabaskan and Inuit tags.
+	s:STATE_ALASKA = {
+		region_state:ATB ?= {
+			kill_population_percent_in_state = {
+				culture = cu:athabaskan
+				percent = 0.75
+			}
+			every_scope_pop = {
+				limit = {
+					culture = cu:inuit
+				}
+				move_pop = s:STATE_ALASKA.region_state:c2c_IPQ
+			}
+		}
+		region_state:c2c_KYK ?= {
+			create_pop = {
+				culture = athabaskan
+				size = 6000
+			}
+		}
+		region_state:c2c_TNN ?= {
+			create_pop = {
+				culture = athabaskan
+				size = 6000
+			}
+		}
+		region_state:c2c_AHT ?= {
+			create_pop = {
+				culture = athabaskan
+				size = 6000
+			}
+		}
+		region_state:c2c_GWC ?= {
+			create_pop = {
+				culture = athabaskan
+				size = 2000
+			}
+		}
+	}
 }

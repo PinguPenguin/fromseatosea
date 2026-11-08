@@ -83,4 +83,59 @@
 	c:c2c_WKS ?= {
 		c2c_native_startup_effect = yes
 	}
+	c:c2c_AHT ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_ARK ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_HOK ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_IWY ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_KAL ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_KLA ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_KYK ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_MDC ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_PIU ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_SHP ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_SPI ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_SRN ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_TNN ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_YKM ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_YOK ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_YUR ?= {
+		c2c_native_startup_effect = yes
+	}
+	c:c2c_CSW ?= {
+		c2c_native_startup_effect = yes
+	}
+	# Cherokee: a vanilla tag with no vanilla history, landed at start by c2c (from Hail, Columbia!).
+	c:CHE ?= {
+		c2c_native_startup_effect = yes
+	}
 }
