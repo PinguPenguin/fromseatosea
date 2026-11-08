@@ -65,14 +65,6 @@
 			}
 		}
 	}
-	s:STATE_BRITISH_COLUMBIA = {
-		set_owner_of_provinces = {
-			country = c:ORG
-			provinces = {
-				x064FE6 x06BB33
-			}
-		}
-	}
 	s:STATE_NEW_BRUNSWICK = {
 		region_state:NVS = {
 			set_state_owner = c:NBS
@@ -154,7 +146,7 @@
 			}
 		}
 		s:STATE_LABRADOR = {
-			every_scope_state = {
+			region_state:GBR ?= {
 				set_state_owner = c:NEW
 			}
 		}

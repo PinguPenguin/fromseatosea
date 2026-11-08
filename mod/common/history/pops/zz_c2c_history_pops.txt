@@ -16,34 +16,29 @@
 				percent = 1
 			}
 			create_pop = {
-				culture = metis
-				religion = catholic
-				size = 6710
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 8826
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = catholic
-				size = 1768
-			}
-			create_pop = {
 				culture = cree
 				religion = animist
-				size = 3805
+				size = 2000
 			}
 			create_pop = {
 				culture = dakota
 				religion = animist
-				size = 4224
+				size = 2000
 			}
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 6358
+				size = 1200
+			}
+			create_pop = {
+				culture = siouan
+				religion = animist
+				size = 10000
+			}
+		}
+		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
 			}
 		}
 	}
@@ -53,7 +48,7 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 1867
+				size = 250
 			}
 			create_pop = {
 				culture = cree
@@ -110,12 +105,7 @@
 			create_pop = {
 				culture = metis
 				religion = catholic
-				size = 4158
-			}
-			create_pop = {
-				culture = metis
-				religion = animist
-				size = 1748
+				size = 400
 			}
 		}
 	}
@@ -130,22 +120,17 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 6461
+				size = 150
 			}
 			create_pop = {
 				culture = metis
 				religion = catholic
-				size = 1738
-			}
-			create_pop = {
-				culture = metis
-				religion = animist
-				size = 2585
+				size = 200
 			}
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 3433
+				size = 250
 			}
 			create_pop = {
 				culture = athabaskan
@@ -163,12 +148,7 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 11536
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = catholic
-				size = 1098
+				size = 300
 			}
 			create_pop = {
 				culture = salish
@@ -178,17 +158,22 @@
 			create_pop = {
 				culture = metis
 				religion = catholic
-				size = 2786
-			}
-			create_pop = {
-				culture = metis
-				religion = animist
-				size = 1805
+				size = 200
 			}
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 3336
+				size = 150
+			}
+		}
+		region_state:ATB = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
 			}
 		}
 	}
@@ -198,12 +183,12 @@
 			create_pop = {
 				culture = metis
 				religion = catholic
-				size = 1370
+				size = 400
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 1747
+				size = 300
 			}
 			create_pop = {
 				culture = athabaskan
@@ -243,6 +228,18 @@
 	s:STATE_LABRADOR = {
 		region_state:GBR = {
 			create_pop = {
+				culture = anglo_canadian
+				religion = protestant
+				size = 1572
+			}
+			create_pop = {
+				culture = franco_canadian
+				religion = catholic
+				size = 1123
+			}
+		}
+		region_state:c2c_INK = {
+			create_pop = {
 				culture = inuit
 				religion = protestant
 				size = 1207
@@ -252,15 +249,12 @@
 				religion = animist
 				size = 2166
 			}
+		}
+		region_state:c2c_INN = {
 			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 1572
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = catholic
-				size = 1123
+				culture = cree
+				religion = animist
+				size = 2500
 			}
 		}
 	}
@@ -273,12 +267,12 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 4248
+				size = 1200
 			}
 			create_pop = {
 				culture = metis
 				religion = catholic
-				size = 2000
+				size = 4500
 			}
 			create_pop = {
 				culture = cree
@@ -288,7 +282,7 @@
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 4000
+				size = 600
 			}
 		}
 		region_state:IRC = {
@@ -440,11 +434,6 @@
 				size = 2646
 			}
 			create_pop = {
-				culture = metis
-				religion = catholic
-				size = 1211
-			}
-			create_pop = {
 				culture = athabaskan
 				religion = animist
 				size = 1511
@@ -459,17 +448,17 @@
 			create_pop = {
 				culture = metis
 				religion = protestant
-				size = 1413
+				size = 300
 			}
 			create_pop = {
 				culture = metis
 				religion = catholic
-				size = 1554
+				size = 300
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 1553
+				size = 250
 			}
 			create_pop = {
 				culture = athabaskan
@@ -489,7 +478,7 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 1139
+				size = 200
 			}
 		}
 	}
@@ -500,29 +489,14 @@
 				percent = 1
 			}
 			create_pop = {
-				culture = cree
-				religion = animist
-				size = 5140
-			}
-			create_pop = {
 				culture = inuit
 				religion = animist
 				size = 3515
 			}
-			create_pop = {
-				culture = metis
-				religion = protestant
-				size = 2057
-			}
-			create_pop = {
-				culture = metis
-				religion = catholic
-				size = 2317
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 2201
+		}
+		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
 			}
 		}
 	}
@@ -542,7 +516,7 @@
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 5104
+				size = 300
 			}
 		}
 	}
@@ -602,25 +576,10 @@
 				religion = animist
 				size = 13500
 			}
-			create_pop = {
-				culture = cree
-				religion = animist
-				size = 5000
-			}
-			create_pop = {
-				culture = metis
-				religion = catholic
-				size = 2000
-			}
-			create_pop = {
-				culture = metis
-				religion = animist
-				size = 1250
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 2000
+		}
+		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
 			}
 		}
 	}
@@ -669,6 +628,11 @@
 				culture = iroquoian
 				religion = animist
 				size = 4000
+			}
+		}
+		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
 			}
 		}
 	}
@@ -849,12 +813,17 @@
 			create_pop = {
 				culture = cree
 				religion = animist
-				size = 9486
+				size = 12000
 			}
 			create_pop = {
 				culture = dakota
 				religion = animist
-				size = 4215
+				size = 7000
+			}
+		}
+		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
 			}
 		}
 	}
@@ -879,11 +848,6 @@
 				size = 3110
 			}
 			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 1886
-			}
-			create_pop = {
 				culture = salish
 				religion = animist
 				size = 3326
@@ -898,17 +862,12 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 2636
+				size = 100
 			}
 			create_pop = {
 				culture = metis
 				religion = catholic
-				size = 1187
-			}
-			create_pop = {
-				culture = metis
-				religion = animist
-				size = 1449
+				size = 150
 			}
 			create_pop = {
 				culture = salish
@@ -946,24 +905,9 @@
 				percent = 1
 			}
 			create_pop = {
-				culture = inuit
-				religion = animist
-				size = 1014
-			}
-			create_pop = {
-				culture = metis
-				religion = animist
-				size = 1208
-			}
-			create_pop = {
-				culture = anglo_canadian
-				religion = protestant
-				size = 1136
-			}
-			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 1200
+				size = 2500
 			}
 		}
 		region_state:c2c_IPQ = {
@@ -971,6 +915,16 @@
 				culture = inuit
 				religion = animist
 				size = 1500
+			}
+		}
+		region_state:ATB = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
+		}
+		region_state:HBC = {
+			kill_population_percent_in_state = {
+				percent = 1
 			}
 		}
 	}
@@ -1030,7 +984,7 @@
 			create_pop = {
 				culture = salish
 				religion = animist
-				size = 2600
+				size = 6000
 			}
 		}
 		region_state:c2c_SYX = {
@@ -1050,7 +1004,7 @@
 			create_pop = {
 				culture = salish
 				religion = animist
-				size = 1000
+				size = 3000
 			}
 		}
 		region_state:c2c_WKS = {
@@ -1060,7 +1014,7 @@
 			create_pop = {
 				culture = salish
 				religion = animist
-				size = 2432
+				size = 9000
 			}
 		}
 		region_state:c2c_DKL = {
@@ -1087,7 +1041,7 @@
 			create_pop = {
 				culture = salish
 				religion = animist
-				size = 2625
+				size = 5000
 			}
 		}
 	}
@@ -1116,7 +1070,7 @@
 			create_pop = {
 				culture = salish
 				religion = animist
-				size = 5000
+				size = 7000
 			}
 		}
 		region_state:c2c_SVY = {
@@ -1137,14 +1091,14 @@
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 5000
+				size = 8000
 			}
 		}
 		region_state:c2c_WKS = {
 			create_pop = {
 				culture = salish
 				religion = animist
-				size = 1216
+				size = 3000
 			}
 		}
 	}
@@ -1171,7 +1125,7 @@
 			create_pop = {
 				culture = salish
 				religion = animist
-				size = 1352
+				size = 6000
 			}
 		}
 	}
@@ -1377,11 +1331,11 @@
 			}
 			create_pop = {
 				culture = franco_canadian
-				size = 19200
+				size = 200
 			}
 			create_pop = {
 				culture = anglo_canadian
-				size = 8000
+				size = 200
 			}
 		}
 	}
@@ -1421,6 +1375,9 @@
 			}
 		}
 		region_state:NVS = {
+			kill_population_percent_in_state = {
+				percent = 1
+			}
 			create_pop = {
 				culture = algonquian
 				religion = animist

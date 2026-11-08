@@ -43,6 +43,7 @@ STATES = {
 
 	s:STATE_MAINE = {
 		add_homeland = cu:algonquian
+		add_claim = c:USA
 
 		#disputed boundary, effectively New Brunswick until the Webster-Ashburton Treaty
 		set_owner_of_provinces = {
@@ -549,6 +550,7 @@ STATES = {
 		}
 
 		add_claim = c:ORG
+		add_claim = c:USA
 	}
 
 	s:STATE_UTAH = {
@@ -593,6 +595,7 @@ STATES = {
 		}
 
 		add_claim = c:ORG
+		add_claim = c:USA
 	}
 
 	s:STATE_ALASKA = {
