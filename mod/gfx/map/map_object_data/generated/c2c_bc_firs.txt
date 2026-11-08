@@ -1,0 +1,117 @@
+﻿object={
+	name="c2c_bc_firs_semidynamic_tree_fir_002"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic"
+	pdxmesh="tree_fir_002_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_tree_fir_002.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_tree_fir_003"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic"
+	pdxmesh="tree_fir_003_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_tree_fir_003.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_tree_fir_004"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic"
+	pdxmesh="tree_fir_004_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_tree_fir_004.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_tree_fir_005"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic"
+	pdxmesh="tree_fir_005_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_tree_fir_005.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_medium_tree_fir_002"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic_medium"
+	pdxmesh="tree_fir_002_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_medium_tree_fir_002.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_medium_tree_fir_003"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic_medium"
+	pdxmesh="tree_fir_003_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_medium_tree_fir_003.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_medium_tree_fir_004"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic_medium"
+	pdxmesh="tree_fir_004_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_medium_tree_fir_004.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_medium_tree_fir_005"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic_medium"
+	pdxmesh="tree_fir_005_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_medium_tree_fir_005.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_high_tree_fir_001"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic_high"
+	pdxmesh="tree_fir_001_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_high_tree_fir_001.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_high_tree_fir_002"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic_high"
+	pdxmesh="tree_fir_002_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_high_tree_fir_002.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_high_tree_fir_003"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic_high"
+	pdxmesh="tree_fir_003_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_high_tree_fir_003.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_high_tree_fir_004"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic_high"
+	pdxmesh="tree_fir_004_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_high_tree_fir_004.bin"
+}
+object={
+	name="c2c_bc_firs_semidynamic_high_tree_fir_005"
+	clamp_to_water_level=no
+	render_under_water=no
+	generated_content=yes
+	layer="semidynamic_high"
+	pdxmesh="tree_fir_005_mesh"
+	transform_bin_file="gfx/map/map_object_data/c2c_bc_firs_semidynamic_high_tree_fir_005.bin"
+}
