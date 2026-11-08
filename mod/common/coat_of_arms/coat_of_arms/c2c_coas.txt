@@ -45,15 +45,13 @@
 		instance = { position = { 0.98 0.642857 } scale = { 0.04 0.142857 } }
 		instance = { position = { 0.98 0.928571 } scale = { 0.04 0.142857 } }
 	}
-	colored_emblem = {
-		texture = "ce_leopard_passant_guardant.dds"
-		color1 = "yellow"
-		color2 = "yellow"
-		instance = { position = { 0.47 0.2 } scale = { 0.86 0.86 } }
+	textured_emblem = {
+		texture = "te_coa_prince_edward_island_lion.dds"
+		instance = { position = { 0.478 0.209 } scale = { 0.9 0.9 } }
 	}
 	textured_emblem = {
 		texture = "te_coa_prince_edward_island.dds"
-		instance = { position = { 0.47 0.65 } scale = { 0.62 0.62 } }
+		instance = { position = { 0.4995 0.6455 } scale = { 0.72 0.72 } }
 	}
 }
 
@@ -72,24 +70,21 @@ sub_PEI = {
 		texture = "ce_solid.dds"
 		color1 = "red"
 		color2 = "red"
-		instance = { position = { 0.5 0.275 } scale = { 0.395 0.295 } }
+		instance = { position = { 0.5 0.24 } scale = { 0.395 0.225 } }
 	}
 	colored_emblem = {
 		texture = "ce_solid.dds"
 		color1 = "black"
 		color2 = "black"
-		instance = { position = { 0.5 0.43 } scale = { 0.395 0.012 } }
+		instance = { position = { 0.5 0.355 } scale = { 0.395 0.012 } }
 	}
-	colored_emblem = {
-		texture = "ce_lion_passant_guardant_long.dds"
-		color1 = "yellow"
-		color2 = "azure"
-		color3 = "orange"
-		instance = { position = { 0.495 0.28 } scale = { 0.51 0.58 } }
+	textured_emblem = {
+		texture = "te_coa_prince_edward_island_lion.dds"
+		instance = { position = { 0.5 0.24 } scale = { 0.37 0.37 } }
 	}
 	textured_emblem = {
 		texture = "te_coa_prince_edward_island.dds"
-		instance = { position = { 0.5 0.63 } scale = { 0.35 0.35 } }
+		instance = { position = { 0.5 0.575 } scale = { 0.35 0.35 } }
 	}
 }
 
