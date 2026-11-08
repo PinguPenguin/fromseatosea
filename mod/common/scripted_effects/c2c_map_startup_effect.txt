@@ -142,6 +142,7 @@
 		}
 		s:STATE_NEWFOUNDLAND = {
 			every_scope_state = {
+				limit = { NOT = { owner = c:NEW } }
 				set_state_owner = c:NEW
 			}
 		}

@@ -13,6 +13,16 @@
     -Colonizing the Prairie/Building the Railway
     -Unlocking the North/Canadian shield?
     -Chinese Immigration Act/path to multiculturalism
+    -King's Posts: Saguenay closed under the HBC lease (1831-59), Vingt-et-un (1838), Price at Chicoutimi, Innu petition
+
+-Pacific rework
+    -Vancouver Island (VAN) exists in 1836; Fort Victoria was 1843, the colony 1849. Kept for now
+-Indigenous rework
+    -Tsimshian (c2c_TSI) use athabaskan culture
+    -Tahltan (c2c_TLT) hold southern Yukon (Tagish, Inland Tlingit, Southern Tutchone country)
+    -Gros Ventre (c2c_GVT) on the Saskatchewan/Alberta prairie; mostly on the Missouri by the 1830s
+    -Inuit Nunangat (c2c_INV) incorporated area is a hard-edged rectangle
+    -Tlingit have no tag; the panhandle and its pops sit under ALK as athabaskan
 
 ----Far long-term----
 -Map beautification (asset painting, etc.)

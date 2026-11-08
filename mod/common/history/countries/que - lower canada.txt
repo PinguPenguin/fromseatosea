@@ -1,0 +1,5 @@
+﻿COUNTRIES = {
+	c:QUE ?= {
+		set_capital = STATE_QUEBEC_SAGUENAY
+	}
+}

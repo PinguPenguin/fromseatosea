@@ -228,6 +228,7 @@ STATES = {
 		}
 
 		add_claim = c:ORG
+		add_claim = c:USA
 	}
 
 	s:STATE_WYOMING = {

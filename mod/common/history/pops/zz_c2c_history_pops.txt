@@ -65,7 +65,7 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 4790
+				size = 800
 			}
 			create_pop = {
 				culture = cree
@@ -75,7 +75,7 @@
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 2343
+				size = 400
 			}
 			create_pop = {
 				culture = algonquian
@@ -343,17 +343,12 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 40012
+				size = 53664
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = catholic
-				size = 8125
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = protestant
-				size = 2005
+				size = 3000
 			}
 			create_pop = {
 				culture = franco_canadian
@@ -368,7 +363,7 @@
 			create_pop = {
 				culture = irish
 				religion = catholic
-				size = 32057
+				size = 18000
 			}
 			create_pop = {
 				culture = afro_american
@@ -378,7 +373,7 @@
 			create_pop = {
 				culture = irish
 				religion = protestant
-				size = 17465
+				size = 25000
 			}
 		}
 	}
@@ -391,27 +386,22 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 29025
+				size = 26800
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = catholic
-				size = 5275
+				size = 7500
 			}
 			create_pop = {
 				culture = irish
 				religion = protestant
-				size = 11679
+				size = 6000
 			}
 			create_pop = {
 				culture = irish
 				religion = catholic
-				size = 12443
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = catholic
-				size = 4116
+				size = 22238
 			}
 			create_pop = {
 				culture = acadian
@@ -419,9 +409,9 @@
 				size = 1200
 			}
 			create_pop = {
-				culture = inuit
-				religion = animist
-				size = 2859
+				culture = algonquian
+				religion = catholic
+				size = 500
 			}
 		}
 	}
@@ -526,12 +516,12 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 104708
+				size = 125689
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = catholic
-				size = 31317
+				size = 20000
 			}
 			create_pop = {
 				culture = irish
@@ -544,16 +534,6 @@
 				size = 23779
 			}
 			create_pop = {
-				culture = franco_canadian
-				religion = protestant
-				size = 8443
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = catholic
-				size = 2721
-			}
-			create_pop = {
 				culture = acadian
 				religion = catholic
 				size = 16000
@@ -562,6 +542,11 @@
 				culture = afro_american
 				religion = protestant
 				size = 6533
+			}
+			create_pop = {
+				culture = algonquian
+				religion = catholic
+				size = 1500
 			}
 		}
 	}
@@ -592,7 +577,7 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 44076
+				size = 60319
 			}
 			create_pop = {
 				culture = anglo_canadian
@@ -601,23 +586,18 @@
 			}
 			create_pop = {
 				culture = franco_canadian
-				religion = protestant
-				size = 1670
-			}
-			create_pop = {
-				culture = franco_canadian
 				religion = catholic
-				size = 20773
+				size = 6200
 			}
 			create_pop = {
 				culture = irish
 				religion = protestant
-				size = 3857
+				size = 5707
 			}
 			create_pop = {
 				culture = irish
 				religion = catholic
-				size = 5350
+				size = 3500
 			}
 			create_pop = {
 				culture = algonquian
@@ -642,32 +622,27 @@
 			create_pop = {
 				culture = anglo_canadian
 				religion = protestant
-				size = 130592
+				size = 176563
 			}
 			create_pop = {
 				culture = anglo_canadian
 				religion = catholic
-				size = 18410
-			}
-			create_pop = {
-				culture = franco_canadian
-				religion = protestant
-				size = 3161
+				size = 9000
 			}
 			create_pop = {
 				culture = franco_canadian
 				religion = catholic
-				size = 40100
+				size = 6700
 			}
 			create_pop = {
 				culture = irish
 				religion = protestant
-				size = 25605
+				size = 38770
 			}
 			create_pop = {
 				culture = irish
 				religion = catholic
-				size = 26165
+				size = 13000
 			}
 			create_pop = {
 				culture = afro_american
@@ -954,7 +929,7 @@
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 5625
+				size = 2000
 			}
 		}
 		region_state:c2c_SVY = {
@@ -971,7 +946,7 @@
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 4375
+				size = 1500
 			}
 		}
 	}
@@ -1063,7 +1038,7 @@
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 10000
+				size = 3000
 			}
 		}
 		region_state:c2c_HDA = {
@@ -1084,7 +1059,7 @@
 			create_pop = {
 				culture = athabaskan
 				religion = animist
-				size = 20000
+				size = 5000
 			}
 		}
 		region_state:c2c_TSI = {

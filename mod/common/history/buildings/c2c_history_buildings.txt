@@ -181,6 +181,26 @@
 
 	s:STATE_KEEWATIN = {
 		region_state:HBC = {
+			create_building = {
+				building = "building_port"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:HBC"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_barrack"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:HBC"
+						levels = 1
+					}
+				}
+			}
 		}
 	}
 
@@ -218,16 +238,17 @@
 	s:STATE_MANITOBA = {
 		region_state:HBC = {
 			remove_building = building_barrack
+			remove_building = building_port
 			create_building = {
 				building = "building_barrack"
+				reserves = 1
 				add_ownership = {
 					country = {
 						country = "c:HBC"
-						levels = 1
+						levels = 3
 					}
 				}
-				reserves = 1
-				activate_production_methods={ "pm_no_organization" }
+				activate_production_methods = { "pm_no_organization" }
 			}
 			remove_building = building_logging_camp
 			create_building = {
@@ -288,6 +309,50 @@
 				add_ownership = {
 					building = {
 						type = "building_livestock_ranch"
+						country = "c:PEI"
+						levels = 1
+						region = "STATE_PRINCE_EDWARD_ISLAND"
+					}
+				}
+			}
+			create_building = {
+				building = "building_port"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:PEI"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_shipyard"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:PEI"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_fishing_wharf"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_fishing_wharf"
+						country = "c:PEI"
+						levels = 1
+						region = "STATE_PRINCE_EDWARD_ISLAND"
+					}
+				}
+			}
+			create_building = {
+				building = "building_logging_camp"
+				reserves = 1
+				add_ownership = {
+					building = {
+						type = "building_logging_camp"
 						country = "c:PEI"
 						levels = 1
 						region = "STATE_PRINCE_EDWARD_ISLAND"
@@ -482,13 +547,13 @@
 		region_state:HBC = {
 			create_building = {
 				building = "building_barrack"
+				reserves = 1
 				add_ownership = {
 					country = {
 						country = "c:HBC"
-						levels = 3
+						levels = 1
 					}
 				}
-				reserves = 1
 			}
 			create_building = {
 				building = "building_logging_camp"
@@ -526,13 +591,13 @@
 		region_state:HBC = {
 			create_building = {
 				building = "building_barrack"
+				reserves = 1
 				add_ownership = {
 					country = {
 						country = "c:HBC"
-						levels = 4
+						levels = 1
 					}
 				}
-				reserves = 1
 			}
 		}
 		# Vanilla's HBC logging camp for Abitibi
@@ -1061,6 +1126,36 @@
 						country = "c:QUE"
 						levels = 1
 						region = "STATE_QUEBEC_SAGUENAY"
+					}
+				}
+			}
+			create_building = {
+				building = "building_government_administration"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:QUE"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_barrack"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:QUE"
+						levels = 1
+					}
+				}
+			}
+			create_building = {
+				building = "building_trade_center"
+				reserves = 1
+				add_ownership = {
+					country = {
+						country = "c:QUE"
+						levels = 1
 					}
 				}
 			}
